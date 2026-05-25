@@ -1,0 +1,114 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: CMS Marketplace Plans
+  description: Search and retrieve Qualified Health Plans, Stand-alone Dental Plans, issuers, and
+    providers from the CMS Marketplace API (HealthCare.gov).
+  tags:
+  - CMS
+  - Marketplace
+  - ACA
+  - Plans
+  - HealthCare.gov
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    MARKETPLACE_API_KEY: MARKETPLACE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: marketplace-plans
+    baseUri: https://marketplace.api.healthcare.gov/api/v1
+    description: CMS Marketplace plan and eligibility surface.
+    resources:
+    - name: plans-search
+      path: /plans/search
+      operations:
+      - name: searchplans
+        method: POST
+        description: Search Marketplace plans by household composition and place.
+        inputParameters:
+        - { name: body, in: body, type: object, required: true }
+        outputRawFormat: json
+        outputParameters:
+        - { name: result, type: object, value: $. }
+    - name: plans-id
+      path: /plans/{planId}
+      operations:
+      - name: getplan
+        method: GET
+        description: Get Marketplace plan details by plan ID.
+        inputParameters:
+        - { name: planId, in: path, type: string, required: true }
+        outputRawFormat: json
+        outputParameters:
+        - { name: result, type: object, value: $. }
+    - name: counties-by-zip
+      path: /counties/by/zip/{zip}
+      operations:
+      - name: getcountiesbyzip
+        method: GET
+        description: Look up counties served from a 5-digit ZIP code.
+        inputParameters:
+        - { name: zip, in: path, type: string, required: true }
+        outputRawFormat: json
+        outputParameters:
+        - { name: result, type: object, value: $. }
+    - name: issuers
+      path: /issuers
+      operations:
+      - name: listissuers
+        method: GET
+        description: List Marketplace QHP issuers.
+        outputRawFormat: json
+        outputParameters:
+        - { name: result, type: object, value: $. }
+    - name: forms-eligibility
+      path: /forms/eligibility
+      operations:
+      - name: checkeligibility
+        method: POST
+        description: Check Marketplace subsidy eligibility (APTC, CSR).
+        inputParameters:
+        - { name: body, in: body, type: object, required: true }
+        outputRawFormat: json
+        outputParameters:
+        - { name: result, type: object, value: $. }
+    authentication:
+      type: apikey
+      key: apikey
+      value: '{{env.MARKETPLACE_API_KEY}}'
+      placement: query
+  exposes:
+  - type: mcp
+    namespace: marketplace-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for CMS Marketplace plans.
+    tools:
+    - name: cms-marketplace-search-plans
+      description: Search Marketplace QHPs by household composition and place.
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: marketplace-plans.searchplans
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: cms-marketplace-get-plan
+      description: Get Marketplace plan details by ID.
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: marketplace-plans.getplan
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: cms-marketplace-counties-by-zip
+      description: Look up counties served from a ZIP code.
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: marketplace-plans.getcountiesbyzip
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: cms-marketplace-list-issuers
+      description: List Marketplace QHP issuers.
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: marketplace-plans.listissuers
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: cms-marketplace-check-eligibility
+      description: Check Marketplace subsidy eligibility (APTC/CSR).
+      hints: { readOnly: true, destructive: false, idempotent: false }
+      call: marketplace-plans.checkeligibility
+      outputParameters: [ { type: object, mapping: $. } ]

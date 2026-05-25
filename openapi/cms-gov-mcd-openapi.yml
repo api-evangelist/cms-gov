@@ -1,0 +1,68 @@
+openapi: 3.0.3
+info:
+  title: CMS Medicare Coverage Database API
+  description: |
+    The Medicare Coverage Database (MCD) exposes National Coverage Determinations (NCDs),
+    Local Coverage Determinations (LCDs), Local Coverage Articles, Proposed Decisions,
+    National Coverage Analyses, and MEDCAC records.
+  version: '1.0'
+  license:
+    name: Public Domain (U.S. Government Work)
+    url: https://www.usa.gov/government-works
+servers:
+- url: https://www.cms.gov/medicare-coverage-database/api
+  description: Production
+paths:
+  /ncds:
+    get:
+      summary: Search National Coverage Determinations
+      operationId: searchNCDs
+      tags: [NCD]
+      parameters:
+      - { name: keyword, in: query, schema: { type: string } }
+      - { name: hcpcsCode, in: query, schema: { type: string } }
+      - { name: status, in: query, schema: { type: string, enum: [active, retired, pending] } }
+      responses:
+        '200': { description: Matching NCDs }
+  /ncds/{ncdId}:
+    get:
+      summary: Get NCD
+      operationId: getNCD
+      tags: [NCD]
+      parameters:
+      - { name: ncdId, in: path, required: true, schema: { type: string } }
+      responses: { '200': { description: NCD record } }
+  /lcds:
+    get:
+      summary: Search Local Coverage Determinations
+      operationId: searchLCDs
+      tags: [LCD]
+      parameters:
+      - { name: keyword, in: query, schema: { type: string } }
+      - { name: state, in: query, schema: { type: string } }
+      - { name: contractor, in: query, schema: { type: string } }
+      - { name: hcpcsCode, in: query, schema: { type: string } }
+      responses: { '200': { description: Matching LCDs } }
+  /lcds/{lcdId}:
+    get:
+      summary: Get LCD
+      operationId: getLCD
+      tags: [LCD]
+      parameters:
+      - { name: lcdId, in: path, required: true, schema: { type: string } }
+      responses: { '200': { description: LCD record } }
+  /articles:
+    get:
+      summary: Search Coverage Articles
+      operationId: searchArticles
+      tags: [Articles]
+      parameters:
+      - { name: keyword, in: query, schema: { type: string } }
+      - { name: state, in: query, schema: { type: string } }
+      responses: { '200': { description: Matching articles } }
+  /medcac:
+    get:
+      summary: Search MEDCAC Meetings
+      operationId: searchMedcac
+      tags: [MEDCAC]
+      responses: { '200': { description: MEDCAC meeting records } }

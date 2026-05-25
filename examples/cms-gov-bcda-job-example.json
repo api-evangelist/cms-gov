@@ -1,0 +1,24 @@
+{
+  "transactionTime": "2026-05-25T10:00:00.000Z",
+  "request": "https://api.bcda.cms.gov/api/v2/Patient/$export?_type=Patient,Coverage,ExplanationOfBenefit",
+  "requiresAccessToken": true,
+  "output": [
+    {
+      "type": "Patient",
+      "url": "https://api.bcda.cms.gov/data/0c527d2e-2e8a-4808-b11d-0fa06baf8254/Patient.ndjson"
+    },
+    {
+      "type": "Coverage",
+      "url": "https://api.bcda.cms.gov/data/0c527d2e-2e8a-4808-b11d-0fa06baf8254/Coverage.ndjson"
+    },
+    {
+      "type": "ExplanationOfBenefit",
+      "url": "https://api.bcda.cms.gov/data/0c527d2e-2e8a-4808-b11d-0fa06baf8254/ExplanationOfBenefit_0001.ndjson"
+    },
+    {
+      "type": "ExplanationOfBenefit",
+      "url": "https://api.bcda.cms.gov/data/0c527d2e-2e8a-4808-b11d-0fa06baf8254/ExplanationOfBenefit_0002.ndjson"
+    }
+  ],
+  "error": []
+}

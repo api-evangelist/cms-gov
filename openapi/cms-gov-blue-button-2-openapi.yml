@@ -1,0 +1,216 @@
+openapi: 3.0.3
+info:
+  title: CMS Blue Button 2.0 API
+  description: |
+    The CMS Blue Button 2.0 API is a developer-friendly, OAuth 2.0-enabled HL7 FHIR R4 API
+    that delivers Medicare Part A, B, and D claims data for 60+ million Medicare beneficiaries
+    to applications, services, and research programs after the beneficiary grants consent.
+  version: '2.0'
+  contact:
+    name: CMS Blue Button Developer Help
+    url: https://bluebutton.cms.gov/developers/
+    email: bluebuttonapi@cms.hhs.gov
+  license:
+    name: Public Domain (U.S. Government Work)
+    url: https://www.usa.gov/government-works
+servers:
+- url: https://api.bluebutton.cms.gov/v2/fhir
+  description: Production FHIR R4 endpoint
+- url: https://sandbox.bluebutton.cms.gov/v2/fhir
+  description: Sandbox FHIR R4 endpoint
+security:
+- OAuth2: [read]
+paths:
+  /metadata:
+    get:
+      summary: Get FHIR Capability Statement
+      operationId: getCapabilityStatement
+      tags: [Metadata]
+      security: []
+      responses:
+        '200':
+          description: FHIR CapabilityStatement
+          content:
+            application/fhir+json:
+              schema: { $ref: '#/components/schemas/CapabilityStatement' }
+  /Patient:
+    get:
+      summary: Search Patient Resources
+      operationId: searchPatient
+      description: Returns the Patient resource for the currently authorized beneficiary.
+      tags: [Patient]
+      parameters:
+      - { name: _id, in: query, schema: { type: string } }
+      - { name: _format, in: query, schema: { type: string, enum: [application/fhir+json, application/fhir+xml] } }
+      responses:
+        '200':
+          description: Bundle of Patient resources
+          content:
+            application/fhir+json:
+              schema: { $ref: '#/components/schemas/Bundle' }
+  /Patient/{id}:
+    get:
+      summary: Read Patient by ID
+      operationId: readPatient
+      tags: [Patient]
+      parameters:
+      - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: Patient resource
+          content:
+            application/fhir+json:
+              schema: { $ref: '#/components/schemas/Patient' }
+  /Coverage:
+    get:
+      summary: Search Coverage Resources
+      operationId: searchCoverage
+      tags: [Coverage]
+      parameters:
+      - { name: beneficiary, in: query, schema: { type: string } }
+      - { name: _format, in: query, schema: { type: string } }
+      responses:
+        '200':
+          description: Bundle of Coverage resources
+          content:
+            application/fhir+json:
+              schema: { $ref: '#/components/schemas/Bundle' }
+  /Coverage/{id}:
+    get:
+      summary: Read Coverage by ID
+      operationId: readCoverage
+      tags: [Coverage]
+      parameters:
+      - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: Coverage resource
+          content:
+            application/fhir+json:
+              schema: { $ref: '#/components/schemas/Coverage' }
+  /ExplanationOfBenefit:
+    get:
+      summary: Search Explanation Of Benefit Resources
+      operationId: searchExplanationOfBenefit
+      description: Returns Medicare claims as FHIR ExplanationOfBenefit resources for the authorized beneficiary.
+      tags: [ExplanationOfBenefit]
+      parameters:
+      - { name: patient, in: query, schema: { type: string } }
+      - { name: type, in: query, schema: { type: string, description: 'Claim type: carrier, dme, hha, hospice, inpatient, outpatient, pde, snf' } }
+      - { name: service-date, in: query, schema: { type: string, description: 'FHIR date or date range' } }
+      - { name: _lastUpdated, in: query, schema: { type: string } }
+      - { name: startIndex, in: query, schema: { type: integer } }
+      - { name: _count, in: query, schema: { type: integer, maximum: 50 } }
+      responses:
+        '200':
+          description: Bundle of ExplanationOfBenefit resources
+          content:
+            application/fhir+json:
+              schema: { $ref: '#/components/schemas/Bundle' }
+  /ExplanationOfBenefit/{id}:
+    get:
+      summary: Read Explanation Of Benefit by ID
+      operationId: readExplanationOfBenefit
+      tags: [ExplanationOfBenefit]
+      parameters:
+      - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: ExplanationOfBenefit resource
+          content:
+            application/fhir+json:
+              schema: { $ref: '#/components/schemas/ExplanationOfBenefit' }
+  /userinfo:
+    get:
+      summary: Get Beneficiary User Info
+      operationId: getUserinfo
+      description: OpenID Connect userinfo endpoint returning beneficiary identity claims.
+      tags: [Auth]
+      responses:
+        '200':
+          description: User info claims
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sub: { type: string }
+                  patient: { type: string }
+                  name: { type: string }
+                  given_name: { type: string }
+                  family_name: { type: string }
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.bluebutton.cms.gov/v2/o/authorize/
+          tokenUrl: https://api.bluebutton.cms.gov/v2/o/token/
+          scopes:
+            patient/Patient.read: Read Patient resource
+            patient/Coverage.read: Read Coverage resources
+            patient/ExplanationOfBenefit.read: Read ExplanationOfBenefit resources
+            profile: OpenID profile claims
+  schemas:
+    Bundle:
+      type: object
+      properties:
+        resourceType: { type: string, enum: [Bundle] }
+        type: { type: string }
+        total: { type: integer }
+        link: { type: array, items: { type: object } }
+        entry:
+          type: array
+          items:
+            type: object
+            properties:
+              resource: { type: object }
+              fullUrl: { type: string }
+    Patient:
+      type: object
+      properties:
+        resourceType: { type: string, enum: [Patient] }
+        id: { type: string }
+        identifier: { type: array, items: { type: object } }
+        name: { type: array, items: { type: object } }
+        gender: { type: string, enum: [male, female, other, unknown] }
+        birthDate: { type: string, format: date }
+        address: { type: array, items: { type: object } }
+    Coverage:
+      type: object
+      properties:
+        resourceType: { type: string, enum: [Coverage] }
+        id: { type: string }
+        status: { type: string, enum: [active, cancelled, draft, entered-in-error] }
+        type: { type: object }
+        beneficiary: { type: object }
+        relationship: { type: object }
+        period: { type: object }
+        payor: { type: array, items: { type: object } }
+    ExplanationOfBenefit:
+      type: object
+      properties:
+        resourceType: { type: string, enum: [ExplanationOfBenefit] }
+        id: { type: string }
+        status: { type: string }
+        type: { type: object }
+        use: { type: string }
+        patient: { type: object }
+        billablePeriod: { type: object }
+        created: { type: string, format: date-time }
+        insurer: { type: object }
+        provider: { type: object }
+        diagnosis: { type: array, items: { type: object } }
+        procedure: { type: array, items: { type: object } }
+        item: { type: array, items: { type: object } }
+        total: { type: array, items: { type: object } }
+        payment: { type: object }
+    CapabilityStatement:
+      type: object
+      properties:
+        resourceType: { type: string, enum: [CapabilityStatement] }
+        status: { type: string }
+        fhirVersion: { type: string, enum: ['4.0.1'] }
+        format: { type: array, items: { type: string } }
+        rest: { type: array, items: { type: object } }

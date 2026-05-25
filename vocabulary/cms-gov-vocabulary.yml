@@ -1,0 +1,89 @@
+vocabulary: cms-gov
+version: '0.1'
+description: Vocabulary for the CMS — Centers for Medicare & Medicaid Services API surface. Captures
+  programs, claim types, FHIR resources, identifiers, and common abbreviations across Medicare, Medicaid,
+  the Health Insurance Marketplace, and the CMS open-data ecosystem.
+terms:
+- term: Medicare
+  definition: U.S. federal health insurance program for people 65+, certain younger people with
+    disabilities, and people with End-Stage Renal Disease.
+- term: Medicaid
+  definition: Joint federal-state program providing health coverage to low-income individuals and families.
+- term: CHIP
+  definition: Children's Health Insurance Program — low-cost coverage for children in families that earn
+    too much to qualify for Medicaid.
+- term: Marketplace
+  definition: Health Insurance Marketplace — the ACA-established exchange where consumers shop for QHPs.
+- term: ACA
+  definition: Affordable Care Act (Patient Protection and Affordable Care Act, 2010).
+- term: MACRA
+  definition: Medicare Access and CHIP Reauthorization Act of 2015.
+- term: MIPS
+  definition: Merit-based Incentive Payment System under MACRA.
+- term: APM
+  definition: Alternative Payment Model — value-based care payment under MACRA.
+- term: ACO
+  definition: Accountable Care Organization — group of providers jointly responsible for quality and cost.
+- term: MSSP
+  definition: Medicare Shared Savings Program — the largest CMS ACO program.
+- term: QHP
+  definition: Qualified Health Plan — Marketplace-certified individual or small-group plan.
+- term: SADP
+  definition: Stand-alone Dental Plan offered through the Marketplace.
+- term: APTC
+  definition: Advance Premium Tax Credit — Marketplace subsidy.
+- term: CSR
+  definition: Cost-Sharing Reduction — Marketplace subsidy for Silver-tier plans.
+- term: Part A
+  definition: Medicare hospital insurance.
+- term: Part B
+  definition: Medicare medical insurance.
+- term: Part C
+  definition: Medicare Advantage — private plans that combine Parts A and B.
+- term: Part D
+  definition: Medicare prescription drug coverage.
+- term: MBI
+  definition: Medicare Beneficiary Identifier — the 11-character alphanumeric ID that replaced the HICN.
+- term: HICN
+  definition: Health Insurance Claim Number — legacy SSN-based Medicare identifier (now deprecated).
+- term: BENE_ID
+  definition: CCW-assigned synthetic beneficiary identifier used in BFD and downstream APIs.
+- term: NPI
+  definition: National Provider Identifier — 10-digit identifier for healthcare providers.
+- term: HCPCS
+  definition: Healthcare Common Procedure Coding System.
+- term: NCD
+  definition: National Coverage Determination — CMS-issued national coverage policy.
+- term: LCD
+  definition: Local Coverage Determination — Medicare Administrative Contractor regional policy.
+- term: MEDCAC
+  definition: Medicare Evidence Development & Coverage Advisory Committee.
+- term: FHIR
+  definition: HL7 Fast Healthcare Interoperability Resources standard.
+- term: BulkData
+  definition: HL7 FHIR Bulk Data Access (Flat FHIR) specification for asynchronous NDJSON exports.
+- term: CARIN BB
+  definition: CARIN Consumer Directed Payer Data Exchange (Blue Button) FHIR Implementation Guide.
+- term: BFD
+  definition: Beneficiary FHIR Data Server — upstream CMS FHIR server.
+- term: CCW
+  definition: Chronic Conditions Warehouse — the CMS analytic data store that feeds BFD.
+- term: BCDA
+  definition: Beneficiary Claims Data API — bulk FHIR for MSSP ACOs.
+- term: AB2D
+  definition: Claim and Claim Line Feed API — bulk FHIR for Part D plan sponsors.
+- term: DPC
+  definition: Data at the Point of Care — bulk FHIR for fee-for-service providers.
+- term: QPP
+  definition: Quality Payment Program — the MACRA scoring and submission program.
+- term: ExplanationOfBenefit
+  definition: FHIR R4 resource representing a Medicare claim with adjudication detail.
+- term: Coverage
+  definition: FHIR R4 resource representing Medicare Part A/B/C/D enrollment.
+- term: Patient
+  definition: FHIR R4 resource representing a Medicare beneficiary.
+- term: Hospital Compare
+  definition: Legacy CMS public quality-comparison site now consolidated into the Provider Data Catalog.
+- term: Open Payments
+  definition: CMS Sunshine Act dataset of financial relationships between drug/device manufacturers and
+    physicians/teaching hospitals.

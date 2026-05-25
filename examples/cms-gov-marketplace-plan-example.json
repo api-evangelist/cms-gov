@@ -1,0 +1,27 @@
+{
+  "id": "12345CT0010001-01",
+  "name": "Anthem Silver Pathway HMO 5000",
+  "issuer": {
+    "id": "12345",
+    "name": "Anthem Health Plans, Inc.",
+    "state": "CT"
+  },
+  "metal_level": "Silver",
+  "type": "HMO",
+  "year": 2026,
+  "premium": 542.18,
+  "premium_w_credit": 162.18,
+  "deductibles": [
+    { "amount": 5000, "type": "Combined Medical and Drug EHB Deductible", "family_cost": "Per Person", "csr": "Standard" }
+  ],
+  "moops": [
+    { "amount": 9450, "type": "Maximum Out of Pocket for Medical EHB Benefits", "family_cost": "Per Person", "csr": "Standard" }
+  ],
+  "benefits": [
+    { "name": "Primary Care Visit to Treat an Injury or Illness", "covered": true, "cost_sharings": [ { "amount": "$30", "type": "Copay after deductible" } ] },
+    { "name": "Generic Drugs", "covered": true, "cost_sharings": [ { "amount": "$10", "type": "Copay" } ] }
+  ],
+  "hsa_eligible": false,
+  "network_url": "https://www.anthem.com/find-doctor/",
+  "benefits_url": "https://www.anthem.com/individual-and-family/sbc/12345CT0010001-01.pdf"
+}

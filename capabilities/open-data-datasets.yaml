@@ -1,0 +1,79 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: CMS Open Data Catalog
+  description: Browse and query the data.cms.gov public dataset catalog — Medicare provider utilization,
+    Open Payments, Compare datasets, Marketplace public-use files, and more.
+  tags:
+  - CMS
+  - OpenData
+  - Datasets
+  - Catalog
+  created: '2026-05-25'
+  modified: '2026-05-25'
+capability:
+  consumes:
+  - type: http
+    namespace: open-data-datasets
+    baseUri: https://data.cms.gov/data-api/v1
+    description: CMS Open Data dataset catalog and query surface.
+    resources:
+    - name: dataset
+      path: /dataset
+      operations:
+      - name: listdatasets
+        method: GET
+        description: List CMS open datasets.
+        inputParameters:
+        - { name: keyword, in: query, type: string }
+        - { name: theme, in: query, type: string }
+        - { name: publisher, in: query, type: string }
+        outputRawFormat: json
+        outputParameters:
+        - { name: result, type: object, value: $. }
+    - name: dataset-id
+      path: /dataset/{datasetId}
+      operations:
+      - name: getdataset
+        method: GET
+        description: Get dataset metadata by ID.
+        inputParameters:
+        - { name: datasetId, in: path, type: string, required: true }
+        outputRawFormat: json
+        outputParameters:
+        - { name: result, type: object, value: $. }
+    - name: dataset-data
+      path: /dataset/{datasetId}/data
+      operations:
+      - name: getdatasetdata
+        method: GET
+        description: Query dataset rows with field filters.
+        inputParameters:
+        - { name: datasetId, in: path, type: string, required: true }
+        - { name: filter, in: query, type: string }
+        - { name: size, in: query, type: integer }
+        - { name: offset, in: query, type: integer }
+        outputRawFormat: json
+        outputParameters:
+        - { name: result, type: object, value: $. }
+  exposes:
+  - type: mcp
+    namespace: open-data-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for the CMS Open Data catalog.
+    tools:
+    - name: cms-open-data-list-datasets
+      description: List CMS open datasets.
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: open-data-datasets.listdatasets
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: cms-open-data-get-dataset
+      description: Get dataset metadata by ID.
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: open-data-datasets.getdataset
+      outputParameters: [ { type: object, mapping: $. } ]
+    - name: cms-open-data-query-dataset
+      description: Query dataset rows with field filters.
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: open-data-datasets.getdatasetdata
+      outputParameters: [ { type: object, mapping: $. } ]

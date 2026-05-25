@@ -1,0 +1,84 @@
+openapi: 3.0.3
+info:
+  title: CMS Beneficiary FHIR Data Server (BFD)
+  description: |
+    The Beneficiary FHIR Data (BFD) Server is the upstream HL7 FHIR R4 service that powers
+    Blue Button 2.0, BCDA, AB2D, and DPC. BFD ingests claims from the CMS Chronic Conditions
+    Warehouse (CCW). Access is limited to internal CMS systems and the four downstream
+    peering applications.
+  version: '2.0'
+  contact:
+    name: BFD Team
+    url: https://github.com/CMSgov/beneficiary-fhir-data
+  license:
+    name: Public Domain (U.S. Government Work)
+    url: https://www.usa.gov/government-works
+servers:
+- url: https://prod.bfd.cms.gov/v2/fhir
+  description: Production (peering only)
+- url: https://sandbox.bfd.cms.gov/v2/fhir
+  description: Sandbox (peering only)
+security:
+- MutualTLS: []
+paths:
+  /metadata:
+    get:
+      summary: Get FHIR Capability Statement
+      operationId: getCapabilityStatement
+      tags: [Metadata]
+      responses: { '200': { description: CapabilityStatement } }
+  /Patient:
+    get:
+      summary: Search Patient Resources
+      operationId: searchPatient
+      tags: [Patient]
+      parameters:
+      - { name: identifier, in: query, schema: { type: string, description: 'HICN, MBI, or BENE_ID identifier' } }
+      - { name: _has:Coverage.extension, in: query, schema: { type: string } }
+      - { name: _lastUpdated, in: query, schema: { type: string } }
+      responses: { '200': { description: Bundle of Patients } }
+  /Patient/{id}:
+    get:
+      summary: Read Patient
+      operationId: readPatient
+      tags: [Patient]
+      parameters:
+      - { name: id, in: path, required: true, schema: { type: string } }
+      responses: { '200': { description: Patient resource } }
+  /Coverage:
+    get:
+      summary: Search Coverage Resources
+      operationId: searchCoverage
+      tags: [Coverage]
+      parameters:
+      - { name: beneficiary, in: query, schema: { type: string } }
+      responses: { '200': { description: Bundle of Coverage } }
+  /ExplanationOfBenefit:
+    get:
+      summary: Search Explanation Of Benefit Resources
+      operationId: searchExplanationOfBenefit
+      tags: [ExplanationOfBenefit]
+      parameters:
+      - { name: patient, in: query, schema: { type: string } }
+      - { name: type, in: query, schema: { type: string } }
+      - { name: service-date, in: query, schema: { type: string } }
+      - { name: _lastUpdated, in: query, schema: { type: string } }
+      - { name: excludeSAMHSA, in: query, schema: { type: boolean } }
+      - { name: includeTaxNumbers, in: query, schema: { type: boolean } }
+      responses: { '200': { description: Bundle of ExplanationOfBenefit } }
+  /Group/{id}/$export:
+    get:
+      summary: Group Bulk Export
+      operationId: exportGroup
+      tags: [Bulk Export]
+      parameters:
+      - { name: id, in: path, required: true, schema: { type: string } }
+      - { name: _type, in: query, schema: { type: string } }
+      - { name: _since, in: query, schema: { type: string, format: date-time } }
+      - { name: Prefer, in: header, required: true, schema: { type: string, enum: ['respond-async'] } }
+      responses: { '202': { description: Accepted } }
+components:
+  securitySchemes:
+    MutualTLS:
+      type: mutualTLS
+      description: BFD requires X.509 client certificates issued by the CMS PKI; access is restricted to peering applications.

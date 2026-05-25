@@ -1,0 +1,54 @@
+apiCommonsRateLimits: '0.1'
+provider: cms-gov
+description: |
+  Rate limit policies across CMS APIs. The Blue Button 2.0 API is the only CMS API that publishes a
+  per-application rate limit. BCDA, AB2D, and DPC throttle by concurrent in-flight bulk export jobs
+  rather than per-request limits. The Marketplace API and data.cms.gov apply best-effort fair-use
+  throttling without published numbers.
+modified: '2026-05-25'
+policies:
+- api: cms-gov:blue-button-2-fhir-api
+  description: Blue Button 2.0 per-application throttling on the production FHIR R4 endpoint.
+  limits:
+  - type: requestRate
+    scope: application
+    requests: 3600
+    window: hour
+    note: Production tier limits per Blue Button developer documentation; sandbox is more permissive.
+  - type: concurrency
+    scope: application
+    requests: 10
+    note: Soft concurrency ceiling per application.
+- api: cms-gov:beneficiary-claims-data-api
+  description: BCDA throttles by concurrent jobs per ACO, not by request rate.
+  limits:
+  - type: concurrency
+    scope: organization
+    requests: 1
+    note: One in-flight bulk export job per ACO.
+- api: cms-gov:ab2d-api
+  description: AB2D throttles by concurrent jobs per contract.
+  limits:
+  - type: concurrency
+    scope: organization
+    requests: 1
+    note: One in-flight bulk export job per contract.
+- api: cms-gov:data-at-point-of-care-api
+  description: DPC sandbox and production both throttle bulk jobs per organization.
+  limits:
+  - type: concurrency
+    scope: organization
+    requests: 1
+    note: One in-flight bulk export job per Organization.
+- api: cms-gov:marketplace-api
+  description: Marketplace API applies fair-use throttling; specific numbers are not published.
+  limits:
+  - type: requestRate
+    scope: apiKey
+    note: Fair-use throttling on the apikey query parameter.
+- api: cms-gov:data-cms-gov-api
+  description: data.cms.gov data-api applies best-effort throttling.
+  limits:
+  - type: requestRate
+    scope: ip
+    note: Per-IP fair-use throttling; no documented hard cap.

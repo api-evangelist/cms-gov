@@ -1,0 +1,70 @@
+{
+  "resourceType": "ExplanationOfBenefit",
+  "id": "carrier-10000932623",
+  "meta": {
+    "lastUpdated": "2026-04-30T12:34:56.000-05:00",
+    "profile": [
+      "http://hl7.org/fhir/us/carin-bb/StructureDefinition/C4BB-ExplanationOfBenefit-Professional-NonClinician"
+    ]
+  },
+  "status": "active",
+  "type": {
+    "coding": [
+      {
+        "system": "https://bluebutton.cms.gov/resources/codesystem/eob-type",
+        "code": "CARRIER",
+        "display": "Carrier"
+      }
+    ]
+  },
+  "use": "claim",
+  "patient": { "reference": "Patient/-20140000008325" },
+  "billablePeriod": {
+    "start": "2026-03-12",
+    "end": "2026-03-12"
+  },
+  "created": "2026-04-15T00:00:00-05:00",
+  "insurer": { "reference": "Organization/CMS" },
+  "provider": { "reference": "Practitioner/1234567890" },
+  "outcome": "complete",
+  "diagnosis": [
+    {
+      "sequence": 1,
+      "diagnosisCodeableConcept": {
+        "coding": [
+          { "system": "http://hl7.org/fhir/sid/icd-10-cm", "code": "I10", "display": "Essential (primary) hypertension" }
+        ]
+      },
+      "type": [
+        { "coding": [ { "system": "http://terminology.hl7.org/CodeSystem/ex-diagnosistype", "code": "principal" } ] }
+      ]
+    }
+  ],
+  "item": [
+    {
+      "sequence": 1,
+      "productOrService": {
+        "coding": [
+          { "system": "https://bluebutton.cms.gov/resources/codesystem/hcpcs", "code": "99213", "display": "Office visit, established patient" }
+        ]
+      },
+      "servicedDate": "2026-03-12",
+      "quantity": { "value": 1 },
+      "unitPrice": { "value": 109.51, "currency": "USD" },
+      "net": { "value": 109.51, "currency": "USD" },
+      "adjudication": [
+        { "category": { "coding": [ { "code": "submitted" } ] }, "amount": { "value": 109.51, "currency": "USD" } },
+        { "category": { "coding": [ { "code": "eligible" } ] }, "amount": { "value": 87.61, "currency": "USD" } }
+      ]
+    }
+  ],
+  "total": [
+    { "category": { "coding": [ { "code": "submitted" } ] }, "amount": { "value": 109.51, "currency": "USD" } },
+    { "category": { "coding": [ { "code": "benefit" } ] }, "amount": { "value": 70.09, "currency": "USD" } }
+  ],
+  "payment": {
+    "type": { "coding": [ { "code": "complete" } ] },
+    "amount": { "value": 70.09, "currency": "USD" },
+    "date": "2026-04-25"
+  }
+}

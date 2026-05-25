@@ -1,0 +1,124 @@
+openapi: 3.0.3
+info:
+  title: CMS Marketplace API
+  description: |
+    The Marketplace API exposes Qualified Health Plan (QHP) and Stand-alone Dental Plan
+    (SADP) data from healthcare.gov including plan finder, plan compare, plan rates, plan
+    benefits, and crosswalks. Powers consumer plan-shopping experiences across
+    HealthCare.gov and partner brokers.
+  version: '1.0'
+  contact:
+    name: CMS Marketplace API
+    url: https://developer.cms.gov/marketplace-api/
+  license:
+    name: Public Domain (U.S. Government Work)
+    url: https://www.usa.gov/government-works
+servers:
+- url: https://marketplace.api.healthcare.gov/api/v1
+  description: Production
+security:
+- ApiKey: []
+paths:
+  /plans/search:
+    post:
+      summary: Search Marketplace Plans
+      operationId: searchPlans
+      description: Search QHPs available to a household based on location, income, and household composition.
+      tags: [Plans]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                household: { type: object }
+                place: { type: object }
+                market: { type: string, enum: [Individual, SHOP] }
+                year: { type: integer }
+      responses:
+        '200':
+          description: List of matching plans
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total: { type: integer }
+                  plans: { type: array, items: { $ref: '#/components/schemas/Plan' } }
+  /plans/{planId}:
+    get:
+      summary: Get Plan Details
+      operationId: getPlan
+      tags: [Plans]
+      parameters:
+      - { name: planId, in: path, required: true, schema: { type: string } }
+      - { name: year, in: query, schema: { type: integer } }
+      responses:
+        '200':
+          description: Plan details
+          content: { application/json: { schema: { $ref: '#/components/schemas/Plan' } } }
+  /counties/by/zip/{zip}:
+    get:
+      summary: Get Counties by ZIP
+      operationId: getCountiesByZip
+      tags: [Geography]
+      parameters:
+      - { name: zip, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: List of counties }
+  /issuers:
+    get:
+      summary: List Issuers
+      operationId: listIssuers
+      tags: [Issuers]
+      responses:
+        '200': { description: List of QHP issuers }
+  /providers/search:
+    post:
+      summary: Search Providers
+      operationId: searchProviders
+      tags: [Providers]
+      requestBody:
+        required: true
+        content: { application/json: { schema: { type: object } } }
+      responses:
+        '200': { description: Matching providers and networks }
+  /drugs/autocomplete:
+    get:
+      summary: Drug Autocomplete
+      operationId: drugAutocomplete
+      tags: [Drugs]
+      parameters:
+      - { name: q, in: query, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Drug suggestions }
+  /forms/eligibility:
+    post:
+      summary: Check Subsidy Eligibility
+      operationId: checkEligibility
+      tags: [Eligibility]
+      requestBody:
+        required: true
+        content: { application/json: { schema: { type: object } } }
+      responses:
+        '200': { description: Eligibility result including APTC and CSR }
+components:
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: query
+      name: apikey
+  schemas:
+    Plan:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        issuer: { type: object }
+        metal_level: { type: string, enum: [Bronze, Silver, Gold, Platinum, Catastrophic] }
+        type: { type: string, enum: [HMO, PPO, EPO, POS, Indemnity] }
+        premium: { type: number }
+        deductibles: { type: array, items: { type: object } }
+        moops: { type: array, items: { type: object } }
+        benefits: { type: array, items: { type: object } }

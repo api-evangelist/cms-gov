@@ -1,0 +1,81 @@
+openapi: 3.0.3
+info:
+  title: CMS Open Data API (data.cms.gov)
+  description: |
+    The CMS Open Data API exposes the public catalog of CMS datasets — Medicare provider
+    utilization, Open Payments, Hospital/Nursing Home/Physician Compare, Marketplace
+    public-use files, and more — via filtered JSON/CSV downloads and dataset-level
+    data-api endpoints.
+  version: '1.0'
+  contact:
+    name: CMS Open Data
+    url: https://data.cms.gov/
+  license:
+    name: Public Domain (U.S. Government Work)
+    url: https://www.usa.gov/government-works
+servers:
+- url: https://data.cms.gov/data-api/v1
+  description: Production
+- url: https://data.cms.gov/data.json
+  description: DCAT catalog
+paths:
+  /dataset:
+    get:
+      summary: List Datasets
+      operationId: listDatasets
+      tags: [Catalog]
+      parameters:
+      - { name: keyword, in: query, schema: { type: string } }
+      - { name: theme, in: query, schema: { type: string } }
+      - { name: publisher, in: query, schema: { type: string } }
+      responses:
+        '200': { description: List of datasets, content: { application/json: { schema: { type: array, items: { $ref: '#/components/schemas/Dataset' } } } } }
+  /dataset/{datasetId}:
+    get:
+      summary: Get Dataset Metadata
+      operationId: getDataset
+      tags: [Catalog]
+      parameters:
+      - { name: datasetId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Dataset metadata, content: { application/json: { schema: { $ref: '#/components/schemas/Dataset' } } } }
+  /dataset/{datasetId}/data:
+    get:
+      summary: Get Dataset Data
+      operationId: getDatasetData
+      description: Filtered data query against a dataset distribution.
+      tags: [Data]
+      parameters:
+      - { name: datasetId, in: path, required: true, schema: { type: string } }
+      - { name: filter, in: query, schema: { type: string, description: 'Field filter expressions' } }
+      - { name: keyword, in: query, schema: { type: string } }
+      - { name: offset, in: query, schema: { type: integer } }
+      - { name: size, in: query, schema: { type: integer, maximum: 5000 } }
+      - { name: format, in: query, schema: { type: string, enum: [json, csv, tsv] } }
+      responses:
+        '200': { description: Dataset rows }
+  /dataset/{datasetId}/data-stats:
+    get:
+      summary: Get Dataset Statistics
+      operationId: getDatasetStats
+      tags: [Data]
+      parameters:
+      - { name: datasetId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Row counts and column stats }
+components:
+  schemas:
+    Dataset:
+      type: object
+      properties:
+        identifier: { type: string }
+        title: { type: string }
+        description: { type: string }
+        keyword: { type: array, items: { type: string } }
+        issued: { type: string, format: date }
+        modified: { type: string, format: date }
+        publisher: { type: object }
+        contactPoint: { type: object }
+        accessLevel: { type: string }
+        distribution: { type: array, items: { type: object } }
+        theme: { type: array, items: { type: string } }

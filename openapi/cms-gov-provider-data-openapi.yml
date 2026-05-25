@@ -1,0 +1,55 @@
+openapi: 3.0.3
+info:
+  title: CMS Provider Data Catalog API
+  description: |
+    The Provider Data Catalog API surfaces the quality and compare datasets that powered
+    the legacy Hospital Compare, Nursing Home Compare, Home Health Compare, Hospice
+    Compare, LTCH Compare, IRF Compare, Dialysis Facility Compare, and Physician Compare
+    sites via CKAN/DKAN-compatible endpoints.
+  version: '1.0'
+  license:
+    name: Public Domain (U.S. Government Work)
+    url: https://www.usa.gov/government-works
+servers:
+- url: https://data.cms.gov/provider-data/api/1
+  description: Production
+paths:
+  /metastore/schemas/dataset/items:
+    get:
+      summary: List Provider Datasets
+      operationId: listProviderDatasets
+      tags: [Catalog]
+      responses:
+        '200': { description: List of provider datasets }
+  /metastore/schemas/dataset/items/{datasetId}:
+    get:
+      summary: Get Provider Dataset
+      operationId: getProviderDataset
+      tags: [Catalog]
+      parameters:
+      - { name: datasetId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Dataset record }
+  /datastore/query/{distributionId}:
+    get:
+      summary: Query Dataset Distribution
+      operationId: queryDistribution
+      tags: [Data]
+      parameters:
+      - { name: distributionId, in: path, required: true, schema: { type: string } }
+      - { name: conditions, in: query, schema: { type: string } }
+      - { name: limit, in: query, schema: { type: integer, maximum: 500 } }
+      - { name: offset, in: query, schema: { type: integer } }
+      - { name: format, in: query, schema: { type: string, enum: [json, csv] } }
+      responses:
+        '200': { description: Query results }
+  /datastore/sql:
+    get:
+      summary: Run SQL Query
+      operationId: runSql
+      description: Execute a constrained SQL query against the published provider datasets.
+      tags: [Data]
+      parameters:
+      - { name: query, in: query, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Query results }

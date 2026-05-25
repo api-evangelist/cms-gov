@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cms-gov/main/json-schema/cms-gov-explanation-of-benefit-schema.json",
+  "title": "ExplanationOfBenefit",
+  "description": "Carin BB / HL7 FHIR R4 ExplanationOfBenefit resource — the canonical Medicare claim representation used across Blue Button 2.0, BCDA, AB2D, DPC, and BFD.",
+  "type": "object",
+  "required": ["resourceType", "id", "status", "type", "patient"],
+  "properties": {
+    "resourceType": { "type": "string", "const": "ExplanationOfBenefit" },
+    "id": { "type": "string" },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "lastUpdated": { "type": "string", "format": "date-time" },
+        "profile": { "type": "array", "items": { "type": "string", "format": "uri" } }
+      }
+    },
+    "status": { "type": "string", "enum": ["active", "cancelled", "draft", "entered-in-error"] },
+    "type": { "$ref": "#/$defs/CodeableConcept", "description": "Claim type: carrier, dme, hha, hospice, inpatient, outpatient, pde, snf" },
+    "use": { "type": "string", "enum": ["claim", "preauthorization", "predetermination"] },
+    "patient": { "$ref": "#/$defs/Reference" },
+    "billablePeriod": { "$ref": "#/$defs/Period" },
+    "created": { "type": "string", "format": "date-time" },
+    "insurer": { "$ref": "#/$defs/Reference" },
+    "provider": { "$ref": "#/$defs/Reference" },
+    "outcome": { "type": "string", "enum": ["queued", "complete", "error", "partial"] },
+    "diagnosis": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sequence": { "type": "integer" },
+          "diagnosisCodeableConcept": { "$ref": "#/$defs/CodeableConcept" },
+          "type": { "type": "array", "items": { "$ref": "#/$defs/CodeableConcept" } }
+        }
+      }
+    },
+    "procedure": { "type": "array", "items": { "type": "object" } },
+    "insurance": { "type": "array", "items": { "type": "object" } },
+    "item": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sequence": { "type": "integer" },
+          "productOrService": { "$ref": "#/$defs/CodeableConcept" },
+          "servicedDate": { "type": "string", "format": "date" },
+          "servicedPeriod": { "$ref": "#/$defs/Period" },
+          "quantity": { "type": "object" },
+          "unitPrice": { "$ref": "#/$defs/Money" },
+          "net": { "$ref": "#/$defs/Money" },
+          "adjudication": { "type": "array", "items": { "type": "object" } }
+        }
+      }
+    },
+    "total": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "category": { "$ref": "#/$defs/CodeableConcept" },
+          "amount": { "$ref": "#/$defs/Money" }
+        }
+      }
+    },
+    "payment": {
+      "type": "object",
+      "properties": {
+        "type": { "$ref": "#/$defs/CodeableConcept" },
+        "amount": { "$ref": "#/$defs/Money" },
+        "date": { "type": "string", "format": "date" }
+      }
+    }
+  },
+  "$defs": {
+    "Reference": {
+      "type": "object",
+      "properties": {
+        "reference": { "type": "string" },
+        "identifier": { "type": "object" },
+        "display": { "type": "string" }
+      }
+    },
+    "CodeableConcept": {
+      "type": "object",
+      "properties": {
+        "coding": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "system": { "type": "string", "format": "uri" },
+              "code": { "type": "string" },
+              "display": { "type": "string" }
+            }
+          }
+        },
+        "text": { "type": "string" }
+      }
+    },
+    "Period": {
+      "type": "object",
+      "properties": {
+        "start": { "type": "string", "format": "date-time" },
+        "end": { "type": "string", "format": "date-time" }
+      }
+    },
+    "Money": {
+      "type": "object",
+      "properties": {
+        "value": { "type": "number" },
+        "currency": { "type": "string", "const": "USD" }
+      }
+    }
+  }
+}

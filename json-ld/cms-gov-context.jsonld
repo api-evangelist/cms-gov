@@ -1,0 +1,88 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@vocab": "https://schema.org/",
+    "schema": "https://schema.org/",
+    "fhir": "http://hl7.org/fhir/",
+    "cms": "https://bluebutton.cms.gov/resources/",
+    "carin": "http://hl7.org/fhir/us/carin-bb/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Patient": {
+      "@id": "fhir:Patient",
+      "@context": {
+        "id": { "@id": "fhir:Patient.id", "@type": "xsd:string" },
+        "identifier": { "@id": "fhir:Patient.identifier" },
+        "name": { "@id": "fhir:Patient.name" },
+        "gender": { "@id": "fhir:Patient.gender" },
+        "birthDate": { "@id": "fhir:Patient.birthDate", "@type": "xsd:date" },
+        "address": { "@id": "fhir:Patient.address" }
+      }
+    },
+
+    "Coverage": {
+      "@id": "fhir:Coverage",
+      "@context": {
+        "id": { "@id": "fhir:Coverage.id", "@type": "xsd:string" },
+        "status": { "@id": "fhir:Coverage.status" },
+        "type": { "@id": "fhir:Coverage.type" },
+        "beneficiary": { "@id": "fhir:Coverage.beneficiary" },
+        "period": { "@id": "fhir:Coverage.period" },
+        "payor": { "@id": "fhir:Coverage.payor" }
+      }
+    },
+
+    "ExplanationOfBenefit": {
+      "@id": "fhir:ExplanationOfBenefit",
+      "@context": {
+        "id": { "@id": "fhir:ExplanationOfBenefit.id", "@type": "xsd:string" },
+        "status": { "@id": "fhir:ExplanationOfBenefit.status" },
+        "type": { "@id": "fhir:ExplanationOfBenefit.type" },
+        "patient": { "@id": "fhir:ExplanationOfBenefit.patient" },
+        "billablePeriod": { "@id": "fhir:ExplanationOfBenefit.billablePeriod" },
+        "diagnosis": { "@id": "fhir:ExplanationOfBenefit.diagnosis" },
+        "procedure": { "@id": "fhir:ExplanationOfBenefit.procedure" },
+        "item": { "@id": "fhir:ExplanationOfBenefit.item" },
+        "total": { "@id": "fhir:ExplanationOfBenefit.total" },
+        "payment": { "@id": "fhir:ExplanationOfBenefit.payment" }
+      }
+    },
+
+    "MarketplacePlan": {
+      "@id": "schema:HealthInsurancePlan",
+      "@context": {
+        "id": { "@id": "cms:plan/id", "@type": "xsd:string" },
+        "name": { "@id": "schema:name" },
+        "issuer": { "@id": "schema:provider" },
+        "metal_level": { "@id": "cms:plan/metalLevel" },
+        "premium": { "@id": "cms:plan/premium", "@type": "xsd:decimal" },
+        "deductibles": { "@id": "cms:plan/deductibles" }
+      }
+    },
+
+    "Dataset": {
+      "@id": "schema:Dataset",
+      "@context": {
+        "identifier": { "@id": "dcterms:identifier" },
+        "title": { "@id": "dcterms:title" },
+        "description": { "@id": "dcterms:description" },
+        "publisher": { "@id": "dcterms:publisher" },
+        "issued": { "@id": "dcterms:issued", "@type": "xsd:date" },
+        "modified": { "@id": "dcterms:modified", "@type": "xsd:date" },
+        "theme": { "@id": "dcterms:subject" },
+        "distribution": { "@id": "dcat:distribution" }
+      }
+    },
+
+    "Provider": {
+      "@id": "schema:MedicalOrganization",
+      "@context": {
+        "npi": { "@id": "cms:provider/npi" },
+        "name": { "@id": "schema:legalName" },
+        "specialty": { "@id": "schema:medicalSpecialty" },
+        "address": { "@id": "schema:address" }
+      }
+    }
+  }
+}

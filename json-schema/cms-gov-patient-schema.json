@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cms-gov/main/json-schema/cms-gov-patient-schema.json",
+  "title": "Patient",
+  "description": "HL7 FHIR R4 Patient resource as exposed by CMS Blue Button 2.0, BCDA, AB2D, DPC, and BFD. Identifiers carry MBI, BENE_ID, or HICN.",
+  "type": "object",
+  "required": ["resourceType", "id"],
+  "properties": {
+    "resourceType": { "type": "string", "const": "Patient" },
+    "id": { "type": "string" },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "lastUpdated": { "type": "string", "format": "date-time" },
+        "profile": { "type": "array", "items": { "type": "string", "format": "uri" } }
+      }
+    },
+    "identifier": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "system": { "type": "string", "format": "uri", "description": "Identifier namespace e.g. https://bluebutton.cms.gov/resources/variables/bene_id" },
+          "value": { "type": "string" },
+          "use": { "type": "string", "enum": ["usual", "official", "temp", "secondary", "old"] }
+        }
+      }
+    },
+    "name": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "use": { "type": "string" },
+          "family": { "type": "string" },
+          "given": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "gender": { "type": "string", "enum": ["male", "female", "other", "unknown"] },
+    "birthDate": { "type": "string", "format": "date" },
+    "deceasedDateTime": { "type": "string", "format": "date-time" },
+    "address": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "use": { "type": "string" },
+          "line": { "type": "array", "items": { "type": "string" } },
+          "city": { "type": "string" },
+          "state": { "type": "string" },
+          "postalCode": { "type": "string" },
+          "country": { "type": "string" }
+        }
+      }
+    },
+    "communication": { "type": "array", "items": { "type": "object" } },
+    "extension": { "type": "array", "items": { "type": "object" } }
+  }
+}

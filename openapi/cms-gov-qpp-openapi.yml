@@ -1,0 +1,85 @@
+openapi: 3.0.3
+info:
+  title: CMS Quality Payment Program API
+  description: |
+    The Quality Payment Program (QPP) API supports MIPS and Advanced APMs under MACRA.
+    Exposes measures, benchmarks, scoring, and submission endpoints used by Qualified
+    Registries, EHR vendors, and QCDRs.
+  version: '1.0'
+  license:
+    name: Public Domain (U.S. Government Work)
+    url: https://www.usa.gov/government-works
+servers:
+- url: https://qpp.cms.gov/api
+  description: Production
+security:
+- BearerAuth: []
+paths:
+  /submissions:
+    get:
+      summary: List Submissions
+      operationId: listSubmissions
+      tags: [Submissions]
+      responses: { '200': { description: List of submissions } }
+    post:
+      summary: Create Submission
+      operationId: createSubmission
+      tags: [Submissions]
+      requestBody:
+        required: true
+        content: { application/json: { schema: { type: object } } }
+      responses: { '201': { description: Submission created } }
+  /submissions/{id}:
+    get:
+      summary: Get Submission
+      operationId: getSubmission
+      tags: [Submissions]
+      parameters:
+      - { name: id, in: path, required: true, schema: { type: string } }
+      responses: { '200': { description: Submission record } }
+    put:
+      summary: Update Submission
+      operationId: updateSubmission
+      tags: [Submissions]
+      parameters:
+      - { name: id, in: path, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content: { application/json: { schema: { type: object } } }
+      responses: { '200': { description: Submission updated } }
+  /measurements:
+    get:
+      summary: List Measurements
+      operationId: listMeasurements
+      tags: [Measurements]
+      responses: { '200': { description: List of measurements } }
+    post:
+      summary: Create Measurement
+      operationId: createMeasurement
+      tags: [Measurements]
+      requestBody:
+        required: true
+        content: { application/json: { schema: { type: object } } }
+      responses: { '201': { description: Measurement created } }
+  /scoring:
+    get:
+      summary: Get Score Preview
+      operationId: getScore
+      tags: [Scoring]
+      parameters:
+      - { name: submissionId, in: query, schema: { type: string } }
+      responses: { '200': { description: Score preview } }
+  /benchmarks:
+    get:
+      summary: List Benchmarks
+      operationId: listBenchmarks
+      tags: [Benchmarks]
+      parameters:
+      - { name: performanceYear, in: query, schema: { type: integer } }
+      responses: { '200': { description: Benchmark data } }
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: QPP uses HARP-issued JWT bearer tokens.

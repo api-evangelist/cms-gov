@@ -1,0 +1,66 @@
+extends:
+- spectral:oas
+rules:
+  # CMS APIs follow Title Case operation summaries
+  cms-operation-summary-title-case:
+    description: Operation summaries should use Title Case (matches CMS developer docs style).
+    given: $.paths.*.*.summary
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^([A-Z][a-zA-Z0-9]*)( [A-Za-z0-9$()/{}-]+)*$"
+  # FHIR APIs must declare CapabilityStatement
+  cms-fhir-capability-statement-required:
+    description: FHIR APIs must expose GET /metadata returning a CapabilityStatement.
+    given: $.paths
+    severity: warn
+    then:
+      function: truthy
+      field: /metadata
+  # Bulk export endpoints must require Prefer:respond-async header
+  cms-bulk-export-prefer-header:
+    description: Bulk FHIR $export operations must require a Prefer header.
+    given: $.paths[?(@property.match(/\$export$/))].get.parameters[?(@.in=='header')]
+    severity: warn
+    then:
+      field: name
+      function: pattern
+      functionOptions:
+        match: "Prefer"
+  # All operations must have tags
+  cms-operation-tagged:
+    description: All operations should be tagged.
+    given: $.paths.*.*
+    severity: warn
+    then:
+      field: tags
+      function: truthy
+  # All operations must have operationId
+  cms-operation-id-required:
+    description: All operations must declare a camelCase operationId.
+    given: $.paths.*.*
+    severity: error
+    then:
+      field: operationId
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+  # FHIR responses use application/fhir+json content type
+  cms-fhir-content-type:
+    description: FHIR responses should use the application/fhir+json content type.
+    given: $.paths[?(@property=='/Patient' || @property=='/Coverage' || @property=='/ExplanationOfBenefit')].get.responses.200.content
+    severity: hint
+    then:
+      function: truthy
+      field: application/fhir+json
+  # All paths must use kebab-case or FHIR resource conventions
+  cms-public-domain-license:
+    description: CMS APIs are U.S. Government works and should declare Public Domain.
+    given: $.info.license
+    severity: hint
+    then:
+      field: name
+      function: pattern
+      functionOptions:
+        match: "Public Domain"

@@ -1,0 +1,356 @@
+aid: cms-gov
+url: https://raw.githubusercontent.com/api-evangelist/cms-gov/refs/heads/main/apis.yml
+apis:
+- aid: cms-gov:blue-button-2-fhir-api
+  name: CMS Blue Button 2.0 API
+  tags:
+  - Healthcare
+  - Medicare
+  - FHIR
+  - Claims
+  - Beneficiary
+  - Government
+  humanURL: https://bluebutton.cms.gov/developers/
+  baseURL: https://api.bluebutton.cms.gov/v2/fhir
+  properties:
+  - url: https://bluebutton.cms.gov/developers/
+    type: Documentation
+  - url: https://bluebutton.cms.gov/api/v2/explorer/
+    type: Console
+  - url: openapi/cms-gov-blue-button-2-openapi.yml
+    type: OpenAPI
+  - url: json-schema/cms-gov-explanation-of-benefit-schema.json
+    type: JSONSchema
+  - url: json-schema/cms-gov-patient-schema.json
+    type: JSONSchema
+  - url: json-schema/cms-gov-coverage-schema.json
+    type: JSONSchema
+  - url: json-ld/cms-gov-context.jsonld
+    type: JSONLD
+  - type: NaftikoCapability
+    url: capabilities/blue-button-fhir.yaml
+  description: Blue Button 2.0 is a developer-friendly, OAuth 2.0-enabled, HL7 FHIR R4 standard data API that delivers
+    Medicare Part A, B, and D claims data for 60+ million Medicare beneficiaries to applications, services, and
+    research programs. Includes Patient, Coverage, and ExplanationOfBenefit resources for the beneficiary's
+    consented data.
+- aid: cms-gov:beneficiary-claims-data-api
+  name: CMS Beneficiary Claims Data API (BCDA)
+  tags:
+  - Healthcare
+  - Medicare
+  - FHIR
+  - Bulk Data
+  - ACO
+  - Claims
+  - Government
+  humanURL: https://bcda.cms.gov/
+  baseURL: https://api.bcda.cms.gov/api/v2
+  properties:
+  - url: https://bcda.cms.gov/
+    type: Documentation
+  - url: https://bcda.cms.gov/guide.html
+    type: Documentation
+  - url: https://sandbox.bcda.cms.gov/
+    type: Sandbox
+  - url: openapi/cms-gov-bcda-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/bcda-bulk-fhir.yaml
+  description: BCDA enables Medicare Shared Savings Program Accountable Care Organizations (ACOs) to retrieve bulk
+    Medicare Parts A, B, and D claims data for their assigned and assignable beneficiaries via the HL7 FHIR Bulk
+    Data Access (Flat FHIR) specification. Uses asynchronous $export endpoints returning NDJSON resources for
+    Patient, Coverage, and ExplanationOfBenefit.
+- aid: cms-gov:ab2d-api
+  name: CMS AB2D API
+  tags:
+  - Healthcare
+  - Medicare
+  - FHIR
+  - Bulk Data
+  - Part D
+  - Claims
+  - Government
+  humanURL: https://ab2d.cms.gov/
+  baseURL: https://api.ab2d.cms.gov/api/v2
+  properties:
+  - url: https://ab2d.cms.gov/
+    type: Documentation
+  - url: https://ab2d.cms.gov/getting-started/
+    type: Documentation
+  - url: https://sandbox.ab2d.cms.gov/swagger-ui/
+    type: Console
+  - url: openapi/cms-gov-ab2d-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/ab2d-bulk-fhir.yaml
+  description: AB2D (Claim and Claim Line Feed) delivers Medicare Parts A, B, and D claims data to Part D
+    prescription drug plan sponsors via the HL7 FHIR Bulk Data Access specification. Supports asynchronous
+    $export of ExplanationOfBenefit resources as NDJSON for all enrolled Medicare beneficiaries since 2020.
+- aid: cms-gov:data-at-point-of-care-api
+  name: CMS Data at the Point of Care API (DPC)
+  tags:
+  - Healthcare
+  - Medicare
+  - FHIR
+  - Bulk Data
+  - Provider
+  - Government
+  humanURL: https://dpc.cms.gov/
+  baseURL: https://sandbox.dpc.cms.gov/api/v1
+  properties:
+  - url: https://dpc.cms.gov/
+    type: Documentation
+  - url: https://dpc.cms.gov/docs
+    type: Documentation
+  - url: openapi/cms-gov-dpc-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/dpc-bulk-fhir.yaml
+  description: Data at the Point of Care fills gaps in patient history by delivering Medicare claims data via HL7
+    FHIR Bulk Data Access to fee-for-service providers at the point of care. Providers register Practitioner,
+    Organization, Group, and Patient roster resources, then asynchronously $export ExplanationOfBenefit, Coverage,
+    and Patient resources.
+- aid: cms-gov:bfd-api
+  name: CMS Beneficiary FHIR Data Server (BFD)
+  tags:
+  - Healthcare
+  - Medicare
+  - FHIR
+  - Claims
+  - Beneficiary
+  - Government
+  humanURL: https://bfd.cms.gov/
+  properties:
+  - url: https://bfd.cms.gov/
+    type: Documentation
+  - url: https://github.com/CMSgov/beneficiary-fhir-data
+    type: SourceCode
+  - url: openapi/cms-gov-bfd-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/bfd-fhir.yaml
+  description: The Beneficiary FHIR Data (BFD) Server is the upstream HL7 FHIR R4 service that powers Blue Button
+    2.0, BCDA, AB2D, and DPC. BFD ingests claims from the CMS Chronic Conditions Warehouse (CCW) and exposes
+    Patient, Coverage, and ExplanationOfBenefit resources with both synchronous and bulk asynchronous access.
+    Internal/peering access only; clients use the downstream Blue Button, BCDA, AB2D, or DPC APIs.
+- aid: cms-gov:marketplace-api
+  name: CMS Marketplace API
+  tags:
+  - Healthcare
+  - Marketplace
+  - Insurance
+  - ACA
+  - Plans
+  - Government
+  humanURL: https://developer.cms.gov/marketplace-api/
+  baseURL: https://marketplace.api.healthcare.gov/api/v1
+  properties:
+  - url: https://developer.cms.gov/marketplace-api/
+    type: Documentation
+  - url: https://www.cms.gov/marketplace/resources/data/public-use-files
+    type: Documentation
+  - url: openapi/cms-gov-marketplace-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/marketplace-plans.yaml
+  description: The Marketplace API exposes Qualified Health Plan (QHP) and Stand-alone Dental Plan (SADP) data
+    from healthcare.gov including plan finder, plan compare, plan rates, plan benefits, plan crosswalks, and
+    issuer details. Powers consumer plan-shopping experiences across HealthCare.gov and partner brokers.
+- aid: cms-gov:data-cms-gov-api
+  name: CMS Open Data API (data.cms.gov)
+  tags:
+  - Healthcare
+  - Open Data
+  - Datasets
+  - Socrata
+  - Government
+  humanURL: https://data.cms.gov/
+  baseURL: https://data.cms.gov/data-api/v1
+  properties:
+  - url: https://data.cms.gov/
+    type: Portal
+  - url: https://data.cms.gov/provider-data/
+    type: Documentation
+  - url: https://data.cms.gov/data.json
+    type: Schema
+  - url: openapi/cms-gov-open-data-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/open-data-datasets.yaml
+  description: The CMS Open Data API exposes the full catalog of public CMS datasets — Medicare provider utilization
+    and payment files, Medicare Advantage and Part D enrollment, Hospital Compare, Nursing Home Compare, Physician
+    Compare, Open Payments (Sunshine Act), Marketplace public-use files, and the Provider Data Catalog. Datasets
+    are queryable via filtered JSON/CSV downloads and dataset-level data-api endpoints.
+- aid: cms-gov:provider-data-catalog-api
+  name: CMS Provider Data Catalog API
+  tags:
+  - Healthcare
+  - Quality
+  - Provider
+  - Hospitals
+  - Compare
+  - Government
+  humanURL: https://data.cms.gov/provider-data/
+  baseURL: https://data.cms.gov/provider-data/api/1
+  properties:
+  - url: https://data.cms.gov/provider-data/
+    type: Portal
+  - url: https://data.cms.gov/provider-data/docs
+    type: Documentation
+  - url: openapi/cms-gov-provider-data-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/provider-data-catalog.yaml
+  description: The Provider Data Catalog API surfaces the quality and compare datasets that powered the legacy
+    Hospital Compare, Nursing Home Compare, Home Health Compare, Hospice Compare, Long-Term Care Hospital
+    Compare, Inpatient Rehabilitation Facility Compare, Dialysis Facility Compare, and Physician Compare sites
+    via CKAN DKAN-compatible dataset and resource endpoints.
+- aid: cms-gov:quality-payment-program-api
+  name: CMS Quality Payment Program API
+  tags:
+  - Healthcare
+  - Quality
+  - MIPS
+  - MACRA
+  - Provider
+  - Government
+  humanURL: https://qpp.cms.gov/about/resource-library
+  baseURL: https://qpp.cms.gov/api
+  properties:
+  - url: https://qpp.cms.gov/about/resource-library
+    type: Documentation
+  - url: https://github.com/CMSgov/qpp-measures-data
+    type: SourceCode
+  - url: openapi/cms-gov-qpp-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/quality-payment-program.yaml
+  description: The Quality Payment Program (QPP) API supports the Merit-based Incentive Payment System (MIPS) and
+    Advanced Alternative Payment Models (APMs) under MACRA. Exposes measures, benchmarks, scoring, and submission
+    endpoints used by Qualified Registries, EHR vendors, and QCDRs to submit clinician performance data and
+    retrieve scoring metadata.
+- aid: cms-gov:medicare-coverage-database-api
+  name: CMS Medicare Coverage Database API
+  tags:
+  - Healthcare
+  - Medicare
+  - Coverage
+  - Policy
+  - LCD
+  - NCD
+  - Government
+  humanURL: https://www.cms.gov/medicare-coverage-database/
+  properties:
+  - url: https://www.cms.gov/medicare-coverage-database/
+    type: Portal
+  - url: https://www.cms.gov/medicare-coverage-database/reports/reports.aspx
+    type: Documentation
+  - url: openapi/cms-gov-mcd-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/medicare-coverage-database.yaml
+  description: The Medicare Coverage Database (MCD) exposes National Coverage Determinations (NCDs), Local
+    Coverage Determinations (LCDs), Local Coverage Articles, Proposed Decisions, National Coverage Analyses, and
+    Medicare Evidence Development & Coverage Advisory Committee (MEDCAC) records. Powers coverage policy lookups
+    by HCPCS code, ICD-10, contractor jurisdiction, and state.
+name: CMS — Centers for Medicare & Medicaid Services
+description: The Centers for Medicare & Medicaid Services (CMS) is the U.S. federal agency within the Department
+  of Health and Human Services that administers Medicare, Medicaid, the Children's Health Insurance Program (CHIP),
+  the Health Insurance Marketplace, and the broader CMS open-data program. CMS operates one of the largest
+  collections of HL7 FHIR APIs in the U.S. federal government — Blue Button 2.0, BCDA, AB2D, DPC, and the
+  upstream BFD server — alongside the Marketplace API, the data.cms.gov open-data catalog, the Provider Data
+  Catalog, the Quality Payment Program API, and the Medicare Coverage Database.
+tags:
+- Healthcare
+- Medicare
+- Medicaid
+- FHIR
+- Bulk Data
+- Open Data
+- Government
+- Federal
+- Claims
+- Insurance
+- ACA
+- Marketplace
+- Quality
+kind: contract
+image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+access: 3rd-Party
+common:
+- url: https://www.cms.gov/
+  name: CMS Homepage
+  type: Portal
+- url: https://developer.cms.gov/
+  name: CMS Developer Hub
+  type: Portal
+- url: https://github.com/CMSgov
+  name: CMSgov GitHub Org
+  type: SourceCode
+- url: https://github.com/CMSgov/bluebutton-developer-help
+  name: Blue Button Developer Help
+  type: Support
+- url: https://groups.google.com/g/developer-group-for-cms-blue-button-api
+  name: Blue Button Google Group
+  type: Forum
+- url: https://groups.google.com/g/cms-bcda-api
+  name: BCDA Google Group
+  type: Forum
+- url: https://groups.google.com/g/cms-ab2d-api
+  name: AB2D Google Group
+  type: Forum
+- url: https://dpc.cms.gov/contact
+  name: DPC Support
+  type: Support
+- url: https://bluebutton.cms.gov/developers/#try-the-api
+  name: Blue Button Sandbox
+  type: Sandbox
+- url: https://sandbox.bcda.cms.gov/
+  name: BCDA Sandbox
+  type: Sandbox
+- url: https://sandbox.ab2d.cms.gov/
+  name: AB2D Sandbox
+  type: Sandbox
+- url: https://sandbox.dpc.cms.gov/
+  name: DPC Sandbox
+  type: Sandbox
+- url: https://bluebutton.cms.gov/developers/#authorization
+  name: Blue Button Authentication
+  type: Authentication
+- url: https://bcda.cms.gov/guide.html#authentication
+  name: BCDA Authentication
+  type: Authentication
+- url: https://www.cms.gov/about-cms/contact-current/contact-us
+  name: Contact CMS
+  type: Support
+- url: https://www.cms.gov/newsroom
+  name: CMS Newsroom
+  type: Blog
+- url: https://www.cms.gov/about-cms/web-policies-important-links/privacy-policy
+  name: Privacy Policy
+  type: Privacy
+- url: https://www.cms.gov/cclio/regulations-and-guidance
+  name: CCIIO Regulations and Guidance
+  type: Documentation
+- url: https://confluence.hl7.org/display/FHIR/Argonaut+Implementation+Guide+Home+Page
+  name: Argonaut FHIR Implementation Guide
+  type: Documentation
+- url: https://hl7.org/fhir/us/carin-bb/
+  name: CARIN Blue Button FHIR IG
+  type: Documentation
+- url: https://hl7.org/fhir/uv/bulkdata/
+  name: HL7 FHIR Bulk Data Access IG
+  type: Documentation
+- url: https://www.cms.gov/about-cms
+  name: About CMS
+  type: About
+- url: https://www.cms.gov/about-cms/contact-current/cms-rss-feeds
+  name: CMS RSS Feeds
+  type: Feeds
+maintainers:
+- FN: Centers for Medicare & Medicaid Services
+  url: https://www.cms.gov/
+  email: CMS_Feedback@cms.hhs.gov
+created: '2026-05-25'
+modified: '2026-05-25'
+specificationVersion: '0.18'

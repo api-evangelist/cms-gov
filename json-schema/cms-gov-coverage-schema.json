@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cms-gov/main/json-schema/cms-gov-coverage-schema.json",
+  "title": "Coverage",
+  "description": "HL7 FHIR R4 Coverage resource as exposed by CMS Blue Button 2.0, BCDA, AB2D, DPC, and BFD. Represents Medicare Part A, B, C, or D enrollment.",
+  "type": "object",
+  "required": ["resourceType", "id", "status", "beneficiary"],
+  "properties": {
+    "resourceType": { "type": "string", "const": "Coverage" },
+    "id": { "type": "string" },
+    "status": { "type": "string", "enum": ["active", "cancelled", "draft", "entered-in-error"] },
+    "type": {
+      "type": "object",
+      "description": "Coverage type: PART_A, PART_B, PART_C, PART_D",
+      "properties": {
+        "coding": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "system": { "type": "string", "format": "uri" },
+              "code": { "type": "string", "enum": ["PART_A", "PART_B", "PART_C", "PART_D"] },
+              "display": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "subscriberId": { "type": "string" },
+    "beneficiary": {
+      "type": "object",
+      "properties": { "reference": { "type": "string" } }
+    },
+    "relationship": { "type": "object" },
+    "period": {
+      "type": "object",
+      "properties": {
+        "start": { "type": "string", "format": "date" },
+        "end": { "type": "string", "format": "date" }
+      }
+    },
+    "payor": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": { "reference": { "type": "string" } }
+      }
+    },
+    "class": { "type": "array", "items": { "type": "object" } },
+    "extension": { "type": "array", "items": { "type": "object" } }
+  }
+}
