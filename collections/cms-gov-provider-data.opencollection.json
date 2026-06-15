@@ -1,0 +1,111 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CMS Provider Data Catalog API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Catalog",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Provider Datasets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items"
+          },
+          "docs": "List Provider Datasets"
+        },
+        {
+          "info": {
+            "name": "Get Provider Dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items/:datasetId",
+            "params": [
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Provider Dataset"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query Dataset Distribution",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.cms.gov/provider-data/api/1/datastore/query/:distributionId",
+            "params": [
+              {
+                "name": "distributionId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "conditions",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Query Dataset Distribution"
+        },
+        {
+          "info": {
+            "name": "Run SQL Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.cms.gov/provider-data/api/1/datastore/sql",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Execute a constrained SQL query against the published provider datasets."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

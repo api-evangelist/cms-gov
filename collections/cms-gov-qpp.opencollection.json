@@ -1,0 +1,176 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CMS Quality Payment Program API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Submissions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Submissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://qpp.cms.gov/api/submissions"
+          },
+          "docs": "List Submissions"
+        },
+        {
+          "info": {
+            "name": "Create Submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://qpp.cms.gov/api/submissions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Submission"
+        },
+        {
+          "info": {
+            "name": "Get Submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://qpp.cms.gov/api/submissions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Submission"
+        },
+        {
+          "info": {
+            "name": "Update Submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://qpp.cms.gov/api/submissions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Submission"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Measurements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Measurements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://qpp.cms.gov/api/measurements"
+          },
+          "docs": "List Measurements"
+        },
+        {
+          "info": {
+            "name": "Create Measurement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://qpp.cms.gov/api/measurements",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Measurement"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Scoring",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Score Preview",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://qpp.cms.gov/api/scoring",
+            "params": [
+              {
+                "name": "submissionId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get Score Preview"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Benchmarks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Benchmarks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://qpp.cms.gov/api/benchmarks",
+            "params": [
+              {
+                "name": "performanceYear",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Benchmarks"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

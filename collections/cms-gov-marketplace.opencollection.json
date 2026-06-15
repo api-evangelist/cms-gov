@@ -1,0 +1,181 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CMS Marketplace API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Plans",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Marketplace Plans",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://marketplace.api.healthcare.gov/api/v1/plans/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search QHPs available to a household based on location, income, and household composition."
+        },
+        {
+          "info": {
+            "name": "Get Plan Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://marketplace.api.healthcare.gov/api/v1/plans/:planId",
+            "params": [
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "year",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get Plan Details"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Geography",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Counties by ZIP",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://marketplace.api.healthcare.gov/api/v1/counties/by/zip/:zip",
+            "params": [
+              {
+                "name": "zip",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Counties by ZIP"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Issuers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Issuers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://marketplace.api.healthcare.gov/api/v1/issuers"
+          },
+          "docs": "List Issuers"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Providers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Providers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://marketplace.api.healthcare.gov/api/v1/providers/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search Providers"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Drugs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Drug Autocomplete",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://marketplace.api.healthcare.gov/api/v1/drugs/autocomplete",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Drug Autocomplete"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Eligibility",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Check Subsidy Eligibility",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://marketplace.api.healthcare.gov/api/v1/forms/eligibility",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Check Subsidy Eligibility"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

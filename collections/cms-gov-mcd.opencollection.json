@@ -1,0 +1,173 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CMS Medicare Coverage Database API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "NCD",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search National Coverage Determinations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.cms.gov/medicare-coverage-database/api/ncds",
+            "params": [
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "hcpcsCode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search National Coverage Determinations"
+        },
+        {
+          "info": {
+            "name": "Get NCD",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.cms.gov/medicare-coverage-database/api/ncds/:ncdId",
+            "params": [
+              {
+                "name": "ncdId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get NCD"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "LCD",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Local Coverage Determinations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.cms.gov/medicare-coverage-database/api/lcds",
+            "params": [
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "contractor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "hcpcsCode",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search Local Coverage Determinations"
+        },
+        {
+          "info": {
+            "name": "Get LCD",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.cms.gov/medicare-coverage-database/api/lcds/:lcdId",
+            "params": [
+              {
+                "name": "lcdId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get LCD"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Articles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Coverage Articles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.cms.gov/medicare-coverage-database/api/articles",
+            "params": [
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search Coverage Articles"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "MEDCAC",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search MEDCAC Meetings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.cms.gov/medicare-coverage-database/api/medcac"
+          },
+          "docs": "Search MEDCAC Meetings"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,155 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CMS AB2D API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bulk Export",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Export Patient Claims",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ab2d.cms.gov/api/v2/Patient/$export",
+            "headers": [
+              {
+                "name": "Prefer",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "_since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "_outputFormat",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Asynchronously kick off a bulk export of ExplanationOfBenefit resources."
+        },
+        {
+          "info": {
+            "name": "Export Contract Population",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ab2d.cms.gov/api/v2/Group/:contractId/$export",
+            "headers": [
+              {
+                "name": "Prefer",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "contractId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "_since",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Export Contract Population"
+        },
+        {
+          "info": {
+            "name": "Get Job Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ab2d.cms.gov/api/v2/Job/:jobUuid/$status",
+            "params": [
+              {
+                "name": "jobUuid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Job Status"
+        },
+        {
+          "info": {
+            "name": "Cancel Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.ab2d.cms.gov/api/v2/Job/:jobUuid/$status",
+            "params": [
+              {
+                "name": "jobUuid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancel Job"
+        },
+        {
+          "info": {
+            "name": "Download Job Output File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ab2d.cms.gov/api/v2/Job/:jobUuid/file/:filename",
+            "params": [
+              {
+                "name": "jobUuid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "filename",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Download Job Output File"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

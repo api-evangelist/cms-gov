@@ -1,0 +1,133 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CMS Open Data API (data.cms.gov)",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Catalog",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Datasets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.cms.gov/data-api/v1/dataset",
+            "params": [
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "theme",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "publisher",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Datasets"
+        },
+        {
+          "info": {
+            "name": "Get Dataset Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.cms.gov/data-api/v1/dataset/:datasetId",
+            "params": [
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Dataset Metadata"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Dataset Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.cms.gov/data-api/v1/dataset/:datasetId/data",
+            "params": [
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Filtered data query against a dataset distribution."
+        },
+        {
+          "info": {
+            "name": "Get Dataset Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://data.cms.gov/data-api/v1/dataset/:datasetId/data-stats",
+            "params": [
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Dataset Statistics"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

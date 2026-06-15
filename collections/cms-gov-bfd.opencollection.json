@@ -1,0 +1,202 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CMS Beneficiary FHIR Data Server (BFD)",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get FHIR Capability Statement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.bfd.cms.gov/v2/fhir/metadata"
+          },
+          "docs": "Get FHIR Capability Statement"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Patient",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Patient Resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.bfd.cms.gov/v2/fhir/Patient",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "_has:Coverage.extension",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "_lastUpdated",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search Patient Resources"
+        },
+        {
+          "info": {
+            "name": "Read Patient",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.bfd.cms.gov/v2/fhir/Patient/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Read Patient"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Coverage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Coverage Resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.bfd.cms.gov/v2/fhir/Coverage",
+            "params": [
+              {
+                "name": "beneficiary",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search Coverage Resources"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ExplanationOfBenefit",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Explanation Of Benefit Resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.bfd.cms.gov/v2/fhir/ExplanationOfBenefit",
+            "params": [
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service-date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "_lastUpdated",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "excludeSAMHSA",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeTaxNumbers",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search Explanation Of Benefit Resources"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Bulk Export",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Group Bulk Export",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://prod.bfd.cms.gov/v2/fhir/Group/:id/$export",
+            "headers": [
+              {
+                "name": "Prefer",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "_since",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Group Bulk Export"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

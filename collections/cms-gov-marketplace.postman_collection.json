@@ -1,0 +1,687 @@
+{
+  "item": [
+    {
+      "id": "c1a54800-dfb1-460f-99a2-caaccdeaff52",
+      "name": "Plans",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6a38234d-94f2-4b54-8a8a-8b8141e79bc5",
+          "name": "Search Marketplace Plans",
+          "request": {
+            "name": "Search Marketplace Plans",
+            "description": {
+              "content": "Search QHPs available to a household based on location, income, and household composition.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "plans",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"household\": \"<object>\",\n  \"place\": \"<object>\",\n  \"market\": \"<string>\",\n  \"year\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6cf99f4e-d1a4-44ca-b12b-01fc5deda0c9",
+              "name": "List of matching plans",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plans",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"household\": \"<object>\",\n  \"place\": \"<object>\",\n  \"market\": \"<string>\",\n  \"year\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 2258,\n  \"plans\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"issuer\": {},\n      \"metal_level\": \"Catastrophic\",\n      \"type\": \"POS\",\n      \"premium\": 6933.738611021167\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"issuer\": {},\n      \"metal_level\": \"Silver\",\n      \"type\": \"Indemnity\",\n      \"premium\": 5865.858821259202\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e77cc87e-29b1-4415-a7f5-5941b8f7d2fa",
+          "name": "Get Plan Details",
+          "request": {
+            "name": "Get Plan Details",
+            "description": {},
+            "url": {
+              "path": [
+                "plans",
+                ":planId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "year",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "planId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1b9c71ef-49cf-4e4e-b5c1-438c626fa163",
+              "name": "Plan details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "year",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"issuer\": {},\n  \"metal_level\": \"Silver\",\n  \"type\": \"HMO\",\n  \"premium\": 4692.703173975134\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "60417a06-0cc2-4b30-9013-65cbca9127bb",
+      "name": "Geography",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1600554a-d2bb-4641-b963-2134d0be7488",
+          "name": "Get Counties by ZIP",
+          "request": {
+            "name": "Get Counties by ZIP",
+            "description": {},
+            "url": {
+              "path": [
+                "counties",
+                "by",
+                "zip",
+                ":zip"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "zip",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "46328613-9786-4d58-b299-710c5e783c2a",
+              "name": "List of counties",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "counties",
+                    "by",
+                    "zip",
+                    ":zip"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "zip",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "3736b938-221f-4651-a047-2ea2eb0a97c0",
+      "name": "Issuers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b49c47c7-1265-4272-ba95-6aa30d01fc93",
+          "name": "List Issuers",
+          "request": {
+            "name": "List Issuers",
+            "description": {},
+            "url": {
+              "path": [
+                "issuers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2dbe1fdf-31ed-4d16-813f-a51585a32dcc",
+              "name": "List of QHP issuers",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "issuers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "51b17e18-7b3c-4459-9c97-4b5a6ca96e45",
+      "name": "Providers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f2d9db80-5327-4964-bc5d-ecec61284b82",
+          "name": "Search Providers",
+          "request": {
+            "name": "Search Providers",
+            "description": {},
+            "url": {
+              "path": [
+                "providers",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "be50615d-57a0-446e-8b83-3ff040adfa78",
+              "name": "Matching providers and networks",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providers",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "ea13abc7-56f9-415b-ad09-4f0aa6fa5cf8",
+      "name": "Drugs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8e04e424-c2d3-49ee-8c24-c25c9490de53",
+          "name": "Drug Autocomplete",
+          "request": {
+            "name": "Drug Autocomplete",
+            "description": {},
+            "url": {
+              "path": [
+                "drugs",
+                "autocomplete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2c3aa1ed-083e-4379-bc27-673ee2fc9c44",
+              "name": "Drug suggestions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "drugs",
+                    "autocomplete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "06bba577-658e-41c2-9b99-037388140058",
+      "name": "Eligibility",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "83d4b9ee-9230-46b5-b0ff-9e1a6f3905f7",
+          "name": "Check Subsidy Eligibility",
+          "request": {
+            "name": "Check Subsidy Eligibility",
+            "description": {},
+            "url": {
+              "path": [
+                "forms",
+                "eligibility"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b60b7e3a-526a-4976-9e32-599fea9fb106",
+              "name": "Eligibility result including APTC and CSR",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "forms",
+                    "eligibility"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://marketplace.api.healthcare.gov/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fbb61662-e1f7-489b-ba9b-3adc6afd552b",
+    "name": "CMS Marketplace API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Marketplace API exposes Qualified Health Plan (QHP) and Stand-alone Dental Plan\n(SADP) data from healthcare.gov including plan finder, plan compare, plan rates, plan\nbenefits, and crosswalks. Powers consumer plan-shopping experiences across\nHealthCare.gov and partner brokers.\n\n\nContact Support:\n Name: CMS Marketplace API",
+      "type": "text/plain"
+    }
+  }
+}

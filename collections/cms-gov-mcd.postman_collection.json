@@ -1,0 +1,518 @@
+{
+  "item": [
+    {
+      "id": "fd2ec734-8d21-4962-adc0-87b3bdc77edb",
+      "name": "NCD",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b30b3acb-afb9-4d3c-9349-5c3d9d370d8e",
+          "name": "Search National Coverage Determinations",
+          "request": {
+            "name": "Search National Coverage Determinations",
+            "description": {},
+            "url": {
+              "path": [
+                "ncds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "keyword",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "hcpcsCode",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3b217f51-13bb-43d4-8b1b-3cc85681305e",
+              "name": "Matching NCDs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ncds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "keyword",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hcpcsCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "223c395a-cc3a-417c-b050-0e8c7a036690",
+          "name": "Get NCD",
+          "request": {
+            "name": "Get NCD",
+            "description": {},
+            "url": {
+              "path": [
+                "ncds",
+                ":ncdId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ncdId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d7a488a4-e7f2-4c25-a873-b55b321d525a",
+              "name": "NCD record",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ncds",
+                    ":ncdId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ncdId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "dc472467-667e-4ace-9f86-57d56191c45d",
+      "name": "LCD",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1051e344-e3c0-4375-935b-6c0425bbcb6c",
+          "name": "Search Local Coverage Determinations",
+          "request": {
+            "name": "Search Local Coverage Determinations",
+            "description": {},
+            "url": {
+              "path": [
+                "lcds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "keyword",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "contractor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "hcpcsCode",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0b1b849e-d28a-49df-b736-c5efea2edc33",
+              "name": "Matching LCDs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lcds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "keyword",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "contractor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hcpcsCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "abebcdc4-def3-44e5-b395-42f13c7eca9b",
+          "name": "Get LCD",
+          "request": {
+            "name": "Get LCD",
+            "description": {},
+            "url": {
+              "path": [
+                "lcds",
+                ":lcdId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "lcdId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4d41bb57-ff0d-45f3-ad8d-9bd27e4c701a",
+              "name": "LCD record",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lcds",
+                    ":lcdId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "lcdId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "515ff0d2-6f4d-4369-9949-d0ad72083305",
+      "name": "Articles",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a2e5e64a-3fc3-46e9-b09f-4d1ceab592d2",
+          "name": "Search Coverage Articles",
+          "request": {
+            "name": "Search Coverage Articles",
+            "description": {},
+            "url": {
+              "path": [
+                "articles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "keyword",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6ff1e609-0428-4c0f-b01f-09714db89201",
+              "name": "Matching articles",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "articles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "keyword",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "ae39f844-a934-4a51-8ea3-83ca34cc66b0",
+      "name": "MEDCAC",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "92d1b63e-7b79-4152-a56f-0cc7084992b6",
+          "name": "Search MEDCAC Meetings",
+          "request": {
+            "name": "Search MEDCAC Meetings",
+            "description": {},
+            "url": {
+              "path": [
+                "medcac"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5d6386cf-6400-441c-9238-6eee11295776",
+              "name": "MEDCAC meeting records",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "medcac"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.cms.gov/medicare-coverage-database/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2ce88622-0c60-43f0-905d-251a3452e7e3",
+    "name": "CMS Medicare Coverage Database API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Medicare Coverage Database (MCD) exposes National Coverage Determinations (NCDs),\nLocal Coverage Determinations (LCDs), Local Coverage Articles, Proposed Decisions,\nNational Coverage Analyses, and MEDCAC records.\n",
+      "type": "text/plain"
+    }
+  }
+}

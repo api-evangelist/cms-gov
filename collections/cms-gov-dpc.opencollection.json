@@ -1,0 +1,336 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CMS Data at the Point of Care API (DPC)",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get FHIR Capability Statement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dpc.cms.gov/api/v1/metadata"
+          },
+          "docs": "Get FHIR Capability Statement"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Organization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Organizations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dpc.cms.gov/api/v1/Organization"
+          },
+          "docs": "Search Organizations"
+        },
+        {
+          "info": {
+            "name": "Read Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dpc.cms.gov/api/v1/Organization/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Read Organization"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Practitioner",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Practitioners",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dpc.cms.gov/api/v1/Practitioner"
+          },
+          "docs": "Search Practitioners"
+        },
+        {
+          "info": {
+            "name": "Create Practitioner",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dpc.cms.gov/api/v1/Practitioner",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Practitioner"
+        },
+        {
+          "info": {
+            "name": "Read Practitioner",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dpc.cms.gov/api/v1/Practitioner/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Read Practitioner"
+        },
+        {
+          "info": {
+            "name": "Delete Practitioner",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.dpc.cms.gov/api/v1/Practitioner/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete Practitioner"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Patient",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Patients",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dpc.cms.gov/api/v1/Patient"
+          },
+          "docs": "Search Patients"
+        },
+        {
+          "info": {
+            "name": "Create Patient",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dpc.cms.gov/api/v1/Patient",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Patient"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Group",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Roster Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dpc.cms.gov/api/v1/Group",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an attribution roster Group with member references to Patients."
+        },
+        {
+          "info": {
+            "name": "Read Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dpc.cms.gov/api/v1/Group/:groupId",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Read Group"
+        },
+        {
+          "info": {
+            "name": "Update Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.dpc.cms.gov/api/v1/Group/:groupId",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Group"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Bulk Export",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Export Group Claims",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dpc.cms.gov/api/v1/Group/:groupId/$export",
+            "headers": [
+              {
+                "name": "Prefer",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "_since",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Export Group Claims"
+        },
+        {
+          "info": {
+            "name": "Get Export Job Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dpc.cms.gov/api/v1/Jobs/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Export Job Status"
+        },
+        {
+          "info": {
+            "name": "Download Export File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dpc.cms.gov/api/v1/Data/:fileName",
+            "params": [
+              {
+                "name": "fileName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Download Export File"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Client Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dpc.cms.gov/api/v1/Token"
+          },
+          "docs": "Create a long-lived client token for the registered organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

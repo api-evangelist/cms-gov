@@ -1,0 +1,368 @@
+{
+  "item": [
+    {
+      "id": "9e650629-ce52-4d30-a130-e233e9c75b39",
+      "name": "Catalog",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4364dfe4-65f0-42c2-9649-5bd100a5b762",
+          "name": "List Provider Datasets",
+          "request": {
+            "name": "List Provider Datasets",
+            "description": {},
+            "url": {
+              "path": [
+                "metastore",
+                "schemas",
+                "dataset",
+                "items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1152c765-eba5-4320-8ddc-b2264a62ee9c",
+              "name": "List of provider datasets",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metastore",
+                    "schemas",
+                    "dataset",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b1a61f4-67da-44a2-90ab-cf02e2018061",
+          "name": "Get Provider Dataset",
+          "request": {
+            "name": "Get Provider Dataset",
+            "description": {},
+            "url": {
+              "path": [
+                "metastore",
+                "schemas",
+                "dataset",
+                "items",
+                ":datasetId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "datasetId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7daf296a-4d96-4e88-95bb-e2cd0d9dfc09",
+              "name": "Dataset record",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metastore",
+                    "schemas",
+                    "dataset",
+                    "items",
+                    ":datasetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "datasetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "9edb9eda-2f9e-4949-aafd-9b0f8c291612",
+      "name": "Data",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "959e857a-0051-465d-b1b5-0f42b0618dac",
+          "name": "Query Dataset Distribution",
+          "request": {
+            "name": "Query Dataset Distribution",
+            "description": {},
+            "url": {
+              "path": [
+                "datastore",
+                "query",
+                ":distributionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "conditions",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "distributionId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "49d82010-651e-44cd-ac7f-61f5cfc80ecc",
+              "name": "Query results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datastore",
+                    "query",
+                    ":distributionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "conditions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "distributionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "14e32afa-e715-4e8d-b0e6-566af3647346",
+          "name": "Run SQL Query",
+          "request": {
+            "name": "Run SQL Query",
+            "description": {
+              "content": "Execute a constrained SQL query against the published provider datasets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "datastore",
+                "sql"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5d7c8db2-6e77-4185-b39f-a745ce354ec3",
+              "name": "Query results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datastore",
+                    "sql"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://data.cms.gov/provider-data/api/1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ecefa1b8-11a2-483d-960d-48a4654aa35e",
+    "name": "CMS Provider Data Catalog API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Provider Data Catalog API surfaces the quality and compare datasets that powered\nthe legacy Hospital Compare, Nursing Home Compare, Home Health Compare, Hospice\nCompare, LTCH Compare, IRF Compare, Dialysis Facility Compare, and Physician Compare\nsites via CKAN/DKAN-compatible endpoints.\n",
+      "type": "text/plain"
+    }
+  }
+}
