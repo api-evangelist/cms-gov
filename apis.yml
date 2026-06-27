@@ -281,13 +281,13 @@ common:
     type: Support
   - url: https://groups.google.com/g/developer-group-for-cms-blue-button-api
     name: Blue Button Google Group
-    type: Forum
+    type: Forums
   - url: https://groups.google.com/g/cms-bcda-api
     name: BCDA Google Group
-    type: Forum
+    type: Forums
   - url: https://groups.google.com/g/cms-ab2d-api
     name: AB2D Google Group
-    type: Forum
+    type: Forums
   - url: https://dpc.cms.gov/contact
     name: DPC Support
     type: Support
