@@ -1,0 +1,47 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/cms-gov-ab2d-openapi.yml, openapi/cms-gov-bcda-openapi.yml, openapi/cms-gov-bfd-openapi.yml,
+  openapi/cms-gov-blue-button-2-openapi.yml, openapi/cms-gov-dpc-openapi.yml, openapi/cms-gov-marketplace-openapi.yml,
+  openapi/cms-gov-qpp-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  - mutualTLS
+  - oauth2
+  api_key_in:
+  - query
+  oauth2_flows:
+  - authorizationCode
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: AB2D uses SMART Backend Services with okta-issued JWT bearer tokens.
+  sources:
+  - openapi/cms-gov-ab2d-openapi.yml
+  - openapi/cms-gov-bcda-openapi.yml
+  - openapi/cms-gov-dpc-openapi.yml
+  - openapi/cms-gov-qpp-openapi.yml
+- name: MutualTLS
+  type: mutualTLS
+  description: BFD requires X.509 client certificates issued by the CMS PKI; access is restricted
+    to peering applications.
+  sources:
+  - openapi/cms-gov-bfd-openapi.yml
+- name: OAuth2
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api.bluebutton.cms.gov/v2/o/authorize/
+    tokenUrl: https://api.bluebutton.cms.gov/v2/o/token/
+    scopes: 4
+  sources:
+  - openapi/cms-gov-blue-button-2-openapi.yml
+- name: ApiKey
+  type: apiKey
+  in: query
+  parameter: apikey
+  sources:
+  - openapi/cms-gov-marketplace-openapi.yml
