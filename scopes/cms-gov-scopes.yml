@@ -1,0 +1,38 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/cms-gov-blue-button-2-openapi.yml
+schemes:
+- name: OAuth2
+  source: openapi/cms-gov-blue-button-2-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api.bluebutton.cms.gov/v2/o/authorize/
+    tokenUrl: https://api.bluebutton.cms.gov/v2/o/token/
+scopes:
+- scope: patient/Coverage.read
+  description: Read Coverage resources
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/cms-gov-blue-button-2-openapi.yml
+- scope: patient/ExplanationOfBenefit.read
+  description: Read ExplanationOfBenefit resources
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/cms-gov-blue-button-2-openapi.yml
+- scope: patient/Patient.read
+  description: Read Patient resource
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/cms-gov-blue-button-2-openapi.yml
+- scope: profile
+  description: OpenID profile claims
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/cms-gov-blue-button-2-openapi.yml
+- scope: read
+  sources:
+  - openapi/cms-gov-blue-button-2-openapi.yml

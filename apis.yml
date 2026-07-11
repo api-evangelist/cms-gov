@@ -267,6 +267,8 @@ kind: contract
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 common:
+  - type: OAuthScopes
+    url: scopes/cms-gov-scopes.yml
   - url: https://www.cms.gov/
     name: CMS Homepage
     type: Portal
