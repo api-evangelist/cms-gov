@@ -1,0 +1,87 @@
+openapi: 3.0.3
+info:
+  title: CMS AB2D Articles Patient API
+  description: 'AB2D delivers Medicare Parts A, B, and D claims data to Part D Prescription Drug Plan
+
+    sponsors via the HL7 FHIR Bulk Data Access specification. Asynchronous $export returns
+
+    ExplanationOfBenefit NDJSON for all enrolled Medicare beneficiaries since 2020.
+
+    '
+  version: '2.0'
+  contact:
+    name: AB2D Help
+    url: https://ab2d.cms.gov/
+    email: ab2d@cms.hhs.gov
+  license:
+    name: Public Domain (U.S. Government Work)
+    url: https://www.usa.gov/government-works
+servers:
+- url: https://api.ab2d.cms.gov/api/v2
+  description: Production
+- url: https://sandbox.ab2d.cms.gov/api/v2
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Patient
+paths:
+  /Patient:
+    get:
+      summary: Search Patient Resources
+      operationId: searchPatient
+      tags:
+      - Patient
+      parameters:
+      - name: identifier
+        in: query
+        schema:
+          type: string
+          description: HICN, MBI, or BENE_ID identifier
+      - name: _has:Coverage.extension
+        in: query
+        schema:
+          type: string
+      - name: _lastUpdated
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Bundle of Patients
+    post:
+      summary: Create Patient
+      operationId: createPatient
+      tags:
+      - Patient
+      requestBody:
+        required: true
+        content:
+          application/fhir+json:
+            schema:
+              type: object
+      responses:
+        '201':
+          description: Patient created
+  /Patient/{id}:
+    get:
+      summary: Read Patient
+      operationId: readPatient
+      tags:
+      - Patient
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Patient resource
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: AB2D uses SMART Backend Services with okta-issued JWT bearer tokens.

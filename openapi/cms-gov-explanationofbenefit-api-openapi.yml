@@ -1,0 +1,133 @@
+openapi: 3.0.3
+info:
+  title: CMS AB2D Articles ExplanationOfBenefit API
+  description: 'AB2D delivers Medicare Parts A, B, and D claims data to Part D Prescription Drug Plan
+
+    sponsors via the HL7 FHIR Bulk Data Access specification. Asynchronous $export returns
+
+    ExplanationOfBenefit NDJSON for all enrolled Medicare beneficiaries since 2020.
+
+    '
+  version: '2.0'
+  contact:
+    name: AB2D Help
+    url: https://ab2d.cms.gov/
+    email: ab2d@cms.hhs.gov
+  license:
+    name: Public Domain (U.S. Government Work)
+    url: https://www.usa.gov/government-works
+servers:
+- url: https://api.ab2d.cms.gov/api/v2
+  description: Production
+- url: https://sandbox.ab2d.cms.gov/api/v2
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: ExplanationOfBenefit
+paths:
+  /ExplanationOfBenefit:
+    get:
+      summary: Search Explanation Of Benefit Resources
+      operationId: searchExplanationOfBenefit
+      tags:
+      - ExplanationOfBenefit
+      parameters:
+      - name: patient
+        in: query
+        schema:
+          type: string
+      - name: type
+        in: query
+        schema:
+          type: string
+      - name: service-date
+        in: query
+        schema:
+          type: string
+      - name: _lastUpdated
+        in: query
+        schema:
+          type: string
+      - name: excludeSAMHSA
+        in: query
+        schema:
+          type: boolean
+      - name: includeTaxNumbers
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Bundle of ExplanationOfBenefit
+  /ExplanationOfBenefit/{id}:
+    get:
+      summary: Read Explanation Of Benefit by ID
+      operationId: readExplanationOfBenefit
+      tags:
+      - ExplanationOfBenefit
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ExplanationOfBenefit resource
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/ExplanationOfBenefit'
+components:
+  schemas:
+    ExplanationOfBenefit:
+      type: object
+      properties:
+        resourceType:
+          type: string
+          enum:
+          - ExplanationOfBenefit
+        id:
+          type: string
+        status:
+          type: string
+        type:
+          type: object
+        use:
+          type: string
+        patient:
+          type: object
+        billablePeriod:
+          type: object
+        created:
+          type: string
+          format: date-time
+        insurer:
+          type: object
+        provider:
+          type: object
+        diagnosis:
+          type: array
+          items:
+            type: object
+        procedure:
+          type: array
+          items:
+            type: object
+        item:
+          type: array
+          items:
+            type: object
+        total:
+          type: array
+          items:
+            type: object
+        payment:
+          type: object
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: AB2D uses SMART Backend Services with okta-issued JWT bearer tokens.

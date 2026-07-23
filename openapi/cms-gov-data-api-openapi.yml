@@ -1,0 +1,143 @@
+openapi: 3.0.3
+info:
+  title: CMS AB2D Articles Data API
+  description: 'AB2D delivers Medicare Parts A, B, and D claims data to Part D Prescription Drug Plan
+
+    sponsors via the HL7 FHIR Bulk Data Access specification. Asynchronous $export returns
+
+    ExplanationOfBenefit NDJSON for all enrolled Medicare beneficiaries since 2020.
+
+    '
+  version: '2.0'
+  contact:
+    name: AB2D Help
+    url: https://ab2d.cms.gov/
+    email: ab2d@cms.hhs.gov
+  license:
+    name: Public Domain (U.S. Government Work)
+    url: https://www.usa.gov/government-works
+servers:
+- url: https://api.ab2d.cms.gov/api/v2
+  description: Production
+- url: https://sandbox.ab2d.cms.gov/api/v2
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Data
+paths:
+  /dataset/{datasetId}/data:
+    get:
+      summary: Get Dataset Data
+      operationId: getDatasetData
+      description: Filtered data query against a dataset distribution.
+      tags:
+      - Data
+      parameters:
+      - name: datasetId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: filter
+        in: query
+        schema:
+          type: string
+          description: Field filter expressions
+      - name: keyword
+        in: query
+        schema:
+          type: string
+      - name: offset
+        in: query
+        schema:
+          type: integer
+      - name: size
+        in: query
+        schema:
+          type: integer
+          maximum: 5000
+      - name: format
+        in: query
+        schema:
+          type: string
+          enum:
+          - json
+          - csv
+          - tsv
+      responses:
+        '200':
+          description: Dataset rows
+  /dataset/{datasetId}/data-stats:
+    get:
+      summary: Get Dataset Statistics
+      operationId: getDatasetStats
+      tags:
+      - Data
+      parameters:
+      - name: datasetId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Row counts and column stats
+  /datastore/query/{distributionId}:
+    get:
+      summary: Query Dataset Distribution
+      operationId: queryDistribution
+      tags:
+      - Data
+      parameters:
+      - name: distributionId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: conditions
+        in: query
+        schema:
+          type: string
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 500
+      - name: offset
+        in: query
+        schema:
+          type: integer
+      - name: format
+        in: query
+        schema:
+          type: string
+          enum:
+          - json
+          - csv
+      responses:
+        '200':
+          description: Query results
+  /datastore/sql:
+    get:
+      summary: Run SQL Query
+      operationId: runSql
+      description: Execute a constrained SQL query against the published provider datasets.
+      tags:
+      - Data
+      parameters:
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Query results
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: AB2D uses SMART Backend Services with okta-issued JWT bearer tokens.

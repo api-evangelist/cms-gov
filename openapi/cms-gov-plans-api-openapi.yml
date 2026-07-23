@@ -1,0 +1,137 @@
+openapi: 3.0.3
+info:
+  title: CMS AB2D Articles Plans API
+  description: 'AB2D delivers Medicare Parts A, B, and D claims data to Part D Prescription Drug Plan
+
+    sponsors via the HL7 FHIR Bulk Data Access specification. Asynchronous $export returns
+
+    ExplanationOfBenefit NDJSON for all enrolled Medicare beneficiaries since 2020.
+
+    '
+  version: '2.0'
+  contact:
+    name: AB2D Help
+    url: https://ab2d.cms.gov/
+    email: ab2d@cms.hhs.gov
+  license:
+    name: Public Domain (U.S. Government Work)
+    url: https://www.usa.gov/government-works
+servers:
+- url: https://api.ab2d.cms.gov/api/v2
+  description: Production
+- url: https://sandbox.ab2d.cms.gov/api/v2
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Plans
+paths:
+  /plans/search:
+    post:
+      summary: Search Marketplace Plans
+      operationId: searchPlans
+      description: Search QHPs available to a household based on location, income, and household composition.
+      tags:
+      - Plans
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                household:
+                  type: object
+                place:
+                  type: object
+                market:
+                  type: string
+                  enum:
+                  - Individual
+                  - SHOP
+                year:
+                  type: integer
+      responses:
+        '200':
+          description: List of matching plans
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  plans:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Plan'
+  /plans/{planId}:
+    get:
+      summary: Get Plan Details
+      operationId: getPlan
+      tags:
+      - Plans
+      parameters:
+      - name: planId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: year
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Plan details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plan'
+components:
+  schemas:
+    Plan:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        issuer:
+          type: object
+        metal_level:
+          type: string
+          enum:
+          - Bronze
+          - Silver
+          - Gold
+          - Platinum
+          - Catastrophic
+        type:
+          type: string
+          enum:
+          - HMO
+          - PPO
+          - EPO
+          - POS
+          - Indemnity
+        premium:
+          type: number
+        deductibles:
+          type: array
+          items:
+            type: object
+        moops:
+          type: array
+          items:
+            type: object
+        benefits:
+          type: array
+          items:
+            type: object
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: AB2D uses SMART Backend Services with okta-issued JWT bearer tokens.

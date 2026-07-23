@@ -1,0 +1,76 @@
+openapi: 3.0.3
+info:
+  title: CMS AB2D Articles NCD API
+  description: 'AB2D delivers Medicare Parts A, B, and D claims data to Part D Prescription Drug Plan
+
+    sponsors via the HL7 FHIR Bulk Data Access specification. Asynchronous $export returns
+
+    ExplanationOfBenefit NDJSON for all enrolled Medicare beneficiaries since 2020.
+
+    '
+  version: '2.0'
+  contact:
+    name: AB2D Help
+    url: https://ab2d.cms.gov/
+    email: ab2d@cms.hhs.gov
+  license:
+    name: Public Domain (U.S. Government Work)
+    url: https://www.usa.gov/government-works
+servers:
+- url: https://api.ab2d.cms.gov/api/v2
+  description: Production
+- url: https://sandbox.ab2d.cms.gov/api/v2
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: NCD
+paths:
+  /ncds:
+    get:
+      summary: Search National Coverage Determinations
+      operationId: searchNCDs
+      tags:
+      - NCD
+      parameters:
+      - name: keyword
+        in: query
+        schema:
+          type: string
+      - name: hcpcsCode
+        in: query
+        schema:
+          type: string
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - active
+          - retired
+          - pending
+      responses:
+        '200':
+          description: Matching NCDs
+  /ncds/{ncdId}:
+    get:
+      summary: Get NCD
+      operationId: getNCD
+      tags:
+      - NCD
+      parameters:
+      - name: ncdId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: NCD record
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: AB2D uses SMART Backend Services with okta-issued JWT bearer tokens.

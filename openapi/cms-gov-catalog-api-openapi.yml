@@ -1,0 +1,140 @@
+openapi: 3.0.3
+info:
+  title: CMS AB2D Articles Catalog API
+  description: 'AB2D delivers Medicare Parts A, B, and D claims data to Part D Prescription Drug Plan
+
+    sponsors via the HL7 FHIR Bulk Data Access specification. Asynchronous $export returns
+
+    ExplanationOfBenefit NDJSON for all enrolled Medicare beneficiaries since 2020.
+
+    '
+  version: '2.0'
+  contact:
+    name: AB2D Help
+    url: https://ab2d.cms.gov/
+    email: ab2d@cms.hhs.gov
+  license:
+    name: Public Domain (U.S. Government Work)
+    url: https://www.usa.gov/government-works
+servers:
+- url: https://api.ab2d.cms.gov/api/v2
+  description: Production
+- url: https://sandbox.ab2d.cms.gov/api/v2
+  description: Sandbox
+security:
+- BearerAuth: []
+tags:
+- name: Catalog
+paths:
+  /dataset:
+    get:
+      summary: List Datasets
+      operationId: listDatasets
+      tags:
+      - Catalog
+      parameters:
+      - name: keyword
+        in: query
+        schema:
+          type: string
+      - name: theme
+        in: query
+        schema:
+          type: string
+      - name: publisher
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of datasets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Dataset'
+  /dataset/{datasetId}:
+    get:
+      summary: Get Dataset Metadata
+      operationId: getDataset
+      tags:
+      - Catalog
+      parameters:
+      - name: datasetId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Dataset metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dataset'
+  /metastore/schemas/dataset/items:
+    get:
+      summary: List Provider Datasets
+      operationId: listProviderDatasets
+      tags:
+      - Catalog
+      responses:
+        '200':
+          description: List of provider datasets
+  /metastore/schemas/dataset/items/{datasetId}:
+    get:
+      summary: Get Provider Dataset
+      operationId: getProviderDataset
+      tags:
+      - Catalog
+      parameters:
+      - name: datasetId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Dataset record
+components:
+  schemas:
+    Dataset:
+      type: object
+      properties:
+        identifier:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        keyword:
+          type: array
+          items:
+            type: string
+        issued:
+          type: string
+          format: date
+        modified:
+          type: string
+          format: date
+        publisher:
+          type: object
+        contactPoint:
+          type: object
+        accessLevel:
+          type: string
+        distribution:
+          type: array
+          items:
+            type: object
+        theme:
+          type: array
+          items:
+            type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: AB2D uses SMART Backend Services with okta-issued JWT bearer tokens.
