@@ -1,0 +1,100 @@
+openapi: 3.0.3
+info:
+  title: CMS AB2D API
+  description: |
+    AB2D delivers Medicare Parts A, B, and D claims data to Part D Prescription Drug Plan
+    sponsors via the HL7 FHIR Bulk Data Access specification. Asynchronous $export returns
+    ExplanationOfBenefit NDJSON for all enrolled Medicare beneficiaries since 2020.
+  version: '2.0'
+  contact:
+    name: AB2D Help
+    url: https://ab2d.cms.gov/
+    email: ab2d@cms.hhs.gov
+  license:
+    name: Public Domain (U.S. Government Work)
+    url: https://www.usa.gov/government-works
+servers:
+- url: https://api.ab2d.cms.gov/api/v2
+  description: Production
+- url: https://sandbox.ab2d.cms.gov/api/v2
+  description: Sandbox
+security:
+- BearerAuth: []
+paths:
+  /Patient/$export:
+    get:
+      summary: Export Patient Claims
+      operationId: exportPatient
+      description: Asynchronously kick off a bulk export of ExplanationOfBenefit resources.
+      tags: [Bulk Export]
+      parameters:
+      - { name: _type, in: query, schema: { type: string, default: ExplanationOfBenefit } }
+      - { name: _since, in: query, schema: { type: string, format: date-time } }
+      - { name: _outputFormat, in: query, schema: { type: string, enum: ['application/fhir+ndjson', 'application/ndjson', 'ndjson'] } }
+      - { name: Prefer, in: header, required: true, schema: { type: string, enum: ['respond-async'] } }
+      - { name: Accept, in: header, required: true, schema: { type: string } }
+      responses:
+        '202':
+          description: Export job created; poll Content-Location.
+          headers:
+            Content-Location: { schema: { type: string, format: uri } }
+  /Group/{contractId}/$export:
+    get:
+      summary: Export Contract Population
+      operationId: exportContract
+      tags: [Bulk Export]
+      parameters:
+      - { name: contractId, in: path, required: true, schema: { type: string } }
+      - { name: _type, in: query, schema: { type: string } }
+      - { name: _since, in: query, schema: { type: string, format: date-time } }
+      - { name: Prefer, in: header, required: true, schema: { type: string } }
+      responses:
+        '202': { description: Accepted }
+  /Job/{jobUuid}/$status:
+    get:
+      summary: Get Job Status
+      operationId: getJobStatus
+      tags: [Bulk Export]
+      parameters:
+      - { name: jobUuid, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        '200':
+          description: Job complete with manifest
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transactionTime: { type: string, format: date-time }
+                  output: { type: array, items: { type: object } }
+                  error: { type: array, items: { type: object } }
+        '202': { description: Job still processing }
+    delete:
+      summary: Cancel Job
+      operationId: cancelJob
+      tags: [Bulk Export]
+      parameters:
+      - { name: jobUuid, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        '202': { description: Cancelled }
+  /Job/{jobUuid}/file/{filename}:
+    get:
+      summary: Download Job Output File
+      operationId: downloadOutput
+      tags: [Bulk Export]
+      parameters:
+      - { name: jobUuid, in: path, required: true, schema: { type: string, format: uuid } }
+      - { name: filename, in: path, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: NDJSON file
+          content:
+            application/fhir+ndjson:
+              schema: { type: string, format: binary }
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: AB2D uses SMART Backend Services with okta-issued JWT bearer tokens.

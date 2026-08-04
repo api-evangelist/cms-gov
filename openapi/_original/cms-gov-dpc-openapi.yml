@@ -1,0 +1,176 @@
+openapi: 3.0.3
+info:
+  title: CMS Data at the Point of Care API (DPC)
+  description: |
+    Data at the Point of Care (DPC) fills gaps in patient history by delivering Medicare
+    claims data via HL7 FHIR Bulk Data Access to fee-for-service providers. Providers
+    register Practitioner, Organization, and Patient roster resources, then asynchronously
+    $export ExplanationOfBenefit, Coverage, and Patient resources.
+  version: '1.0'
+  contact:
+    name: DPC Support
+    url: https://dpc.cms.gov/
+    email: dpcinfo@cms.hhs.gov
+  license:
+    name: Public Domain (U.S. Government Work)
+    url: https://www.usa.gov/government-works
+servers:
+- url: https://api.dpc.cms.gov/api/v1
+  description: Production
+- url: https://sandbox.dpc.cms.gov/api/v1
+  description: Sandbox
+security:
+- BearerAuth: []
+paths:
+  /metadata:
+    get:
+      summary: Get FHIR Capability Statement
+      operationId: getCapabilityStatement
+      tags: [Metadata]
+      security: []
+      responses:
+        '200': { description: CapabilityStatement }
+  /Organization:
+    get:
+      summary: Search Organizations
+      operationId: searchOrganization
+      tags: [Organization]
+      responses:
+        '200': { description: Bundle of Organizations }
+  /Organization/{id}:
+    get:
+      summary: Read Organization
+      operationId: readOrganization
+      tags: [Organization]
+      parameters:
+      - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Organization resource }
+  /Practitioner:
+    post:
+      summary: Create Practitioner
+      operationId: createPractitioner
+      tags: [Practitioner]
+      requestBody:
+        required: true
+        content: { application/fhir+json: { schema: { type: object } } }
+      responses:
+        '201': { description: Practitioner created }
+    get:
+      summary: Search Practitioners
+      operationId: searchPractitioner
+      tags: [Practitioner]
+      responses:
+        '200': { description: Bundle of Practitioners }
+  /Practitioner/{id}:
+    get:
+      summary: Read Practitioner
+      operationId: readPractitioner
+      tags: [Practitioner]
+      parameters:
+      - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Practitioner resource }
+    delete:
+      summary: Delete Practitioner
+      operationId: deletePractitioner
+      tags: [Practitioner]
+      parameters:
+      - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        '204': { description: Deleted }
+  /Patient:
+    post:
+      summary: Create Patient
+      operationId: createPatient
+      tags: [Patient]
+      requestBody:
+        required: true
+        content: { application/fhir+json: { schema: { type: object } } }
+      responses:
+        '201': { description: Patient created }
+    get:
+      summary: Search Patients
+      operationId: searchPatient
+      tags: [Patient]
+      responses:
+        '200': { description: Bundle of Patients }
+  /Group:
+    post:
+      summary: Create Roster Group
+      operationId: createGroup
+      description: Create an attribution roster Group with member references to Patients.
+      tags: [Group]
+      requestBody:
+        required: true
+        content: { application/fhir+json: { schema: { type: object } } }
+      responses:
+        '201': { description: Group created }
+  /Group/{groupId}:
+    get:
+      summary: Read Group
+      operationId: readGroup
+      tags: [Group]
+      parameters:
+      - { name: groupId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Group resource }
+    put:
+      summary: Update Group
+      operationId: updateGroup
+      tags: [Group]
+      parameters:
+      - { name: groupId, in: path, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content: { application/fhir+json: { schema: { type: object } } }
+      responses:
+        '200': { description: Group updated }
+  /Group/{groupId}/$export:
+    get:
+      summary: Export Group Claims
+      operationId: exportGroup
+      tags: [Bulk Export]
+      parameters:
+      - { name: groupId, in: path, required: true, schema: { type: string } }
+      - { name: _type, in: query, schema: { type: string } }
+      - { name: _since, in: query, schema: { type: string, format: date-time } }
+      - { name: Prefer, in: header, required: true, schema: { type: string, enum: ['respond-async'] } }
+      responses:
+        '202': { description: Export job accepted }
+  /Jobs/{jobId}:
+    get:
+      summary: Get Export Job Status
+      operationId: getJob
+      tags: [Bulk Export]
+      parameters:
+      - { name: jobId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Job manifest }
+        '202': { description: Still processing }
+  /Data/{fileName}:
+    get:
+      summary: Download Export File
+      operationId: downloadFile
+      tags: [Bulk Export]
+      parameters:
+      - { name: fileName, in: path, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: NDJSON file
+          content: { application/fhir+ndjson: { schema: { type: string, format: binary } } }
+  /Token:
+    post:
+      summary: Create Client Token
+      operationId: createToken
+      description: Create a long-lived client token for the registered organization.
+      tags: [Auth]
+      responses:
+        '200': { description: Token created }
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: DPC uses asymmetric SMART Backend Services authentication.

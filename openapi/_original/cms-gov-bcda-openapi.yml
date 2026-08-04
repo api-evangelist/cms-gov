@@ -1,0 +1,117 @@
+openapi: 3.0.3
+info:
+  title: CMS Beneficiary Claims Data API (BCDA)
+  description: |
+    BCDA enables Medicare Shared Savings Program ACOs to retrieve bulk Medicare Parts A, B,
+    and D claims data for assigned and assignable beneficiaries via the HL7 FHIR Bulk Data
+    Access (Flat FHIR) specification.
+  version: '2.0'
+  contact:
+    name: BCDA Help
+    url: https://bcda.cms.gov/
+    email: bcapi@cms.hhs.gov
+  license:
+    name: Public Domain (U.S. Government Work)
+    url: https://www.usa.gov/government-works
+servers:
+- url: https://api.bcda.cms.gov/api/v2
+  description: Production
+- url: https://sandbox.bcda.cms.gov/api/v2
+  description: Sandbox
+security:
+- BearerAuth: []
+paths:
+  /metadata:
+    get:
+      summary: Get FHIR Capability Statement
+      operationId: getCapabilityStatement
+      tags: [Metadata]
+      security: []
+      responses:
+        '200': { description: CapabilityStatement, content: { application/fhir+json: { schema: { type: object } } } }
+  /Patient/$export:
+    get:
+      summary: Initiate Bulk Patient Export
+      operationId: exportPatient
+      description: Asynchronously export Patient resources for the ACO's beneficiary population.
+      tags: [Bulk Export]
+      parameters:
+      - { name: _type, in: query, schema: { type: string, description: 'Comma-delimited list: Patient,Coverage,ExplanationOfBenefit' } }
+      - { name: _since, in: query, schema: { type: string, format: date-time } }
+      - { name: _outputFormat, in: query, schema: { type: string, default: 'application/fhir+ndjson' } }
+      - { name: Prefer, in: header, required: true, schema: { type: string, enum: ['respond-async'] } }
+      - { name: Accept, in: header, required: true, schema: { type: string, enum: ['application/fhir+json'] } }
+      responses:
+        '202':
+          description: Export job accepted; poll Content-Location for status.
+          headers:
+            Content-Location: { schema: { type: string, format: uri } }
+  /Group/{groupId}/$export:
+    get:
+      summary: Initiate Group Bulk Export
+      operationId: exportGroup
+      tags: [Bulk Export]
+      parameters:
+      - { name: groupId, in: path, required: true, schema: { type: string, enum: [all, runout, new] } }
+      - { name: _type, in: query, schema: { type: string } }
+      - { name: _since, in: query, schema: { type: string, format: date-time } }
+      - { name: Prefer, in: header, required: true, schema: { type: string } }
+      responses:
+        '202': { description: Accepted }
+  /jobs/{jobId}:
+    get:
+      summary: Get Bulk Export Job Status
+      operationId: getJob
+      tags: [Bulk Export]
+      parameters:
+      - { name: jobId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: Job complete, output manifest returned.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transactionTime: { type: string, format: date-time }
+                  request: { type: string }
+                  requiresAccessToken: { type: boolean }
+                  output:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type: { type: string }
+                        url: { type: string, format: uri }
+                  error: { type: array, items: { type: object } }
+        '202': { description: Still processing }
+    delete:
+      summary: Cancel Bulk Export Job
+      operationId: cancelJob
+      tags: [Bulk Export]
+      parameters:
+      - { name: jobId, in: path, required: true, schema: { type: string } }
+      responses:
+        '202': { description: Job cancelled }
+  /jobs:
+    get:
+      summary: List Bulk Export Jobs
+      operationId: listJobs
+      tags: [Bulk Export]
+      responses:
+        '200': { description: List of jobs, content: { application/json: { schema: { type: array, items: { type: object } } } } }
+  /attribution_status:
+    get:
+      summary: Get Attribution Status
+      operationId: getAttributionStatus
+      description: Retrieve the date of the last attribution and runout file ingestion.
+      tags: [Metadata]
+      responses:
+        '200': { description: Attribution status, content: { application/json: { schema: { type: object } } } }
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: BCDA uses SMART Backend Services authentication — token obtained from /auth/token.
