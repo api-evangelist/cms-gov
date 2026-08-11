@@ -1666,6 +1666,19 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/cms-gov.png
 access: 3rd-Party
 common:
+  - type: IssueTracker
+    url: https://github.com/CMSgov/beneficiary-fhir-data/issues
+  - type: Releases
+    url: https://github.com/CMSgov/beneficiary-fhir-data/releases
+  - type: SecurityPolicy
+    url: https://github.com/CMSgov/beneficiary-fhir-data/blob/master/SECURITY.md
+  - type: CodeOfConduct
+    url: https://github.com/CMSgov/beneficiary-fhir-data/blob/master/CODE_OF_CONDUCT.md
+  - type: ContributionGuide
+    url: https://github.com/CMSgov/beneficiary-fhir-data/blob/master/CONTRIBUTING.md
+  - type: License
+    name: CC0-1.0
+    url: https://github.com/CMSgov/beneficiary-fhir-data/blob/master/LICENSE
   - type: AgenticAccess
     url: agentic-access/cms-gov-agentic-access.yml
   - type: DomainSecurity
