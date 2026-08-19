@@ -1,0 +1,189 @@
+{
+  "item": [
+    {
+      "id": "bf4dd7dd-4bd2-427d-99e3-8db2e93ef6c4",
+      "name": "Organization",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e8052b0c-f464-42f3-b4e2-939e8a04271d",
+          "name": "Search Organizations",
+          "request": {
+            "name": "Search Organizations",
+            "description": {},
+            "url": {
+              "path": [
+                "Organization"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "58fd45bb-a924-4b12-9bca-b78f9d2849d2",
+              "name": "Bundle of Organizations",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Organization"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d264ed09-5c6c-4add-8f15-4a201e41e115",
+          "name": "Read Organization",
+          "request": {
+            "name": "Read Organization",
+            "description": {},
+            "url": {
+              "path": [
+                "Organization",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a317dfbd-a1c7-44c3-bcdf-95d216f0c9c0",
+              "name": "Organization resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Organization",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ab2d.cms.gov/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "45137157-8fba-4633-99e2-5b74a2ee3772",
+    "name": "CMS AB2D Articles Organization API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "AB2D delivers Medicare Parts A, B, and D claims data to Part D Prescription Drug Plan\nsponsors via the HL7 FHIR Bulk Data Access specification. Asynchronous $export returns\nExplanationOfBenefit NDJSON for all enrolled Medicare beneficiaries since 2020.\n\n\nContact Support:\n Name: AB2D Help\n Email: ab2d@cms.hhs.gov",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "item": [
+    {
+      "id": "884824dc-4806-477d-b4c5-9e21f89c1d88",
+      "name": "Benchmarks",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bb6b74a8-4c20-4e32-9955-e53ece403b6a",
+          "name": "List Benchmarks",
+          "request": {
+            "name": "List Benchmarks",
+            "description": {},
+            "url": {
+              "path": [
+                "benchmarks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "performanceYear",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cb422d89-894e-4ce4-9e5f-5faa171108c8",
+              "name": "Benchmark data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "benchmarks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "performanceYear",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ab2d.cms.gov/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "993a3414-66ae-4420-9fae-774efcc4f08b",
+    "name": "CMS AB2D Articles Benchmarks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "AB2D delivers Medicare Parts A, B, and D claims data to Part D Prescription Drug Plan\nsponsors via the HL7 FHIR Bulk Data Access specification. Asynchronous $export returns\nExplanationOfBenefit NDJSON for all enrolled Medicare beneficiaries since 2020.\n\n\nContact Support:\n Name: AB2D Help\n Email: ab2d@cms.hhs.gov",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CMS AB2D Articles Data API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Dataset Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ab2d.cms.gov/api/v2/dataset/:datasetId/data",
+            "params": [
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Filtered data query against a dataset distribution."
+        },
+        {
+          "info": {
+            "name": "Get Dataset Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ab2d.cms.gov/api/v2/dataset/:datasetId/data-stats",
+            "params": [
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Dataset Statistics"
+        },
+        {
+          "info": {
+            "name": "Query Dataset Distribution",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ab2d.cms.gov/api/v2/datastore/query/:distributionId",
+            "params": [
+              {
+                "name": "distributionId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "conditions",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Query Dataset Distribution"
+        },
+        {
+          "info": {
+            "name": "Run SQL Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ab2d.cms.gov/api/v2/datastore/sql",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Execute a constrained SQL query against the published provider datasets."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

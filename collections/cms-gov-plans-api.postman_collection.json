@@ -1,0 +1,246 @@
+{
+  "item": [
+    {
+      "id": "ed92ce41-76b4-404e-bea5-aaa4bd36922a",
+      "name": "Plans",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c9aa3726-7fcc-4815-96ba-7f665a5a5c4d",
+          "name": "Search Marketplace Plans",
+          "request": {
+            "name": "Search Marketplace Plans",
+            "description": {
+              "content": "Search QHPs available to a household based on location, income, and household composition.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "plans",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"household\": \"<object>\",\n  \"place\": \"<object>\",\n  \"market\": \"<string>\",\n  \"year\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c9cd71d8-2818-4eac-9ff4-fbce3be9a9ab",
+              "name": "List of matching plans",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plans",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"household\": \"<object>\",\n  \"place\": \"<object>\",\n  \"market\": \"<string>\",\n  \"year\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 1733,\n  \"plans\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"issuer\": {},\n      \"metal_level\": \"Bronze\",\n      \"type\": \"EPO\",\n      \"premium\": 3176.413685497058\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"issuer\": {},\n      \"metal_level\": \"Platinum\",\n      \"type\": \"Indemnity\",\n      \"premium\": 9307.38537318181\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "328c62fe-66b0-4592-98b6-db7ecd0f9efa",
+          "name": "Get Plan Details",
+          "request": {
+            "name": "Get Plan Details",
+            "description": {},
+            "url": {
+              "path": [
+                "plans",
+                ":planId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "year",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "planId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8a5a6742-c59b-4d3d-a121-21692d64f87b",
+              "name": "Plan details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "year",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"issuer\": {},\n  \"metal_level\": \"Catastrophic\",\n  \"type\": \"Indemnity\",\n  \"premium\": 9641.152395622414\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ab2d.cms.gov/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b73b5071-03c0-437e-9221-7e00dbfb4b69",
+    "name": "CMS AB2D Articles Plans API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "AB2D delivers Medicare Parts A, B, and D claims data to Part D Prescription Drug Plan\nsponsors via the HL7 FHIR Bulk Data Access specification. Asynchronous $export returns\nExplanationOfBenefit NDJSON for all enrolled Medicare beneficiaries since 2020.\n\n\nContact Support:\n Name: AB2D Help\n Email: ab2d@cms.hhs.gov",
+      "type": "text/plain"
+    }
+  }
+}

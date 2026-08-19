@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CMS AB2D Articles ExplanationOfBenefit API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ExplanationOfBenefit",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Explanation Of Benefit Resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ab2d.cms.gov/api/v2/ExplanationOfBenefit",
+            "params": [
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service-date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "_lastUpdated",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "excludeSAMHSA",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeTaxNumbers",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search Explanation Of Benefit Resources"
+        },
+        {
+          "info": {
+            "name": "Read Explanation Of Benefit by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ab2d.cms.gov/api/v2/ExplanationOfBenefit/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Read Explanation Of Benefit by ID"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

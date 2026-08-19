@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CMS AB2D Articles Providers API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Providers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Providers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ab2d.cms.gov/api/v2/providers/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search Providers"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

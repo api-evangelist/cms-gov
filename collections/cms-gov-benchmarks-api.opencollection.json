@@ -1,0 +1,42 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CMS AB2D Articles Benchmarks API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Benchmarks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Benchmarks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ab2d.cms.gov/api/v2/benchmarks",
+            "params": [
+              {
+                "name": "performanceYear",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Benchmarks"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

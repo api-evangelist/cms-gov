@@ -1,0 +1,46 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CMS AB2D Articles Metadata API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get FHIR Capability Statement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ab2d.cms.gov/api/v2/metadata"
+          },
+          "docs": "Get FHIR Capability Statement"
+        },
+        {
+          "info": {
+            "name": "Get Attribution Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ab2d.cms.gov/api/v2/attribution_status"
+          },
+          "docs": "Retrieve the date of the last attribution and runout file ingestion."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

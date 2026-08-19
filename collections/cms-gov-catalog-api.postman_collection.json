@@ -1,0 +1,398 @@
+{
+  "item": [
+    {
+      "id": "7ec249fb-99ee-4b0b-88c0-fd5a6405698a",
+      "name": "Catalog",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "75c5fd44-c3ae-4b2d-8081-aca94f68a216",
+          "name": "List Datasets",
+          "request": {
+            "name": "List Datasets",
+            "description": {},
+            "url": {
+              "path": [
+                "dataset"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "keyword",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "theme",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "publisher",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0081e89a-fda6-41c1-9cc9-e1ecceeccf5a",
+              "name": "List of datasets",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "keyword",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "theme",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "publisher",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"identifier\": \"string\",\n    \"title\": \"string\",\n    \"description\": \"string\",\n    \"keyword\": [\n      \"string\",\n      \"string\"\n    ],\n    \"issued\": \"1958-01-09\",\n    \"modified\": \"1994-12-31\",\n    \"publisher\": {},\n    \"contactPoint\": {},\n    \"accessLevel\": \"string\",\n    \"theme\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"identifier\": \"string\",\n    \"title\": \"string\",\n    \"description\": \"string\",\n    \"keyword\": [\n      \"string\",\n      \"string\"\n    ],\n    \"issued\": \"1960-12-12\",\n    \"modified\": \"1985-12-27\",\n    \"publisher\": {},\n    \"contactPoint\": {},\n    \"accessLevel\": \"string\",\n    \"theme\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3a5aaade-deac-45fa-8915-cd95b897c359",
+          "name": "Get Dataset Metadata",
+          "request": {
+            "name": "Get Dataset Metadata",
+            "description": {},
+            "url": {
+              "path": [
+                "dataset",
+                ":datasetId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "datasetId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e73d74a1-880a-4cee-a825-3ed8b7a20064",
+              "name": "Dataset metadata",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    ":datasetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "datasetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"identifier\": \"string\",\n  \"title\": \"string\",\n  \"description\": \"string\",\n  \"keyword\": [\n    \"string\",\n    \"string\"\n  ],\n  \"issued\": \"2006-04-29\",\n  \"modified\": \"2015-05-13\",\n  \"publisher\": {},\n  \"contactPoint\": {},\n  \"accessLevel\": \"string\",\n  \"theme\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "44ff04ac-d5d7-43b8-a26a-fc3cb4f1260d",
+          "name": "List Provider Datasets",
+          "request": {
+            "name": "List Provider Datasets",
+            "description": {},
+            "url": {
+              "path": [
+                "metastore",
+                "schemas",
+                "dataset",
+                "items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fb18c1be-8621-4687-872f-cc6c1ec35384",
+              "name": "List of provider datasets",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metastore",
+                    "schemas",
+                    "dataset",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1ad7c046-087e-4593-830b-dcdeaad63a91",
+          "name": "Get Provider Dataset",
+          "request": {
+            "name": "Get Provider Dataset",
+            "description": {},
+            "url": {
+              "path": [
+                "metastore",
+                "schemas",
+                "dataset",
+                "items",
+                ":datasetId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "datasetId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "493d264e-5a53-415b-ad9a-4e72ed739ed0",
+              "name": "Dataset record",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metastore",
+                    "schemas",
+                    "dataset",
+                    "items",
+                    ":datasetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "datasetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ab2d.cms.gov/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cdc55bad-7782-4479-99bd-15f44eab02ee",
+    "name": "CMS AB2D Articles Catalog API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "AB2D delivers Medicare Parts A, B, and D claims data to Part D Prescription Drug Plan\nsponsors via the HL7 FHIR Bulk Data Access specification. Asynchronous $export returns\nExplanationOfBenefit NDJSON for all enrolled Medicare beneficiaries since 2020.\n\n\nContact Support:\n Name: AB2D Help\n Email: ab2d@cms.hhs.gov",
+      "type": "text/plain"
+    }
+  }
+}

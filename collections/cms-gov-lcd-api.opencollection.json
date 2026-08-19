@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CMS AB2D Articles LCD API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "LCD",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Local Coverage Determinations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ab2d.cms.gov/api/v2/lcds",
+            "params": [
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "contractor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "hcpcsCode",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search Local Coverage Determinations"
+        },
+        {
+          "info": {
+            "name": "Get LCD",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ab2d.cms.gov/api/v2/lcds/:lcdId",
+            "params": [
+              {
+                "name": "lcdId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get LCD"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

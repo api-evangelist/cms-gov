@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CMS AB2D Articles Practitioner API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Practitioner",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Practitioners",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ab2d.cms.gov/api/v2/Practitioner"
+          },
+          "docs": "Search Practitioners"
+        },
+        {
+          "info": {
+            "name": "Create Practitioner",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ab2d.cms.gov/api/v2/Practitioner",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Practitioner"
+        },
+        {
+          "info": {
+            "name": "Read Practitioner",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ab2d.cms.gov/api/v2/Practitioner/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Read Practitioner"
+        },
+        {
+          "info": {
+            "name": "Delete Practitioner",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.ab2d.cms.gov/api/v2/Practitioner/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete Practitioner"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

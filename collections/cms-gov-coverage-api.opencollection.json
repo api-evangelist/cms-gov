@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CMS AB2D Articles Coverage API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Coverage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Coverage Resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ab2d.cms.gov/api/v2/Coverage",
+            "params": [
+              {
+                "name": "beneficiary",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search Coverage Resources"
+        },
+        {
+          "info": {
+            "name": "Read Coverage by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ab2d.cms.gov/api/v2/Coverage/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Read Coverage by ID"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

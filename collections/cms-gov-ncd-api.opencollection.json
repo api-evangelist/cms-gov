@@ -1,0 +1,70 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CMS AB2D Articles NCD API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "NCD",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search National Coverage Determinations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ab2d.cms.gov/api/v2/ncds",
+            "params": [
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "hcpcsCode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search National Coverage Determinations"
+        },
+        {
+          "info": {
+            "name": "Get NCD",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ab2d.cms.gov/api/v2/ncds/:ncdId",
+            "params": [
+              {
+                "name": "ncdId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get NCD"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

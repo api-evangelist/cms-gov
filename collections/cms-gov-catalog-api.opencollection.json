@@ -1,0 +1,99 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CMS AB2D Articles Catalog API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Catalog",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Datasets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ab2d.cms.gov/api/v2/dataset",
+            "params": [
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "theme",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "publisher",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Datasets"
+        },
+        {
+          "info": {
+            "name": "Get Dataset Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ab2d.cms.gov/api/v2/dataset/:datasetId",
+            "params": [
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Dataset Metadata"
+        },
+        {
+          "info": {
+            "name": "List Provider Datasets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ab2d.cms.gov/api/v2/metastore/schemas/dataset/items"
+          },
+          "docs": "List Provider Datasets"
+        },
+        {
+          "info": {
+            "name": "Get Provider Dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ab2d.cms.gov/api/v2/metastore/schemas/dataset/items/:datasetId",
+            "params": [
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Provider Dataset"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

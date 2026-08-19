@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CMS AB2D Articles Eligibility API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Eligibility",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Check Subsidy Eligibility",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ab2d.cms.gov/api/v2/forms/eligibility",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Check Subsidy Eligibility"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
