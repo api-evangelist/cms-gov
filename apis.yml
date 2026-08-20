@@ -73,6 +73,8 @@ apis:
   humanURL: https://bluebutton.cms.gov/developers/
   baseURL: https://api.bluebutton.cms.gov/v2/fhir
   tags:
+  - Authentication
+  tags_raw:
   - Auth
   properties:
   - type: OpenAPI
