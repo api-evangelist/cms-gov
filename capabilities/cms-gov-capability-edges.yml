@@ -1,0 +1,26 @@
+slug: cms-gov
+provider: CMS — Centers for Medicare & Medicaid Services
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Public Sector & Government
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Eligibility
+  spec_file: cms-gov-eligibility-api-openapi.yml
+  capability_id: BC-3230.20
+  capability_id_l1: BC-3230
+  capability_name: Eligibility Determination
+  confidence: 0.7
+  evidence: POST /forms/eligibility  checkEligibility  Check Subsidy Eligibility
+  reason: The operation determines applicant eligibility for a government subsidy (APTC/CSR) in the Health
+    Insurance Marketplace, which is eligibility determination for a public entitlement. Confidence held
+    moderate because the surface is a single stateless calculation endpoint rather than full eligibility
+    case processing.

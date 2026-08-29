@@ -1681,6 +1681,9 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/cms-gov.png
 access: 3rd-Party
 common:
+  - type: CapabilityMap
+    url: capabilities/cms-gov-capability-edges.yml
+    name: CMS — Centers for Medicare & Medicaid Services Business Capability Map
   - type: IssueTracker
     url: https://github.com/CMSgov/beneficiary-fhir-data/issues
   - type: Releases
