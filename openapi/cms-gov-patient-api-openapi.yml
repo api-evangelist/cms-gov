@@ -1,28 +1,24 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: CMS AB2D Articles Patient API
-  description: 'AB2D delivers Medicare Parts A, B, and D claims data to Part D Prescription Drug Plan
-
-    sponsors via the HL7 FHIR Bulk Data Access specification. Asynchronous $export returns
-
-    ExplanationOfBenefit NDJSON for all enrolled Medicare beneficiaries since 2020.
-
-    '
-  version: '2.0'
-  contact:
-    name: AB2D Help
-    url: https://ab2d.cms.gov/
-    email: ab2d@cms.hhs.gov
+  title: Cms Gov Patient API
   license:
     name: Public Domain (U.S. Government Work)
     url: https://www.usa.gov/government-works
+  version: '1.0'
+  description: 'Operations tagged Patient across 3 of this provider''s published API definitions: cms-gov-bfd-openapi.yml, cms-gov-blue-button-2-openapi.yml, cms-gov-dpc-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://api.ab2d.cms.gov/api/v2
+- url: https://prod.bfd.cms.gov/v2/fhir
+  description: Production (peering only)
+- url: https://sandbox.bfd.cms.gov/v2/fhir
+  description: Sandbox (peering only)
+- url: https://api.bluebutton.cms.gov/v2/fhir
+  description: Production FHIR R4 endpoint
+- url: https://sandbox.bluebutton.cms.gov/v2/fhir
+  description: Sandbox FHIR R4 endpoint
+- url: https://api.dpc.cms.gov/api/v1
   description: Production
-- url: https://sandbox.ab2d.cms.gov/api/v2
+- url: https://sandbox.dpc.cms.gov/api/v1
   description: Sandbox
-security:
-- BearerAuth: []
 tags:
 - name: Patient
 paths:
@@ -49,6 +45,8 @@ paths:
       responses:
         '200':
           description: Bundle of Patients
+      security:
+      - MutualTLS: []
     post:
       summary: Create Patient
       operationId: createPatient
@@ -63,6 +61,13 @@ paths:
       responses:
         '201':
           description: Patient created
+      security:
+      - MutualTLS: []
+    servers:
+    - url: https://prod.bfd.cms.gov/v2/fhir
+      description: Production (peering only)
+    - url: https://sandbox.bfd.cms.gov/v2/fhir
+      description: Sandbox (peering only)
   /Patient/{id}:
     get:
       summary: Read Patient
@@ -78,10 +83,91 @@ paths:
       responses:
         '200':
           description: Patient resource
+      security:
+      - MutualTLS: []
+    servers:
+    - url: https://prod.bfd.cms.gov/v2/fhir
+      description: Production (peering only)
+    - url: https://sandbox.bfd.cms.gov/v2/fhir
+      description: Sandbox (peering only)
 components:
+  schemas:
+    Bundle:
+      type: object
+      properties:
+        resourceType:
+          type: string
+          enum:
+          - Bundle
+        type:
+          type: string
+        total:
+          type: integer
+        link:
+          type: array
+          items:
+            type: object
+        entry:
+          type: array
+          items:
+            type: object
+            properties:
+              resource:
+                type: object
+              fullUrl:
+                type: string
+    Patient:
+      type: object
+      properties:
+        resourceType:
+          type: string
+          enum:
+          - Patient
+        id:
+          type: string
+        identifier:
+          type: array
+          items:
+            type: object
+        name:
+          type: array
+          items:
+            type: object
+        gender:
+          type: string
+          enum:
+          - male
+          - female
+          - other
+          - unknown
+        birthDate:
+          type: string
+          format: date
+        address:
+          type: array
+          items:
+            type: object
   securitySchemes:
+    MutualTLS:
+      type: mutualTLS
+      description: BFD requires X.509 client certificates issued by the CMS PKI; access is restricted to peering applications.
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.bluebutton.cms.gov/v2/o/authorize/
+          tokenUrl: https://api.bluebutton.cms.gov/v2/o/token/
+          scopes:
+            patient/Patient.read: Read Patient resource
+            patient/Coverage.read: Read Coverage resources
+            patient/ExplanationOfBenefit.read: Read ExplanationOfBenefit resources
+            profile: OpenID profile claims
     BearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      description: AB2D uses SMART Backend Services with okta-issued JWT bearer tokens.
+      description: DPC uses asymmetric SMART Backend Services authentication.
+x-refined-from:
+- cms-gov-bfd-openapi.yml
+- cms-gov-blue-button-2-openapi.yml
+- cms-gov-dpc-openapi.yml

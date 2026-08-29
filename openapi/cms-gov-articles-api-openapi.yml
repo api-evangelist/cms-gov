@@ -1,28 +1,20 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: CMS AB2D Articles API
-  description: 'AB2D delivers Medicare Parts A, B, and D claims data to Part D Prescription Drug Plan
+  title: CMS Medicare Coverage Database Articles API
+  description: 'The Medicare Coverage Database (MCD) exposes National Coverage Determinations (NCDs),
 
-    sponsors via the HL7 FHIR Bulk Data Access specification. Asynchronous $export returns
+    Local Coverage Determinations (LCDs), Local Coverage Articles, Proposed Decisions,
 
-    ExplanationOfBenefit NDJSON for all enrolled Medicare beneficiaries since 2020.
+    National Coverage Analyses, and MEDCAC records.
 
     '
-  version: '2.0'
-  contact:
-    name: AB2D Help
-    url: https://ab2d.cms.gov/
-    email: ab2d@cms.hhs.gov
+  version: '1.0'
   license:
     name: Public Domain (U.S. Government Work)
     url: https://www.usa.gov/government-works
 servers:
-- url: https://api.ab2d.cms.gov/api/v2
+- url: https://www.cms.gov/medicare-coverage-database/api
   description: Production
-- url: https://sandbox.ab2d.cms.gov/api/v2
-  description: Sandbox
-security:
-- BearerAuth: []
 tags:
 - name: Articles
 paths:
@@ -44,10 +36,3 @@ paths:
       responses:
         '200':
           description: Matching articles
-components:
-  securitySchemes:
-    BearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-      description: AB2D uses SMART Backend Services with okta-issued JWT bearer tokens.

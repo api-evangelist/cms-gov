@@ -1,26 +1,20 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: CMS AB2D Articles Scoring API
-  description: 'AB2D delivers Medicare Parts A, B, and D claims data to Part D Prescription Drug Plan
+  title: CMS Quality Payment Program Scoring API
+  description: 'The Quality Payment Program (QPP) API supports MIPS and Advanced APMs under MACRA.
 
-    sponsors via the HL7 FHIR Bulk Data Access specification. Asynchronous $export returns
+    Exposes measures, benchmarks, scoring, and submission endpoints used by Qualified
 
-    ExplanationOfBenefit NDJSON for all enrolled Medicare beneficiaries since 2020.
+    Registries, EHR vendors, and QCDRs.
 
     '
-  version: '2.0'
-  contact:
-    name: AB2D Help
-    url: https://ab2d.cms.gov/
-    email: ab2d@cms.hhs.gov
+  version: '1.0'
   license:
     name: Public Domain (U.S. Government Work)
     url: https://www.usa.gov/government-works
 servers:
-- url: https://api.ab2d.cms.gov/api/v2
+- url: https://qpp.cms.gov/api
   description: Production
-- url: https://sandbox.ab2d.cms.gov/api/v2
-  description: Sandbox
 security:
 - BearerAuth: []
 tags:
@@ -45,5 +39,4 @@ components:
     BearerAuth:
       type: http
       scheme: bearer
-      bearerFormat: JWT
-      description: AB2D uses SMART Backend Services with okta-issued JWT bearer tokens.
+      description: QPP uses HARP-issued JWT bearer tokens.

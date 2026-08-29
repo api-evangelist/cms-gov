@@ -1,25 +1,27 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: CMS AB2D Articles Practitioner API
-  description: 'AB2D delivers Medicare Parts A, B, and D claims data to Part D Prescription Drug Plan
+  title: CMS Data at the Point of Care API (DPC) Practitioner API
+  description: 'Data at the Point of Care (DPC) fills gaps in patient history by delivering Medicare
 
-    sponsors via the HL7 FHIR Bulk Data Access specification. Asynchronous $export returns
+    claims data via HL7 FHIR Bulk Data Access to fee-for-service providers. Providers
 
-    ExplanationOfBenefit NDJSON for all enrolled Medicare beneficiaries since 2020.
+    register Practitioner, Organization, and Patient roster resources, then asynchronously
+
+    $export ExplanationOfBenefit, Coverage, and Patient resources.
 
     '
-  version: '2.0'
+  version: '1.0'
   contact:
-    name: AB2D Help
-    url: https://ab2d.cms.gov/
-    email: ab2d@cms.hhs.gov
+    name: DPC Support
+    url: https://dpc.cms.gov/
+    email: dpcinfo@cms.hhs.gov
   license:
     name: Public Domain (U.S. Government Work)
     url: https://www.usa.gov/government-works
 servers:
-- url: https://api.ab2d.cms.gov/api/v2
+- url: https://api.dpc.cms.gov/api/v1
   description: Production
-- url: https://sandbox.ab2d.cms.gov/api/v2
+- url: https://sandbox.dpc.cms.gov/api/v1
   description: Sandbox
 security:
 - BearerAuth: []
@@ -84,4 +86,4 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      description: AB2D uses SMART Backend Services with okta-issued JWT bearer tokens.
+      description: DPC uses asymmetric SMART Backend Services authentication.

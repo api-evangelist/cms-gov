@@ -1,28 +1,27 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: CMS AB2D Articles Eligibility API
-  description: 'AB2D delivers Medicare Parts A, B, and D claims data to Part D Prescription Drug Plan
+  title: CMS Marketplace Eligibility API
+  description: 'The Marketplace API exposes Qualified Health Plan (QHP) and Stand-alone Dental Plan
 
-    sponsors via the HL7 FHIR Bulk Data Access specification. Asynchronous $export returns
+    (SADP) data from healthcare.gov including plan finder, plan compare, plan rates, plan
 
-    ExplanationOfBenefit NDJSON for all enrolled Medicare beneficiaries since 2020.
+    benefits, and crosswalks. Powers consumer plan-shopping experiences across
+
+    HealthCare.gov and partner brokers.
 
     '
-  version: '2.0'
+  version: '1.0'
   contact:
-    name: AB2D Help
-    url: https://ab2d.cms.gov/
-    email: ab2d@cms.hhs.gov
+    name: CMS Marketplace API
+    url: https://developer.cms.gov/marketplace-api/
   license:
     name: Public Domain (U.S. Government Work)
     url: https://www.usa.gov/government-works
 servers:
-- url: https://api.ab2d.cms.gov/api/v2
+- url: https://marketplace.api.healthcare.gov/api/v1
   description: Production
-- url: https://sandbox.ab2d.cms.gov/api/v2
-  description: Sandbox
 security:
-- BearerAuth: []
+- ApiKey: []
 tags:
 - name: Eligibility
 paths:
@@ -43,8 +42,7 @@ paths:
           description: Eligibility result including APTC and CSR
 components:
   securitySchemes:
-    BearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-      description: AB2D uses SMART Backend Services with okta-issued JWT bearer tokens.
+    ApiKey:
+      type: apiKey
+      in: query
+      name: apikey

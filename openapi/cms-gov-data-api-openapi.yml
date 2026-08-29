@@ -1,28 +1,18 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: CMS AB2D Articles Data API
-  description: 'AB2D delivers Medicare Parts A, B, and D claims data to Part D Prescription Drug Plan
-
-    sponsors via the HL7 FHIR Bulk Data Access specification. Asynchronous $export returns
-
-    ExplanationOfBenefit NDJSON for all enrolled Medicare beneficiaries since 2020.
-
-    '
-  version: '2.0'
-  contact:
-    name: AB2D Help
-    url: https://ab2d.cms.gov/
-    email: ab2d@cms.hhs.gov
+  title: Cms Gov Data API
+  version: '1.0'
   license:
     name: Public Domain (U.S. Government Work)
     url: https://www.usa.gov/government-works
+  description: 'Operations tagged Data across 2 of this provider''s published API definitions: cms-gov-open-data-openapi.yml, cms-gov-provider-data-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://api.ab2d.cms.gov/api/v2
+- url: https://data.cms.gov/data-api/v1
   description: Production
-- url: https://sandbox.ab2d.cms.gov/api/v2
-  description: Sandbox
-security:
-- BearerAuth: []
+- url: https://data.cms.gov/data.json
+  description: DCAT catalog
+- url: https://data.cms.gov/provider-data/api/1
+  description: Production
 tags:
 - name: Data
 paths:
@@ -68,6 +58,11 @@ paths:
       responses:
         '200':
           description: Dataset rows
+    servers:
+    - url: https://data.cms.gov/data-api/v1
+      description: Production
+    - url: https://data.cms.gov/data.json
+      description: DCAT catalog
   /dataset/{datasetId}/data-stats:
     get:
       summary: Get Dataset Statistics
@@ -83,6 +78,11 @@ paths:
       responses:
         '200':
           description: Row counts and column stats
+    servers:
+    - url: https://data.cms.gov/data-api/v1
+      description: Production
+    - url: https://data.cms.gov/data.json
+      description: DCAT catalog
   /datastore/query/{distributionId}:
     get:
       summary: Query Dataset Distribution
@@ -118,6 +118,9 @@ paths:
       responses:
         '200':
           description: Query results
+    servers:
+    - url: https://data.cms.gov/provider-data/api/1
+      description: Production
   /datastore/sql:
     get:
       summary: Run SQL Query
@@ -134,10 +137,9 @@ paths:
       responses:
         '200':
           description: Query results
-components:
-  securitySchemes:
-    BearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-      description: AB2D uses SMART Backend Services with okta-issued JWT bearer tokens.
+    servers:
+    - url: https://data.cms.gov/provider-data/api/1
+      description: Production
+x-refined-from:
+- cms-gov-open-data-openapi.yml
+- cms-gov-provider-data-openapi.yml

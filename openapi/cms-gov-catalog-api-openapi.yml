@@ -1,28 +1,18 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: CMS AB2D Articles Catalog API
-  description: 'AB2D delivers Medicare Parts A, B, and D claims data to Part D Prescription Drug Plan
-
-    sponsors via the HL7 FHIR Bulk Data Access specification. Asynchronous $export returns
-
-    ExplanationOfBenefit NDJSON for all enrolled Medicare beneficiaries since 2020.
-
-    '
-  version: '2.0'
-  contact:
-    name: AB2D Help
-    url: https://ab2d.cms.gov/
-    email: ab2d@cms.hhs.gov
+  title: Cms Gov Catalog API
+  version: '1.0'
   license:
     name: Public Domain (U.S. Government Work)
     url: https://www.usa.gov/government-works
+  description: 'Operations tagged Catalog across 2 of this provider''s published API definitions: cms-gov-open-data-openapi.yml, cms-gov-provider-data-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://api.ab2d.cms.gov/api/v2
+- url: https://data.cms.gov/data-api/v1
   description: Production
-- url: https://sandbox.ab2d.cms.gov/api/v2
-  description: Sandbox
-security:
-- BearerAuth: []
+- url: https://data.cms.gov/data.json
+  description: DCAT catalog
+- url: https://data.cms.gov/provider-data/api/1
+  description: Production
 tags:
 - name: Catalog
 paths:
@@ -54,6 +44,11 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Dataset'
+    servers:
+    - url: https://data.cms.gov/data-api/v1
+      description: Production
+    - url: https://data.cms.gov/data.json
+      description: DCAT catalog
   /dataset/{datasetId}:
     get:
       summary: Get Dataset Metadata
@@ -73,6 +68,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Dataset'
+    servers:
+    - url: https://data.cms.gov/data-api/v1
+      description: Production
+    - url: https://data.cms.gov/data.json
+      description: DCAT catalog
   /metastore/schemas/dataset/items:
     get:
       summary: List Provider Datasets
@@ -82,6 +82,9 @@ paths:
       responses:
         '200':
           description: List of provider datasets
+    servers:
+    - url: https://data.cms.gov/provider-data/api/1
+      description: Production
   /metastore/schemas/dataset/items/{datasetId}:
     get:
       summary: Get Provider Dataset
@@ -97,6 +100,9 @@ paths:
       responses:
         '200':
           description: Dataset record
+    servers:
+    - url: https://data.cms.gov/provider-data/api/1
+      description: Production
 components:
   schemas:
     Dataset:
@@ -132,9 +138,6 @@ components:
           type: array
           items:
             type: string
-  securitySchemes:
-    BearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-      description: AB2D uses SMART Backend Services with okta-issued JWT bearer tokens.
+x-refined-from:
+- cms-gov-open-data-openapi.yml
+- cms-gov-provider-data-openapi.yml
