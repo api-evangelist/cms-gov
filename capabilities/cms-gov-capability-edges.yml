@@ -11,8 +11,32 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 1
+edge_count: 3
 edges:
+- tag: ExplanationOfBenefit
+  spec_file: cms-gov-explanationofbenefit-api-openapi.yml
+  capability_id: BC-2160
+  capability_id_l1: BC-2160
+  capability_name: Insurance Claims Management
+  confidence: 0.8
+  evidence: 'GET /ExplanationOfBenefit searchExplanationOfBenefit Search Explanation Of Benefit Resources;
+    schemas: Bundle, ExplanationOfBenefit'
+  reason: FHIR ExplanationOfBenefit resources are adjudicated insurance claim records (Medicare claims
+    data), so the surface plainly concerns insurance claims. Which sub-capability (adjudication vs settlement
+    records) is unclear, so L1 only.
+  recovered_from: vertical-insurance-edges.json
+- tag: Plans
+  spec_file: cms-gov-plans-api-openapi.yml
+  capability_id: BC-2100.10
+  capability_id_l1: BC-2100
+  capability_name: Insurance Product Catalogue Management
+  confidence: 0.8
+  evidence: exposes Qualified Health Plan (QHP) and Stand-alone Dental Plan (SADP) data from healthcare.gov
+    including plan finder, plan compare, plan rates, plan benefits
+  reason: Search and retrieval of insurance plan master data including benefits and rates — an insurance
+    product catalogue surface. Sub-capability ambiguity exists (rates could touch pricing configuration)
+    but catalogue is the dominant reading.
+  recovered_from: vertical-insurance-edges.json
 - tag: Eligibility
   spec_file: cms-gov-eligibility-api-openapi.yml
   capability_id: BC-3230.20
