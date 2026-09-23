@@ -68,6 +68,30 @@ paths:
       description: Sandbox FHIR R4 endpoint
 components:
   schemas:
+    Bundle:
+      type: object
+      properties:
+        resourceType:
+          type: string
+          enum:
+          - Bundle
+        type:
+          type: string
+        total:
+          type: integer
+        link:
+          type: array
+          items:
+            type: object
+        entry:
+          type: array
+          items:
+            type: object
+            properties:
+              resource:
+                type: object
+              fullUrl:
+                type: string
     Coverage:
       type: object
       properties:
@@ -96,30 +120,6 @@ components:
           type: array
           items:
             type: object
-    Bundle:
-      type: object
-      properties:
-        resourceType:
-          type: string
-          enum:
-          - Bundle
-        type:
-          type: string
-        total:
-          type: integer
-        link:
-          type: array
-          items:
-            type: object
-        entry:
-          type: array
-          items:
-            type: object
-            properties:
-              resource:
-                type: object
-              fullUrl:
-                type: string
   securitySchemes:
     MutualTLS:
       type: mutualTLS

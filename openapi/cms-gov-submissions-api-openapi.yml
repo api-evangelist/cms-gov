@@ -5,9 +5,7 @@ info:
 
     Exposes measures, benchmarks, scoring, and submission endpoints used by Qualified
 
-    Registries, EHR vendors, and QCDRs.
-
-    '
+    Registries, EHR vendors, and QCDRs.'
   version: '1.0'
   license:
     name: Public Domain (U.S. Government Work)

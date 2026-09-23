@@ -7,9 +7,7 @@ info:
 
     register Practitioner, Organization, and Patient roster resources, then asynchronously
 
-    $export ExplanationOfBenefit, Coverage, and Patient resources.
-
-    '
+    $export ExplanationOfBenefit, Coverage, and Patient resources.'
   version: '1.0'
   contact:
     name: DPC Support

@@ -99,7 +99,8 @@
     "tag 'Patient' spans 3 source specs (cms-gov-bfd-openapi.yml, cms-gov-blue-button-2-openapi.yml, cms-gov-dpc-openapi.yml): per-path servers applied",
     "tag 'Auth' spans 2 source specs (cms-gov-blue-button-2-openapi.yml, cms-gov-dpc-openapi.yml): per-path servers applied",
     "tag 'Catalog' spans 2 source specs (cms-gov-open-data-openapi.yml, cms-gov-provider-data-openapi.yml): per-path servers applied",
-    "tag 'Data' spans 2 source specs (cms-gov-open-data-openapi.yml, cms-gov-provider-data-openapi.yml): per-path servers applied"
+    "tag 'Data' spans 2 source specs (cms-gov-open-data-openapi.yml, cms-gov-provider-data-openapi.yml): per-path servers applied",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "cms-gov-articles-api-openapi.yml: previously refined output, superseded by openapi/_original/",
