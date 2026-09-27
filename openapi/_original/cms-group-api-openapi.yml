@@ -1,83 +1,19 @@
+# x-archived-from: cms-group-api-openapi.yml
+# x-archived-on: 2026-09-26
 openapi: 3.2.0
 info:
-  title: Cms Gov Group API
-  version: '1.0'
-  description: 'Operations tagged Group across 2 of this provider''s published API definitions: cms-gov-dpc-openapi.yml, cms-group-api-openapi.yml. Each path carries the servers of the definition it was published in.'
-servers:
-- url: https://api.dpc.cms.gov/api/v1
-  description: Production
-- url: https://sandbox.dpc.cms.gov/api/v1
-  description: Sandbox
+  title: Beneficiary Claims Data Group API
+  description: The Beneficiary Claims Data API (BCDA) allows downloading of claims data in accordance with the FHIR Bulk Data Export specification.
+  contact:
+    email: bcapi@cms.hhs.gov
+  license:
+    name: Public Domain
+    url: https://github.com/CMSgov/bcda-app/blob/main/LICENSE.md
+  version: 1.0.0
+servers: []
 tags:
 - name: Group
 paths:
-  /Group:
-    post:
-      summary: Create Roster Group
-      operationId: createGroup
-      description: Create an attribution roster Group with member references to Patients.
-      tags:
-      - Group
-      requestBody:
-        required: true
-        content:
-          application/fhir+json:
-            schema:
-              type: object
-      responses:
-        '201':
-          description: Group created
-      security:
-      - BearerAuth: []
-    servers:
-    - url: https://api.dpc.cms.gov/api/v1
-      description: Production
-    - url: https://sandbox.dpc.cms.gov/api/v1
-      description: Sandbox
-  /Group/{groupId}:
-    get:
-      summary: Read Group
-      operationId: readGroup
-      tags:
-      - Group
-      parameters:
-      - name: groupId
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: Group resource
-      security:
-      - BearerAuth: []
-    put:
-      summary: Update Group
-      operationId: updateGroup
-      tags:
-      - Group
-      parameters:
-      - name: groupId
-        in: path
-        required: true
-        schema:
-          type: string
-      requestBody:
-        required: true
-        content:
-          application/fhir+json:
-            schema:
-              type: object
-      responses:
-        '200':
-          description: Group updated
-      security:
-      - BearerAuth: []
-    servers:
-    - url: https://api.dpc.cms.gov/api/v1
-      description: Production
-    - url: https://sandbox.dpc.cms.gov/api/v1
-      description: Sandbox
   /api/v1/Group/{groupId}/$export:
     get:
       tags:
@@ -260,11 +196,6 @@ components:
               type: string
       x-go-package: github.com/CMSgov/bcda-app/bcda/models
   securitySchemes:
-    BearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-      description: DPC uses asymmetric SMART Backend Services authentication.
     basic_auth:
       type: http
       scheme: basic
@@ -273,6 +204,4 @@ components:
       description: The Group and Patient endpoints require a Bearer Token. 1) Put your credentials in Basic Authentication, 2) Request a bearer token from /auth/token, 3) Put "Bearer {TOKEN}" in this field (no quotes) using the bearer token retrieved in step 2
       name: Authorization
       in: header
-x-refined-from:
-- cms-gov-dpc-openapi.yml
-- cms-group-api-openapi.yml
+x-original-swagger-version: '2.0'

@@ -1,0 +1,459 @@
+# x-archived-from: cms-bulk-data-api-openapi.yml
+# x-archived-on: 2026-09-26
+openapi: 3.2.0
+info:
+  title: Marketplace Bulk Data API
+  version: '1'
+  description: '# About
+
+
+    The Marketplace API delivers data that helps users find and evaluate health care insurance plans, providers, and coverage information on the marketplace.'
+servers:
+- url: https://marketplace.api.healthcare.gov/api/v1
+security:
+- API Key: []
+tags:
+- name: Bulk Data
+  description: Information about the bulk data json files maintained by Marketplace API.
+paths:
+  /data/apt:
+    x-summary: Bulk data containing our Applicable Percentage Tables
+    get:
+      tags:
+      - Bulk Data
+      description: Bulk data containing our Applicable Percentage Tables
+      parameters:
+      - $ref: '#/components/parameters/apikey'
+      - $ref: '#/components/parameters/year-required'
+      responses:
+        '302':
+          description: Successful response, will redirect to an S3 URL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APT'
+        '400':
+          description: Bad Request, indicating an invalid market year has been provided
+      summary: Get data apt
+      x-summary-source: derived
+      operationId: getDataApt
+      x-operation-id-source: derived
+  /data/decile-mapping:
+    x-summary: Bulk data containing our OOPC Utilization Decile Mapping
+    get:
+      tags:
+      - Bulk Data
+      description: Bulk data containing our OOPC Utilization Decile Mapping
+      parameters:
+      - $ref: '#/components/parameters/apikey'
+      - $ref: '#/components/parameters/year-required'
+      responses:
+        '302':
+          description: Successful response, will redirect to an S3 URL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DecileMapping'
+        '400':
+          description: Bad Request, indicating an invalid market year has been provided
+      summary: Get data decile mapping
+      x-summary-source: derived
+      operationId: getDataDecileMapping
+      x-operation-id-source: derived
+  /data/state-medicaid:
+    x-summary: Bulk data containing our State Medicaid data
+    get:
+      tags:
+      - Bulk Data
+      description: Bulk data containing our State Medicaid data
+      parameters:
+      - $ref: '#/components/parameters/apikey'
+      - $ref: '#/components/parameters/year-required'
+      responses:
+        '302':
+          description: Successful response, will redirect to an S3 URL
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StateMedicaidList'
+                type: array
+        '400':
+          description: Bad Request, indicating an invalid market year has been provided
+      summary: Get data state medicaid
+      x-summary-source: derived
+      operationId: getDataStateMedicaid
+      x-operation-id-source: derived
+  /data/rate-areas:
+    x-summary: Bulk data containing our rate area information
+    get:
+      tags:
+      - Bulk Data
+      description: Bulk data containing our rate area information
+      parameters:
+      - $ref: '#/components/parameters/apikey'
+      - $ref: '#/components/parameters/year-required'
+      responses:
+        '302':
+          description: Successful response, will redirect to an S3 URL
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StateRateArea'
+        '400':
+          description: Bad Request, indicating an invalid market year has been provided
+      summary: Get data rate areas
+      x-summary-source: derived
+      operationId: getDataRateAreas
+      x-operation-id-source: derived
+  /data/county-zips:
+    x-summary: Bulk data containing our county zip information
+    get:
+      tags:
+      - Bulk Data
+      description: Bulk data containing our county zip information
+      parameters:
+      - $ref: '#/components/parameters/apikey'
+      - $ref: '#/components/parameters/year-required'
+      responses:
+        '302':
+          description: Successful response, will redirect to an S3 URL
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StateCounty'
+                type: array
+        '400':
+          description: Bad Request, indicating an invalid market year has been provided
+      summary: Get data county zips
+      x-summary-source: derived
+      operationId: getDataCountyZips
+      x-operation-id-source: derived
+  /data/crosswalk:
+    x-summary: Bulk data containing our Crosswalk data
+    get:
+      tags:
+      - Bulk Data
+      description: Bulk data containing our Crosswalk data
+      parameters:
+      - $ref: '#/components/parameters/apikey'
+      - $ref: '#/components/parameters/year-required'
+      responses:
+        '302':
+          description: Successful response, will redirect to an S3 URL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Crosswalk'
+        '400':
+          description: Bad Request, indicating an invalid market year has been provided
+      summary: Get data crosswalk
+      x-summary-source: derived
+      operationId: getDataCrosswalk
+      x-operation-id-source: derived
+components:
+  parameters:
+    apikey:
+      name: apikey
+      description: API key used for authentication
+      in: query
+      required: true
+      x-example: d687412e7b53146b2631dc01974ad0a4
+      schema:
+        type: string
+    year-required:
+      x-example: 2019
+      name: year
+      description: 4 digit market year.
+      in: query
+      required: true
+      schema:
+        type: number
+        format: integer
+  schemas:
+    DecileMapping:
+      properties:
+        low:
+          $ref: '#/components/schemas/DecileUtilizationMapping'
+        medium:
+          $ref: '#/components/schemas/DecileUtilizationMapping'
+        high:
+          $ref: '#/components/schemas/DecileUtilizationMapping'
+      type: object
+    CrosswalkCode:
+      properties:
+        code:
+          description: Integer code value
+          format: integer
+          type: number
+        description:
+          description: Human readable code description
+          type: string
+      type: object
+    Range:
+      properties:
+        min:
+          format: float
+          type: number
+        max:
+          format: float
+          type: number
+      type: object
+    DecileUtilizationMapping:
+      properties:
+        male:
+          $ref: '#/components/schemas/DecileUtilizationAgeMap'
+        femaile:
+          $ref: '#/components/schemas/DecileUtilizationAgeMap'
+      type: object
+    DecileEnum:
+      enum:
+      - Decile 1
+      - Decile 2
+      - Decile 3
+      - Decile 4
+      - Decile 5
+      - Decile 6
+      - Decile 7
+      - Decile 8
+      - Decile 9
+      - Decile 10
+      type: string
+      properties: {}
+    APTTier:
+      properties:
+        pctFPL:
+          description: Percentage of the Federal Poverty Line in regards to your income
+          $ref: '#/components/schemas/Range'
+        pctPremium:
+          description: Percentage of the premium to pay based on the income range
+          $ref: '#/components/schemas/Range'
+      type: object
+    StateCounty:
+      properties:
+        state:
+          description: 2-letter USPS state abbreviation
+          example: KS
+          type: string
+        counties:
+          description: list of counties for given state
+          items:
+            $ref: '#/components/schemas/CountyZips'
+          type: array
+      type: object
+    CountyZips:
+      properties:
+        name:
+          type: string
+          example: Sedgwick
+        fips:
+          format: ^[0-9]{5}$
+          type: string
+          example: 20173
+        zips:
+          items:
+            format: ^[0-9]{5}$
+            example: 67212
+            type: string
+          type: array
+      type: object
+    APT:
+      properties:
+        market_year:
+          type: integer
+          example: 2023
+        tiers:
+          items:
+            $ref: '#/components/schemas/APTTier'
+          type: array
+      type: object
+    RateAreaCounty:
+      properties:
+        rateArea:
+          description: Rate area number for the given state.
+          type: integer
+          example: 6
+        counties:
+          description: list of counties for given state
+          items:
+            $ref: '#/components/schemas/CountyZips'
+          type: array
+      type: object
+    StateMedicaidList:
+      properties:
+        fiscal_year:
+          description: 4 digit fiscal year
+          format: integer
+          type: number
+          example: 2023
+        fiscal_quarter:
+          description: Fiscal quarter (1 - 4)
+          format: integer
+          type: number
+          example: 1
+        states:
+          items:
+            $ref: '#/components/schemas/StateMedicaid'
+          type: array
+      type: object
+    StateRateArea:
+      properties:
+        state:
+          description: 2-letter USPS state abbreviation
+          example: KS
+          type: string
+        rateAreas:
+          description: list of rate areas for given state
+          items:
+            $ref: '#/components/schemas/RateAreaCounty'
+          type: array
+      type: object
+    LowIncomeChild:
+      properties:
+        min_age:
+          description: Minimum age
+          format: integer
+          type: number
+        max_age:
+          description: Maximum age
+          format: integer
+          type: number
+        pc_fpl:
+          description: Percentage federal poverty level
+          format: float
+          type: number
+      type: object
+    Crosswalk:
+      properties:
+        levels:
+          items:
+            $ref: '#/components/schemas/CrosswalkCode'
+          type: array
+        reasons:
+          items:
+            $ref: '#/components/schemas/CrosswalkCode'
+          type: array
+        data:
+          items:
+            $ref: '#/components/schemas/CrosswalkData'
+          type: array
+      type: object
+    DecileUtilizationAgeMap:
+      properties:
+        '6':
+          $ref: '#/components/schemas/DecileEnum'
+        '18':
+          $ref: '#/components/schemas/DecileEnum'
+        '26':
+          $ref: '#/components/schemas/DecileEnum'
+        '35':
+          $ref: '#/components/schemas/DecileEnum'
+        '45':
+          $ref: '#/components/schemas/DecileEnum'
+        '55':
+          $ref: '#/components/schemas/DecileEnum'
+        '999':
+          $ref: '#/components/schemas/DecileEnum'
+      type: object
+    StateMedicaid:
+      properties:
+        name:
+          description: Uppercase name
+          type: string
+        abbrev:
+          description: 2-letter USPS abbreviation
+          type: string
+        fiscal_year:
+          description: 4 digit fiscal year
+          format: integer
+          type: number
+        fiscal_quarter:
+          description: Fiscal quarter (1 - 4)
+          format: integer
+          type: number
+        pc_fpl_parent:
+          description: Percentage federal poverty level parent caretaker
+          format: float
+          type: number
+        pc_fpl_pregnant:
+          description: Percentage medicaid federal poverty level pregnant woman
+          format: float
+          type: number
+        pc_fpl_adult:
+          description: Percentage federal poverty level adult group
+          format: float
+          type: number
+        pc_fpl_child_newborn:
+          description: Percentage medicaid federal poverty level child
+          format: float
+          type: number
+        pc_fpl_child_1_5:
+          description: Percentage medicaid federal poverty level child 1 - 5
+          format: float
+          type: number
+        pc_fpl_child_6_18:
+          description: Percentage medicaid federal poverty level child 6 - 18
+          format: float
+          type: number
+        low_income_child:
+          description: Low income child eligibility rules
+          items:
+            $ref: '#/components/schemas/LowIncomeChild'
+          type: array
+        chip:
+          description: Children's Health Insurance Program eligibility rules
+          items:
+            $ref: '#/components/schemas/LowIncomeChild'
+          type: array
+      example:
+        name: KANSAS
+        abbrev: KS
+        fiscal_year: 2019
+        fiscal_quarter: 1
+        pc_fpl_parent: 0.33
+        pc_fpl_pregnant: 1.66
+        pc_fpl_adult: 0
+        pc_fpl_child_newborn: 1.66
+        pc_fpl_child_1_5: 1.49
+        pc_fpl_child_6_18: 1.33
+        low_income_child: []
+        chip:
+        - min_age: 0
+          max_age: 18
+          pc_fpl: 2.35
+      type: object
+    CrosswalkData:
+      properties:
+        state:
+          description: Two letter State designation
+          type: string
+        previous_plan_id:
+          type: string
+        new_plan_id:
+          type: string
+        fips:
+          description: County FIPS code
+          type: string
+        level:
+          description: Integer code value
+          format: integer
+          type: number
+        reason:
+          description: Integer code value
+          format: integer
+          type: number
+        zipcodes:
+          items:
+            type: string
+          type: array
+      type: object
+  securitySchemes:
+    API_Key:
+      x-summary: API Key Auth
+      description: Your API key should be included as a query parameter with the request. You can [fill out this form](https://cms.gov1.qualtrics.com/jfe/form/SV_4N2GHCJfNuX7n8x) to request an API key.
+      type: apiKey
+      in: query
+      name: apikey
+      x-example: d687412e7b53146b2631dc01974ad0a4

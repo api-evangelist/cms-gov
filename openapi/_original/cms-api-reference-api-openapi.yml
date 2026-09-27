@@ -1,0 +1,99 @@
+# x-archived-from: cms-api-reference-api-openapi.yml
+# x-archived-on: 2026-09-26
+openapi: 3.2.0
+info:
+  title: Marketplace API Reference API
+  version: '1'
+  description: '# About
+
+
+    The Marketplace API delivers data that helps users find and evaluate health care insurance plans, providers, and coverage information on the marketplace.'
+servers:
+- url: https://marketplace.api.healthcare.gov/api/v1
+security:
+- API Key: []
+tags:
+- name: API Reference
+  description: Information about the state of Marketplace API.
+paths:
+  /versions:
+    x-summary: API Version Info
+    get:
+      tags:
+      - API Reference
+      parameters:
+      - $ref: '#/components/parameters/apikey'
+      description: Get the last updated date for various data sets
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DataVersion'
+      summary: Get versions
+      x-summary-source: derived
+      operationId: getVersions
+      x-operation-id-source: derived
+  /market-years:
+    x-summary: Current and supported market years
+    get:
+      tags:
+      - API Reference
+      parameters:
+      - $ref: '#/components/parameters/apikey'
+      description: Get the current and supported market years
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarketYears'
+      summary: Get market years
+      x-summary-source: derived
+      operationId: getMarketYears
+      x-operation-id-source: derived
+components:
+  schemas:
+    MarketYear:
+      type: number
+    MarketYears:
+      description: Current and supported market years
+      type: object
+      properties:
+        current:
+          description: Current market year
+          type: number
+        supported:
+          description: Supported market years
+          type: array
+          items:
+            $ref: '#/components/schemas/MarketYear'
+    DataVersion:
+      type: object
+      properties:
+        name:
+          type: string
+        updated:
+          type: string
+          description: iso-8601 date
+  parameters:
+    apikey:
+      name: apikey
+      description: API key used for authentication
+      in: query
+      required: true
+      x-example: d687412e7b53146b2631dc01974ad0a4
+      schema:
+        type: string
+  securitySchemes:
+    API_Key:
+      x-summary: API Key Auth
+      description: Your API key should be included as a query parameter with the request. You can [fill out this form](https://cms.gov1.qualtrics.com/jfe/form/SV_4N2GHCJfNuX7n8x) to request an API key.
+      type: apiKey
+      in: query
+      name: apikey
+      x-example: d687412e7b53146b2631dc01974ad0a4

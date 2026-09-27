@@ -1,0 +1,530 @@
+openapi: 3.2.0
+info:
+  title: Marketplace Provider & Drug Coverage API
+  version: '1'
+  description: '# About
+
+
+    The Marketplace API delivers data that helps users find and evaluate health care insurance plans, providers, and coverage information on the marketplace.'
+servers:
+- url: https://marketplace.api.healthcare.gov/api/v1
+security:
+- API Key: []
+tags:
+- name: Provider & Drug Coverage
+  description: Lookup information on providers, drugs, and what is covered under what plans.
+paths:
+  /drugs/autocomplete:
+    x-summary: Drugs Autocomplete
+    get:
+      tags:
+      - Provider & Drug Coverage
+      description: Search prescription drugs
+      parameters:
+      - $ref: '#/components/parameters/apikey'
+      - $ref: '#/components/parameters/year-with-default'
+      - description: name of drug to search for (minimum 3 chars)
+        in: query
+        name: q
+        required: true
+        x-example: ibuprof
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  drugs:
+                    items:
+                      $ref: '#/components/schemas/Drug'
+                    type: array
+                type: object
+      summary: Autocomplete drugs by name
+      operationId: getDrugsAutocomplete
+      x-operation-id-source: derived
+  /drugs/search:
+    x-summary: Drugs Search
+    get:
+      tags:
+      - Provider & Drug Coverage
+      parameters:
+      - $ref: '#/components/parameters/apikey'
+      - $ref: '#/components/parameters/year-with-default'
+      - description: name of drug to search for
+        in: query
+        name: q
+        required: true
+        x-example: ibuprofen
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  drugs:
+                    items:
+                      $ref: '#/components/schemas/Drug'
+                    type: array
+                  next:
+                    description: URL of next page of results, if any
+                    type: string
+                  prev:
+                    description: URL of previous page of results, if any
+                    type: string
+                type: object
+      summary: Search prescription drugs
+      operationId: getDrugsSearch
+      x-operation-id-source: derived
+  /drugs/covered:
+    x-summary: Drug Coverage
+    get:
+      tags:
+      - Provider & Drug Coverage
+      summary: Get a list of whether drugs are covered by plans
+      parameters:
+      - $ref: '#/components/parameters/apikey'
+      - $ref: '#/components/parameters/year-with-default'
+      - description: array of drug RxCUIs
+        in: query
+        name: drugs
+        required: true
+        x-example: '1049589'
+        schema:
+          type: string
+      - description: array of plan IDs
+        in: query
+        name: planids
+        required: true
+        x-example: 11512NC0100031
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  Provider & Drug Coverage:
+                    items:
+                      $ref: '#/components/schemas/DrugCoverage'
+                    type: array
+                type: object
+      operationId: getDrugsCovered
+      x-operation-id-source: derived
+  /coverage/stats:
+    x-summary: Coverage Stats
+    get:
+      tags:
+      - Provider & Drug Coverage
+      parameters:
+      - $ref: '#/components/parameters/apikey'
+      description: Return statistics related to the number of coverage (drugs and providers) records.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  issuers:
+                    type: integer
+                  drugs:
+                    type: integer
+                  providers:
+                    type: integer
+                  providers_plans:
+                    type: integer
+                  drugs_plans:
+                    type: integer
+                  last_refreshed_at:
+                    type: string
+                type: object
+      summary: Coverage statistics
+      operationId: getCoverageStats
+      x-operation-id-source: derived
+  /coverage/search:
+    x-summary: Coverage Search
+    get:
+      tags:
+      - Provider & Drug Coverage
+      parameters:
+      - $ref: '#/components/parameters/apikey'
+      - description: search query
+        in: query
+        name: q
+        required: true
+        x-example: hospital
+        schema:
+          type: string
+      - description: User's ZIP Code for searching nearby
+        in: query
+        name: zipcode
+        required: true
+        x-example: '19123'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  providers:
+                    items:
+                      $ref: '#/components/schemas/NearbyProvider'
+                    type: array
+                  drugs:
+                    items:
+                      $ref: '#/components/schemas/Drug'
+                    type: array
+                type: object
+                required:
+                - providers
+                - drugs
+      summary: Search providers
+      operationId: getCoverageSearch
+      x-operation-id-source: derived
+  /providers/autocomplete:
+    x-summary: Provider Autocomplete
+    get:
+      tags:
+      - Provider & Drug Coverage
+      parameters:
+      - $ref: '#/components/parameters/apikey'
+      - description: search query (minimum 3 characters)
+        in: query
+        name: q
+        required: true
+        x-example: hospital
+        schema:
+          type: string
+      - description: 5-digit US zipcode
+        in: query
+        name: zipcode
+        required: true
+        x-example: '19123'
+        schema:
+          type: string
+      - description: Provider type, comma separated to specify multiple
+        in: query
+        required: true
+        name: type
+        x-example: Facility
+        schema:
+          type: string
+          enum:
+          - Individual
+          - Facility
+          - Group
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  providers:
+                    items:
+                      $ref: '#/components/schemas/Provider'
+                    type: array
+      summary: Autocomplete nearby providers
+      operationId: getProvidersAutocomplete
+      x-operation-id-source: derived
+  /providers/search:
+    x-summary: Provider Search
+    get:
+      tags:
+      - Provider & Drug Coverage
+      parameters:
+      - $ref: '#/components/parameters/apikey'
+      - $ref: '#/components/parameters/year-with-default'
+      - description: search query
+        in: query
+        name: q
+        required: true
+        x-example: hospital
+        schema:
+          type: string
+      - description: User's ZIP Code for searching nearby
+        in: query
+        name: zipcode
+        required: true
+        x-example: '19123'
+        schema:
+          type: string
+      - in: query
+        name: type
+        description: Provider type, comma separated to specify multiple
+        required: true
+        x-example: Facility
+        schema:
+          type: string
+          enum:
+          - Individual
+          - Facility
+      - in: query
+        name: specialty
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  next:
+                    description: URL of next page of results, if any
+                    type: string
+                  prev:
+                    description: URL of previous page of results, if any
+                    type: string
+                  providers:
+                    items:
+                      $ref: '#/components/schemas/NearbyProvider'
+                    type: array
+                type: object
+                required:
+                - providers
+      summary: Search providers
+      operationId: getProvidersSearch
+      x-operation-id-source: derived
+  /providers/covered:
+    x-summary: Provider Coverage
+    get:
+      tags:
+      - Provider & Drug Coverage
+      parameters:
+      - $ref: '#/components/parameters/apikey'
+      - description: array of provider NPIs
+        in: query
+        name: providerids
+        required: true
+        x-example: '1407884893'
+        schema:
+          type: string
+      - description: array of plan IDs
+        in: query
+        name: planids
+        required: true
+        x-example: 83761GA0040002
+        schema:
+          type: string
+      - $ref: '#/components/parameters/year-with-default'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  Provider & Drug Coverage:
+                    items:
+                      $ref: '#/components/schemas/ProviderCoverage'
+                    type: array
+                type: object
+      summary: Get a list of whether a set of providers are covered by given plans
+      operationId: getProvidersCovered
+      x-operation-id-source: derived
+components:
+  schemas:
+    RxCUI:
+      type: string
+      pattern: ^[0-9]+$
+      properties: {}
+    Coverage:
+      type: string
+      enum:
+      - Covered
+      - NotCovered
+      - DataNotProvided
+      - GenericCovered
+      properties: {}
+    Provider:
+      properties:
+        name:
+          type: string
+        gender:
+          $ref: '#/components/schemas/ProviderGenderEnum'
+        specialties:
+          type: array
+          items:
+            type: string
+        type:
+          $ref: '#/components/schemas/ProviderTypeEnum'
+        accepting:
+          type: string
+          enum:
+          - accepting
+          - not accepting
+          - accepting in some locations
+          - unknown
+        npi:
+          type: string
+          pattern: ^[0-9]{10}$
+          title: National Provider Identifier
+        languages:
+          type: array
+          items:
+            type: string
+        facility_types:
+          type: array
+          items:
+            type: string
+          description: If provider is a facility, this is a list of the applicable facility types
+        taxonomy:
+          type: string
+          description: provider taxonomy from National Uniform Claim Committee
+      type: object
+      required:
+      - name
+      - type
+      - npi
+    DrugCoverage:
+      properties:
+        rxcui:
+          $ref: '#/components/schemas/RxCUI'
+        plan_id:
+          $ref: '#/components/schemas/PlanID'
+        coverage:
+          $ref: '#/components/schemas/Coverage'
+        generic_rxcui:
+          type: string
+          description: The RxCUI for the generic equivalent of the given drug
+    Address:
+      properties:
+        city:
+          type: string
+        state:
+          type: string
+        street_1:
+          type: string
+        street_2:
+          type: string
+        zipcode:
+          type: string
+        countyfips:
+          description: 5-digit county FIPS code
+          type: string
+      type: object
+    PlanID:
+      type: string
+      pattern: ^[0-9]{5}[A-Z]{2}[0-9]{7}$
+      properties: {}
+    NearbyProvider:
+      properties:
+        provider:
+          $ref: '#/components/schemas/Provider'
+        address:
+          $ref: '#/components/schemas/Address'
+        distance:
+          type: number
+          minimum: 0
+          title: Distance in miles from address, eg., from a proximity search
+      type: object
+      required:
+      - provider
+      - distance
+    ProviderTypeEnum:
+      enum:
+      - Individual
+      - Facility
+      type: string
+      properties: {}
+    ProviderCoverage:
+      properties:
+        npi:
+          $ref: '#/components/schemas/NPI'
+        plan_id:
+          $ref: '#/components/schemas/PlanID'
+        coverage:
+          $ref: '#/components/schemas/Coverage'
+        addresses:
+          description: at which addresses this provider is covered by the plan, if any
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+        accepting:
+          type: string
+          enum:
+          - accepting
+          - not accepting
+          - accepting in some locations
+          - unknown
+    ProviderGenderEnum:
+      enum:
+      - Male
+      - Female
+      - Other
+      - Transgender-female
+      - Transgender-male
+      - Non-binary
+      - Non-disclose
+      type: string
+      properties: {}
+    Drug:
+      properties:
+        id:
+          description: drug ID
+          type: string
+          pattern: ^[0-9]{1,10}$
+        name:
+          description: normalized SAB=RXNORM name
+          type: string
+        rxcui:
+          $ref: '#/components/schemas/RxCUI'
+        strength:
+          description: strength information for this drug
+          type: string
+        route:
+          description: route information for this drug
+          type: string
+        full_name:
+          description: full name information for this drug
+          type: string
+        rxterms_dose_form:
+          description: rxtermsDoseForm value for this drug
+          type: string
+        rxnorm_dose_form:
+          description: rxnormDoseForm for this drug
+          type: string
+      type: object
+    NPI:
+      type: string
+      pattern: ^[0-9]{10}$
+      properties: {}
+  parameters:
+    apikey:
+      name: apikey
+      description: API key used for authentication
+      in: query
+      required: true
+      x-example: d687412e7b53146b2631dc01974ad0a4
+      schema:
+        type: string
+    year-with-default:
+      x-example: 2019
+      name: year
+      description: 4 digit market year (Defaults to the current year when not specified).
+      in: query
+      required: false
+      schema:
+        type: number
+        format: integer
+  securitySchemes:
+    API_Key:
+      x-summary: API Key Auth
+      description: Your API key should be included as a query parameter with the request. You can [fill out this form](https://cms.gov1.qualtrics.com/jfe/form/SV_4N2GHCJfNuX7n8x) to request an API key.
+      type: apiKey
+      in: query
+      name: apikey
+      x-example: d687412e7b53146b2631dc01974ad0a4

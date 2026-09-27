@@ -1,0 +1,1334 @@
+# x-archived-from: cms-insurance-plans-api-openapi.yml
+# x-archived-on: 2026-09-26
+openapi: 3.2.0
+info:
+  title: Marketplace Insurance Plans API
+  version: '1'
+  description: '# About
+
+
+    The Marketplace API delivers data that helps users find and evaluate health care insurance plans, providers, and coverage information on the marketplace.'
+servers:
+- url: https://marketplace.api.healthcare.gov/api/v1
+security:
+- API Key: []
+tags:
+- name: Insurance Plans
+  description: Data on both health and dental insurance plans.
+paths:
+  /crosswalk:
+    x-summary: Plan Crosswalk
+    get:
+      tags:
+      - Insurance Plans
+      description: Crosswalk a previous year plan to the next year's plan
+      parameters:
+      - $ref: '#/components/parameters/apikey'
+      - description: Previous year
+        in: query
+        name: year
+        required: true
+        x-example: 2018
+        schema:
+          type: number
+          format: integer
+      - description: Previous year plan ID
+        in: query
+        name: plan_id
+        required: true
+        x-example: 53882IL0040002
+        schema:
+          type: string
+      - description: State abbreviation
+        in: query
+        name: state
+        required: true
+        x-example: IL
+        schema:
+          type: string
+      - description: ZIP Code
+        in: query
+        name: zipcode
+        required: true
+        x-example: '60647'
+        schema:
+          type: string
+      - description: FIPS code
+        in: query
+        name: fips
+        required: true
+        x-example: '17031'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  new_plan_id:
+                    description: the crosswalked plan id for the next year
+                    type: string
+                  level:
+                    description: the level code for the crosswalked plan
+                    type: string
+                  reason:
+                    description: the reason code for the crosswalked plan
+                    type: string
+                type: object
+      summary: Crosswalk a previous year plan
+      operationId: getCrosswalk
+      x-operation-id-source: derived
+  /plans:
+    x-summary: Multi Plan Details
+    post:
+      tags:
+      - Insurance Plans
+      description: '#### Note
+
+        Use this JSON example in the **POST** Body in the request pane to view results
+
+        ```
+
+        {
+
+        "household": {
+
+        "income": 20000,
+
+        "people": [
+
+        {
+
+        "age": 34,
+
+        "is_pregnant": false,
+
+        "is_parent": false,
+
+        "uses_tobacco": false,
+
+        "gender": "Male"
+
+        }
+
+        ],
+
+        "has_married_couple": false
+
+        },
+
+        "place": {
+
+        "countyfips": "51107",
+
+        "state": "VA",
+
+        "zipcode": "20103"
+
+        },
+
+        "market": "Individual",
+
+        "plan_ids": [
+
+        "11512NC0100031"
+
+        ],
+
+        "year": 2019,
+
+        "aptc_override": 100,
+
+        "csr_override": "CSR73",
+
+        "catastrophic_override": true
+
+        }
+
+        ```
+
+        Get details on multiple plans, typically for plan comparison.'
+      parameters:
+      - $ref: '#/components/parameters/apikey'
+      - $ref: '#/components/parameters/year-with-default'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  plans:
+                    items:
+                      $ref: '#/components/schemas/Plan'
+                    type: array
+                type: object
+      summary: Get multiple plans
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                household:
+                  $ref: '#/components/schemas/Household'
+                place:
+                  $ref: '#/components/schemas/Place'
+                market:
+                  $ref: '#/components/schemas/MarketEnum'
+                plan_ids:
+                  description: 14-character HIOS IDs
+                  items:
+                    type: string
+                  type: array
+                year:
+                  format: integer
+                  type: number
+                aptc_override:
+                  description: override the aptc calculation with a specific amount
+                  type: number
+                csr_override:
+                  $ref: '#/components/schemas/CSRRequestEnum'
+                catastrophic_override:
+                  description: Force the display (or suppression) of catastrophic plans
+                  type: boolean
+              required:
+              - place
+              - plan_ids
+              type: object
+        required: true
+      operationId: postPlans
+      x-operation-id-source: derived
+  /plans/search:
+    x-summary: Plan Search
+    post:
+      tags:
+      - Insurance Plans
+      summary: Search for insurance plans
+      description: '#### Note
+
+        Use this JSON example in the **POST** Body in the request pane to view results:
+
+        ```
+
+        {
+
+        "household": {
+
+        "income": 42000,
+
+        "people": [
+
+        {
+
+        "aptc_eligible": true,
+
+        "dob": "1992-01-01",
+
+        "has_mec": false,
+
+        "is_pregnant": false,
+
+        "is_parent": false,
+
+        "uses_tobacco": false,
+
+        "gender": "Male",
+
+        "utilization_level": "Low"
+
+        }
+
+        ],
+
+        "has_married_couple": false
+
+        },
+
+        "market": "Individual",
+
+        "place": {
+
+        "countyfips": "17031",
+
+        "state": "IL",
+
+        "zipcode": "60647"
+
+        },
+
+        "limit": 10,
+
+        "offset": 0,
+
+        "order": "asc",
+
+        "year": 2020
+
+        }
+
+        ```
+
+        Search insurance plans. Each plan object has only the “top” expanded
+
+        Benefit objects in benefits array (ER visit, generic RX, specialist
+
+        visit, primary care visit, dental coverage) - to get other benefits, call the Plan Details API endpoint; for moops and deductibles, only the in-network and
+
+        combined in-out of network tiers are available, other tiers are not
+
+        currently supported.
+
+
+        This API is paged. Ten results are returned for each query, and
+
+        the total amount of results that match your query is available as the
+
+        `total` attribute on the result. Use the `offset` parameter to get
+
+        results beyond the first page.
+
+        Including the `current_enrollment` property implies a CIC type enrollment is being performed. The `current_enrollment` object is used to provide their current plan id and the tobacco rating they had originally upon enrollment of that plan. This will be used as their tobacco status for the purposes of calculating the premium for their enrolled plan. All other plans will use the persons top level tobacco usage as a basis of rate calculations.'
+      parameters:
+      - $ref: '#/components/parameters/apikey'
+      - $ref: '#/components/parameters/year-with-default'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  plans:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Plan'
+                  total:
+                    type: number
+                  facet_groups:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        facets:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              value:
+                                type: string
+                              count:
+                                type: number
+                  rate_area:
+                    $ref: '#/components/schemas/RateArea'
+                  ranges:
+                    description: The lowest and highest values of premiums and deductibles of all the included plans are calculated and returned here. Premiums range is calculated from the premium_w_credit field
+                    type: object
+                    properties:
+                      premiums:
+                        $ref: '#/components/schemas/Range'
+                      deductibles:
+                        $ref: '#/components/schemas/Range'
+                type: object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlanSearchRequest'
+        required: true
+      operationId: postPlansSearch
+      x-operation-id-source: derived
+  /plans/search/stats:
+    x-summary: Plan Search Stats
+    post:
+      tags:
+      - Insurance Plans
+      summary: Retrieve stats on groups of insurance plans
+      description: '#### Note
+
+        Use this JSON example in the **POST** Body in the request pane to view results:
+
+        ```
+
+        {
+
+        "household": {
+
+        "income": 52000,
+
+        "people": [
+
+        {
+
+        "dob": "1992-01-01",
+
+        "aptc_eligible": true,
+
+        "gender": "Female",
+
+        "uses_tobacco": false
+
+        }
+
+        ]
+
+        },
+
+        "market": "Individual",
+
+        "place": {
+
+        "countyfips": "37057",
+
+        "state": "NC",
+
+        "zipcode": "27360"
+
+        },
+
+        "year": 2019
+
+        }
+
+        ```
+
+        Retrieve stats (avg premium, oopc, etc) on a group of insurance plans. The input is identical to /plans/search, but the return value does not contain any actual plan data.'
+      parameters:
+      - $ref: '#/components/parameters/apikey'
+      - $ref: '#/components/parameters/year-with-default'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    metal_level:
+                      $ref: '#/components/schemas/MetalLevelEnum'
+                    total:
+                      type: number
+                    simple_choice:
+                      description: The number of simple choice plans available
+                      type: number
+                    premiums:
+                      type: object
+                      properties:
+                        min:
+                          type: number
+                        max:
+                          type: number
+                        mean:
+                          type: number
+                    oopc:
+                      type: object
+                      properties:
+                        min:
+                          type: number
+                        max:
+                          type: number
+                        mean:
+                          type: number
+                    quality_ratings:
+                      type: object
+                      description: Quality ratings will not always be available
+                      properties:
+                        five_star_rating:
+                          type: number
+                        four_star_rating:
+                          type: number
+                        three_star_rating:
+                          type: number
+                        two_star_rating:
+                          type: number
+                        one_star_rating:
+                          type: number
+                example:
+                - metal_level: Catastrophic
+                  total: 1
+                  simple_choice: 0
+                  premiums:
+                    min: 302.29
+                    max: 302.29
+                    mean: 302.29
+                  oopc:
+                    min: -1
+                    max: 0
+                    mean: -1
+                  quality_ratings:
+                    five_star_rating: 0
+                    four_star_rating: 0
+                    three_star_rating: 0
+                    two_star_rating: 0
+                    one_star_rating: 0
+                - metal_level: Bronze
+                  total: 5
+                  simple_choice: 0
+                  premiums:
+                    min: 358.32
+                    max: 466.6
+                    mean: 413.1
+                  oopc:
+                    min: -1
+                    max: 0
+                    mean: -1
+                  quality_ratings:
+                    five_star_rating: 0
+                    four_star_rating: 0
+                    three_star_rating: 0
+                    two_star_rating: 0
+                    one_star_rating: 0
+                - metal_level: Silver
+                  total: 3
+                  simple_choice: 0
+                  premiums:
+                    min: 491.63
+                    max: 564.6
+                    mean: 520.64
+                  oopc:
+                    min: -1
+                    max: 0
+                    mean: -1
+                  quality_ratings:
+                    five_star_rating: 0
+                    four_star_rating: 0
+                    three_star_rating: 0
+                    two_star_rating: 0
+                    one_star_rating: 0
+                - metal_level: Gold
+                  total: 2
+                  simple_choice: 0
+                  premiums:
+                    min: 463.5
+                    max: 517.18
+                    mean: 490.34
+                  oopc:
+                    min: -1
+                    max: 0
+                    mean: -1
+                  quality_ratings:
+                    five_star_rating: 0
+                    four_star_rating: 0
+                    three_star_rating: 0
+                    two_star_rating: 0
+                    one_star_rating: 0
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlanSearchRequest'
+        required: true
+      operationId: postPlansSearchStats
+      x-operation-id-source: derived
+  /plans/{plan_id}:
+    x-summary: Plan Details
+    get:
+      tags:
+      - Insurance Plans
+      description: Get a plan's basic details, no premium or APTC calculated.
+      parameters:
+      - $ref: '#/components/parameters/apikey'
+      - $ref: '#/components/parameters/year-with-default'
+      - description: 14-character HIOS plan ID
+        in: path
+        name: plan_id
+        required: true
+        x-example: 11512NC0100031
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  plan:
+                    $ref: '#/components/schemas/Plan'
+                type: object
+      summary: Get a plan
+      operationId: getPlansByPlanId
+      x-operation-id-source: derived
+  /plans/{plan_id}/quality-ratings:
+    x-summary: Quality Ratings
+    get:
+      tags:
+      - Insurance Plans
+      description: Quality ratings for a plan. If a rating value is missing or is 0, then the rating is considered 'Not Rated' and the corresponding reason value will indicate the reason for the non-rating.
+      parameters:
+      - $ref: '#/components/parameters/apikey'
+      - $ref: '#/components/parameters/year-required'
+      - description: Plan ID
+        in: path
+        name: plan_id
+        required: true
+        x-example: 95185VA0530001
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                properties:
+                  quality_rating:
+                    $ref: '#/components/schemas/QualityRating'
+                type: object
+      summary: Get plans by plan id quality ratings
+      x-summary-source: derived
+      operationId: getPlansByPlanIdQualityRatings
+      x-operation-id-source: derived
+components:
+  schemas:
+    Relationship:
+      description: Should match one of the [listed valid relationships](#introduction/more-information-about-households).
+      type: string
+      properties: {}
+    MarketEnum:
+      enum:
+      - Individual
+      - SHOP
+      - Any
+      type: string
+      properties: {}
+    ProductDivisionEnum:
+      enum:
+      - HealthCare
+      - Dental
+      type: string
+    CSRRequestEnum:
+      type: string
+      description: Cost-sharing reduction (CSR) override for requests
+      enum:
+      - CSR73
+      - CSR87
+      - CSR94
+      - LimitedCSR
+      - ZeroCSR
+    Range:
+      properties:
+        min:
+          format: float
+          type: number
+        max:
+          format: float
+          type: number
+      type: object
+    Deductible:
+      properties:
+        amount:
+          type: number
+        csr:
+          $ref: '#/components/schemas/CostSharingReductionEnum'
+        family_cost:
+          $ref: '#/components/schemas/FamilyCostEnum'
+        network_tier:
+          $ref: '#/components/schemas/NetworkTierEnum'
+        type:
+          enum:
+          - Medical EHB Deductible
+          - Combined Medical and Drug EHB Deductible
+          - Drug EHB Deductible
+          type: string
+        individual:
+          description: Applies to individuals
+          type: boolean
+        family:
+          description: Applies to families
+          type: boolean
+        display_string:
+          type: string
+          description: An optional human-readable description
+      type: object
+    CertificationStatus:
+      type: string
+      enum:
+      - Certified
+      - Not Certified
+      - Decertified
+      - Certified Off-Exchange SADP
+    SBCScenario:
+      type: object
+      properties:
+        deductible:
+          type: number
+          format: float
+        copay:
+          type: number
+          format: float
+        coinsurance:
+          type: number
+          format: float
+        limit:
+          type: number
+          format: float
+    Household:
+      description: If a household is not included, will default to Individual household
+      properties:
+        income:
+          description: household's yearly income in dollars
+          format: float
+          type: number
+        unemployment_received:
+          description: Specifies whether a tax payer or tax dependent in the household received unemployment benefits for market year 2021. May affect ATPC and CSR calulations due to income percentage capping if income is above 133% of the Federal poverty level. If the person who received unemployment is a tax dependent, only the eligible CSRs will be affected. Defaults to None
+          enum:
+          - Adult
+          - Dependent
+          - None
+          type: string
+        people:
+          description: people in household applying for coverage/seeking eligibility esimate; first is considered the subscriber
+          items:
+            $ref: '#/components/schemas/Person'
+          type: array
+        has_married_couple:
+          type: boolean
+        effective_date:
+          description: The effective date of the application (YYYY-MM-DD)
+          type: string
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+      example:
+        income: 20000
+        people:
+        - age: 34
+          dob: '1984-01-06'
+          is_pregnant: false
+          is_parent: false
+          uses_tobacco: false
+          gender: Male
+        has_married_couple: false
+      type: object
+    Plan:
+      properties:
+        id:
+          description: 14-character HIOS plan ID
+          type: string
+        name:
+          description: Name of the insurance plan
+          type: string
+        benefits:
+          items:
+            $ref: '#/components/schemas/Benefit'
+          type: array
+        deductibles:
+          items:
+            $ref: '#/components/schemas/Deductible'
+          type: array
+        disease_mgmt_programs:
+          items:
+            $ref: '#/components/schemas/DiseaseMgmtProgramsEnum'
+          type: array
+        has_national_network:
+          description: if plan has a national network of providers
+          type: boolean
+        quality_rating:
+          $ref: '#/components/schemas/QualityRating'
+        insurance_market:
+          $ref: '#/components/schemas/InsuranceMarketEnum'
+        issuer:
+          $ref: '#/components/schemas/Issuer'
+        market:
+          $ref: '#/components/schemas/MarketEnum'
+        max_age_child:
+          description: the maximum age a person is considered a child on their parents' plan
+          format: int32
+          type: number
+        metal_level:
+          $ref: '#/components/schemas/MetalLevelEnum'
+        moops:
+          items:
+            $ref: '#/components/schemas/MOOP'
+          type: array
+        premium:
+          description: monthly premium in US dollars, unsubsidized (i.e., no APTC applied)
+          format: float
+          type: number
+        premium_w_credit:
+          description: monthly premium in US dollars, with APTC applied
+          format: float
+          type: number
+        ehb_premium:
+          description: monthly premium in US dollars, for essential health benefits portion of total premium
+          format: float
+          type: number
+        pediatric_ehb_premium:
+          description: monthly pediatric portion of the ehb premium in US dollars
+          type: number
+          format: float
+        aptc_eligible_premium:
+          description: the portion of the premium that is eligible for APTC
+          type: number
+          format: float
+        guaranteed_rate:
+          description: true if the premiums are guaranteed (versus estimated)
+          type: boolean
+        simple_choice:
+          description: true if the plan is a Simple Choice plan
+          type: boolean
+        product_division:
+          $ref: '#/components/schemas/ProductDivisionEnum'
+        specialist_referral_required:
+          type: boolean
+        state:
+          description: 2-letter USPS state abbreviation
+          type: string
+        type:
+          $ref: '#/components/schemas/PlanTypeEnum'
+        benefits_url:
+          type: string
+        brochure_url:
+          type: string
+        formulary_url:
+          type: string
+        network_url:
+          type: string
+        hsa_eligible:
+          description: Is this plan eligible as an HSA?
+          type: boolean
+        oopc:
+          description: out-of-pocket cost; calculated when age, gender and utilization_level are present, otherwise -1
+          type: number
+        suppression_state:
+          $ref: '#/components/schemas/SuppressionStatus'
+        tobacco_lookback:
+          type: integer
+        certification:
+          $ref: '#/components/schemas/CertificationStatus'
+        network_adequacy:
+          description: Network adequacy
+          type: object
+          properties:
+            scope:
+              description: The county for which the network adequacy is in scope
+              type: string
+            networks:
+              description: Specialty networks and their network types
+              type: object
+        sbcs:
+          description: Summary of benefits and costs
+          type: object
+          properties:
+            baby:
+              description: Typical yearly costs for having a healthy pregnancy and normal delivery for one person
+              allOf:
+              - $ref: '#/components/schemas/SBCScenario'
+            diabetes:
+              description: Typical yearly costs for managing type 2 diabetes for one person
+              allOf:
+              - $ref: '#/components/schemas/SBCScenario'
+            fracture:
+              description: Typical yearly costs for treating a simple fracture
+              allOf:
+              - $ref: '#/components/schemas/SBCScenario'
+        rx_3mo_mail_order:
+          description: 3-month in-network mail order pharmacy benefit
+          type: boolean
+        is_ineligible:
+          description: If the given enrollment group/household is ineligible for the plan by business rules, it will be flagged true
+          type: boolean
+        covers_nonhyde_abortion:
+          type: boolean
+        service_area_id:
+          description: 6-character id representing the geographic area the plan accepts members from.  The first two characters are the state's abbreviation.
+          type: string
+      type: object
+    CostSharingReductionEnum:
+      type: string
+      description: Cost-sharing reduction (CSR)
+      enum:
+      - Exchange variant (no CSR)
+      - Zero Cost Sharing Plan Variation
+      - Limited Cost Sharing Plan Variation
+      - 73% AV Level Silver Plan CSR
+      - 87% AV Level Silver Plan CSR
+      - 94% AV Level Silver Plan CSR
+      - Non-Exchange variant
+      - Unknown CSR
+      properties: {}
+    CurrentEnrollment:
+      description: Current/existing enrollment information used to determine tobacco status for CiC enrollments. This will ensure rate calculation is done correctly.
+      required:
+      - plan_id
+      - effective_date
+      - uses_tobacco
+      properties:
+        plan_id:
+          $ref: '#/components/schemas/PlanID'
+        effective_date:
+          description: Date plan went into effect (ISO-8601 YYYY-MM-DD)
+          type: string
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+          x-example: '2020-01-01'
+        uses_tobacco:
+          type: boolean
+      type: object
+    CostSharing:
+      properties:
+        coinsurance_options:
+          type: string
+        coinsurance_rate:
+          format: float
+          type: number
+        copay_amount:
+          type: number
+        copay_options:
+          type: string
+        network_tier:
+          $ref: '#/components/schemas/NetworkTierEnum'
+        csr:
+          $ref: '#/components/schemas/CostSharingReductionEnum'
+        display_string:
+          type: string
+      type: object
+    DiseaseMgmtProgramsEnum:
+      enum:
+      - Asthma
+      - Heart Disease
+      - Depression
+      - Diabetes
+      - High Blood Pressure and High Cholesterol
+      - Low Back Pain
+      - Pain Management
+      - Pregnancy
+      - Weight Loss Programs
+      type: string
+      properties: {}
+    PlanSearchFilter:
+      description: plan search filter
+      properties:
+        disease_mgmt_programs:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiseaseMgmtProgramsEnum'
+        division:
+          $ref: '#/components/schemas/ProductDivisionEnum'
+        issuer:
+          description: Issuer name
+          type: string
+        issuers:
+          description: A List of Issuers names
+          type: array
+          items:
+            type: string
+        metal_levels:
+          description: A list of Metalic Levels
+          type: array
+          items:
+            $ref: '#/components/schemas/MetalLevelEnum'
+        metal_level:
+          $ref: '#/components/schemas/MetalLevelEnum'
+        metal_design_types:
+          description: A list of Plan Design Type / Metalic Level Combinations
+          type: array
+          items:
+            $ref: '#/components/schemas/MetalDesignType'
+        design_types:
+          description: A list of Plan Design Types
+          type: array
+          items:
+            $ref: '#/components/schemas/DesignTypeEnum'
+        premium:
+          type: number
+        type:
+          $ref: '#/components/schemas/PlanTypeEnum'
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlanTypeEnum'
+          description: a list of plan types
+        deductible:
+          type: number
+        hsa:
+          description: HSA eligibilty
+          type: boolean
+        oopc:
+          description: Out of Pocket Costs
+          type: number
+        child_dental_coverage:
+          description: Only show plans with child dental coverage
+          type: boolean
+        adult_dental_coverage:
+          description: Only show plans with adult dental coverage
+          type: boolean
+        drugs:
+          description: A list of RXCUIs
+          type: array
+          items:
+            type: string
+            pattern: ^[0-9]{5,7}$
+        providers:
+          description: A list of NPIs
+          type: array
+          items:
+            type: string
+            pattern: ^[0-9]{10}$
+        quality_rating:
+          description: Quality ratings for a plan
+          type: number
+        simple_choice:
+          type: boolean
+        premium_range:
+          $ref: '#/components/schemas/Range'
+        deductible_range:
+          $ref: '#/components/schemas/Range'
+      type: object
+    PlanSearchRequest:
+      properties:
+        filter:
+          $ref: '#/components/schemas/PlanSearchFilter'
+        household:
+          $ref: '#/components/schemas/Household'
+        offset:
+          type: number
+        order:
+          enum:
+          - asc
+          - desc
+          type: string
+        place:
+          $ref: '#/components/schemas/Place'
+        sort:
+          enum:
+          - premium
+          - deductible
+          - oopc
+          - total_costs
+          - quality_rating
+          type: string
+        year:
+          description: defaults to current open enrollment year
+          x-example: 2019
+          type: number
+        market:
+          $ref: '#/components/schemas/MarketEnum'
+        aptc_override:
+          description: override the aptc calculation with a specific amount
+          type: number
+        csr_override:
+          $ref: '#/components/schemas/CSRRequestEnum'
+        catastrophic_override:
+          description: Force the display (or suppression) of catastrophic plans
+          type: boolean
+        suppressed_plan_ids:
+          $ref: '#/components/schemas/PlanIDList'
+      required:
+      - place
+      - market
+      type: object
+    PlanIDList:
+      items:
+        type: string
+        pattern: ^[0-9]{5}[A-Z]{2}[0-9]{7}(,[0-9]{5}[A-Z]{2}[0-9]{7})*$
+      type: array
+    GenderEnum:
+      enum:
+      - Male
+      - Female
+      type: string
+    Benefit:
+      properties:
+        name:
+          type: string
+        covered:
+          type: boolean
+        cost_sharings:
+          items:
+            $ref: '#/components/schemas/CostSharing'
+          type: array
+        explanation:
+          type: string
+        exclusions:
+          type: string
+        has_limits:
+          type: boolean
+        limit_unit:
+          type: string
+        limit_quantity:
+          format: integer
+          type: number
+      type: object
+    MOOP:
+      description: maximum out-of-pocket
+      properties:
+        amount:
+          type: number
+        csr:
+          $ref: '#/components/schemas/CostSharingReductionEnum'
+        family_cost:
+          type: string
+          enum:
+          - Individual
+          - Family
+          - Family Per Person
+        network_tier:
+          $ref: '#/components/schemas/NetworkTierEnum'
+        type:
+          enum:
+          - Maximum Out of Pocket for Medical and Drug EHB Benefits (Total)
+          - Maximum Out of Pocket for Medical EHB Benefits
+          - Maximum Out of Pocket for Drug EHB Benefits
+          type: string
+        individual:
+          description: Applies to individuals
+          type: boolean
+        family:
+          description: Applies to families
+          type: boolean
+        display_string:
+          type: string
+          description: An optional human-readable description
+      type: object
+    PlanID:
+      type: string
+      pattern: ^[0-9]{5}[A-Z]{2}[0-9]{7}$
+      properties: {}
+    Person:
+      properties:
+        age:
+          format: integer
+          type: number
+          description: required if dob not provided
+        dob:
+          description: A person's date of birth (YYYY-MM-DD) required if age not provided
+          type: string
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+          x-example: '2020-01-01'
+        has_mec:
+          description: has minimum essential coverage
+          type: boolean
+        is_parent:
+          type: boolean
+        is_pregnant:
+          description: Indicates whether the individual is pregnant or not. If this is true and `pregnant_with` is not provided, `pregnant_with` is assumed to be 1.
+          type: boolean
+        pregnant_with:
+          description: The number of expected children from a pregnancy. If this value is > 0, `is_pregnant` is assumed to be true, even if specified otherwise.
+          type: number
+        uses_tobacco:
+          type: boolean
+        last_tobacco_use_date:
+          description: The last date of regular tobacco use (YYYY-MM-DD)
+          type: string
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+        gender:
+          $ref: '#/components/schemas/GenderEnum'
+        utilization_level:
+          $ref: '#/components/schemas/UtilizationEnum'
+        relationship:
+          $ref: '#/components/schemas/Relationship'
+        does_not_cohabitate:
+          type: boolean
+        aptc_eligible:
+          description: is the given person eligible for APTC
+          type: boolean
+        current_enrollment:
+          $ref: '#/components/schemas/CurrentEnrollment'
+      type: object
+      required:
+      - age
+      - dob
+    RateArea:
+      properties:
+        state:
+          description: 2-letter USPS abbreviation
+          type: string
+        area:
+          description: Rate area number for the given state.
+          type: integer
+      type: object
+      example:
+        state: LA
+        area: 7
+    QualityRating:
+      properties:
+        available:
+          type: boolean
+          description: True if the plan has a quality rating, otherwise false.  A plan can still be unrated when the quality rating is available
+        year:
+          x-example: 2019
+          type: integer
+        global_rating:
+          type: integer
+          minimum: 0
+          maximum: 5
+        global_not_rated_reason:
+          type: string
+        clinical_quality_management_rating:
+          type: integer
+          minimum: 0
+          maximum: 5
+        clinical_quality_management_not_rated_reason:
+          type: string
+        enrollee_experience_rating:
+          type: integer
+          minimum: 0
+          maximum: 5
+        enrollee_experience_not_rated_reason:
+          type: string
+        plan_efficiency_rating:
+          type: integer
+          minimum: 0
+          maximum: 5
+        plan_efficiency_not_rated_reason:
+          type: string
+      type: object
+    InsuranceMarketEnum:
+      enum:
+      - QHP
+      - MSP
+      type: string
+      properties: {}
+    Place:
+      properties:
+        countyfips:
+          description: 5-digit county FIPS code
+          type: string
+        state:
+          description: 2-letter USPS state abbreviation
+          type: string
+        zipcode:
+          description: 5-digit ZIP Code
+          type: string
+      required:
+      - countyfips
+      - state
+      - zipcode
+      example:
+        countyfips: '51107'
+        state: VA
+        zipcode: '20103'
+      type: object
+    SuppressionStatus:
+      type: string
+      enum:
+      - Available
+      - Suspended
+      - Closed
+      - Not Applicable
+    UtilizationEnum:
+      enum:
+      - Low
+      - Medium
+      - High
+      type: string
+    DesignTypeEnum:
+      enum:
+      - DESIGN1
+      - DESIGN2
+      - DESIGN3
+      - DESIGN4
+      - DESIGN5
+      - NOT_APPLICABLE
+      type: string
+      properties: {}
+    PlanTypeEnum:
+      enum:
+      - Indemnity
+      - PPO
+      - HMO
+      - EPO
+      - POS
+      type: string
+    Issuer:
+      properties:
+        eligible_dependents:
+          description: list of allowed relationship types for dependents
+          items:
+            $ref: '#/components/schemas/Relationship'
+          type: array
+        id:
+          description: 5-digit HIOS ID
+          type: string
+        individual_url:
+          description: URL for individual market plans
+          type: string
+        name:
+          description: issuer's name
+          type: string
+        shop_url:
+          description: URL for SHOP market plans
+          type: string
+        state:
+          description: 2-letter USPS state abbreviation
+          type: string
+        toll_free:
+          description: toll-free customer service phone number
+          type: string
+        tty:
+          description: TTY customer service number)
+          type: string
+      type: object
+    MetalLevelEnum:
+      enum:
+      - Catastrophic
+      - Silver
+      - Bronze
+      - Gold
+      - Platinum
+      type: string
+      properties: {}
+    FamilyCostEnum:
+      description: family cost enumeration for MOOPs and deductibles
+      enum:
+      - Individual
+      - Family Per Person
+      - Family
+      type: string
+      properties: {}
+    MetalDesignType:
+      properties:
+        metal_level:
+          $ref: '#/components/schemas/MetalLevelEnum'
+        design_types:
+          items:
+            $ref: '#/components/schemas/DesignTypeEnum'
+          type: array
+    NetworkTierEnum:
+      enum:
+      - In-Network
+      - In-Network Tier 2
+      - Out-of-Network
+      - Combined In-Out of Network
+      type: string
+      properties: {}
+  parameters:
+    apikey:
+      name: apikey
+      description: API key used for authentication
+      in: query
+      required: true
+      x-example: d687412e7b53146b2631dc01974ad0a4
+      schema:
+        type: string
+    year-with-default:
+      x-example: 2019
+      name: year
+      description: 4 digit market year (Defaults to the current year when not specified).
+      in: query
+      required: false
+      schema:
+        type: number
+        format: integer
+    year-required:
+      x-example: 2019
+      name: year
+      description: 4 digit market year.
+      in: query
+      required: true
+      schema:
+        type: number
+        format: integer
+  securitySchemes:
+    API_Key:
+      x-summary: API Key Auth
+      description: Your API key should be included as a query parameter with the request. You can [fill out this form](https://cms.gov1.qualtrics.com/jfe/form/SV_4N2GHCJfNuX7n8x) to request an API key.
+      type: apiKey
+      in: query
+      name: apikey
+      x-example: d687412e7b53146b2631dc01974ad0a4

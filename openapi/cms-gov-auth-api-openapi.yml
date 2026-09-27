@@ -1,11 +1,8 @@
 openapi: 3.2.0
 info:
   title: Cms Gov Auth API
-  license:
-    name: Public Domain (U.S. Government Work)
-    url: https://www.usa.gov/government-works
   version: '1.0'
-  description: 'Operations tagged Auth across 2 of this provider''s published API definitions: cms-gov-blue-button-2-openapi.yml, cms-gov-dpc-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Auth across 3 of this provider''s published API definitions: cms-gov-blue-button-2-openapi.yml, cms-gov-dpc-openapi.yml, cms-auth-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.bluebutton.cms.gov/v2/fhir
   description: Production FHIR R4 endpoint
@@ -68,6 +65,79 @@ paths:
       description: Production
     - url: https://sandbox.dpc.cms.gov/api/v1
       description: Sandbox
+  /_auth:
+    get:
+      tags:
+      - Auth
+      summary: Get details about auth
+      description: Returns the auth provider that is currently being used. Note that this endpoint is **not** prefixed with the base path (e.g. /api/v1).
+      operationId: getAuthInfo
+      responses:
+        '200':
+          description: JSON object containing an auth_provider field
+          content:
+            application/json:
+              schema:
+                required:
+                - auth_provider
+                type: object
+                properties:
+                  auth_provider:
+                    type: string
+                    x-go-name: Version
+  /auth/token:
+    post:
+      tags:
+      - Auth
+      summary: Get access token
+      description: Verifies Basic authentication credentials, and returns a JWT bearer token that can be presented to the other API endpoints.
+      operationId: GetAuthToken
+      responses:
+        '200':
+          description: JSON with a valid JWT
+          content:
+            application/json:
+              schema:
+                required:
+                - access_token
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    x-go-name: AccessToken
+                  expires_in:
+                    type: string
+                    x-go-name: ExpiresIn
+                  token_type:
+                    type: string
+                    x-go-name: TokenType
+        '400':
+          description: Missing credentials
+          content: {}
+        '401':
+          description: Unauthorized. The provided credentials are invalid for the requested resource.
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+      security:
+      - basic_auth: []
+  /auth/welcome:
+    get:
+      tags:
+      - Auth
+      summary: Test authentication
+      description: If a valid token is presented, show a welcome message.
+      operationId: welcome
+      responses:
+        '200':
+          description: Welcome message
+          content: {}
+        '401':
+          description: Unauthorized. The provided credentials are invalid for the requested resource.
+          content: {}
+      security:
+      - bearer_token: []
 components:
   securitySchemes:
     OAuth2:
@@ -86,6 +156,15 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: DPC uses asymmetric SMART Backend Services authentication.
+    basic_auth:
+      type: http
+      scheme: basic
+    bearer_token:
+      type: apiKey
+      description: The Group and Patient endpoints require a Bearer Token. 1) Put your credentials in Basic Authentication, 2) Request a bearer token from /auth/token, 3) Put "Bearer {TOKEN}" in this field (no quotes) using the bearer token retrieved in step 2
+      name: Authorization
+      in: header
 x-refined-from:
 - cms-gov-blue-button-2-openapi.yml
 - cms-gov-dpc-openapi.yml
+- cms-auth-api-openapi.yml

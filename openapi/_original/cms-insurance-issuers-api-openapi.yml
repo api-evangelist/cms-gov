@@ -1,0 +1,159 @@
+# x-archived-from: cms-insurance-issuers-api-openapi.yml
+# x-archived-on: 2026-09-26
+openapi: 3.2.0
+info:
+  title: Marketplace Insurance Issuers API
+  version: '1'
+  description: '# About
+
+
+    The Marketplace API delivers data that helps users find and evaluate health care insurance plans, providers, and coverage information on the marketplace.'
+servers:
+- url: https://marketplace.api.healthcare.gov/api/v1
+security:
+- API Key: []
+tags:
+- name: Insurance Issuers
+  description: Data related to health insurance issuers on the marketplace.
+paths:
+  /issuers:
+    x-summary: List Issuers
+    get:
+      tags:
+      - Insurance Issuers
+      description: 'List issuers
+
+
+        This API is paged. Ten results are returned for each query, and
+
+        the total amount of results that match your query is available as the
+
+        `total` attribute on the result. Use the `offset` parameter to get
+
+        results beyond the first page.'
+      parameters:
+      - $ref: '#/components/parameters/apikey'
+      - $ref: '#/components/parameters/year-with-default'
+      - description: 2-letter USPS state abbreviation
+        in: query
+        name: state
+        required: false
+        x-example: VA
+        schema:
+          type: string
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+          default: 25
+      - in: query
+        name: offset
+        required: false
+        schema:
+          type: number
+          default: 0
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  issuers:
+                    items:
+                      $ref: '#/components/schemas/Issuer'
+                    type: array
+                type: object
+      summary: List issuers
+      operationId: getIssuers
+      x-operation-id-source: derived
+  /issuers/{issuer_id}:
+    x-summary: Get Issuer
+    get:
+      tags:
+      - Insurance Issuers
+      parameters:
+      - $ref: '#/components/parameters/apikey'
+      - $ref: '#/components/parameters/year-with-default'
+      - description: 5-digit HIOS issuer ID
+        in: path
+        name: issuer_id
+        required: true
+        x-example: '10191'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  issuer:
+                    $ref: '#/components/schemas/Issuer'
+                type: object
+      summary: Get issuer
+      operationId: getIssuersByIssuerId
+      x-operation-id-source: derived
+components:
+  parameters:
+    apikey:
+      name: apikey
+      description: API key used for authentication
+      in: query
+      required: true
+      x-example: d687412e7b53146b2631dc01974ad0a4
+      schema:
+        type: string
+    year-with-default:
+      x-example: 2019
+      name: year
+      description: 4 digit market year (Defaults to the current year when not specified).
+      in: query
+      required: false
+      schema:
+        type: number
+        format: integer
+  schemas:
+    Issuer:
+      properties:
+        eligible_dependents:
+          description: list of allowed relationship types for dependents
+          items:
+            $ref: '#/components/schemas/Relationship'
+          type: array
+        id:
+          description: 5-digit HIOS ID
+          type: string
+        individual_url:
+          description: URL for individual market plans
+          type: string
+        name:
+          description: issuer's name
+          type: string
+        shop_url:
+          description: URL for SHOP market plans
+          type: string
+        state:
+          description: 2-letter USPS state abbreviation
+          type: string
+        toll_free:
+          description: toll-free customer service phone number
+          type: string
+        tty:
+          description: TTY customer service number)
+          type: string
+      type: object
+    Relationship:
+      description: Should match one of the [listed valid relationships](#introduction/more-information-about-households).
+      type: string
+      properties: {}
+  securitySchemes:
+    API_Key:
+      x-summary: API Key Auth
+      description: Your API key should be included as a query parameter with the request. You can [fill out this form](https://cms.gov1.qualtrics.com/jfe/form/SV_4N2GHCJfNuX7n8x) to request an API key.
+      type: apiKey
+      in: query
+      name: apikey
+      x-example: d687412e7b53146b2631dc01974ad0a4

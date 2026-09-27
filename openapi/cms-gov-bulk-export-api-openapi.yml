@@ -293,7 +293,7 @@ paths:
       - BearerAuth: []
     delete:
       summary: Cancel Bulk Export Job
-      operationId: cancelJob
+      operationId: deleteJobsByJobId
       tags:
       - Bulk Export
       parameters:
@@ -307,6 +307,8 @@ paths:
           description: Job cancelled
       security:
       - BearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: cancelJob
     servers:
     - url: https://api.bcda.cms.gov/api/v2
       description: Production
@@ -337,7 +339,7 @@ paths:
   /Group/{id}/$export:
     get:
       summary: Group Bulk Export
-      operationId: exportGroup
+      operationId: getGroupById$export
       tags:
       - Bulk Export
       parameters:
@@ -367,6 +369,8 @@ paths:
           description: Accepted
       security:
       - MutualTLS: []
+      x-operation-id-source: normalized
+      x-operation-id-original: exportGroup
     servers:
     - url: https://prod.bfd.cms.gov/v2/fhir
       description: Production (peering only)
@@ -375,7 +379,7 @@ paths:
   /Jobs/{jobId}:
     get:
       summary: Get Export Job Status
-      operationId: getJob
+      operationId: getJobsByJobId
       tags:
       - Bulk Export
       parameters:
@@ -391,6 +395,8 @@ paths:
           description: Still processing
       security:
       - BearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: getJob
     servers:
     - url: https://api.dpc.cms.gov/api/v1
       description: Production

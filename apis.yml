@@ -1632,6 +1632,1291 @@ apis:
     url: https://www.cms.gov/medicare-coverage-database/
   - type: Documentation
     url: https://www.cms.gov/medicare-coverage-database/reports/reports.aspx
+- name: CMS Data at the Point of Care (DPC) API
+  description: >-
+    Provides Original Medicare claims data to fee-for-service Medicare providers in a structured, standardized
+    FHIR format at the point of care. Helps providers gain complete views of patient medical histories
+    to improve care coordination and reduce redundant testing.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://dpc.cms.gov/
+  baseURL: https://sandbox.dpc.cms.gov
+  tags:
+  - Medicare
+  - FHIR
+  - Providers
+  - Point of Care
+  - Claims Data
+  - Care Coordination
+  tags_raw:
+  - Medicare
+  - FHIR
+  - Provider
+  - Point of Care
+  - Claims Data
+  - Care Coordination
+  properties:
+  - type: CapabilityStatement
+    url: conformance/cms-dpc-capabilitystatement.json
+  - type: Documentation
+    url: https://dpc.cms.gov/docsV1
+  - type: Sandbox
+    url: https://sandbox.dpc.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/dpc-app
+  contact:
+  - FN: DPC API Developer Group
+    url: https://groups.google.com/d/forum/dpc-api
+- name: CMS Finder API
+  description: >-
+    The API behind Finder.Healthcare.gov that helps users find private health plans available outside
+    the Health Insurance Marketplace. Supports individual plan lookups, small group plan searches, and
+    geographic lookups by ZIP code. Rate limited to 1000 requests per minute.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.cms.gov/finder-api/
+  baseURL: https://finder.healthcare.gov
+  tags:
+  - Health Insurance
+  - Plan Finder
+  - Individual Plans
+  - Small Group Plans
+  - Healthcare.gov
+  properties:
+  - type: Documentation
+    url: https://finder.healthcare.gov/#services
+  - type: Authentication
+    url: https://developer.cms.gov/finder-api/key-request.html
+- name: CMS Quality Payment Program (QPP) Submissions API
+  description: >-
+    Enables QPP participants to submit quality performance data and receive real-time performance scoring
+    feedback. Supports Merit-based Incentive Payment System (MIPS) and Advanced Alternative Payment Model
+    (APM) data submissions for Medicare quality reporting.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://cmsgov.github.io/qpp-submissions-docs/
+  baseURL: https://qpp.cms.gov/api/submissions
+  tags:
+  - Quality Payment Program
+  - QPP
+  - MIPS
+  - APM
+  - Medicare Quality
+  - Performance Scoring
+  properties:
+  - type: Documentation
+    url: https://cmsgov.github.io/qpp-submissions-docs/
+- aid: cms-gov:cms-socrata-open-data
+  name: CMS Socrata Open Data API (data.cms.gov)
+  tags:
+  - Datasets
+  - Medicare
+  - Open Data
+  - Provider Data
+  - SODA
+  - Socrata
+  humanURL: https://data.cms.gov/
+  baseURL: https://data.cms.gov/data.json
+  properties:
+  - url: https://data.cms.gov/
+    type: Website
+  - url: https://data.cms.gov/provider-data/docs
+    type: Documentation
+  - url: https://developer.cms.gov/data-cms/
+    type: Developer
+  - url: https://data.cms.gov/data-api
+    type: DataAPI
+  description: >-
+    data.cms.gov hosts hundreds of CMS datasets including Medicare Fee-for-Service utilization and payment
+    data, Provider of Services files, Medicare Part B/D Prescriber summaries, Marketplace open enrollment
+    data, and COVID-19 nursing home data, available via the data.cms.gov Data API (JSON) and the CMS Provider
+    Data Catalog Socrata-compatible endpoints.
+- aid: cms-gov:cms-provider-data-catalog
+  name: CMS Provider Data Catalog API (Care Compare)
+  tags:
+  - Care Compare
+  - Dialysis Compare
+  - Hospital Compare
+  - Nursing Home Compare
+  - Provider Data
+  - Quality
+  humanURL: https://data.cms.gov/provider-data/
+  baseURL: https://data.cms.gov/provider-data/api/1/
+  properties:
+  - url: https://data.cms.gov/provider-data/
+    type: Website
+  - url: https://data.cms.gov/provider-data/docs
+    type: Documentation
+  - url: https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items
+    type: Metastore
+  description: >-
+    The Provider Data Catalog API (formerly Hospital Compare) exposes the Medicare.gov Care Compare datasets
+    including Hospital, Nursing Home, Home Health, Hospice, Physician, Long-Term Care Hospital, Inpatient
+    Rehab, and Dialysis Facility quality measures as DCAT-based datasets with Datastore query endpoints.
+- aid: cms-gov:nppes-npi-registry
+  name: NPPES NPI Registry API
+  tags:
+  - Credentialing
+  - NPI
+  - NPPES
+  - Provider Identifier
+  - Provider Registry
+  humanURL: https://npiregistry.cms.hhs.gov/
+  baseURL: https://npiregistry.cms.hhs.gov/api/
+  properties:
+  - url: https://npiregistry.cms.hhs.gov/
+    type: Website
+  - url: https://npiregistry.cms.hhs.gov/api-page
+    type: Documentation
+  - url: https://npiregistry.cms.hhs.gov/help-api/
+    type: Help
+  description: >-
+    The NPPES NPI Registry API provides free public access to look up active National Provider Identifier
+    records for individual and organizational healthcare providers, supporting FHIR-compatible JSON responses
+    used widely in credentialing, directory, and claims validation workflows.
+- aid: cms-gov:healthcare-gov-marketplace
+  name: Healthcare.gov Marketplace API
+  tags:
+  - ACA
+  - Exchange
+  - Marketplace
+  - Plan Finder
+  - QHP
+  humanURL: https://www.healthcare.gov/developers/
+  baseURL: https://marketplace.api.healthcare.gov/api/v1/
+  properties:
+  - url: skills/cms-search-marketplace-plans.md
+    type: AgentSkill
+  - url: https://www.healthcare.gov/developers/
+    type: Developer
+  - url: https://github.com/CMSgov/marketplace-api-examples
+    type: Examples
+  - url: https://data.healthcare.gov/
+    type: OpenData
+  description: >-
+    The Healthcare.gov Marketplace API and accompanying Open Data Plan Finder exposes Qualified Health
+    Plan (QHP) details, plan attributes, provider networks, and formularies for the Federally-Facilitated
+    Marketplace states, enabling third-party plan comparison and enrollment experiences.
+- aid: cms-gov:qpp-measures-api
+  name: CMS Quality Payment Program (QPP) Measures API
+  baseURL: https://qpp.cms.gov/api/measures
+  tags:
+  - MIPS
+  - Measures
+  - Quality
+  - QPP
+  - Value-Based
+  humanURL: https://qpp.cms.gov/
+  properties:
+  - url: https://qpp.cms.gov/
+    type: Website
+  - url: https://cmsgov.github.io/qpp-measures-data/
+    type: Documentation
+  - url: https://github.com/CMSgov/qpp-measures-data
+    type: SourceCode
+  description: >-
+    The Quality Payment Program Measures Data repository and REST API publish machine-readable specifications
+    of MIPS quality, promoting interoperability, improvement activities, and cost measures for each performance
+    year, supporting vendor QPP submissions and analytics.
+- aid: cms-gov:medicare-coverage-database
+  name: Medicare Coverage Database (MCD) API
+  tags:
+  - Coverage
+  - LCD
+  - Mac
+  - NCD
+  - Policy
+  tags_raw:
+  - Coverage
+  - LCD
+  - MAC
+  - NCD
+  - Policy
+  humanURL: https://www.cms.gov/medicare-coverage-database/
+  properties:
+  - url: https://www.cms.gov/medicare-coverage-database/
+    type: Website
+  - url: https://www.cms.gov/medicare-coverage-database/downloads/downloads.aspx
+    type: Downloads
+  description: >-
+    The Medicare Coverage Database publishes National Coverage Determinations (NCDs), Local Coverage Determinations
+    (LCDs), articles, and coding guidance used to determine Medicare coverage and reimbursement policies,
+    distributed via downloadable datasets and JSON/CSV query endpoints.
+- aid: cms-gov:cms-gov-1-export-api
+  name: CMS — Centers for Medicare & Medicaid Services 1. Export API
+  description: >-
+    API through which an authenticated and authorized PDP sponsor may request a bulk-data export from
+    a server.
+  humanURL: https://bluebutton.cms.gov/developers/
+  baseURL: https://api.bluebutton.cms.gov/v2/fhir
+  tags:
+  - 1. Export
+  properties:
+  - type: OpenAPI
+    url: openapi/cms-gov-1-export-api-openapi.yml
+  - type: Documentation
+    url: https://developer.cms.gov/marketplace-api/
+  - type: Authentication
+    url: https://developer.cms.gov/marketplace-api/key-request.html
+  - type: Documentation
+    url: https://bluebutton.cms.gov/api-documentation
+  - type: Sandbox
+    url: https://sandbox.bluebutton.cms.gov/v1/accounts/login
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bluebutton-web-server
+  - type: Documentation
+    url: https://developer.cms.gov/ppl-api/
+  - type: Documentation
+    url: https://bcda.cms.gov/api-documentation.html
+  - type: ChangeLog
+    url: https://bcda.cms.gov/announcements.html
+  - type: Deprecation
+    url: https://bcda.cms.gov/v3/welcome-v3
+  - type: Sandbox
+    url: https://sandbox.bcda.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bcda-app
+  - type: Documentation
+    url: https://ab2d.cms.gov/api-documentation
+  - type: APIReference
+    url: https://sandbox.ab2d.cms.gov/swagger-ui/index.html
+  - type: StatusPage
+    url: https://ab2d.cms.gov/status
+  - type: Sandbox
+    url: https://sandbox.ab2d.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/ab2d
+  - type: Support
+    url: https://groups.google.com/u/0/g/cms-ab2d-api
+  - type: AdvancedGuide
+    url: https://ab2d.cms.gov/advanced-user-guide.html
+- aid: cms-gov:cms-gov-2-status-api
+  name: CMS — Centers for Medicare & Medicaid Services 2. Status API
+  description: >-
+    API to determine the status of the job, the files to download once the job is complete and an endpoint
+    to cancel a job
+  humanURL: https://bluebutton.cms.gov/developers/
+  baseURL: https://api.bluebutton.cms.gov/v2/fhir
+  tags:
+  - 2. Status
+  properties:
+  - type: OpenAPI
+    url: openapi/cms-gov-2-status-api-openapi.yml
+  - type: Documentation
+    url: https://developer.cms.gov/marketplace-api/
+  - type: Authentication
+    url: https://developer.cms.gov/marketplace-api/key-request.html
+  - type: Documentation
+    url: https://bluebutton.cms.gov/api-documentation
+  - type: Sandbox
+    url: https://sandbox.bluebutton.cms.gov/v1/accounts/login
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bluebutton-web-server
+  - type: Documentation
+    url: https://developer.cms.gov/ppl-api/
+  - type: Documentation
+    url: https://bcda.cms.gov/api-documentation.html
+  - type: ChangeLog
+    url: https://bcda.cms.gov/announcements.html
+  - type: Deprecation
+    url: https://bcda.cms.gov/v3/welcome-v3
+  - type: Sandbox
+    url: https://sandbox.bcda.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bcda-app
+  - type: Documentation
+    url: https://ab2d.cms.gov/api-documentation
+  - type: APIReference
+    url: https://sandbox.ab2d.cms.gov/swagger-ui/index.html
+  - type: StatusPage
+    url: https://ab2d.cms.gov/status
+  - type: Sandbox
+    url: https://sandbox.ab2d.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/ab2d
+  - type: Support
+    url: https://groups.google.com/u/0/g/cms-ab2d-api
+  - type: AdvancedGuide
+    url: https://ab2d.cms.gov/advanced-user-guide.html
+- aid: cms-gov:cms-gov-3-download-api
+  name: CMS — Centers for Medicare & Medicaid Services 3. Download API
+  description: After creating a job, the API to download the generated bulk download files
+  humanURL: https://bluebutton.cms.gov/developers/
+  baseURL: https://api.bluebutton.cms.gov/v2/fhir
+  tags:
+  - 3. Download
+  properties:
+  - type: OpenAPI
+    url: openapi/cms-gov-3-download-api-openapi.yml
+  - type: Documentation
+    url: https://developer.cms.gov/marketplace-api/
+  - type: Authentication
+    url: https://developer.cms.gov/marketplace-api/key-request.html
+  - type: Documentation
+    url: https://bluebutton.cms.gov/api-documentation
+  - type: Sandbox
+    url: https://sandbox.bluebutton.cms.gov/v1/accounts/login
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bluebutton-web-server
+  - type: Documentation
+    url: https://developer.cms.gov/ppl-api/
+  - type: Documentation
+    url: https://bcda.cms.gov/api-documentation.html
+  - type: ChangeLog
+    url: https://bcda.cms.gov/announcements.html
+  - type: Deprecation
+    url: https://bcda.cms.gov/v3/welcome-v3
+  - type: Sandbox
+    url: https://sandbox.bcda.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bcda-app
+  - type: Documentation
+    url: https://ab2d.cms.gov/api-documentation
+  - type: APIReference
+    url: https://sandbox.ab2d.cms.gov/swagger-ui/index.html
+  - type: StatusPage
+    url: https://ab2d.cms.gov/status
+  - type: Sandbox
+    url: https://sandbox.ab2d.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/ab2d
+  - type: Support
+    url: https://groups.google.com/u/0/g/cms-ab2d-api
+  - type: AdvancedGuide
+    url: https://ab2d.cms.gov/advanced-user-guide.html
+- aid: cms-gov:cms-gov-4-capabilities-api
+  name: CMS — Centers for Medicare & Medicaid Services 4. Capabilities API
+  description: Provide the standard required FHIR capability statement
+  humanURL: https://bluebutton.cms.gov/developers/
+  baseURL: https://api.bluebutton.cms.gov/v2/fhir
+  tags:
+  - 4. Capabilities
+  properties:
+  - type: OpenAPI
+    url: openapi/cms-gov-4-capabilities-api-openapi.yml
+  - type: Documentation
+    url: https://developer.cms.gov/marketplace-api/
+  - type: Authentication
+    url: https://developer.cms.gov/marketplace-api/key-request.html
+  - type: Documentation
+    url: https://bluebutton.cms.gov/api-documentation
+  - type: Sandbox
+    url: https://sandbox.bluebutton.cms.gov/v1/accounts/login
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bluebutton-web-server
+  - type: Documentation
+    url: https://developer.cms.gov/ppl-api/
+  - type: Documentation
+    url: https://bcda.cms.gov/api-documentation.html
+  - type: ChangeLog
+    url: https://bcda.cms.gov/announcements.html
+  - type: Deprecation
+    url: https://bcda.cms.gov/v3/welcome-v3
+  - type: Sandbox
+    url: https://sandbox.bcda.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bcda-app
+  - type: Documentation
+    url: https://ab2d.cms.gov/api-documentation
+  - type: APIReference
+    url: https://sandbox.ab2d.cms.gov/swagger-ui/index.html
+  - type: StatusPage
+    url: https://ab2d.cms.gov/status
+  - type: Sandbox
+    url: https://sandbox.ab2d.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/ab2d
+  - type: Support
+    url: https://groups.google.com/u/0/g/cms-ab2d-api
+  - type: AdvancedGuide
+    url: https://ab2d.cms.gov/advanced-user-guide.html
+- aid: cms-gov:cms-gov-admin-api-api
+  name: CMS — Centers for Medicare & Medicaid Services Admin API
+  description: >-
+    The admin-api API from CMS — Centers for Medicare & Medicaid Services — 5 operation(s) for admin-api.
+  humanURL: https://bluebutton.cms.gov/developers/
+  baseURL: https://api.bluebutton.cms.gov/v2/fhir
+  tags:
+  - admin-api
+  properties:
+  - type: OpenAPI
+    url: openapi/cms-gov-admin-api-api-openapi.yml
+  - type: Documentation
+    url: https://developer.cms.gov/marketplace-api/
+  - type: Authentication
+    url: https://developer.cms.gov/marketplace-api/key-request.html
+  - type: Documentation
+    url: https://bluebutton.cms.gov/api-documentation
+  - type: Sandbox
+    url: https://sandbox.bluebutton.cms.gov/v1/accounts/login
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bluebutton-web-server
+  - type: Documentation
+    url: https://developer.cms.gov/ppl-api/
+  - type: Documentation
+    url: https://bcda.cms.gov/api-documentation.html
+  - type: ChangeLog
+    url: https://bcda.cms.gov/announcements.html
+  - type: Deprecation
+    url: https://bcda.cms.gov/v3/welcome-v3
+  - type: Sandbox
+    url: https://sandbox.bcda.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bcda-app
+  - type: Documentation
+    url: https://ab2d.cms.gov/api-documentation
+  - type: APIReference
+    url: https://sandbox.ab2d.cms.gov/swagger-ui/index.html
+  - type: StatusPage
+    url: https://ab2d.cms.gov/status
+  - type: Sandbox
+    url: https://sandbox.ab2d.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/ab2d
+  - type: Support
+    url: https://groups.google.com/u/0/g/cms-ab2d-api
+  - type: AdvancedGuide
+    url: https://ab2d.cms.gov/advanced-user-guide.html
+- aid: cms-gov:cms-gov-api-reference-api
+  name: CMS — Centers for Medicare & Medicaid Services API Reference API
+  description: Information about the state of Marketplace API.
+  humanURL: https://bluebutton.cms.gov/developers/
+  baseURL: https://api.bluebutton.cms.gov/v2/fhir
+  tags:
+  - API Reference
+  properties:
+  - type: OpenAPI
+    url: openapi/cms-gov-api-reference-api-openapi.yml
+  - type: Documentation
+    url: https://developer.cms.gov/marketplace-api/
+  - type: Authentication
+    url: https://developer.cms.gov/marketplace-api/key-request.html
+  - type: Documentation
+    url: https://bluebutton.cms.gov/api-documentation
+  - type: Sandbox
+    url: https://sandbox.bluebutton.cms.gov/v1/accounts/login
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bluebutton-web-server
+  - type: Documentation
+    url: https://developer.cms.gov/ppl-api/
+  - type: Documentation
+    url: https://bcda.cms.gov/api-documentation.html
+  - type: ChangeLog
+    url: https://bcda.cms.gov/announcements.html
+  - type: Deprecation
+    url: https://bcda.cms.gov/v3/welcome-v3
+  - type: Sandbox
+    url: https://sandbox.bcda.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bcda-app
+  - type: Documentation
+    url: https://ab2d.cms.gov/api-documentation
+  - type: APIReference
+    url: https://sandbox.ab2d.cms.gov/swagger-ui/index.html
+  - type: StatusPage
+    url: https://ab2d.cms.gov/status
+  - type: Sandbox
+    url: https://sandbox.ab2d.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/ab2d
+  - type: Support
+    url: https://groups.google.com/u/0/g/cms-ab2d-api
+  - type: AdvancedGuide
+    url: https://ab2d.cms.gov/advanced-user-guide.html
+- aid: cms-gov:cms-gov-attribution-api
+  name: CMS — Centers for Medicare & Medicaid Services Attribution API
+  description: >-
+    The Attribution API from CMS — Centers for Medicare & Medicaid Services — 2 operation(s) for attribution.
+  humanURL: https://bluebutton.cms.gov/developers/
+  baseURL: https://api.bluebutton.cms.gov/v2/fhir
+  tags:
+  - Attribution
+  properties:
+  - type: OpenAPI
+    url: openapi/cms-gov-attribution-api-openapi.yml
+  - type: Documentation
+    url: https://developer.cms.gov/marketplace-api/
+  - type: Authentication
+    url: https://developer.cms.gov/marketplace-api/key-request.html
+  - type: Documentation
+    url: https://bluebutton.cms.gov/api-documentation
+  - type: Sandbox
+    url: https://sandbox.bluebutton.cms.gov/v1/accounts/login
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bluebutton-web-server
+  - type: Documentation
+    url: https://developer.cms.gov/ppl-api/
+  - type: Documentation
+    url: https://bcda.cms.gov/api-documentation.html
+  - type: ChangeLog
+    url: https://bcda.cms.gov/announcements.html
+  - type: Deprecation
+    url: https://bcda.cms.gov/v3/welcome-v3
+  - type: Sandbox
+    url: https://sandbox.bcda.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bcda-app
+  - type: Documentation
+    url: https://ab2d.cms.gov/api-documentation
+  - type: APIReference
+    url: https://sandbox.ab2d.cms.gov/swagger-ui/index.html
+  - type: StatusPage
+    url: https://ab2d.cms.gov/status
+  - type: Sandbox
+    url: https://sandbox.ab2d.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/ab2d
+  - type: Support
+    url: https://groups.google.com/u/0/g/cms-ab2d-api
+  - type: AdvancedGuide
+    url: https://ab2d.cms.gov/advanced-user-guide.html
+- aid: cms-gov:cms-gov-bulk-data-api
+  name: CMS — Centers for Medicare & Medicaid Services Bulk Data API
+  description: Information about the bulk data json files maintained by Marketplace API.
+  humanURL: https://bluebutton.cms.gov/developers/
+  baseURL: https://api.bluebutton.cms.gov/v2/fhir
+  tags:
+  - Bulk Data
+  properties:
+  - type: OpenAPI
+    url: openapi/cms-gov-bulk-data-api-openapi.yml
+  - type: Documentation
+    url: https://developer.cms.gov/marketplace-api/
+  - type: Authentication
+    url: https://developer.cms.gov/marketplace-api/key-request.html
+  - type: Documentation
+    url: https://bluebutton.cms.gov/api-documentation
+  - type: Sandbox
+    url: https://sandbox.bluebutton.cms.gov/v1/accounts/login
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bluebutton-web-server
+  - type: Documentation
+    url: https://developer.cms.gov/ppl-api/
+  - type: Documentation
+    url: https://bcda.cms.gov/api-documentation.html
+  - type: ChangeLog
+    url: https://bcda.cms.gov/announcements.html
+  - type: Deprecation
+    url: https://bcda.cms.gov/v3/welcome-v3
+  - type: Sandbox
+    url: https://sandbox.bcda.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bcda-app
+  - type: Documentation
+    url: https://ab2d.cms.gov/api-documentation
+  - type: APIReference
+    url: https://sandbox.ab2d.cms.gov/swagger-ui/index.html
+  - type: StatusPage
+    url: https://ab2d.cms.gov/status
+  - type: Sandbox
+    url: https://sandbox.ab2d.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/ab2d
+  - type: Support
+    url: https://groups.google.com/u/0/g/cms-ab2d-api
+  - type: AdvancedGuide
+    url: https://ab2d.cms.gov/advanced-user-guide.html
+- aid: cms-gov:cms-gov-capabilities-api
+  name: CMS — Centers for Medicare & Medicaid Services Capabilities API
+  description: Provide the standard required FHIR capability statement
+  humanURL: https://bluebutton.cms.gov/developers/
+  baseURL: https://api.bluebutton.cms.gov/v2/fhir
+  tags:
+  - Capabilities
+  properties:
+  - type: OpenAPI
+    url: openapi/cms-gov-capabilities-api-openapi.yml
+  - type: Documentation
+    url: https://developer.cms.gov/marketplace-api/
+  - type: Authentication
+    url: https://developer.cms.gov/marketplace-api/key-request.html
+  - type: Documentation
+    url: https://bluebutton.cms.gov/api-documentation
+  - type: Sandbox
+    url: https://sandbox.bluebutton.cms.gov/v1/accounts/login
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bluebutton-web-server
+  - type: Documentation
+    url: https://developer.cms.gov/ppl-api/
+  - type: Documentation
+    url: https://bcda.cms.gov/api-documentation.html
+  - type: ChangeLog
+    url: https://bcda.cms.gov/announcements.html
+  - type: Deprecation
+    url: https://bcda.cms.gov/v3/welcome-v3
+  - type: Sandbox
+    url: https://sandbox.bcda.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bcda-app
+  - type: Documentation
+    url: https://ab2d.cms.gov/api-documentation
+  - type: APIReference
+    url: https://sandbox.ab2d.cms.gov/swagger-ui/index.html
+  - type: StatusPage
+    url: https://ab2d.cms.gov/status
+  - type: Sandbox
+    url: https://sandbox.ab2d.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/ab2d
+  - type: Support
+    url: https://groups.google.com/u/0/g/cms-ab2d-api
+  - type: AdvancedGuide
+    url: https://ab2d.cms.gov/advanced-user-guide.html
+- aid: cms-gov:cms-gov-capability-api
+  name: CMS — Centers for Medicare & Medicaid Services Capability API
+  description: FHIR server capability statements and metadata.
+  humanURL: https://bluebutton.cms.gov/developers/
+  baseURL: https://api.bluebutton.cms.gov/v2/fhir
+  tags:
+  - Capability
+  properties:
+  - type: OpenAPI
+    url: openapi/cms-gov-capability-api-openapi.yml
+  - type: Documentation
+    url: https://developer.cms.gov/marketplace-api/
+  - type: Authentication
+    url: https://developer.cms.gov/marketplace-api/key-request.html
+  - type: Documentation
+    url: https://bluebutton.cms.gov/api-documentation
+  - type: Sandbox
+    url: https://sandbox.bluebutton.cms.gov/v1/accounts/login
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bluebutton-web-server
+  - type: Documentation
+    url: https://developer.cms.gov/ppl-api/
+  - type: Documentation
+    url: https://bcda.cms.gov/api-documentation.html
+  - type: ChangeLog
+    url: https://bcda.cms.gov/announcements.html
+  - type: Deprecation
+    url: https://bcda.cms.gov/v3/welcome-v3
+  - type: Sandbox
+    url: https://sandbox.bcda.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bcda-app
+  - type: Documentation
+    url: https://ab2d.cms.gov/api-documentation
+  - type: APIReference
+    url: https://sandbox.ab2d.cms.gov/swagger-ui/index.html
+  - type: StatusPage
+    url: https://ab2d.cms.gov/status
+  - type: Sandbox
+    url: https://sandbox.ab2d.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/ab2d
+  - type: Support
+    url: https://groups.google.com/u/0/g/cms-ab2d-api
+  - type: AdvancedGuide
+    url: https://ab2d.cms.gov/advanced-user-guide.html
+- aid: cms-gov:cms-gov-code-search-api
+  name: CMS — Centers for Medicare & Medicaid Services Code Search API
+  description: >-
+    Search CPT/HCPCS codes by procedure codes or terms describing medical procedures. Get code details
+    for a given procedure code.
+  humanURL: https://bluebutton.cms.gov/developers/
+  baseURL: https://api.bluebutton.cms.gov/v2/fhir
+  tags:
+  - Code Search
+  properties:
+  - type: OpenAPI
+    url: openapi/cms-gov-code-search-api-openapi.yml
+  - type: Documentation
+    url: https://developer.cms.gov/marketplace-api/
+  - type: Authentication
+    url: https://developer.cms.gov/marketplace-api/key-request.html
+  - type: Documentation
+    url: https://bluebutton.cms.gov/api-documentation
+  - type: Sandbox
+    url: https://sandbox.bluebutton.cms.gov/v1/accounts/login
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bluebutton-web-server
+  - type: Documentation
+    url: https://developer.cms.gov/ppl-api/
+  - type: Documentation
+    url: https://bcda.cms.gov/api-documentation.html
+  - type: ChangeLog
+    url: https://bcda.cms.gov/announcements.html
+  - type: Deprecation
+    url: https://bcda.cms.gov/v3/welcome-v3
+  - type: Sandbox
+    url: https://sandbox.bcda.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bcda-app
+  - type: Documentation
+    url: https://ab2d.cms.gov/api-documentation
+  - type: APIReference
+    url: https://sandbox.ab2d.cms.gov/swagger-ui/index.html
+  - type: StatusPage
+    url: https://ab2d.cms.gov/status
+  - type: Sandbox
+    url: https://sandbox.ab2d.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/ab2d
+  - type: Support
+    url: https://groups.google.com/u/0/g/cms-ab2d-api
+  - type: AdvancedGuide
+    url: https://ab2d.cms.gov/advanced-user-guide.html
+- aid: cms-gov:cms-gov-cost-search-api
+  name: CMS — Centers for Medicare & Medicaid Services Cost Search API
+  description: >-
+    For a given procedure code or entire set of codes, get national averages for the amount Medicare pays
+    hospitals or surgical centers, and the national average copay amounts.
+  humanURL: https://bluebutton.cms.gov/developers/
+  baseURL: https://api.bluebutton.cms.gov/v2/fhir
+  tags:
+  - Cost Search
+  properties:
+  - type: OpenAPI
+    url: openapi/cms-gov-cost-search-api-openapi.yml
+  - type: Documentation
+    url: https://developer.cms.gov/marketplace-api/
+  - type: Authentication
+    url: https://developer.cms.gov/marketplace-api/key-request.html
+  - type: Documentation
+    url: https://bluebutton.cms.gov/api-documentation
+  - type: Sandbox
+    url: https://sandbox.bluebutton.cms.gov/v1/accounts/login
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bluebutton-web-server
+  - type: Documentation
+    url: https://developer.cms.gov/ppl-api/
+  - type: Documentation
+    url: https://bcda.cms.gov/api-documentation.html
+  - type: ChangeLog
+    url: https://bcda.cms.gov/announcements.html
+  - type: Deprecation
+    url: https://bcda.cms.gov/v3/welcome-v3
+  - type: Sandbox
+    url: https://sandbox.bcda.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bcda-app
+  - type: Documentation
+    url: https://ab2d.cms.gov/api-documentation
+  - type: APIReference
+    url: https://sandbox.ab2d.cms.gov/swagger-ui/index.html
+  - type: StatusPage
+    url: https://ab2d.cms.gov/status
+  - type: Sandbox
+    url: https://sandbox.ab2d.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/ab2d
+  - type: Support
+    url: https://groups.google.com/u/0/g/cms-ab2d-api
+  - type: AdvancedGuide
+    url: https://ab2d.cms.gov/advanced-user-guide.html
+- aid: cms-gov:cms-gov-download-api
+  name: CMS — Centers for Medicare & Medicaid Services Download API
+  description: After creating a job, the API to download the generated bulk download files
+  humanURL: https://bluebutton.cms.gov/developers/
+  baseURL: https://api.bluebutton.cms.gov/v2/fhir
+  tags:
+  - Download
+  properties:
+  - type: OpenAPI
+    url: openapi/cms-gov-download-api-openapi.yml
+  - type: Documentation
+    url: https://developer.cms.gov/marketplace-api/
+  - type: Authentication
+    url: https://developer.cms.gov/marketplace-api/key-request.html
+  - type: Documentation
+    url: https://bluebutton.cms.gov/api-documentation
+  - type: Sandbox
+    url: https://sandbox.bluebutton.cms.gov/v1/accounts/login
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bluebutton-web-server
+  - type: Documentation
+    url: https://developer.cms.gov/ppl-api/
+  - type: Documentation
+    url: https://bcda.cms.gov/api-documentation.html
+  - type: ChangeLog
+    url: https://bcda.cms.gov/announcements.html
+  - type: Deprecation
+    url: https://bcda.cms.gov/v3/welcome-v3
+  - type: Sandbox
+    url: https://sandbox.bcda.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bcda-app
+  - type: Documentation
+    url: https://ab2d.cms.gov/api-documentation
+  - type: APIReference
+    url: https://sandbox.ab2d.cms.gov/swagger-ui/index.html
+  - type: StatusPage
+    url: https://ab2d.cms.gov/status
+  - type: Sandbox
+    url: https://sandbox.ab2d.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/ab2d
+  - type: Support
+    url: https://groups.google.com/u/0/g/cms-ab2d-api
+  - type: AdvancedGuide
+    url: https://ab2d.cms.gov/advanced-user-guide.html
+- aid: cms-gov:cms-gov-enrollments-api
+  name: CMS — Centers for Medicare & Medicaid Services Enrollments API
+  description: Enrollment grouping validation and information.
+  humanURL: https://bluebutton.cms.gov/developers/
+  baseURL: https://api.bluebutton.cms.gov/v2/fhir
+  tags:
+  - Enrollments
+  properties:
+  - type: OpenAPI
+    url: openapi/cms-gov-enrollments-api-openapi.yml
+  - type: Documentation
+    url: https://developer.cms.gov/marketplace-api/
+  - type: Authentication
+    url: https://developer.cms.gov/marketplace-api/key-request.html
+  - type: Documentation
+    url: https://bluebutton.cms.gov/api-documentation
+  - type: Sandbox
+    url: https://sandbox.bluebutton.cms.gov/v1/accounts/login
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bluebutton-web-server
+  - type: Documentation
+    url: https://developer.cms.gov/ppl-api/
+  - type: Documentation
+    url: https://bcda.cms.gov/api-documentation.html
+  - type: ChangeLog
+    url: https://bcda.cms.gov/announcements.html
+  - type: Deprecation
+    url: https://bcda.cms.gov/v3/welcome-v3
+  - type: Sandbox
+    url: https://sandbox.bcda.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bcda-app
+  - type: Documentation
+    url: https://ab2d.cms.gov/api-documentation
+  - type: APIReference
+    url: https://sandbox.ab2d.cms.gov/swagger-ui/index.html
+  - type: StatusPage
+    url: https://ab2d.cms.gov/status
+  - type: Sandbox
+    url: https://sandbox.ab2d.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/ab2d
+  - type: Support
+    url: https://groups.google.com/u/0/g/cms-ab2d-api
+  - type: AdvancedGuide
+    url: https://ab2d.cms.gov/advanced-user-guide.html
+- aid: cms-gov:cms-gov-export-api
+  name: CMS — Centers for Medicare & Medicaid Services Export API
+  description: >-
+    API through which an authenticated and authorized PDP sponsor may request a bulk-data export from
+    a server.
+  humanURL: https://bluebutton.cms.gov/developers/
+  baseURL: https://api.bluebutton.cms.gov/v2/fhir
+  tags:
+  - Export
+  properties:
+  - type: OpenAPI
+    url: openapi/cms-gov-export-api-openapi.yml
+  - type: Documentation
+    url: https://developer.cms.gov/marketplace-api/
+  - type: Authentication
+    url: https://developer.cms.gov/marketplace-api/key-request.html
+  - type: Documentation
+    url: https://bluebutton.cms.gov/api-documentation
+  - type: Sandbox
+    url: https://sandbox.bluebutton.cms.gov/v1/accounts/login
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bluebutton-web-server
+  - type: Documentation
+    url: https://developer.cms.gov/ppl-api/
+  - type: Documentation
+    url: https://bcda.cms.gov/api-documentation.html
+  - type: ChangeLog
+    url: https://bcda.cms.gov/announcements.html
+  - type: Deprecation
+    url: https://bcda.cms.gov/v3/welcome-v3
+  - type: Sandbox
+    url: https://sandbox.bcda.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bcda-app
+  - type: Documentation
+    url: https://ab2d.cms.gov/api-documentation
+  - type: APIReference
+    url: https://sandbox.ab2d.cms.gov/swagger-ui/index.html
+  - type: StatusPage
+    url: https://ab2d.cms.gov/status
+  - type: Sandbox
+    url: https://sandbox.ab2d.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/ab2d
+  - type: Support
+    url: https://groups.google.com/u/0/g/cms-ab2d-api
+  - type: AdvancedGuide
+    url: https://ab2d.cms.gov/advanced-user-guide.html
+- aid: cms-gov:cms-gov-health-api-api
+  name: CMS — Centers for Medicare & Medicaid Services Health API
+  description: >-
+    The health-api API from CMS — Centers for Medicare & Medicaid Services — 1 operation(s) for health-api.
+  humanURL: https://bluebutton.cms.gov/developers/
+  baseURL: https://api.bluebutton.cms.gov/v2/fhir
+  tags:
+  - health-api
+  properties:
+  - type: OpenAPI
+    url: openapi/cms-gov-health-api-api-openapi.yml
+  - type: Documentation
+    url: https://developer.cms.gov/marketplace-api/
+  - type: Authentication
+    url: https://developer.cms.gov/marketplace-api/key-request.html
+  - type: Documentation
+    url: https://bluebutton.cms.gov/api-documentation
+  - type: Sandbox
+    url: https://sandbox.bluebutton.cms.gov/v1/accounts/login
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bluebutton-web-server
+  - type: Documentation
+    url: https://developer.cms.gov/ppl-api/
+  - type: Documentation
+    url: https://bcda.cms.gov/api-documentation.html
+  - type: ChangeLog
+    url: https://bcda.cms.gov/announcements.html
+  - type: Deprecation
+    url: https://bcda.cms.gov/v3/welcome-v3
+  - type: Sandbox
+    url: https://sandbox.bcda.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bcda-app
+  - type: Documentation
+    url: https://ab2d.cms.gov/api-documentation
+  - type: APIReference
+    url: https://sandbox.ab2d.cms.gov/swagger-ui/index.html
+  - type: StatusPage
+    url: https://ab2d.cms.gov/status
+  - type: Sandbox
+    url: https://sandbox.ab2d.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/ab2d
+  - type: Support
+    url: https://groups.google.com/u/0/g/cms-ab2d-api
+  - type: AdvancedGuide
+    url: https://ab2d.cms.gov/advanced-user-guide.html
+- aid: cms-gov:cms-gov-households-eligibility-api
+  name: CMS — Centers for Medicare & Medicaid Services Households & Eligibility API
+  description: >-
+    Household specific calculations, including eligibility information, out of pocket costs, poverty levels,
+    and cost benchmarks.
+  humanURL: https://bluebutton.cms.gov/developers/
+  baseURL: https://api.bluebutton.cms.gov/v2/fhir
+  tags:
+  - Households & Eligibility
+  properties:
+  - type: OpenAPI
+    url: openapi/cms-gov-households-eligibility-api-openapi.yml
+  - type: Documentation
+    url: https://developer.cms.gov/marketplace-api/
+  - type: Authentication
+    url: https://developer.cms.gov/marketplace-api/key-request.html
+  - type: Documentation
+    url: https://bluebutton.cms.gov/api-documentation
+  - type: Sandbox
+    url: https://sandbox.bluebutton.cms.gov/v1/accounts/login
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bluebutton-web-server
+  - type: Documentation
+    url: https://developer.cms.gov/ppl-api/
+  - type: Documentation
+    url: https://bcda.cms.gov/api-documentation.html
+  - type: ChangeLog
+    url: https://bcda.cms.gov/announcements.html
+  - type: Deprecation
+    url: https://bcda.cms.gov/v3/welcome-v3
+  - type: Sandbox
+    url: https://sandbox.bcda.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bcda-app
+  - type: Documentation
+    url: https://ab2d.cms.gov/api-documentation
+  - type: APIReference
+    url: https://sandbox.ab2d.cms.gov/swagger-ui/index.html
+  - type: StatusPage
+    url: https://ab2d.cms.gov/status
+  - type: Sandbox
+    url: https://sandbox.ab2d.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/ab2d
+  - type: Support
+    url: https://groups.google.com/u/0/g/cms-ab2d-api
+  - type: AdvancedGuide
+    url: https://ab2d.cms.gov/advanced-user-guide.html
+- aid: cms-gov:cms-gov-insurance-issuers-api
+  name: CMS — Centers for Medicare & Medicaid Services Insurance Issuers API
+  description: Data related to health insurance issuers on the marketplace.
+  humanURL: https://bluebutton.cms.gov/developers/
+  baseURL: https://api.bluebutton.cms.gov/v2/fhir
+  tags:
+  - Insurance Issuers
+  properties:
+  - type: OpenAPI
+    url: openapi/cms-gov-insurance-issuers-api-openapi.yml
+  - type: Documentation
+    url: https://developer.cms.gov/marketplace-api/
+  - type: Authentication
+    url: https://developer.cms.gov/marketplace-api/key-request.html
+  - type: Documentation
+    url: https://bluebutton.cms.gov/api-documentation
+  - type: Sandbox
+    url: https://sandbox.bluebutton.cms.gov/v1/accounts/login
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bluebutton-web-server
+  - type: Documentation
+    url: https://developer.cms.gov/ppl-api/
+  - type: Documentation
+    url: https://bcda.cms.gov/api-documentation.html
+  - type: ChangeLog
+    url: https://bcda.cms.gov/announcements.html
+  - type: Deprecation
+    url: https://bcda.cms.gov/v3/welcome-v3
+  - type: Sandbox
+    url: https://sandbox.bcda.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bcda-app
+  - type: Documentation
+    url: https://ab2d.cms.gov/api-documentation
+  - type: APIReference
+    url: https://sandbox.ab2d.cms.gov/swagger-ui/index.html
+  - type: StatusPage
+    url: https://ab2d.cms.gov/status
+  - type: Sandbox
+    url: https://sandbox.ab2d.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/ab2d
+  - type: Support
+    url: https://groups.google.com/u/0/g/cms-ab2d-api
+  - type: AdvancedGuide
+    url: https://ab2d.cms.gov/advanced-user-guide.html
+- aid: cms-gov:cms-gov-insurance-plans-api
+  name: CMS — Centers for Medicare & Medicaid Services Insurance Plans API
+  description: Data on both health and dental insurance plans.
+  humanURL: https://bluebutton.cms.gov/developers/
+  baseURL: https://api.bluebutton.cms.gov/v2/fhir
+  tags:
+  - Insurance Plans
+  properties:
+  - type: OpenAPI
+    url: openapi/cms-gov-insurance-plans-api-openapi.yml
+  - type: Documentation
+    url: https://developer.cms.gov/marketplace-api/
+  - type: Authentication
+    url: https://developer.cms.gov/marketplace-api/key-request.html
+  - type: Documentation
+    url: https://bluebutton.cms.gov/api-documentation
+  - type: Sandbox
+    url: https://sandbox.bluebutton.cms.gov/v1/accounts/login
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bluebutton-web-server
+  - type: Documentation
+    url: https://developer.cms.gov/ppl-api/
+  - type: Documentation
+    url: https://bcda.cms.gov/api-documentation.html
+  - type: ChangeLog
+    url: https://bcda.cms.gov/announcements.html
+  - type: Deprecation
+    url: https://bcda.cms.gov/v3/welcome-v3
+  - type: Sandbox
+    url: https://sandbox.bcda.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bcda-app
+  - type: Documentation
+    url: https://ab2d.cms.gov/api-documentation
+  - type: APIReference
+    url: https://sandbox.ab2d.cms.gov/swagger-ui/index.html
+  - type: StatusPage
+    url: https://ab2d.cms.gov/status
+  - type: Sandbox
+    url: https://sandbox.ab2d.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/ab2d
+  - type: Support
+    url: https://groups.google.com/u/0/g/cms-ab2d-api
+  - type: AdvancedGuide
+    url: https://ab2d.cms.gov/advanced-user-guide.html
+- aid: cms-gov:cms-gov-job-api
+  name: CMS — Centers for Medicare & Medicaid Services Job API
+  description: >-
+    The Job API from CMS — Centers for Medicare & Medicaid Services — 4 operation(s) for job.
+  humanURL: https://bluebutton.cms.gov/developers/
+  baseURL: https://api.bluebutton.cms.gov/v2/fhir
+  tags:
+  - Job
+  properties:
+  - type: OpenAPI
+    url: openapi/cms-gov-job-api-openapi.yml
+  - type: Documentation
+    url: https://developer.cms.gov/marketplace-api/
+  - type: Authentication
+    url: https://developer.cms.gov/marketplace-api/key-request.html
+  - type: Documentation
+    url: https://bluebutton.cms.gov/api-documentation
+  - type: Sandbox
+    url: https://sandbox.bluebutton.cms.gov/v1/accounts/login
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bluebutton-web-server
+  - type: Documentation
+    url: https://developer.cms.gov/ppl-api/
+  - type: Documentation
+    url: https://bcda.cms.gov/api-documentation.html
+  - type: ChangeLog
+    url: https://bcda.cms.gov/announcements.html
+  - type: Deprecation
+    url: https://bcda.cms.gov/v3/welcome-v3
+  - type: Sandbox
+    url: https://sandbox.bcda.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bcda-app
+  - type: Documentation
+    url: https://ab2d.cms.gov/api-documentation
+  - type: APIReference
+    url: https://sandbox.ab2d.cms.gov/swagger-ui/index.html
+  - type: StatusPage
+    url: https://ab2d.cms.gov/status
+  - type: Sandbox
+    url: https://sandbox.ab2d.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/ab2d
+  - type: Support
+    url: https://groups.google.com/u/0/g/cms-ab2d-api
+  - type: AdvancedGuide
+    url: https://ab2d.cms.gov/advanced-user-guide.html
+- aid: cms-gov:cms-gov-maintenance-mode-api-api
+  name: CMS — Centers for Medicare & Medicaid Services Maintenance Mode API
+  description: >-
+    The maintenance-mode-api API from CMS — Centers for Medicare & Medicaid Services — 1 operation(s)
+    for maintenance-mode-api.
+  humanURL: https://bluebutton.cms.gov/developers/
+  baseURL: https://api.bluebutton.cms.gov/v2/fhir
+  tags:
+  - maintenance-mode-api
+  properties:
+  - type: OpenAPI
+    url: openapi/cms-gov-maintenance-mode-api-api-openapi.yml
+  - type: Documentation
+    url: https://developer.cms.gov/marketplace-api/
+  - type: Authentication
+    url: https://developer.cms.gov/marketplace-api/key-request.html
+  - type: Documentation
+    url: https://bluebutton.cms.gov/api-documentation
+  - type: Sandbox
+    url: https://sandbox.bluebutton.cms.gov/v1/accounts/login
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bluebutton-web-server
+  - type: Documentation
+    url: https://developer.cms.gov/ppl-api/
+  - type: Documentation
+    url: https://bcda.cms.gov/api-documentation.html
+  - type: ChangeLog
+    url: https://bcda.cms.gov/announcements.html
+  - type: Deprecation
+    url: https://bcda.cms.gov/v3/welcome-v3
+  - type: Sandbox
+    url: https://sandbox.bcda.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bcda-app
+  - type: Documentation
+    url: https://ab2d.cms.gov/api-documentation
+  - type: APIReference
+    url: https://sandbox.ab2d.cms.gov/swagger-ui/index.html
+  - type: StatusPage
+    url: https://ab2d.cms.gov/status
+  - type: Sandbox
+    url: https://sandbox.ab2d.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/ab2d
+  - type: Support
+    url: https://groups.google.com/u/0/g/cms-ab2d-api
+  - type: AdvancedGuide
+    url: https://ab2d.cms.gov/advanced-user-guide.html
+- aid: cms-gov:cms-gov-provider-drug-coverage-api
+  name: CMS — Centers for Medicare & Medicaid Services Provider & Drug Coverage API
+  description: Lookup information on providers, drugs, and what is covered under what plans.
+  humanURL: https://bluebutton.cms.gov/developers/
+  baseURL: https://api.bluebutton.cms.gov/v2/fhir
+  tags:
+  - Provider & Drug Coverage
+  properties:
+  - type: OpenAPI
+    url: openapi/cms-gov-provider-drug-coverage-api-openapi.yml
+  - type: Documentation
+    url: https://developer.cms.gov/marketplace-api/
+  - type: Authentication
+    url: https://developer.cms.gov/marketplace-api/key-request.html
+  - type: Documentation
+    url: https://bluebutton.cms.gov/api-documentation
+  - type: Sandbox
+    url: https://sandbox.bluebutton.cms.gov/v1/accounts/login
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bluebutton-web-server
+  - type: Documentation
+    url: https://developer.cms.gov/ppl-api/
+  - type: Documentation
+    url: https://bcda.cms.gov/api-documentation.html
+  - type: ChangeLog
+    url: https://bcda.cms.gov/announcements.html
+  - type: Deprecation
+    url: https://bcda.cms.gov/v3/welcome-v3
+  - type: Sandbox
+    url: https://sandbox.bcda.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bcda-app
+  - type: Documentation
+    url: https://ab2d.cms.gov/api-documentation
+  - type: APIReference
+    url: https://sandbox.ab2d.cms.gov/swagger-ui/index.html
+  - type: StatusPage
+    url: https://ab2d.cms.gov/status
+  - type: Sandbox
+    url: https://sandbox.ab2d.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/ab2d
+  - type: Support
+    url: https://groups.google.com/u/0/g/cms-ab2d-api
+  - type: AdvancedGuide
+    url: https://ab2d.cms.gov/advanced-user-guide.html
+- aid: cms-gov:cms-gov-status-api
+  name: CMS — Centers for Medicare & Medicaid Services Status API
+  description: >-
+    API to determine the status of the job, the files to download once the job is complete and an endpoint
+    to cancel a job
+  humanURL: https://bluebutton.cms.gov/developers/
+  baseURL: https://api.bluebutton.cms.gov/v2/fhir
+  tags:
+  - Status
+  properties:
+  - type: OpenAPI
+    url: openapi/cms-gov-status-api-openapi.yml
+  - type: Documentation
+    url: https://developer.cms.gov/marketplace-api/
+  - type: Authentication
+    url: https://developer.cms.gov/marketplace-api/key-request.html
+  - type: Documentation
+    url: https://bluebutton.cms.gov/api-documentation
+  - type: Sandbox
+    url: https://sandbox.bluebutton.cms.gov/v1/accounts/login
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bluebutton-web-server
+  - type: Documentation
+    url: https://developer.cms.gov/ppl-api/
+  - type: Documentation
+    url: https://bcda.cms.gov/api-documentation.html
+  - type: ChangeLog
+    url: https://bcda.cms.gov/announcements.html
+  - type: Deprecation
+    url: https://bcda.cms.gov/v3/welcome-v3
+  - type: Sandbox
+    url: https://sandbox.bcda.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/bcda-app
+  - type: Documentation
+    url: https://ab2d.cms.gov/api-documentation
+  - type: APIReference
+    url: https://sandbox.ab2d.cms.gov/swagger-ui/index.html
+  - type: StatusPage
+    url: https://ab2d.cms.gov/status
+  - type: Sandbox
+    url: https://sandbox.ab2d.cms.gov
+  - type: GitHubRepository
+    url: https://github.com/CMSgov/ab2d
+  - type: Support
+    url: https://groups.google.com/u/0/g/cms-ab2d-api
+  - type: AdvancedGuide
+    url: https://ab2d.cms.gov/advanced-user-guide.html
 name: CMS — Centers for Medicare & Medicaid Services
 description: >-
   The Centers for Medicare & Medicaid Services (CMS) is the U.S. federal agency within the Department of Health and
@@ -1654,6 +2939,13 @@ tags:
   - ACA
   - Marketplace
   - Quality
+  - Health Insurance
+  - Federal Government
+  - Drug Spending
+  - Provider Data
+  - Quality Measures
+  - Claims Data
+  - Government Data
 kind: contract
 deliveryModel:
   model: unknown

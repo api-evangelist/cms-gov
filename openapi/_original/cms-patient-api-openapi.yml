@@ -1,92 +1,18 @@
+# x-archived-from: cms-patient-api-openapi.yml
+# x-archived-on: 2026-09-26
 openapi: 3.2.0
 info:
-  title: Cms Gov Patient API
+  title: Cms Patient API
   version: '1.0'
-  description: 'Operations tagged Patient across 4 of this provider''s published API definitions: cms-gov-bfd-openapi.yml, cms-gov-blue-button-2-openapi.yml, cms-gov-dpc-openapi.yml, cms-patient-api-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged patient across 2 of this provider''s published API definitions: cms-bcda-openapi.yml, cms-cms-blue-button-2-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://prod.bfd.cms.gov/v2/fhir
-  description: Production (peering only)
-- url: https://sandbox.bfd.cms.gov/v2/fhir
-  description: Sandbox (peering only)
 - url: https://api.bluebutton.cms.gov/v2/fhir
-  description: Production FHIR R4 endpoint
+  description: Blue Button 2.0 production FHIR server
 - url: https://sandbox.bluebutton.cms.gov/v2/fhir
-  description: Sandbox FHIR R4 endpoint
-- url: https://api.dpc.cms.gov/api/v1
-  description: Production
-- url: https://sandbox.dpc.cms.gov/api/v1
-  description: Sandbox
+  description: Blue Button 2.0 sandbox FHIR server
 tags:
 - name: Patient
 paths:
-  /Patient:
-    get:
-      summary: Search Patient Resources
-      operationId: searchPatient
-      tags:
-      - Patient
-      parameters:
-      - name: identifier
-        in: query
-        schema:
-          type: string
-          description: HICN, MBI, or BENE_ID identifier
-      - name: _has:Coverage.extension
-        in: query
-        schema:
-          type: string
-      - name: _lastUpdated
-        in: query
-        schema:
-          type: string
-      responses:
-        '200':
-          description: Bundle of Patients
-      security:
-      - MutualTLS: []
-    post:
-      summary: Create Patient
-      operationId: createPatient
-      tags:
-      - Patient
-      requestBody:
-        required: true
-        content:
-          application/fhir+json:
-            schema:
-              type: object
-      responses:
-        '201':
-          description: Patient created
-      security:
-      - MutualTLS: []
-    servers:
-    - url: https://api.bluebutton.cms.gov/v2/fhir
-      description: Blue Button 2.0 production FHIR server
-    - url: https://sandbox.bluebutton.cms.gov/v2/fhir
-      description: Blue Button 2.0 sandbox FHIR server
-  /Patient/{id}:
-    get:
-      summary: Read Patient
-      operationId: readPatient
-      tags:
-      - Patient
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: Patient resource
-      security:
-      - MutualTLS: []
-    servers:
-    - url: https://api.bluebutton.cms.gov/v2/fhir
-      description: Blue Button 2.0 production FHIR server
-    - url: https://sandbox.bluebutton.cms.gov/v2/fhir
-      description: Blue Button 2.0 sandbox FHIR server
   /api/v1/Patient/$export:
     get:
       tags:
@@ -152,11 +78,6 @@ paths:
                 $ref: '#/components/schemas/OperationOutcomeResponse'
       security:
       - bearer_token: []
-    servers:
-    - url: https://api.bluebutton.cms.gov/v2/fhir
-      description: Blue Button 2.0 production FHIR server
-    - url: https://sandbox.bluebutton.cms.gov/v2/fhir
-      description: Blue Button 2.0 sandbox FHIR server
   /api/v2/Patient/$export:
     get:
       tags:
@@ -222,6 +143,54 @@ paths:
                 $ref: '#/components/schemas/OperationOutcomeResponse'
       security:
       - bearer_token: []
+  /Patient:
+    get:
+      operationId: searchPatient
+      summary: Search Patient
+      description: Returns the authenticated Medicare beneficiary as a FHIR Patient resource.
+      tags:
+      - Patient
+      responses:
+        '200':
+          description: A FHIR Bundle of Patient resources.
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/FHIRBundle'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      security:
+      - oauth2: []
+    servers:
+    - url: https://api.bluebutton.cms.gov/v2/fhir
+      description: Blue Button 2.0 production FHIR server
+    - url: https://sandbox.bluebutton.cms.gov/v2/fhir
+      description: Blue Button 2.0 sandbox FHIR server
+  /Patient/{id}:
+    get:
+      operationId: readPatient
+      summary: Read Patient
+      description: Returns a single Patient resource by ID.
+      tags:
+      - Patient
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: FHIR Patient resource ID.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A FHIR Patient resource.
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/FHIRResource'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+      - oauth2: []
     servers:
     - url: https://api.bluebutton.cms.gov/v2/fhir
       description: Blue Button 2.0 production FHIR server
@@ -229,87 +198,6 @@ paths:
       description: Blue Button 2.0 sandbox FHIR server
 components:
   schemas:
-    Patient:
-      type: object
-      properties:
-        resourceType:
-          type: string
-          enum:
-          - Patient
-        id:
-          type: string
-        identifier:
-          type: array
-          items:
-            type: object
-        name:
-          type: array
-          items:
-            type: object
-        gender:
-          type: string
-          enum:
-          - male
-          - female
-          - other
-          - unknown
-        birthDate:
-          type: string
-          format: date
-        address:
-          type: array
-          items:
-            type: object
-    Bundle:
-      type: object
-      properties:
-        resourceType:
-          type: string
-          enum:
-          - Bundle
-        type:
-          type: string
-        total:
-          type: integer
-        link:
-          type: array
-          items:
-            type: object
-        entry:
-          type: array
-          items:
-            type: object
-            properties:
-              resource:
-                type: object
-              fullUrl:
-                type: string
-    FHIRResource:
-      type: object
-      description: A generic FHIR R4 resource.
-      properties:
-        resourceType:
-          type: string
-        id:
-          type: string
-      additionalProperties: true
-    FHIRBundle:
-      type: object
-      description: A FHIR R4 Bundle resource wrapping a collection of resources.
-      properties:
-        resourceType:
-          type: string
-          const: Bundle
-        type:
-          type: string
-        total:
-          type: integer
-        entry:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
-      additionalProperties: true
     OperationOutcomeResponse:
       type: object
       properties:
@@ -330,6 +218,32 @@ components:
               description: Additional diagnostic information about the issue
               type: string
       x-go-package: github.com/CMSgov/bcda-app/bcda/models
+    FHIRBundle:
+      type: object
+      description: A FHIR R4 Bundle resource wrapping a collection of resources.
+      properties:
+        resourceType:
+          type: string
+          const: Bundle
+        type:
+          type: string
+        total:
+          type: integer
+        entry:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+      additionalProperties: true
+    FHIRResource:
+      type: object
+      description: A generic FHIR R4 resource.
+      properties:
+        resourceType:
+          type: string
+        id:
+          type: string
+      additionalProperties: true
   responses:
     NotFound:
       description: The requested resource was not found.
@@ -344,25 +258,6 @@ components:
           schema:
             $ref: '#/components/schemas/FHIRResource'
   securitySchemes:
-    MutualTLS:
-      type: mutualTLS
-      description: BFD requires X.509 client certificates issued by the CMS PKI; access is restricted to peering applications.
-    OAuth2:
-      type: oauth2
-      flows:
-        authorizationCode:
-          authorizationUrl: https://api.bluebutton.cms.gov/v2/o/authorize/
-          tokenUrl: https://api.bluebutton.cms.gov/v2/o/token/
-          scopes:
-            patient/Patient.read: Read Patient resource
-            patient/Coverage.read: Read Coverage resources
-            patient/ExplanationOfBenefit.read: Read ExplanationOfBenefit resources
-            profile: OpenID profile claims
-    BearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-      description: DPC uses asymmetric SMART Backend Services authentication.
     basic_auth:
       type: http
       scheme: basic
@@ -386,7 +281,5 @@ externalDocs:
   description: CMS Blue Button 2.0 API Documentation
   url: https://bluebutton.cms.gov/api-documentation/
 x-refined-from:
-- cms-gov-bfd-openapi.yml
-- cms-gov-blue-button-2-openapi.yml
-- cms-gov-dpc-openapi.yml
-- cms-patient-api-openapi.yml
+- cms-bcda-openapi.yml
+- cms-cms-blue-button-2-openapi.yml

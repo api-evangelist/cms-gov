@@ -1,0 +1,125 @@
+# x-archived-from: cms-code-search-api-openapi.yml
+# x-archived-on: 2026-09-26
+openapi: 3.2.0
+info:
+  title: Procedure Price Lookup Code Search API
+  version: 1.1.1
+  description: 'The Procedure Price Lookup (PPL) API provides a bulk cost data endpoint to the American Medical Association (AMA) procedure descriptions and cost data associated with a subset of the CPT/HCPCS codes for CMS application development partners.
+
+    The API allows users to get cost and copay data for approximately 4,000 medical procedures in hospital outpatient departments and ambulatory surgical centers.'
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: ccxp-engineering@navapbc.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://www.medicare.gov/api/procedure-price-lookup/api/v1/core
+tags:
+- name: Code Search
+  description: Search CPT/HCPCS codes by procedure codes or terms describing medical procedures. Get code details for a given procedure code.
+paths:
+  /codes/{code}:
+    get:
+      tags:
+      - Code Search
+      summary: Get information for a given code
+      description: Returns code data (code description and type of code) for a given code.
+      operationId: getCodeInformation
+      parameters:
+      - name: code
+        in: path
+        description: The code to find information for.
+        required: true
+        x-exportParamName: Code
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful code search.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Code'
+        '400':
+          description: Invalid request or code format.
+        '401':
+          description: Missing or invalid apiKey.
+        '403':
+          description: Missing or invalid amaLicense.
+        '404':
+          description: Code information not found.
+        '500':
+          description: An internal server error has occurred for the request.
+  /codes:
+    get:
+      tags:
+      - Code Search
+      summary: Gets a set of codes for given search criteria
+      description: Returns codes for the given search term. When no term parameter is given, returns data for ALL codes.
+      operationId: getBatchCodes
+      parameters:
+      - name: term
+        in: query
+        description: Filter codes by the given term. The term is case-insensitive and can include the code.
+        required: false
+        x-exportParamName: Term
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Limit the number of records returned by the search.
+        required: false
+        x-exportParamName: Limit
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful code search
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Code'
+        '400':
+          description: Invalid request parameter(s).
+        '401':
+          description: Missing or invalid apiKey.
+        '403':
+          description: Missing or invalid amaLicense.
+        '500':
+          description: An internal error has occurred for the request.
+components:
+  schemas:
+    Code:
+      type: object
+      required:
+      - code
+      - description
+      - frequency
+      properties:
+        code:
+          type: string
+        description:
+          type: string
+        frequency:
+          type: integer
+      example:
+        code: code
+        description: description
+        frequency: 0
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: apiKey
+      description: All requests must include the `apiKey` header containing your API Key.
+    amaLicense:
+      type: apiKey
+      in: header
+      name: amaLicense
+      description: All requests must include the `amaLicense` header containing your AMA License.
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
