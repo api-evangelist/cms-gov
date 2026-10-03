@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Cms Gov Auth API
   version: '1.0'
-  description: 'Operations tagged Auth across 3 of this provider''s published API definitions: cms-gov-blue-button-2-openapi.yml, cms-gov-dpc-openapi.yml, cms-auth-api-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Auth across 3 of this provider''s published API definitions: cms-auth-api-openapi.yml, cms-gov-blue-button-2-openapi.yml, cms-gov-dpc-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.bluebutton.cms.gov/v2/fhir
   description: Production FHIR R4 endpoint
@@ -15,56 +15,6 @@ servers:
 tags:
 - name: Auth
 paths:
-  /userinfo:
-    get:
-      summary: Get Beneficiary User Info
-      operationId: getUserinfo
-      description: OpenID Connect userinfo endpoint returning beneficiary identity claims.
-      tags:
-      - Auth
-      responses:
-        '200':
-          description: User info claims
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  sub:
-                    type: string
-                  patient:
-                    type: string
-                  name:
-                    type: string
-                  given_name:
-                    type: string
-                  family_name:
-                    type: string
-      security:
-      - OAuth2:
-        - read
-    servers:
-    - url: https://api.bluebutton.cms.gov/v2/fhir
-      description: Production FHIR R4 endpoint
-    - url: https://sandbox.bluebutton.cms.gov/v2/fhir
-      description: Sandbox FHIR R4 endpoint
-  /Token:
-    post:
-      summary: Create Client Token
-      operationId: createToken
-      description: Create a long-lived client token for the registered organization.
-      tags:
-      - Auth
-      responses:
-        '200':
-          description: Token created
-      security:
-      - BearerAuth: []
-    servers:
-    - url: https://api.dpc.cms.gov/api/v1
-      description: Production
-    - url: https://sandbox.dpc.cms.gov/api/v1
-      description: Sandbox
   /_auth:
     get:
       tags:
@@ -138,8 +88,66 @@ paths:
           content: {}
       security:
       - bearer_token: []
+  /userinfo:
+    get:
+      summary: Get Beneficiary User Info
+      operationId: getUserinfo
+      description: OpenID Connect userinfo endpoint returning beneficiary identity claims.
+      tags:
+      - Auth
+      responses:
+        '200':
+          description: User info claims
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sub:
+                    type: string
+                  patient:
+                    type: string
+                  name:
+                    type: string
+                  given_name:
+                    type: string
+                  family_name:
+                    type: string
+      security:
+      - OAuth2:
+        - read
+    servers:
+    - url: https://api.bluebutton.cms.gov/v2/fhir
+      description: Production FHIR R4 endpoint
+    - url: https://sandbox.bluebutton.cms.gov/v2/fhir
+      description: Sandbox FHIR R4 endpoint
+  /Token:
+    post:
+      summary: Create Client Token
+      operationId: createToken
+      description: Create a long-lived client token for the registered organization.
+      tags:
+      - Auth
+      responses:
+        '200':
+          description: Token created
+      security:
+      - BearerAuth: []
+    servers:
+    - url: https://api.dpc.cms.gov/api/v1
+      description: Production
+    - url: https://sandbox.dpc.cms.gov/api/v1
+      description: Sandbox
 components:
   securitySchemes:
+    basic_auth:
+      type: http
+      scheme: basic
+    bearer_token:
+      type: apiKey
+      description: The Group and Patient endpoints require a Bearer Token. 1) Put your credentials in Basic Authentication, 2) Request a bearer token from /auth/token, 3) Put "Bearer {TOKEN}" in this field (no quotes) using the bearer token retrieved in step 2
+      name: Authorization
+      in: header
     OAuth2:
       type: oauth2
       flows:
@@ -156,15 +164,7 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: DPC uses asymmetric SMART Backend Services authentication.
-    basic_auth:
-      type: http
-      scheme: basic
-    bearer_token:
-      type: apiKey
-      description: The Group and Patient endpoints require a Bearer Token. 1) Put your credentials in Basic Authentication, 2) Request a bearer token from /auth/token, 3) Put "Bearer {TOKEN}" in this field (no quotes) using the bearer token retrieved in step 2
-      name: Authorization
-      in: header
 x-refined-from:
+- cms-auth-api-openapi.yml
 - cms-gov-blue-button-2-openapi.yml
 - cms-gov-dpc-openapi.yml
-- cms-auth-api-openapi.yml

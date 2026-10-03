@@ -229,6 +229,30 @@ paths:
       description: Blue Button 2.0 sandbox FHIR server
 components:
   schemas:
+    Bundle:
+      type: object
+      properties:
+        resourceType:
+          type: string
+          enum:
+          - Bundle
+        type:
+          type: string
+        total:
+          type: integer
+        link:
+          type: array
+          items:
+            type: object
+        entry:
+          type: array
+          items:
+            type: object
+            properties:
+              resource:
+                type: object
+              fullUrl:
+                type: string
     Patient:
       type: object
       properties:
@@ -260,56 +284,6 @@ components:
           type: array
           items:
             type: object
-    Bundle:
-      type: object
-      properties:
-        resourceType:
-          type: string
-          enum:
-          - Bundle
-        type:
-          type: string
-        total:
-          type: integer
-        link:
-          type: array
-          items:
-            type: object
-        entry:
-          type: array
-          items:
-            type: object
-            properties:
-              resource:
-                type: object
-              fullUrl:
-                type: string
-    FHIRResource:
-      type: object
-      description: A generic FHIR R4 resource.
-      properties:
-        resourceType:
-          type: string
-        id:
-          type: string
-      additionalProperties: true
-    FHIRBundle:
-      type: object
-      description: A FHIR R4 Bundle resource wrapping a collection of resources.
-      properties:
-        resourceType:
-          type: string
-          const: Bundle
-        type:
-          type: string
-        total:
-          type: integer
-        entry:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
-      additionalProperties: true
     OperationOutcomeResponse:
       type: object
       properties:
@@ -330,15 +304,41 @@ components:
               description: Additional diagnostic information about the issue
               type: string
       x-go-package: github.com/CMSgov/bcda-app/bcda/models
+    FHIRBundle:
+      type: object
+      description: A FHIR R4 Bundle resource wrapping a collection of resources.
+      properties:
+        resourceType:
+          type: string
+          const: Bundle
+        type:
+          type: string
+        total:
+          type: integer
+        entry:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+      additionalProperties: true
+    FHIRResource:
+      type: object
+      description: A generic FHIR R4 resource.
+      properties:
+        resourceType:
+          type: string
+        id:
+          type: string
+      additionalProperties: true
   responses:
-    NotFound:
-      description: The requested resource was not found.
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
       content:
         application/fhir+json:
           schema:
             $ref: '#/components/schemas/FHIRResource'
-    Unauthorized:
-      description: Authentication credentials are missing or invalid.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/fhir+json:
           schema:

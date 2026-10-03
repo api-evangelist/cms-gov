@@ -96,6 +96,10 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    Relationship:
+      description: Should match one of the [listed valid relationships](#introduction/more-information-about-households).
+      type: string
+      properties: {}
     Issuer:
       properties:
         eligible_dependents:
@@ -125,10 +129,6 @@ components:
           description: TTY customer service number)
           type: string
       type: object
-    Relationship:
-      description: Should match one of the [listed valid relationships](#introduction/more-information-about-households).
-      type: string
-      properties: {}
   parameters:
     year-with-default:
       x-example: 2019

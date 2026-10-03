@@ -58,6 +58,15 @@ paths:
       - bearer_token: []
 components:
   schemas:
+    AttributionFilesParam:
+      type: object
+      properties:
+        ingestion_dates:
+          type: array
+          items:
+            $ref: '#/components/schemas/IngestionDatesStatusParam'
+          x-go-name: IngestionDates
+      x-go-package: github.com/CMSgov/bcda-app/bcda/models
     IngestionDatesStatusParam:
       type: object
       properties:
@@ -68,15 +77,6 @@ components:
         type:
           type: string
           x-go-name: Type
-      x-go-package: github.com/CMSgov/bcda-app/bcda/models
-    AttributionFilesParam:
-      type: object
-      properties:
-        ingestion_dates:
-          type: array
-          items:
-            $ref: '#/components/schemas/IngestionDatesStatusParam'
-          x-go-name: IngestionDates
       x-go-package: github.com/CMSgov/bcda-app/bcda/models
     OperationOutcomeResponse:
       type: object

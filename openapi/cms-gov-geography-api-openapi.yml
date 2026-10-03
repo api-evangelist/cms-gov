@@ -2,33 +2,13 @@ openapi: 3.2.0
 info:
   title: Cms Gov Geography API
   version: '1.0'
-  description: 'Operations tagged Geography across 2 of this provider''s published API definitions: cms-gov-marketplace-openapi.yml, cms-geography-api-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Geography across 2 of this provider''s published API definitions: cms-geography-api-openapi.yml, cms-gov-marketplace-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://marketplace.api.healthcare.gov/api/v1
-  description: Production
 tags:
 - name: Geography
+  description: Geographic data, including information on states, counties, and zipcodes.
 paths:
-  /counties/by/zip/{zip}:
-    get:
-      summary: Get Counties by ZIP
-      operationId: getCountiesByZip
-      tags:
-      - Geography
-      parameters:
-      - name: zip
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: List of counties
-      security:
-      - ApiKey: []
-    servers:
-    - url: https://marketplace.api.healthcare.gov/api/v1
-      description: Production
   /counties/by/zip/{zipcode}:
     x-summary: List Counties by ZIP
     get:
@@ -300,33 +280,71 @@ paths:
       - API Key: []
     servers:
     - url: https://marketplace.api.healthcare.gov/api/v1
+  /counties/by/zip/{zip}:
+    get:
+      summary: Get Counties by ZIP
+      operationId: getCountiesByZip
+      tags:
+      - Geography
+      parameters:
+      - name: zip
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of counties
+      security:
+      - ApiKey: []
+    servers:
+    - url: https://marketplace.api.healthcare.gov/api/v1
+      description: Production
 components:
+  parameters:
+    zipcode:
+      description: 5 digit ZIP Code or 1-4 digit prefix of a ZIP Code
+      in: path
+      name: zipcode
+      required: true
+      x-example: '19123'
+      schema:
+        type: string
+    year-with-default:
+      x-example: 2019
+      name: year
+      description: 4 digit market year (Defaults to the current year when not specified).
+      in: query
+      required: false
+      schema:
+        type: number
+        format: integer
+    year-required:
+      x-example: 2019
+      name: year
+      description: 4 digit market year.
+      in: query
+      required: true
+      schema:
+        type: number
+        format: integer
+    fips:
+      description: 5-digit county FIPS code
+      in: path
+      name: fips
+      required: true
+      x-example: '37057'
+      schema:
+        type: string
+    apikey:
+      name: apikey
+      description: API key used for authentication
+      in: query
+      required: true
+      x-example: d687412e7b53146b2631dc01974ad0a4
+      schema:
+        type: string
   schemas:
-    RateArea:
-      properties:
-        state:
-          description: 2-letter USPS abbreviation
-          type: string
-        area:
-          description: Rate area number for the given state.
-          type: integer
-      type: object
-      example:
-        state: LA
-        area: 7
-    County:
-      properties:
-        fips:
-          type: string
-          example: '04013'
-        name:
-          type: string
-          example: Maricopa County
-        state:
-          description: 2-letter USPS state abbreviation
-          example: AZ
-          type: string
-      type: object
     ZIPCounty:
       properties:
         fips:
@@ -341,17 +359,20 @@ components:
           format: ^[0-9]{5}$
           type: string
       type: object
-    PovertyGuideline:
+    LowIncomeChild:
       properties:
-        add_per_person_after_eight:
-          description: For households over eight members add this value for each additional member
+        min_age:
+          description: Minimum age
           format: integer
           type: number
-        guidelines:
-          description: Household guidelines
-          items:
-            $ref: '#/components/schemas/Guideline'
-          type: array
+        max_age:
+          description: Maximum age
+          format: integer
+          type: number
+        pc_fpl:
+          description: Percentage federal poverty level
+          format: float
+          type: number
       type: object
     Guideline:
       properties:
@@ -363,6 +384,43 @@ components:
           description: Federal poverty level guideline
           format: integer
           type: number
+      type: object
+    County:
+      properties:
+        fips:
+          type: string
+          example: '04013'
+        name:
+          type: string
+          example: Maricopa County
+        state:
+          description: 2-letter USPS state abbreviation
+          example: AZ
+          type: string
+      type: object
+    RateArea:
+      properties:
+        state:
+          description: 2-letter USPS abbreviation
+          type: string
+        area:
+          description: Rate area number for the given state.
+          type: integer
+      type: object
+      example:
+        state: LA
+        area: 7
+    PovertyGuideline:
+      properties:
+        add_per_person_after_eight:
+          description: For households over eight members add this value for each additional member
+          format: integer
+          type: number
+        guidelines:
+          description: Household guidelines
+          items:
+            $ref: '#/components/schemas/Guideline'
+          type: array
       type: object
     StateMedicaid:
       properties:
@@ -439,21 +497,6 @@ components:
       - SupportedSBM
       type: string
       properties: {}
-    LowIncomeChild:
-      properties:
-        min_age:
-          description: Minimum age
-          format: integer
-          type: number
-        max_age:
-          description: Maximum age
-          format: integer
-          type: number
-        pc_fpl:
-          description: Percentage federal poverty level
-          format: float
-          type: number
-      type: object
     State:
       properties:
         abbrev:
@@ -501,54 +544,7 @@ components:
         8965_link: ''
         assister_program_url: https://www.nevadahealthlink.com/find-assistance/
       type: object
-  parameters:
-    apikey:
-      name: apikey
-      description: API key used for authentication
-      in: query
-      required: true
-      x-example: d687412e7b53146b2631dc01974ad0a4
-      schema:
-        type: string
-    fips:
-      description: 5-digit county FIPS code
-      in: path
-      name: fips
-      required: true
-      x-example: '37057'
-      schema:
-        type: string
-    year-required:
-      x-example: 2019
-      name: year
-      description: 4 digit market year.
-      in: query
-      required: true
-      schema:
-        type: number
-        format: integer
-    zipcode:
-      description: 5 digit ZIP Code or 1-4 digit prefix of a ZIP Code
-      in: path
-      name: zipcode
-      required: true
-      x-example: '19123'
-      schema:
-        type: string
-    year-with-default:
-      x-example: 2019
-      name: year
-      description: 4 digit market year (Defaults to the current year when not specified).
-      in: query
-      required: false
-      schema:
-        type: number
-        format: integer
   securitySchemes:
-    ApiKey:
-      type: apiKey
-      in: query
-      name: apikey
     API_Key:
       x-summary: API Key Auth
       description: Your API key should be included as a query parameter with the request. You can [fill out this form](https://cms.gov1.qualtrics.com/jfe/form/SV_4N2GHCJfNuX7n8x) to request an API key.
@@ -556,6 +552,10 @@ components:
       in: query
       name: apikey
       x-example: d687412e7b53146b2631dc01974ad0a4
+    ApiKey:
+      type: apiKey
+      in: query
+      name: apikey
 x-refined-from:
-- cms-gov-marketplace-openapi.yml
 - cms-geography-api-openapi.yml
+- cms-gov-marketplace-openapi.yml

@@ -177,16 +177,17 @@ paths:
                 $ref: '#/components/schemas/OperationOutcome'
 components:
   schemas:
-    FileMetadata:
+    Output:
       type: object
       properties:
+        type:
+          type: string
         url:
           type: string
-        valueString:
-          type: string
-        valueDecimal:
-          type: integer
-          format: int64
+        extension:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileMetadata'
     JobCompletedResponse:
       type: object
       properties:
@@ -204,17 +205,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Output'
-    Output:
+    FileMetadata:
       type: object
       properties:
-        type:
-          type: string
         url:
           type: string
-        extension:
-          type: array
-          items:
-            $ref: '#/components/schemas/FileMetadata'
+        valueString:
+          type: string
+        valueDecimal:
+          type: integer
+          format: int64
   securitySchemes:
     bearerAuth:
       type: http

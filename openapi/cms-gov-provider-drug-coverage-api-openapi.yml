@@ -337,18 +337,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    RxCUI:
-      type: string
-      pattern: ^[0-9]+$
-      properties: {}
-    Coverage:
-      type: string
-      enum:
-      - Covered
-      - NotCovered
-      - DataNotProvided
-      - GenericCovered
-      properties: {}
     Provider:
       properties:
         name:
@@ -400,26 +388,6 @@ components:
         generic_rxcui:
           type: string
           description: The RxCUI for the generic equivalent of the given drug
-    Address:
-      properties:
-        city:
-          type: string
-        state:
-          type: string
-        street_1:
-          type: string
-        street_2:
-          type: string
-        zipcode:
-          type: string
-        countyfips:
-          description: 5-digit county FIPS code
-          type: string
-      type: object
-    PlanID:
-      type: string
-      pattern: ^[0-9]{5}[A-Z]{2}[0-9]{7}$
-      properties: {}
     NearbyProvider:
       properties:
         provider:
@@ -434,11 +402,21 @@ components:
       required:
       - provider
       - distance
-    ProviderTypeEnum:
-      enum:
-      - Individual
-      - Facility
+    RxCUI:
       type: string
+      pattern: ^[0-9]+$
+      properties: {}
+    Coverage:
+      type: string
+      enum:
+      - Covered
+      - NotCovered
+      - DataNotProvided
+      - GenericCovered
+      properties: {}
+    NPI:
+      type: string
+      pattern: ^[0-9]{10}$
       properties: {}
     ProviderCoverage:
       properties:
@@ -460,6 +438,28 @@ components:
           - not accepting
           - accepting in some locations
           - unknown
+    ProviderTypeEnum:
+      enum:
+      - Individual
+      - Facility
+      type: string
+      properties: {}
+    Address:
+      properties:
+        city:
+          type: string
+        state:
+          type: string
+        street_1:
+          type: string
+        street_2:
+          type: string
+        zipcode:
+          type: string
+        countyfips:
+          description: 5-digit county FIPS code
+          type: string
+      type: object
     ProviderGenderEnum:
       enum:
       - Male
@@ -470,6 +470,10 @@ components:
       - Non-binary
       - Non-disclose
       type: string
+      properties: {}
+    PlanID:
+      type: string
+      pattern: ^[0-9]{5}[A-Z]{2}[0-9]{7}$
       properties: {}
     Drug:
       properties:
@@ -498,19 +502,7 @@ components:
           description: rxnormDoseForm for this drug
           type: string
       type: object
-    NPI:
-      type: string
-      pattern: ^[0-9]{10}$
-      properties: {}
   parameters:
-    apikey:
-      name: apikey
-      description: API key used for authentication
-      in: query
-      required: true
-      x-example: d687412e7b53146b2631dc01974ad0a4
-      schema:
-        type: string
     year-with-default:
       x-example: 2019
       name: year
@@ -520,6 +512,14 @@ components:
       schema:
         type: number
         format: integer
+    apikey:
+      name: apikey
+      description: API key used for authentication
+      in: query
+      required: true
+      x-example: d687412e7b53146b2631dc01974ad0a4
+      schema:
+        type: string
   securitySchemes:
     API_Key:
       x-summary: API Key Auth

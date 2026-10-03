@@ -55,26 +55,7 @@ paths:
       operationId: getMarketYears
       x-operation-id-source: derived
 components:
-  parameters:
-    apikey:
-      name: apikey
-      description: API key used for authentication
-      in: query
-      required: true
-      x-example: d687412e7b53146b2631dc01974ad0a4
-      schema:
-        type: string
   schemas:
-    DataVersion:
-      type: object
-      properties:
-        name:
-          type: string
-        updated:
-          type: string
-          description: iso-8601 date
-    MarketYear:
-      type: number
     MarketYears:
       description: Current and supported market years
       type: object
@@ -87,6 +68,25 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/MarketYear'
+    MarketYear:
+      type: number
+    DataVersion:
+      type: object
+      properties:
+        name:
+          type: string
+        updated:
+          type: string
+          description: iso-8601 date
+  parameters:
+    apikey:
+      name: apikey
+      description: API key used for authentication
+      in: query
+      required: true
+      x-example: d687412e7b53146b2631dc01974ad0a4
+      schema:
+        type: string
   securitySchemes:
     API_Key:
       x-summary: API Key Auth

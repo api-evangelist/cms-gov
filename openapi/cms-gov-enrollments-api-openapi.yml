@@ -176,135 +176,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ExtendedEnrollee:
-      properties:
-        id:
-          description: The enrollee's id (uuid)
-          type: string
-          pattern: ^[a-f0-9-]+$
-        name:
-          description: The enrollee's name
-          type: string
-        gender:
-          $ref: '#/components/schemas/GenderEnum'
-        dob:
-          description: The enrollee's date of birth (iso8601 date)
-          type: string
-          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
-        location:
-          $ref: '#/components/schemas/Address'
-        csr:
-          $ref: '#/components/schemas/CostSharingReductionEnum'
-        is_filer:
-          type: boolean
-        effective_age:
-          type: integer
-          description: Effective age of the enrollee at time of enrollment.
-        has_hardship:
-          type: boolean
-        relationship:
-          $ref: '#/components/schemas/Relationship'
-        allowed_metal_levels:
-          type: array
-          items:
-            $ref: '#/components/schemas/MetalLevelEnum'
-        allowed_plan_ids:
-          type: array
-          items:
-            $ref: '#/components/schemas/PlanID'
-        current_enrollment:
-          $ref: '#/components/schemas/CurrentEnrollment'
-    MetalLevelEnum:
-      enum:
-      - Catastrophic
-      - Silver
-      - Bronze
-      - Gold
-      - Platinum
-      type: string
-      properties: {}
-    Relationship:
-      description: Should match one of the [listed valid relationships](#introduction/more-information-about-households).
-      type: string
-      properties: {}
-    PlanID:
-      type: string
-      pattern: ^[0-9]{5}[A-Z]{2}[0-9]{7}$
-      properties: {}
-    Address:
-      properties:
-        city:
-          type: string
-        state:
-          type: string
-        street_1:
-          type: string
-        street_2:
-          type: string
-        zipcode:
-          type: string
-        countyfips:
-          description: 5-digit county FIPS code
-          type: string
-      type: object
-    RelationshipEdge:
-      properties:
-        super_id:
-          type: string
-          description: enrollee id
-        sub_id:
-          type: string
-          description: enrollee id
-        relationship:
-          $ref: '#/components/schemas/Relationship'
-    CurrentEnrollment:
-      description: Current/existing enrollment information used to determine tobacco status for CiC enrollments. This will ensure rate calculation is done correctly.
-      required:
-      - plan_id
-      - effective_date
-      - uses_tobacco
-      properties:
-        plan_id:
-          $ref: '#/components/schemas/PlanID'
-        effective_date:
-          description: Date plan went into effect (ISO-8601 YYYY-MM-DD)
-          type: string
-          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
-          x-example: '2020-01-01'
-        uses_tobacco:
-          type: boolean
-      type: object
-    FlattenedEnrollmentGroup:
-      properties:
-        id:
-          type: string
-        csr:
-          $ref: '#/components/schemas/CostSharingReductionEnum'
-        enrollees:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExtendedEnrollee'
-        grouping_reason:
-          type: string
-        year:
-          x-example: 2019
-          type: number
-          format: integer
-        subscriber_id:
-          type: string
-        relationships:
-          type: array
-          items:
-            $ref: '#/components/schemas/RelationshipEdge'
-        effective_date:
-          type: string
-          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
-          x-example: '2020-01-01'
-    ProductDivisionEnum:
-      enum:
-      - HealthCare
-      - Dental
-      type: string
     ExtendedEnrollment:
       properties:
         maxAPTC:
@@ -356,6 +227,19 @@ components:
       - Male
       - Female
       type: string
+    MetalLevelEnum:
+      enum:
+      - Catastrophic
+      - Silver
+      - Bronze
+      - Gold
+      - Platinum
+      type: string
+      properties: {}
+    Relationship:
+      description: Should match one of the [listed valid relationships](#introduction/more-information-about-households).
+      type: string
+      properties: {}
     CostSharingReductionEnum:
       type: string
       description: Cost-sharing reduction (CSR)
@@ -369,6 +253,122 @@ components:
       - Non-Exchange variant
       - Unknown CSR
       properties: {}
+    ProductDivisionEnum:
+      enum:
+      - HealthCare
+      - Dental
+      type: string
+    CurrentEnrollment:
+      description: Current/existing enrollment information used to determine tobacco status for CiC enrollments. This will ensure rate calculation is done correctly.
+      required:
+      - plan_id
+      - effective_date
+      - uses_tobacco
+      properties:
+        plan_id:
+          $ref: '#/components/schemas/PlanID'
+        effective_date:
+          description: Date plan went into effect (ISO-8601 YYYY-MM-DD)
+          type: string
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+          x-example: '2020-01-01'
+        uses_tobacco:
+          type: boolean
+      type: object
+    Address:
+      properties:
+        city:
+          type: string
+        state:
+          type: string
+        street_1:
+          type: string
+        street_2:
+          type: string
+        zipcode:
+          type: string
+        countyfips:
+          description: 5-digit county FIPS code
+          type: string
+      type: object
+    RelationshipEdge:
+      properties:
+        super_id:
+          type: string
+          description: enrollee id
+        sub_id:
+          type: string
+          description: enrollee id
+        relationship:
+          $ref: '#/components/schemas/Relationship'
+    FlattenedEnrollmentGroup:
+      properties:
+        id:
+          type: string
+        csr:
+          $ref: '#/components/schemas/CostSharingReductionEnum'
+        enrollees:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExtendedEnrollee'
+        grouping_reason:
+          type: string
+        year:
+          x-example: 2019
+          type: number
+          format: integer
+        subscriber_id:
+          type: string
+        relationships:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelationshipEdge'
+        effective_date:
+          type: string
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+          x-example: '2020-01-01'
+    PlanID:
+      type: string
+      pattern: ^[0-9]{5}[A-Z]{2}[0-9]{7}$
+      properties: {}
+    ExtendedEnrollee:
+      properties:
+        id:
+          description: The enrollee's id (uuid)
+          type: string
+          pattern: ^[a-f0-9-]+$
+        name:
+          description: The enrollee's name
+          type: string
+        gender:
+          $ref: '#/components/schemas/GenderEnum'
+        dob:
+          description: The enrollee's date of birth (iso8601 date)
+          type: string
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+        location:
+          $ref: '#/components/schemas/Address'
+        csr:
+          $ref: '#/components/schemas/CostSharingReductionEnum'
+        is_filer:
+          type: boolean
+        effective_age:
+          type: integer
+          description: Effective age of the enrollee at time of enrollment.
+        has_hardship:
+          type: boolean
+        relationship:
+          $ref: '#/components/schemas/Relationship'
+        allowed_metal_levels:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetalLevelEnum'
+        allowed_plan_ids:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlanID'
+        current_enrollment:
+          $ref: '#/components/schemas/CurrentEnrollment'
   parameters:
     apikey:
       name: apikey

@@ -230,175 +230,13 @@ components:
           type: array
           items:
             type: object
-    QualityRating:
-      properties:
-        available:
-          type: boolean
-          description: True if the plan has a quality rating, otherwise false.  A plan can still be unrated when the quality rating is available
-        year:
-          x-example: 2019
-          type: integer
-        global_rating:
-          type: integer
-          minimum: 0
-          maximum: 5
-        global_not_rated_reason:
-          type: string
-        clinical_quality_management_rating:
-          type: integer
-          minimum: 0
-          maximum: 5
-        clinical_quality_management_not_rated_reason:
-          type: string
-        enrollee_experience_rating:
-          type: integer
-          minimum: 0
-          maximum: 5
-        enrollee_experience_not_rated_reason:
-          type: string
-        plan_efficiency_rating:
-          type: integer
-          minimum: 0
-          maximum: 5
-        plan_efficiency_not_rated_reason:
-          type: string
-      type: object
-    Household:
-      description: If a household is not included, will default to Individual household
-      properties:
-        income:
-          description: household's yearly income in dollars
-          format: float
-          type: number
-        unemployment_received:
-          description: Specifies whether a tax payer or tax dependent in the household received unemployment benefits for market year 2021. May affect ATPC and CSR calulations due to income percentage capping if income is above 133% of the Federal poverty level. If the person who received unemployment is a tax dependent, only the eligible CSRs will be affected. Defaults to None
-          enum:
-          - Adult
-          - Dependent
-          - None
-          type: string
-        people:
-          description: people in household applying for coverage/seeking eligibility esimate; first is considered the subscriber
-          items:
-            $ref: '#/components/schemas/Person'
-          type: array
-        has_married_couple:
-          type: boolean
-        effective_date:
-          description: The effective date of the application (YYYY-MM-DD)
-          type: string
-          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
-      example:
-        income: 20000
-        people:
-        - age: 34
-          dob: '1984-01-06'
-          is_pregnant: false
-          is_parent: false
-          uses_tobacco: false
-          gender: Male
-        has_married_couple: false
-      type: object
-    Person:
-      properties:
-        age:
-          format: integer
-          type: number
-          description: required if dob not provided
-        dob:
-          description: A person's date of birth (YYYY-MM-DD) required if age not provided
-          type: string
-          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
-          x-example: '2020-01-01'
-        has_mec:
-          description: has minimum essential coverage
-          type: boolean
-        is_parent:
-          type: boolean
-        is_pregnant:
-          description: Indicates whether the individual is pregnant or not. If this is true and `pregnant_with` is not provided, `pregnant_with` is assumed to be 1.
-          type: boolean
-        pregnant_with:
-          description: The number of expected children from a pregnancy. If this value is > 0, `is_pregnant` is assumed to be true, even if specified otherwise.
-          type: number
-        uses_tobacco:
-          type: boolean
-        last_tobacco_use_date:
-          description: The last date of regular tobacco use (YYYY-MM-DD)
-          type: string
-          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
-        gender:
-          $ref: '#/components/schemas/GenderEnum'
-        utilization_level:
-          $ref: '#/components/schemas/UtilizationEnum'
-        relationship:
-          $ref: '#/components/schemas/Relationship'
-        does_not_cohabitate:
-          type: boolean
-        aptc_eligible:
-          description: is the given person eligible for APTC
-          type: boolean
-        current_enrollment:
-          $ref: '#/components/schemas/CurrentEnrollment'
-      type: object
-      required:
-      - age
-      - dob
-    Deductible:
-      properties:
-        amount:
-          type: number
-        csr:
-          $ref: '#/components/schemas/CostSharingReductionEnum'
-        family_cost:
-          $ref: '#/components/schemas/FamilyCostEnum'
-        network_tier:
-          $ref: '#/components/schemas/NetworkTierEnum'
-        type:
-          enum:
-          - Medical EHB Deductible
-          - Combined Medical and Drug EHB Deductible
-          - Drug EHB Deductible
-          type: string
-        individual:
-          description: Applies to individuals
-          type: boolean
-        family:
-          description: Applies to families
-          type: boolean
-        display_string:
-          type: string
-          description: An optional human-readable description
-      type: object
-    CurrentEnrollment:
-      description: Current/existing enrollment information used to determine tobacco status for CiC enrollments. This will ensure rate calculation is done correctly.
-      required:
-      - plan_id
-      - effective_date
-      - uses_tobacco
-      properties:
-        plan_id:
-          $ref: '#/components/schemas/PlanID'
-        effective_date:
-          description: Date plan went into effect (ISO-8601 YYYY-MM-DD)
-          type: string
-          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
-          x-example: '2020-01-01'
-        uses_tobacco:
-          type: boolean
-      type: object
-    InsuranceMarketEnum:
-      enum:
-      - QHP
-      - MSP
+    SuppressionStatus:
       type: string
-      properties: {}
-    UtilizationEnum:
       enum:
-      - Low
-      - Medium
-      - High
-      type: string
+      - Available
+      - Suspended
+      - Closed
+      - Not Applicable
     Plan_2:
       properties:
         id:
@@ -533,6 +371,244 @@ components:
           description: 6-character id representing the geographic area the plan accepts members from.  The first two characters are the state's abbreviation.
           type: string
       type: object
+    GenderEnum:
+      enum:
+      - Male
+      - Female
+      type: string
+    CurrentEnrollment:
+      description: Current/existing enrollment information used to determine tobacco status for CiC enrollments. This will ensure rate calculation is done correctly.
+      required:
+      - plan_id
+      - effective_date
+      - uses_tobacco
+      properties:
+        plan_id:
+          $ref: '#/components/schemas/PlanID'
+        effective_date:
+          description: Date plan went into effect (ISO-8601 YYYY-MM-DD)
+          type: string
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+          x-example: '2020-01-01'
+        uses_tobacco:
+          type: boolean
+      type: object
+    Person:
+      properties:
+        age:
+          format: integer
+          type: number
+          description: required if dob not provided
+        dob:
+          description: A person's date of birth (YYYY-MM-DD) required if age not provided
+          type: string
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+          x-example: '2020-01-01'
+        has_mec:
+          description: has minimum essential coverage
+          type: boolean
+        is_parent:
+          type: boolean
+        is_pregnant:
+          description: Indicates whether the individual is pregnant or not. If this is true and `pregnant_with` is not provided, `pregnant_with` is assumed to be 1.
+          type: boolean
+        pregnant_with:
+          description: The number of expected children from a pregnancy. If this value is > 0, `is_pregnant` is assumed to be true, even if specified otherwise.
+          type: number
+        uses_tobacco:
+          type: boolean
+        last_tobacco_use_date:
+          description: The last date of regular tobacco use (YYYY-MM-DD)
+          type: string
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+        gender:
+          $ref: '#/components/schemas/GenderEnum'
+        utilization_level:
+          $ref: '#/components/schemas/UtilizationEnum'
+        relationship:
+          $ref: '#/components/schemas/Relationship'
+        does_not_cohabitate:
+          type: boolean
+        aptc_eligible:
+          description: is the given person eligible for APTC
+          type: boolean
+        current_enrollment:
+          $ref: '#/components/schemas/CurrentEnrollment'
+      type: object
+      required:
+      - age
+      - dob
+    Place:
+      properties:
+        countyfips:
+          description: 5-digit county FIPS code
+          type: string
+        state:
+          description: 2-letter USPS state abbreviation
+          type: string
+        zipcode:
+          description: 5-digit ZIP Code
+          type: string
+      required:
+      - countyfips
+      - state
+      - zipcode
+      example:
+        countyfips: '51107'
+        state: VA
+        zipcode: '20103'
+      type: object
+    CertificationStatus:
+      type: string
+      enum:
+      - Certified
+      - Not Certified
+      - Decertified
+      - Certified Off-Exchange SADP
+    FamilyCostEnum:
+      description: family cost enumeration for MOOPs and deductibles
+      enum:
+      - Individual
+      - Family Per Person
+      - Family
+      type: string
+      properties: {}
+    RateArea:
+      properties:
+        state:
+          description: 2-letter USPS abbreviation
+          type: string
+        area:
+          description: Rate area number for the given state.
+          type: integer
+      type: object
+      example:
+        state: LA
+        area: 7
+    CostSharing:
+      properties:
+        coinsurance_options:
+          type: string
+        coinsurance_rate:
+          format: float
+          type: number
+        copay_amount:
+          type: number
+        copay_options:
+          type: string
+        network_tier:
+          $ref: '#/components/schemas/NetworkTierEnum'
+        csr:
+          $ref: '#/components/schemas/CostSharingReductionEnum'
+        display_string:
+          type: string
+      type: object
+    MetalLevelEnum:
+      enum:
+      - Catastrophic
+      - Silver
+      - Bronze
+      - Gold
+      - Platinum
+      type: string
+      properties: {}
+    ProductDivisionEnum:
+      enum:
+      - HealthCare
+      - Dental
+      type: string
+    CSRRequestEnum:
+      type: string
+      description: Cost-sharing reduction (CSR) override for requests
+      enum:
+      - CSR73
+      - CSR87
+      - CSR94
+      - LimitedCSR
+      - ZeroCSR
+    DiseaseMgmtProgramsEnum:
+      enum:
+      - Asthma
+      - Heart Disease
+      - Depression
+      - Diabetes
+      - High Blood Pressure and High Cholesterol
+      - Low Back Pain
+      - Pain Management
+      - Pregnancy
+      - Weight Loss Programs
+      type: string
+      properties: {}
+    Household:
+      description: If a household is not included, will default to Individual household
+      properties:
+        income:
+          description: household's yearly income in dollars
+          format: float
+          type: number
+        unemployment_received:
+          description: Specifies whether a tax payer or tax dependent in the household received unemployment benefits for market year 2021. May affect ATPC and CSR calulations due to income percentage capping if income is above 133% of the Federal poverty level. If the person who received unemployment is a tax dependent, only the eligible CSRs will be affected. Defaults to None
+          enum:
+          - Adult
+          - Dependent
+          - None
+          type: string
+        people:
+          description: people in household applying for coverage/seeking eligibility esimate; first is considered the subscriber
+          items:
+            $ref: '#/components/schemas/Person'
+          type: array
+        has_married_couple:
+          type: boolean
+        effective_date:
+          description: The effective date of the application (YYYY-MM-DD)
+          type: string
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+      example:
+        income: 20000
+        people:
+        - age: 34
+          dob: '1984-01-06'
+          is_pregnant: false
+          is_parent: false
+          uses_tobacco: false
+          gender: Male
+        has_married_couple: false
+      type: object
+    SBCScenario:
+      type: object
+      properties:
+        deductible:
+          type: number
+          format: float
+        copay:
+          type: number
+          format: float
+        coinsurance:
+          type: number
+          format: float
+        limit:
+          type: number
+          format: float
+    InsuranceMarketEnum:
+      enum:
+      - QHP
+      - MSP
+      type: string
+      properties: {}
+    CostSharingReductionEnum:
+      type: string
+      description: Cost-sharing reduction (CSR)
+      enum:
+      - Exchange variant (no CSR)
+      - Zero Cost Sharing Plan Variation
+      - Limited Cost Sharing Plan Variation
+      - 73% AV Level Silver Plan CSR
+      - 87% AV Level Silver Plan CSR
+      - 94% AV Level Silver Plan CSR
+      - Non-Exchange variant
+      - Unknown CSR
+      properties: {}
     Benefit:
       properties:
         name:
@@ -555,72 +631,9 @@ components:
           format: integer
           type: number
       type: object
-    Place:
-      properties:
-        countyfips:
-          description: 5-digit county FIPS code
-          type: string
-        state:
-          description: 2-letter USPS state abbreviation
-          type: string
-        zipcode:
-          description: 5-digit ZIP Code
-          type: string
-      required:
-      - countyfips
-      - state
-      - zipcode
-      example:
-        countyfips: '51107'
-        state: VA
-        zipcode: '20103'
-      type: object
-    MetalLevelEnum:
-      enum:
-      - Catastrophic
-      - Silver
-      - Bronze
-      - Gold
-      - Platinum
+    PlanID:
       type: string
-      properties: {}
-    SBCScenario:
-      type: object
-      properties:
-        deductible:
-          type: number
-          format: float
-        copay:
-          type: number
-          format: float
-        coinsurance:
-          type: number
-          format: float
-        limit:
-          type: number
-          format: float
-    ProductDivisionEnum:
-      enum:
-      - HealthCare
-      - Dental
-      type: string
-    GenderEnum:
-      enum:
-      - Male
-      - Female
-      type: string
-    CSRRequestEnum:
-      type: string
-      description: Cost-sharing reduction (CSR) override for requests
-      enum:
-      - CSR73
-      - CSR87
-      - CSR94
-      - LimitedCSR
-      - ZeroCSR
-    Relationship:
-      description: Should match one of the [listed valid relationships](#introduction/more-information-about-households).
-      type: string
+      pattern: ^[0-9]{5}[A-Z]{2}[0-9]{7}$
       properties: {}
     NetworkTierEnum:
       enum:
@@ -630,6 +643,49 @@ components:
       - Combined In-Out of Network
       type: string
       properties: {}
+    UtilizationEnum:
+      enum:
+      - Low
+      - Medium
+      - High
+      type: string
+    Relationship:
+      description: Should match one of the [listed valid relationships](#introduction/more-information-about-households).
+      type: string
+      properties: {}
+    QualityRating:
+      properties:
+        available:
+          type: boolean
+          description: True if the plan has a quality rating, otherwise false.  A plan can still be unrated when the quality rating is available
+        year:
+          x-example: 2019
+          type: integer
+        global_rating:
+          type: integer
+          minimum: 0
+          maximum: 5
+        global_not_rated_reason:
+          type: string
+        clinical_quality_management_rating:
+          type: integer
+          minimum: 0
+          maximum: 5
+        clinical_quality_management_not_rated_reason:
+          type: string
+        enrollee_experience_rating:
+          type: integer
+          minimum: 0
+          maximum: 5
+        enrollee_experience_not_rated_reason:
+          type: string
+        plan_efficiency_rating:
+          type: integer
+          minimum: 0
+          maximum: 5
+        plan_efficiency_not_rated_reason:
+          type: string
+      type: object
     Issuer:
       properties:
         eligible_dependents:
@@ -659,25 +715,39 @@ components:
           description: TTY customer service number)
           type: string
       type: object
-    RateArea:
+    Deductible:
       properties:
-        state:
-          description: 2-letter USPS abbreviation
+        amount:
+          type: number
+        csr:
+          $ref: '#/components/schemas/CostSharingReductionEnum'
+        family_cost:
+          $ref: '#/components/schemas/FamilyCostEnum'
+        network_tier:
+          $ref: '#/components/schemas/NetworkTierEnum'
+        type:
+          enum:
+          - Medical EHB Deductible
+          - Combined Medical and Drug EHB Deductible
+          - Drug EHB Deductible
           type: string
-        area:
-          description: Rate area number for the given state.
-          type: integer
+        individual:
+          description: Applies to individuals
+          type: boolean
+        family:
+          description: Applies to families
+          type: boolean
+        display_string:
+          type: string
+          description: An optional human-readable description
       type: object
-      example:
-        state: LA
-        area: 7
-    CertificationStatus:
-      type: string
+    MarketEnum:
       enum:
-      - Certified
-      - Not Certified
-      - Decertified
-      - Certified Off-Exchange SADP
+      - Individual
+      - SHOP
+      - Any
+      type: string
+      properties: {}
     PlanTypeEnum:
       enum:
       - Indemnity
@@ -686,48 +756,6 @@ components:
       - EPO
       - POS
       type: string
-    CostSharing:
-      properties:
-        coinsurance_options:
-          type: string
-        coinsurance_rate:
-          format: float
-          type: number
-        copay_amount:
-          type: number
-        copay_options:
-          type: string
-        network_tier:
-          $ref: '#/components/schemas/NetworkTierEnum'
-        csr:
-          $ref: '#/components/schemas/CostSharingReductionEnum'
-        display_string:
-          type: string
-      type: object
-    PlanID:
-      type: string
-      pattern: ^[0-9]{5}[A-Z]{2}[0-9]{7}$
-      properties: {}
-    DiseaseMgmtProgramsEnum:
-      enum:
-      - Asthma
-      - Heart Disease
-      - Depression
-      - Diabetes
-      - High Blood Pressure and High Cholesterol
-      - Low Back Pain
-      - Pain Management
-      - Pregnancy
-      - Weight Loss Programs
-      type: string
-      properties: {}
-    MarketEnum:
-      enum:
-      - Individual
-      - SHOP
-      - Any
-      type: string
-      properties: {}
     MOOP:
       description: maximum out-of-pocket
       properties:
@@ -759,34 +787,6 @@ components:
           type: string
           description: An optional human-readable description
       type: object
-    FamilyCostEnum:
-      description: family cost enumeration for MOOPs and deductibles
-      enum:
-      - Individual
-      - Family Per Person
-      - Family
-      type: string
-      properties: {}
-    SuppressionStatus:
-      type: string
-      enum:
-      - Available
-      - Suspended
-      - Closed
-      - Not Applicable
-    CostSharingReductionEnum:
-      type: string
-      description: Cost-sharing reduction (CSR)
-      enum:
-      - Exchange variant (no CSR)
-      - Zero Cost Sharing Plan Variation
-      - Limited Cost Sharing Plan Variation
-      - 73% AV Level Silver Plan CSR
-      - 87% AV Level Silver Plan CSR
-      - 94% AV Level Silver Plan CSR
-      - Non-Exchange variant
-      - Unknown CSR
-      properties: {}
   parameters:
     apikey:
       name: apikey
