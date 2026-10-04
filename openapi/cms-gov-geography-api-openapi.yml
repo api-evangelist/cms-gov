@@ -301,63 +301,25 @@ paths:
     - url: https://marketplace.api.healthcare.gov/api/v1
       description: Production
 components:
-  parameters:
-    zipcode:
-      description: 5 digit ZIP Code or 1-4 digit prefix of a ZIP Code
-      in: path
-      name: zipcode
-      required: true
-      x-example: '19123'
-      schema:
-        type: string
-    year-with-default:
-      x-example: 2019
-      name: year
-      description: 4 digit market year (Defaults to the current year when not specified).
-      in: query
-      required: false
-      schema:
-        type: number
-        format: integer
-    year-required:
-      x-example: 2019
-      name: year
-      description: 4 digit market year.
-      in: query
-      required: true
-      schema:
-        type: number
-        format: integer
-    fips:
-      description: 5-digit county FIPS code
-      in: path
-      name: fips
-      required: true
-      x-example: '37057'
-      schema:
-        type: string
-    apikey:
-      name: apikey
-      description: API key used for authentication
-      in: query
-      required: true
-      x-example: d687412e7b53146b2631dc01974ad0a4
-      schema:
-        type: string
   schemas:
-    ZIPCounty:
+    MarketplaceModelEnum:
+      enum:
+      - FFM
+      - FFMPartnership
+      - SBM
+      - SupportedSBM
+      type: string
+      properties: {}
+    Guideline:
       properties:
-        fips:
-          format: ^[0-9]{5}$
-          type: string
-        name:
-          type: string
-        state:
-          format: ^[A-Z]{2}$
-          type: string
-        zipcode:
-          format: ^[0-9]{5}$
-          type: string
+        household_size:
+          description: Total size of household
+          format: integer
+          type: number
+        guideline:
+          description: Federal poverty level guideline
+          format: integer
+          type: number
       type: object
     LowIncomeChild:
       properties:
@@ -374,17 +336,6 @@ components:
           format: float
           type: number
       type: object
-    Guideline:
-      properties:
-        household_size:
-          description: Total size of household
-          format: integer
-          type: number
-        guideline:
-          description: Federal poverty level guideline
-          format: integer
-          type: number
-      type: object
     County:
       properties:
         fips:
@@ -398,18 +349,6 @@ components:
           example: AZ
           type: string
       type: object
-    RateArea:
-      properties:
-        state:
-          description: 2-letter USPS abbreviation
-          type: string
-        area:
-          description: Rate area number for the given state.
-          type: integer
-      type: object
-      example:
-        state: LA
-        area: 7
     PovertyGuideline:
       properties:
         add_per_person_after_eight:
@@ -421,6 +360,67 @@ components:
           items:
             $ref: '#/components/schemas/Guideline'
           type: array
+      type: object
+    ZIPCounty:
+      properties:
+        fips:
+          format: ^[0-9]{5}$
+          type: string
+        name:
+          type: string
+        state:
+          format: ^[A-Z]{2}$
+          type: string
+        zipcode:
+          format: ^[0-9]{5}$
+          type: string
+      type: object
+    State:
+      properties:
+        abbrev:
+          description: 2-letter USPS abbreviation
+          type: string
+        fips:
+          description: 2-digit FIPS code
+          type: string
+        hix_name:
+          type: string
+        hix_url:
+          format: uri
+          type: string
+        marketplace:
+          $ref: '#/components/schemas/MarketplaceModelEnum'
+        name:
+          type: string
+        shop_hix_name:
+          type: string
+        shop_hix_url:
+          format: uri
+          type: string
+        shop_marketplace:
+          $ref: '#/components/schemas/MarketplaceModelEnum'
+        8962_link:
+          format: uri
+          type: string
+        8965_link:
+          format: uri
+          type: string
+        assister_program_url:
+          format: uri
+          type: string
+      example:
+        name: Nevada
+        abbrev: NV
+        fips: '32'
+        marketplace_model: FFM
+        shop_marketplace_model: FFM
+        hix_name: Nevada Health Link
+        hix_url: https://www.nevadahealthlink.com/
+        shop_hix_name: Nevada Health Link
+        shop_hix_url: https://www.nevadahealthlink.com/
+        8962_link: ''
+        8965_link: ''
+        assister_program_url: https://www.nevadahealthlink.com/find-assistance/
       type: object
     StateMedicaid:
       properties:
@@ -489,61 +489,61 @@ components:
           max_age: 18
           pc_fpl: 2.35
       type: object
-    MarketplaceModelEnum:
-      enum:
-      - FFM
-      - FFMPartnership
-      - SBM
-      - SupportedSBM
-      type: string
-      properties: {}
-    State:
+    RateArea:
       properties:
-        abbrev:
+        state:
           description: 2-letter USPS abbreviation
           type: string
-        fips:
-          description: 2-digit FIPS code
-          type: string
-        hix_name:
-          type: string
-        hix_url:
-          format: uri
-          type: string
-        marketplace:
-          $ref: '#/components/schemas/MarketplaceModelEnum'
-        name:
-          type: string
-        shop_hix_name:
-          type: string
-        shop_hix_url:
-          format: uri
-          type: string
-        shop_marketplace:
-          $ref: '#/components/schemas/MarketplaceModelEnum'
-        8962_link:
-          format: uri
-          type: string
-        8965_link:
-          format: uri
-          type: string
-        assister_program_url:
-          format: uri
-          type: string
-      example:
-        name: Nevada
-        abbrev: NV
-        fips: '32'
-        marketplace_model: FFM
-        shop_marketplace_model: FFM
-        hix_name: Nevada Health Link
-        hix_url: https://www.nevadahealthlink.com/
-        shop_hix_name: Nevada Health Link
-        shop_hix_url: https://www.nevadahealthlink.com/
-        8962_link: ''
-        8965_link: ''
-        assister_program_url: https://www.nevadahealthlink.com/find-assistance/
+        area:
+          description: Rate area number for the given state.
+          type: integer
       type: object
+      example:
+        state: LA
+        area: 7
+  parameters:
+    year-required:
+      x-example: 2019
+      name: year
+      description: 4 digit market year.
+      in: query
+      required: true
+      schema:
+        type: number
+        format: integer
+    year-with-default:
+      x-example: 2019
+      name: year
+      description: 4 digit market year (Defaults to the current year when not specified).
+      in: query
+      required: false
+      schema:
+        type: number
+        format: integer
+    zipcode:
+      description: 5 digit ZIP Code or 1-4 digit prefix of a ZIP Code
+      in: path
+      name: zipcode
+      required: true
+      x-example: '19123'
+      schema:
+        type: string
+    apikey:
+      name: apikey
+      description: API key used for authentication
+      in: query
+      required: true
+      x-example: d687412e7b53146b2631dc01974ad0a4
+      schema:
+        type: string
+    fips:
+      description: 5-digit county FIPS code
+      in: path
+      name: fips
+      required: true
+      x-example: '37057'
+      schema:
+        type: string
   securitySchemes:
     API_Key:
       x-summary: API Key Auth

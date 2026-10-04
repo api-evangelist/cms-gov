@@ -428,96 +428,9 @@ paths:
       - bearer_token: []
 components:
   schemas:
-    BulkResponseBody:
-      type: object
-      properties:
-        JobID:
-          type: integer
-          format: uint64
-        error:
-          description: Information about error files, including URLs for downloading
-          type: array
-          items:
-            $ref: '#/components/schemas/fileItem'
-          x-go-name: Errors
-        output:
-          description: Information about generated data files, including URLs for downloading
-          type: array
-          items:
-            $ref: '#/components/schemas/fileItem'
-          x-go-name: Files
-        request:
-          description: URL of the bulk data export request
-          type: string
-          x-go-name: RequestURL
-        requiresAccessToken:
-          description: Indicates whether an access token is required to download generated data files
-          type: boolean
-          x-go-name: RequiresAccessToken
-        transactionTime:
-          description: Server time when the query was run
-          type: string
-          format: date-time
-          x-go-name: TransactionTime
-      x-go-package: github.com/CMSgov/bcda-app/bcda/api
-    OperationOutcomeResponse:
-      type: object
-      properties:
-        Issue:
-          type: object
-          required:
-          - Severity
-          - Code
-          - Diagnostics
-          properties:
-            Severity:
-              description: 'Severity of the outcome: fatal | error | warning | information'
-              type: string
-            Code:
-              description: Error or warning code
-              type: string
-            Diagnostics:
-              description: Additional diagnostic information about the issue
-              type: string
-      x-go-package: github.com/CMSgov/bcda-app/bcda/models
-    BundleResponse:
-      type: object
-      properties:
-        entry:
-          type: array
-          items:
-            $ref: '#/components/schemas/EntryResponse'
-          x-go-name: Entry
-        resourceType:
-          description: Bundle
-          type: string
-          x-go-name: ResourceType
-        total:
-          description: Total number of entries
-          type: integer
-          format: int64
-          x-go-name: Total
-        type:
-          description: Searchset
-          type: string
-          x-go-name: Type
-      x-go-package: github.com/CMSgov/bcda-app/bcda/models
     JobStatus:
       type: string
       x-go-package: github.com/CMSgov/bcda-app/bcda/models
-    fileItem:
-      type: object
-      properties:
-        type:
-          description: FHIR resource type of file contents
-          type: string
-          x-go-name: Type
-        url:
-          description: URL of the file
-          type: string
-          x-go-name: URL
-      x-go-name: FileItem
-      x-go-package: github.com/CMSgov/bcda-app/bcda/api
     EntryResponse:
       type: object
       properties:
@@ -585,6 +498,93 @@ components:
               x-go-name: Status
           x-go-name: Resource
       x-go-package: github.com/CMSgov/bcda-app/bcda/models
+    OperationOutcomeResponse:
+      type: object
+      properties:
+        Issue:
+          type: object
+          required:
+          - Severity
+          - Code
+          - Diagnostics
+          properties:
+            Severity:
+              description: 'Severity of the outcome: fatal | error | warning | information'
+              type: string
+            Code:
+              description: Error or warning code
+              type: string
+            Diagnostics:
+              description: Additional diagnostic information about the issue
+              type: string
+      x-go-package: github.com/CMSgov/bcda-app/bcda/models
+    fileItem:
+      type: object
+      properties:
+        type:
+          description: FHIR resource type of file contents
+          type: string
+          x-go-name: Type
+        url:
+          description: URL of the file
+          type: string
+          x-go-name: URL
+      x-go-name: FileItem
+      x-go-package: github.com/CMSgov/bcda-app/bcda/api
+    BundleResponse:
+      type: object
+      properties:
+        entry:
+          type: array
+          items:
+            $ref: '#/components/schemas/EntryResponse'
+          x-go-name: Entry
+        resourceType:
+          description: Bundle
+          type: string
+          x-go-name: ResourceType
+        total:
+          description: Total number of entries
+          type: integer
+          format: int64
+          x-go-name: Total
+        type:
+          description: Searchset
+          type: string
+          x-go-name: Type
+      x-go-package: github.com/CMSgov/bcda-app/bcda/models
+    BulkResponseBody:
+      type: object
+      properties:
+        JobID:
+          type: integer
+          format: uint64
+        error:
+          description: Information about error files, including URLs for downloading
+          type: array
+          items:
+            $ref: '#/components/schemas/fileItem'
+          x-go-name: Errors
+        output:
+          description: Information about generated data files, including URLs for downloading
+          type: array
+          items:
+            $ref: '#/components/schemas/fileItem'
+          x-go-name: Files
+        request:
+          description: URL of the bulk data export request
+          type: string
+          x-go-name: RequestURL
+        requiresAccessToken:
+          description: Indicates whether an access token is required to download generated data files
+          type: boolean
+          x-go-name: RequiresAccessToken
+        transactionTime:
+          description: Server time when the query was run
+          type: string
+          format: date-time
+          x-go-name: TransactionTime
+      x-go-package: github.com/CMSgov/bcda-app/bcda/api
   securitySchemes:
     basic_auth:
       type: http

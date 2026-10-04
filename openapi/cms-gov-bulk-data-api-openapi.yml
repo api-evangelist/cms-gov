@@ -153,41 +153,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    APT:
-      properties:
-        market_year:
-          type: integer
-          example: 2023
-        tiers:
-          items:
-            $ref: '#/components/schemas/APTTier'
-          type: array
-      type: object
-    Range:
-      properties:
-        min:
-          format: float
-          type: number
-        max:
-          format: float
-          type: number
-      type: object
-    CountyZips:
-      properties:
-        name:
-          type: string
-          example: Sedgwick
-        fips:
-          format: ^[0-9]{5}$
-          type: string
-          example: 20173
-        zips:
-          items:
-            format: ^[0-9]{5}$
-            example: 67212
-            type: string
-          type: array
-      type: object
     DecileMapping:
       properties:
         low:
@@ -197,16 +162,14 @@ components:
         high:
           $ref: '#/components/schemas/DecileUtilizationMapping'
       type: object
-    StateCounty:
+    APT:
       properties:
-        state:
-          description: 2-letter USPS state abbreviation
-          example: KS
-          type: string
-        counties:
-          description: list of counties for given state
+        market_year:
+          type: integer
+          example: 2023
+        tiers:
           items:
-            $ref: '#/components/schemas/CountyZips'
+            $ref: '#/components/schemas/APTTier'
           type: array
       type: object
     LowIncomeChild:
@@ -224,16 +187,6 @@ components:
           format: float
           type: number
       type: object
-    CrosswalkCode:
-      properties:
-        code:
-          description: Integer code value
-          format: integer
-          type: number
-        description:
-          description: Human readable code description
-          type: string
-      type: object
     APTTier:
       properties:
         pctFPL:
@@ -242,37 +195,6 @@ components:
         pctPremium:
           description: Percentage of the premium to pay based on the income range
           $ref: '#/components/schemas/Range'
-      type: object
-    DecileUtilizationMapping:
-      properties:
-        male:
-          $ref: '#/components/schemas/DecileUtilizationAgeMap'
-        femaile:
-          $ref: '#/components/schemas/DecileUtilizationAgeMap'
-      type: object
-    RateAreaCounty:
-      properties:
-        rateArea:
-          description: Rate area number for the given state.
-          type: integer
-          example: 6
-        counties:
-          description: list of counties for given state
-          items:
-            $ref: '#/components/schemas/CountyZips'
-          type: array
-      type: object
-    StateRateArea:
-      properties:
-        state:
-          description: 2-letter USPS state abbreviation
-          example: KS
-          type: string
-        rateAreas:
-          description: list of rate areas for given state
-          items:
-            $ref: '#/components/schemas/RateAreaCounty'
-          type: array
       type: object
     DecileEnum:
       enum:
@@ -288,20 +210,22 @@ components:
       - Decile 10
       type: string
       properties: {}
-    Crosswalk:
+    DecileUtilizationAgeMap:
       properties:
-        levels:
-          items:
-            $ref: '#/components/schemas/CrosswalkCode'
-          type: array
-        reasons:
-          items:
-            $ref: '#/components/schemas/CrosswalkCode'
-          type: array
-        data:
-          items:
-            $ref: '#/components/schemas/CrosswalkData'
-          type: array
+        '6':
+          $ref: '#/components/schemas/DecileEnum'
+        '18':
+          $ref: '#/components/schemas/DecileEnum'
+        '26':
+          $ref: '#/components/schemas/DecileEnum'
+        '35':
+          $ref: '#/components/schemas/DecileEnum'
+        '45':
+          $ref: '#/components/schemas/DecileEnum'
+        '55':
+          $ref: '#/components/schemas/DecileEnum'
+        '999':
+          $ref: '#/components/schemas/DecileEnum'
       type: object
     StateMedicaid:
       properties:
@@ -370,6 +294,104 @@ components:
           max_age: 18
           pc_fpl: 2.35
       type: object
+    StateCounty:
+      properties:
+        state:
+          description: 2-letter USPS state abbreviation
+          example: KS
+          type: string
+        counties:
+          description: list of counties for given state
+          items:
+            $ref: '#/components/schemas/CountyZips'
+          type: array
+      type: object
+    DecileUtilizationMapping:
+      properties:
+        male:
+          $ref: '#/components/schemas/DecileUtilizationAgeMap'
+        femaile:
+          $ref: '#/components/schemas/DecileUtilizationAgeMap'
+      type: object
+    StateMedicaidList:
+      properties:
+        fiscal_year:
+          description: 4 digit fiscal year
+          format: integer
+          type: number
+          example: 2023
+        fiscal_quarter:
+          description: Fiscal quarter (1 - 4)
+          format: integer
+          type: number
+          example: 1
+        states:
+          items:
+            $ref: '#/components/schemas/StateMedicaid'
+          type: array
+      type: object
+    CrosswalkCode:
+      properties:
+        code:
+          description: Integer code value
+          format: integer
+          type: number
+        description:
+          description: Human readable code description
+          type: string
+      type: object
+    RateAreaCounty:
+      properties:
+        rateArea:
+          description: Rate area number for the given state.
+          type: integer
+          example: 6
+        counties:
+          description: list of counties for given state
+          items:
+            $ref: '#/components/schemas/CountyZips'
+          type: array
+      type: object
+    Crosswalk:
+      properties:
+        levels:
+          items:
+            $ref: '#/components/schemas/CrosswalkCode'
+          type: array
+        reasons:
+          items:
+            $ref: '#/components/schemas/CrosswalkCode'
+          type: array
+        data:
+          items:
+            $ref: '#/components/schemas/CrosswalkData'
+          type: array
+      type: object
+    Range:
+      properties:
+        min:
+          format: float
+          type: number
+        max:
+          format: float
+          type: number
+      type: object
+    CountyZips:
+      properties:
+        name:
+          type: string
+          example: Sedgwick
+        fips:
+          format: ^[0-9]{5}$
+          type: string
+          example: 20173
+        zips:
+          items:
+            format: ^[0-9]{5}$
+            example: 67212
+            type: string
+          type: array
+      type: object
     CrosswalkData:
       properties:
         state:
@@ -395,41 +417,27 @@ components:
             type: string
           type: array
       type: object
-    DecileUtilizationAgeMap:
+    StateRateArea:
       properties:
-        '6':
-          $ref: '#/components/schemas/DecileEnum'
-        '18':
-          $ref: '#/components/schemas/DecileEnum'
-        '26':
-          $ref: '#/components/schemas/DecileEnum'
-        '35':
-          $ref: '#/components/schemas/DecileEnum'
-        '45':
-          $ref: '#/components/schemas/DecileEnum'
-        '55':
-          $ref: '#/components/schemas/DecileEnum'
-        '999':
-          $ref: '#/components/schemas/DecileEnum'
-      type: object
-    StateMedicaidList:
-      properties:
-        fiscal_year:
-          description: 4 digit fiscal year
-          format: integer
-          type: number
-          example: 2023
-        fiscal_quarter:
-          description: Fiscal quarter (1 - 4)
-          format: integer
-          type: number
-          example: 1
-        states:
+        state:
+          description: 2-letter USPS state abbreviation
+          example: KS
+          type: string
+        rateAreas:
+          description: list of rate areas for given state
           items:
-            $ref: '#/components/schemas/StateMedicaid'
+            $ref: '#/components/schemas/RateAreaCounty'
           type: array
       type: object
   parameters:
+    apikey:
+      name: apikey
+      description: API key used for authentication
+      in: query
+      required: true
+      x-example: d687412e7b53146b2631dc01974ad0a4
+      schema:
+        type: string
     year-required:
       x-example: 2019
       name: year
@@ -439,14 +447,6 @@ components:
       schema:
         type: number
         format: integer
-    apikey:
-      name: apikey
-      description: API key used for authentication
-      in: query
-      required: true
-      x-example: d687412e7b53146b2631dc01974ad0a4
-      schema:
-        type: string
   securitySchemes:
     API_Key:
       x-summary: API Key Auth

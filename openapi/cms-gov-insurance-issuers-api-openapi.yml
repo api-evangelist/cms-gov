@@ -96,10 +96,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Relationship:
-      description: Should match one of the [listed valid relationships](#introduction/more-information-about-households).
-      type: string
-      properties: {}
     Issuer:
       properties:
         eligible_dependents:
@@ -129,7 +125,19 @@ components:
           description: TTY customer service number)
           type: string
       type: object
+    Relationship:
+      description: Should match one of the [listed valid relationships](#introduction/more-information-about-households).
+      type: string
+      properties: {}
   parameters:
+    apikey:
+      name: apikey
+      description: API key used for authentication
+      in: query
+      required: true
+      x-example: d687412e7b53146b2631dc01974ad0a4
+      schema:
+        type: string
     year-with-default:
       x-example: 2019
       name: year
@@ -139,14 +147,6 @@ components:
       schema:
         type: number
         format: integer
-    apikey:
-      name: apikey
-      description: API key used for authentication
-      in: query
-      required: true
-      x-example: d687412e7b53146b2631dc01974ad0a4
-      schema:
-        type: string
   securitySchemes:
     API_Key:
       x-summary: API Key Auth

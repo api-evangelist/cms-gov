@@ -90,9 +90,7 @@
     "cms-gov-provider-drug-coverage-api-openapi.yml",
     "cms-gov-status-api-openapi.yml"
   ],
-  "archived": [
-    "deleted 1 superseded output(s) from the previous generation"
-  ],
+  "archived": [],
   "errors": [
     "cms-1-export-api-openapi.yml: dangling $ref: #/components/schemas/OperationOutcome",
     "cms-2-status-api-openapi.yml: dangling $ref: #/components/schemas/OperationOutcome",
@@ -176,8 +174,7 @@
     "tag 'Group' spans 2 source specs (cms-gov-dpc-openapi.yml, cms-group-api-openapi.yml): per-path servers applied",
     "tag 'Plans' spans 2 source specs (cms-gov-marketplace-openapi.yml, cms-plans-api-openapi.yml): per-path servers applied",
     "tag 'Catalog' spans 2 source specs (cms-gov-open-data-openapi.yml, cms-gov-provider-data-openapi.yml): per-path servers applied",
-    "superseded outputs removed: cms-gov-capability-api-openapi.yml",
-    "apis.yml register: written (+0 apis, 56 total)"
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "_original/cms-explanationofbenefit-api-openapi.yml: archived document superseded by a larger archived document",
@@ -196,7 +193,6 @@
     "cms-gov-bulk-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "cms-gov-bulk-export-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "cms-gov-capabilities-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "cms-gov-capability-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "cms-gov-catalog-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "cms-gov-code-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "cms-gov-cost-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",

@@ -134,10 +134,153 @@ components:
           type: array
           items:
             type: object
-    ContactPointSystemCode:
-      description: 'Telecommunications form for contact point
+    CapabilityStatement_Messaging_Endpoint:
+      description: Where messages should be sent
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/Uri'
+        extension:
+          description: Additional Content defined by implementations
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        modifier_extension:
+          description: Extensions that cannot be ignored
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: ModifierExtension
+        protocol:
+          $ref: '#/components/schemas/Coding'
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/resources_go_proto
+    NarrativeStatusCode_Value:
+      type: integer
+      format: int32
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
+    CapabilityStatement_Messaging_SupportedMessage:
+      description: Messages supported by this system
+      type: object
+      properties:
+        definition:
+          $ref: '#/components/schemas/Reference'
+        extension:
+          description: Additional Content defined by implementations
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        mode:
+          $ref: '#/components/schemas/EventCapabilityModeCode'
+        modifier_extension:
+          description: Extensions that cannot be ignored
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: ModifierExtension
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/resources_go_proto
+    Extension_ValueX:
+      description: Value of extension
+      type: object
+      properties:
+        Choice:
+          $ref: '#/components/schemas/isExtension_ValueX_Choice'
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
+    SearchParamTypeCode:
+      description: See http://hl7.org/fhir/ValueSet/search-param-type
+      type: object
+      title: Data types allowed to be used for search parameters.
+      properties:
+        extension:
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        value:
+          $ref: '#/components/schemas/SearchParamTypeCode_Value'
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
+    ReferenceHandlingPolicyCode:
+      description: See http://hl7.org/fhir/ValueSet/reference-handling-policy
+      type: object
+      title: A set of flags that defines how references are supported.
+      properties:
+        extension:
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        value:
+          $ref: '#/components/schemas/ReferenceHandlingPolicyCode_Value'
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
+    EventCapabilityModeCode_Value:
+      type: integer
+      format: int32
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
+    CapabilityStatement_Rest_Security:
+      description: Information about security of implementation
+      type: object
+      properties:
+        certificate:
+          type: array
+          items:
+            $ref: '#/components/schemas/CapabilityStatement_Rest_Security_Certificate'
+          x-go-name: Certificate
+        cors:
+          type: boolean
+        description:
+          $ref: '#/components/schemas/String'
+        extension:
+          description: Additional Content defined by implementations
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        modifier_extension:
+          description: Extensions that cannot be ignored
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: ModifierExtension
+        service:
+          description: OAuth | SMART-on-FHIR | NTLM | Basic | Kerberos | Certificates
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeableConcept'
+          x-go-name: Service
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/resources_go_proto
+    NarrativeStatusCode:
+      description: 'The status of a resource narrative
 
-        See http://hl7.org/fhir/ValueSet/contact-point-system'
+        See http://hl7.org/fhir/ValueSet/narrative-status'
+      type: object
+      properties:
+        extension:
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        value:
+          $ref: '#/components/schemas/NarrativeStatusCode_Value'
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
+    UnsignedInt:
+      description: 'Auto-generated from StructureDefinition for unsignedInt, last updated
+
+        2017-04-19T07:44:43.294+10:00. Primitive Type unsignedInt. See
+
+        http://hl7.org/fhir/StructureDefinition/unsignedInt'
       type: object
       properties:
         extension:
@@ -149,16 +292,167 @@ components:
         id:
           $ref: '#/components/schemas/String'
         value:
-          $ref: '#/components/schemas/ContactPointSystemCode_Value'
+          description: Primitive value for unsignedInt
+          type: integer
+          format: uint32
+          x-go-name: Value
       x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
-    SystemRestfulInteractionCode_Value:
+    ConditionalReadStatusCode_Value:
       type: integer
       format: int32
       x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
-    SystemRestfulInteractionCode:
-      description: http://hl7.org/fhir/ValueSet/system-restful-interaction
+    Identifier:
+      description: 'Auto-generated from StructureDefinition for Identifier, last updated
+
+        2017-04-19T07:44:43.294+10:00. An identifier intended for computation. See
+
+        http://hl7.org/fhir/StructureDefinition/Identifier'
       type: object
-      title: Operations supported by REST at the system level.
+      properties:
+        assigner:
+          $ref: '#/components/schemas/Reference'
+        extension:
+          description: Additional Content defined by implementations
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        period:
+          $ref: '#/components/schemas/Period'
+        system:
+          $ref: '#/components/schemas/Uri'
+        type:
+          $ref: '#/components/schemas/CodeableConcept'
+        use:
+          $ref: '#/components/schemas/IdentifierUseCode'
+        value:
+          $ref: '#/components/schemas/String'
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
+    Reference:
+      description: 'A reference from one resource to another
+
+        See https://www.hl7.org/fhir/datatypes.html#Reference'
+      type: object
+      properties:
+        Reference:
+          $ref: '#/components/schemas/isReference_Reference'
+        display:
+          $ref: '#/components/schemas/String'
+        extension:
+          description: Additional Content defined by implementations
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        identifier:
+          $ref: '#/components/schemas/Identifier'
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
+    Code:
+      description: 'Auto-generated from StructureDefinition for code, last updated
+
+        2017-04-19T07:44:43.294+10:00. Primitive Type code. See
+
+        http://hl7.org/fhir/StructureDefinition/code'
+      type: object
+      properties:
+        extension:
+          description: Additional Content defined by implementations
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        value:
+          description: Primitive value for code
+          type: string
+          x-go-name: Value
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
+    SearchParamTypeCode_Value:
+      type: integer
+      format: int32
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
+    isReference_Reference:
+      type: object
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
+    ContactPointSystemCode_Value:
+      description: Primitive value for code
+      type: integer
+      format: int32
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
+    ContactPointUseCode:
+      description: 'Use of contact point
+
+        See http://hl7.org/fhir/ValueSet/contact-point-use'
+      type: object
+      properties:
+        extension:
+          description: Additional Content defined by implementations
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        value:
+          $ref: '#/components/schemas/ContactPointUseCode_Value'
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
+    Uri:
+      description: 'Auto-generated from StructureDefinition for uri, last updated
+
+        2017-04-19T07:44:43.294+10:00. Primitive Type uri. See
+
+        http://hl7.org/fhir/StructureDefinition/uri'
+      type: object
+      properties:
+        extension:
+          description: Additional Content defined by implementations
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        value:
+          description: Primitive value for uri
+          type: string
+          x-go-name: Value
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
+    Coding:
+      description: 'Auto-generated from StructureDefinition for Coding, last updated
+
+        2017-04-19T07:44:43.294+10:00. A reference to a code defined by a terminology
+
+        system. See http://hl7.org/fhir/StructureDefinition/Coding'
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/Code'
+        display:
+          $ref: '#/components/schemas/String'
+        extension:
+          description: Additional Content defined by implementations
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        system:
+          $ref: '#/components/schemas/Uri'
+        user_selected:
+          type: boolean
+        version:
+          $ref: '#/components/schemas/String'
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
+    MessageSignificanceCategoryCode:
+      description: See http://hl7.org/fhir/ValueSet/message-significance-category
+      type: object
+      title: The impact of the content of a message.
       properties:
         extension:
           type: array
@@ -168,8 +462,266 @@ components:
         id:
           $ref: '#/components/schemas/String'
         value:
-          $ref: '#/components/schemas/SystemRestfulInteractionCode_Value'
+          $ref: '#/components/schemas/MessageSignificanceCategoryCode_Value'
       x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
+    String:
+      description: 'Auto-generated from StructureDefinition for string, last updated
+
+        2017-04-19T07:44:43.294+10:00. Primitive Type string. See
+
+        http://hl7.org/fhir/StructureDefinition/string'
+      type: object
+      properties:
+        extension:
+          description: Additional Content defined by implementations
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        value:
+          description: Primitive value for string
+          type: string
+          x-go-name: Value
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
+    ContactDetail:
+      description: 'Auto-generated from StructureDefinition for ContactDetail, last updated
+
+        2017-04-19T07:44:43.294+10:00. Contact information. See
+
+        http://hl7.org/fhir/StructureDefinition/ContactDetail'
+      type: object
+      properties:
+        extension:
+          description: Additional Content defined by implementations
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        name:
+          $ref: '#/components/schemas/String'
+        telecom:
+          description: Contact details for individual or organization
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactPoint'
+          x-go-name: Telecom
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/metadatatypes_go_proto
+    Xhtml:
+      description: 'Auto-generated from StructureDefinition for xhtml, last updated
+
+        2017-04-19T07:44:43.294+10:00. Primitive Type xhtml. See
+
+        http://hl7.org/fhir/StructureDefinition/xhtml'
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/String'
+        value:
+          description: Actual xhtml
+          type: string
+          x-go-name: Value
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
+    ResourceTypeCode:
+      description: See http://hl7.org/fhir/ValueSet/resource-types
+      type: object
+      title: One of the resource types defined as part of FHIR.
+      properties:
+        extension:
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        value:
+          $ref: '#/components/schemas/ResourceTypeCode_Value'
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
+    DocumentModeCode:
+      description: See http://hl7.org/fhir/ValueSet/document-mode
+      type: object
+      title: Whether the application produces or consumes documents.
+      properties:
+        extension:
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        value:
+          $ref: '#/components/schemas/DocumentModeCode_Value'
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
+    CapabilityStatement_Document:
+      description: Document definition
+      type: object
+      properties:
+        documentation:
+          $ref: '#/components/schemas/String'
+        extension:
+          description: Additional Content defined by implementations
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        mode:
+          $ref: '#/components/schemas/DocumentModeCode'
+        modifier_extension:
+          description: Extensions that cannot be ignored
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: ModifierExtension
+        profile:
+          $ref: '#/components/schemas/Reference'
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/resources_go_proto
+    DateTime:
+      description: 'Auto-generated from StructureDefinition for dateTime, last updated
+
+        2017-04-19T07:44:43.294+10:00. Primitive Type dateTime. See
+
+        http://hl7.org/fhir/StructureDefinition/dateTime'
+      type: object
+      properties:
+        extension:
+          description: Additional Content defined by implementations
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        precision:
+          $ref: '#/components/schemas/DateTime_Precision'
+        timezone:
+          type: string
+          x-go-name: Timezone
+        value_us:
+          description: Primitive value for dateTime
+          type: integer
+          format: int64
+          x-go-name: ValueUs
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
+    CapabilityStatement_Rest_Security_Certificate:
+      description: Certificates associated with security profiles
+      type: object
+      properties:
+        blob:
+          $ref: '#/components/schemas/Base64Binary'
+        extension:
+          description: Additional Content defined by implementations
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        modifier_extension:
+          description: Extensions that cannot be ignored
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: ModifierExtension
+        type:
+          $ref: '#/components/schemas/MimeTypeCode'
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/resources_go_proto
+    Narrative:
+      description: 'Auto-generated from StructureDefinition for Narrative, last updated
+
+        2017-04-19T07:44:43.294+10:00. A human-readable formatted text, including
+
+        images. See http://hl7.org/fhir/StructureDefinition/Narrative'
+      type: object
+      properties:
+        div:
+          $ref: '#/components/schemas/Xhtml'
+        extension:
+          description: Additional Content defined by implementations
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        status:
+          $ref: '#/components/schemas/NarrativeStatusCode'
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/metadatatypes_go_proto
+    RestfulCapabilityModeCode_Value:
+      type: integer
+      format: int32
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
+    ConditionalReadStatusCode:
+      description: See http://hl7.org/fhir/ValueSet/conditional-read-status
+      type: object
+      title: A code that indicates how the server supports conditional read.
+      properties:
+        extension:
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        value:
+          $ref: '#/components/schemas/ConditionalReadStatusCode_Value'
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
+    CapabilityStatement_Rest:
+      description: If the endpoint is a RESTful one
+      type: object
+      properties:
+        compartment:
+          description: Compartments served/used by system
+          type: array
+          items:
+            $ref: '#/components/schemas/Uri'
+          x-go-name: Compartment
+        documentation:
+          $ref: '#/components/schemas/String'
+        extension:
+          description: Additional Content defined by implementations
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        interaction:
+          type: array
+          items:
+            $ref: '#/components/schemas/CapabilityStatement_Rest_SystemInteraction'
+          x-go-name: Interaction
+        mode:
+          $ref: '#/components/schemas/RestfulCapabilityModeCode'
+        modifier_extension:
+          description: Extensions that cannot be ignored
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: ModifierExtension
+        operation:
+          type: array
+          items:
+            $ref: '#/components/schemas/CapabilityStatement_Rest_Operation'
+          x-go-name: Operation
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/CapabilityStatement_Rest_Resource'
+          x-go-name: Resource
+        search_param:
+          description: Search parameters for searching all resources
+          type: array
+          items:
+            $ref: '#/components/schemas/CapabilityStatement_Rest_Resource_SearchParam'
+          x-go-name: SearchParam
+        security:
+          $ref: '#/components/schemas/CapabilityStatement_Rest_Security'
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/resources_go_proto
     CapabilityStatement_2:
       description: 'Auto-generated from StructureDefinition for CapabilityStatement, last updated
 
@@ -302,37 +854,20 @@ components:
         version:
           $ref: '#/components/schemas/String'
       x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/resources_go_proto
-    NarrativeStatusCode_Value:
+    TypeRestfulInteractionCode_Value:
       type: integer
       format: int32
       x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
-    SearchParamTypeCode:
-      description: See http://hl7.org/fhir/ValueSet/search-param-type
-      type: object
-      title: Data types allowed to be used for search parameters.
-      properties:
-        extension:
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        value:
-          $ref: '#/components/schemas/SearchParamTypeCode_Value'
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
-    CapabilityStatement_Rest:
-      description: If the endpoint is a RESTful one
+    Period:
+      description: 'Auto-generated from StructureDefinition for Period, last updated
+
+        2017-04-19T07:44:43.294+10:00. Time range defined by start and end date/time.
+
+        See http://hl7.org/fhir/StructureDefinition/Period'
       type: object
       properties:
-        compartment:
-          description: Compartments served/used by system
-          type: array
-          items:
-            $ref: '#/components/schemas/Uri'
-          x-go-name: Compartment
-        documentation:
-          $ref: '#/components/schemas/String'
+        end:
+          $ref: '#/components/schemas/DateTime'
         extension:
           description: Additional Content defined by implementations
           type: array
@@ -341,52 +876,22 @@ components:
           x-go-name: Extension
         id:
           $ref: '#/components/schemas/String'
-        interaction:
-          type: array
-          items:
-            $ref: '#/components/schemas/CapabilityStatement_Rest_SystemInteraction'
-          x-go-name: Interaction
-        mode:
-          $ref: '#/components/schemas/RestfulCapabilityModeCode'
-        modifier_extension:
-          description: Extensions that cannot be ignored
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: ModifierExtension
-        operation:
-          type: array
-          items:
-            $ref: '#/components/schemas/CapabilityStatement_Rest_Operation'
-          x-go-name: Operation
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/CapabilityStatement_Rest_Resource'
-          x-go-name: Resource
-        search_param:
-          description: Search parameters for searching all resources
-          type: array
-          items:
-            $ref: '#/components/schemas/CapabilityStatement_Rest_Resource_SearchParam'
-          x-go-name: SearchParam
-        security:
-          $ref: '#/components/schemas/CapabilityStatement_Rest_Security'
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/resources_go_proto
-    DateTime_Precision:
-      type: integer
-      format: int32
+        start:
+          $ref: '#/components/schemas/DateTime'
       x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
-    ReferenceHandlingPolicyCode_Value:
-      type: integer
-      format: int32
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
-    CapabilityStatement_Messaging_Endpoint:
-      description: Where messages should be sent
+    UsageContext_Value:
+      description: Value that defines the context
       type: object
       properties:
-        address:
-          $ref: '#/components/schemas/Uri'
+        Value:
+          $ref: '#/components/schemas/isUsageContext_Value_Value'
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/metadatatypes_go_proto
+    CapabilityStatement_Rest_Operation:
+      description: Definition of an operation or a custom query
+      type: object
+      properties:
+        definition:
+          $ref: '#/components/schemas/Reference'
         extension:
           description: Additional Content defined by implementations
           type: array
@@ -401,8 +906,8 @@ components:
           items:
             $ref: '#/components/schemas/Extension'
           x-go-name: ModifierExtension
-        protocol:
-          $ref: '#/components/schemas/Coding'
+        name:
+          $ref: '#/components/schemas/String'
       x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/resources_go_proto
     PositiveInt:
       description: 'Auto-generated from StructureDefinition for positiveInt, last updated
@@ -426,14 +931,20 @@ components:
           format: uint32
           x-go-name: Value
       x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
-    DateTime:
-      description: 'Auto-generated from StructureDefinition for dateTime, last updated
+    CodeableConcept:
+      description: 'Auto-generated from StructureDefinition for CodeableConcept, last updated
 
-        2017-04-19T07:44:43.294+10:00. Primitive Type dateTime. See
+        2017-04-19T07:44:43.294+10:00. Concept - reference to a terminology or just
 
-        http://hl7.org/fhir/StructureDefinition/dateTime'
+        text. See http://hl7.org/fhir/StructureDefinition/CodeableConcept'
       type: object
       properties:
+        coding:
+          description: Code defined by a terminology system
+          type: array
+          items:
+            $ref: '#/components/schemas/Coding'
+          x-go-name: Coding
         extension:
           description: Additional Content defined by implementations
           type: array
@@ -442,23 +953,14 @@ components:
           x-go-name: Extension
         id:
           $ref: '#/components/schemas/String'
-        precision:
-          $ref: '#/components/schemas/DateTime_Precision'
-        timezone:
-          type: string
-          x-go-name: Timezone
-        value_us:
-          description: Primitive value for dateTime
-          type: integer
-          format: int64
-          x-go-name: ValueUs
+        text:
+          $ref: '#/components/schemas/String'
       x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
-    CapabilityStatement_Messaging_SupportedMessage:
-      description: Messages supported by this system
+    IdentifierUseCode:
+      description: See http://hl7.org/fhir/ValueSet/identifier-use
       type: object
+      title: Identifies the purpose for this identifier, if known .
       properties:
-        definition:
-          $ref: '#/components/schemas/Reference'
         extension:
           description: Additional Content defined by implementations
           type: array
@@ -467,21 +969,15 @@ components:
           x-go-name: Extension
         id:
           $ref: '#/components/schemas/String'
-        mode:
-          $ref: '#/components/schemas/EventCapabilityModeCode'
-        modifier_extension:
-          description: Extensions that cannot be ignored
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: ModifierExtension
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/resources_go_proto
-    CapabilityStatement_Rest_Security_Certificate:
-      description: Certificates associated with security profiles
+        value:
+          $ref: '#/components/schemas/IdentifierUseCode_Value'
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
+    ContactPointSystemCode:
+      description: 'Telecommunications form for contact point
+
+        See http://hl7.org/fhir/ValueSet/contact-point-system'
       type: object
       properties:
-        blob:
-          $ref: '#/components/schemas/Base64Binary'
         extension:
           description: Additional Content defined by implementations
           type: array
@@ -490,19 +986,19 @@ components:
           x-go-name: Extension
         id:
           $ref: '#/components/schemas/String'
-        modifier_extension:
-          description: Extensions that cannot be ignored
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: ModifierExtension
-        type:
-          $ref: '#/components/schemas/MimeTypeCode'
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/resources_go_proto
-    MessageSignificanceCategoryCode:
-      description: See http://hl7.org/fhir/ValueSet/message-significance-category
+        value:
+          $ref: '#/components/schemas/ContactPointSystemCode_Value'
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
+    ContainedResource:
       type: object
-      title: The impact of the content of a message.
+      properties:
+        OneofResource:
+          $ref: '#/components/schemas/isContainedResource_OneofResource'
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/resources_go_proto
+    ConditionalDeleteStatusCode:
+      description: See http://hl7.org/fhir/ValueSet/conditional-delete-status
+      type: object
+      title: A code that indicates how the server supports conditional delete.
       properties:
         extension:
           type: array
@@ -512,60 +1008,19 @@ components:
         id:
           $ref: '#/components/schemas/String'
         value:
-          $ref: '#/components/schemas/MessageSignificanceCategoryCode_Value'
+          $ref: '#/components/schemas/ConditionalDeleteStatusCode_Value'
       x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
-    String:
-      description: 'Auto-generated from StructureDefinition for string, last updated
-
-        2017-04-19T07:44:43.294+10:00. Primitive Type string. See
-
-        http://hl7.org/fhir/StructureDefinition/string'
-      type: object
-      properties:
-        extension:
-          description: Additional Content defined by implementations
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        value:
-          description: Primitive value for string
-          type: string
-          x-go-name: Value
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
-    TypeRestfulInteractionCode_Value:
+    ContactPointUseCode_Value:
+      description: Primitive value for code
       type: integer
       format: int32
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
-    Uri:
-      description: 'Auto-generated from StructureDefinition for uri, last updated
-
-        2017-04-19T07:44:43.294+10:00. Primitive Type uri. See
-
-        http://hl7.org/fhir/StructureDefinition/uri'
-      type: object
-      properties:
-        extension:
-          description: Additional Content defined by implementations
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        value:
-          description: Primitive value for uri
-          type: string
-          x-go-name: Value
       x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
-    CapabilityStatement_Rest_SystemInteraction:
+    CapabilityStatement_Rest_Resource_ResourceInteraction:
       type: object
       title: What operations are supported?
       properties:
         code:
-          $ref: '#/components/schemas/SystemRestfulInteractionCode'
+          $ref: '#/components/schemas/TypeRestfulInteractionCode'
         documentation:
           $ref: '#/components/schemas/String'
         extension:
@@ -583,41 +1038,22 @@ components:
             $ref: '#/components/schemas/Extension'
           x-go-name: ModifierExtension
       x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/resources_go_proto
-    isUsageContext_Value_Value:
+    CapabilityStatement_Messaging:
+      description: If messaging is supported
       type: object
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/metadatatypes_go_proto
-    TypeRestfulInteractionCode:
-      description: See http://hl7.org/fhir/ValueSet/type-restful-interaction
-      type: object
-      title: Operations supported by REST at the type or instance level.
       properties:
-        extension:
+        documentation:
+          $ref: '#/components/schemas/String'
+        endpoint:
           type: array
           items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        value:
-          $ref: '#/components/schemas/TypeRestfulInteractionCode_Value'
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
-    Extension_ValueX:
-      description: Value of extension
-      type: object
-      properties:
-        Choice:
-          $ref: '#/components/schemas/isExtension_ValueX_Choice'
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
-    Period:
-      description: 'Auto-generated from StructureDefinition for Period, last updated
-
-        2017-04-19T07:44:43.294+10:00. Time range defined by start and end date/time.
-
-        See http://hl7.org/fhir/StructureDefinition/Period'
-      type: object
-      properties:
-        end:
-          $ref: '#/components/schemas/DateTime'
+            $ref: '#/components/schemas/CapabilityStatement_Messaging_Endpoint'
+          x-go-name: Endpoint
+        event:
+          type: array
+          items:
+            $ref: '#/components/schemas/CapabilityStatement_Messaging_Event'
+          x-go-name: Event
         extension:
           description: Additional Content defined by implementations
           type: array
@@ -626,16 +1062,64 @@ components:
           x-go-name: Extension
         id:
           $ref: '#/components/schemas/String'
-        start:
-          $ref: '#/components/schemas/DateTime'
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
-    isContainedResource_OneofResource:
-      type: object
+        modifier_extension:
+          description: Extensions that cannot be ignored
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: ModifierExtension
+        reliable_cache:
+          $ref: '#/components/schemas/UnsignedInt'
+        supported_message:
+          type: array
+          items:
+            $ref: '#/components/schemas/CapabilityStatement_Messaging_SupportedMessage'
+          x-go-name: SupportedMessage
       x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/resources_go_proto
-    ResourceVersionPolicyCode:
-      description: See http://hl7.org/fhir/ValueSet/versioning-policy
+    ContactPoint:
+      description: 'Auto-generated from StructureDefinition for ContactPoint, last updated
+
+        2017-04-19T07:44:43.294+10:00. Details of a Technology mediated contact point
+
+        (phone, fax, email, etc.). See
+
+        http://hl7.org/fhir/StructureDefinition/ContactPoint'
       type: object
-      title: How the system supports versioning for a resource.
+      properties:
+        extension:
+          description: Additional Content defined by implementations
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        period:
+          $ref: '#/components/schemas/Period'
+        rank:
+          $ref: '#/components/schemas/PositiveInt'
+        system:
+          $ref: '#/components/schemas/ContactPointSystemCode'
+        use:
+          $ref: '#/components/schemas/ContactPointUseCode'
+        value:
+          $ref: '#/components/schemas/String'
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
+    DocumentModeCode_Value:
+      type: integer
+      format: int32
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
+    MessageSignificanceCategoryCode_Value:
+      type: integer
+      format: int32
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
+    UnknownContentCodeCode:
+      description: 'A code that indicates whether an application accepts unknown elements or
+
+        extensions when reading resources. See
+
+        http://hl7.org/fhir/ValueSet/unknown-content-code'
+      type: object
       properties:
         extension:
           type: array
@@ -645,8 +1129,13 @@ components:
         id:
           $ref: '#/components/schemas/String'
         value:
-          $ref: '#/components/schemas/ResourceVersionPolicyCode_Value'
+          $ref: '#/components/schemas/UnknownContentCodeCode_Value'
       x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
+    IdentifierUseCode_Value:
+      description: Primitive value for code
+      type: integer
+      format: int32
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
     Id:
       description: 'Auto-generated from StructureDefinition for id, last updated
 
@@ -665,6 +1154,82 @@ components:
           $ref: '#/components/schemas/String'
         value:
           description: Primitive value for id
+          type: string
+          x-go-name: Value
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
+    EventCapabilityModeCode:
+      description: See http://hl7.org/fhir/ValueSet/event-capability-mode
+      type: object
+      title: The mode of a message capability statement.
+      properties:
+        extension:
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        value:
+          $ref: '#/components/schemas/EventCapabilityModeCode_Value'
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
+    SystemRestfulInteractionCode:
+      description: http://hl7.org/fhir/ValueSet/system-restful-interaction
+      type: object
+      title: Operations supported by REST at the system level.
+      properties:
+        extension:
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        value:
+          $ref: '#/components/schemas/SystemRestfulInteractionCode_Value'
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
+    UsageContext:
+      description: 'Auto-generated from StructureDefinition for UsageContext, last updated
+
+        2017-04-19T07:44:43.294+10:00. Describes the context of use for a conformance
+
+        or knowledge resource. See
+
+        http://hl7.org/fhir/StructureDefinition/UsageContext'
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/Coding'
+        extension:
+          description: Additional Content defined by implementations
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        value:
+          $ref: '#/components/schemas/UsageContext_Value'
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/metadatatypes_go_proto
+    LanguageCode:
+      description: 'This value set includes common codes from BCP-47
+
+        (http://tools.ietf.org/html/bcp47)
+
+        See http://hl7.org/fhir/ValueSet/languages
+
+        Note: For historical reasons, this does not use an enum to represent value.'
+      type: object
+      properties:
+        extension:
+          description: Additional Content defined by implementations
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        value:
+          description: Primitive value for code
           type: string
           x-go-name: Value
       x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
@@ -689,13 +1254,98 @@ components:
           type: string
           x-go-name: Value
       x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
-    ContactDetail:
-      description: 'Auto-generated from StructureDefinition for ContactDetail, last updated
-
-        2017-04-19T07:44:43.294+10:00. Contact information. See
-
-        http://hl7.org/fhir/StructureDefinition/ContactDetail'
+    ResourceVersionPolicyCode:
+      description: See http://hl7.org/fhir/ValueSet/versioning-policy
       type: object
+      title: How the system supports versioning for a resource.
+      properties:
+        extension:
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        value:
+          $ref: '#/components/schemas/ResourceVersionPolicyCode_Value'
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
+    RestfulCapabilityModeCode:
+      description: See http://hl7.org/fhir/ValueSet/restful-capability-mode
+      type: object
+      title: The mode of a RESTful capability statement.
+      properties:
+        extension:
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        value:
+          $ref: '#/components/schemas/RestfulCapabilityModeCode_Value'
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
+    ConditionalDeleteStatusCode_Value:
+      type: integer
+      format: int32
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
+    Instant_Precision:
+      type: integer
+      format: int32
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
+    SystemRestfulInteractionCode_Value:
+      type: integer
+      format: int32
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
+    CapabilityStatement_Implementation:
+      description: If this describes a specific instance
+      type: object
+      properties:
+        description:
+          $ref: '#/components/schemas/String'
+        extension:
+          description: Additional Content defined by implementations
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        modifier_extension:
+          description: Extensions that cannot be ignored
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: ModifierExtension
+        url:
+          $ref: '#/components/schemas/Uri'
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/resources_go_proto
+    CapabilityStatement_Rest_SystemInteraction:
+      type: object
+      title: What operations are supported?
+      properties:
+        code:
+          $ref: '#/components/schemas/SystemRestfulInteractionCode'
+        documentation:
+          $ref: '#/components/schemas/String'
+        extension:
+          description: Additional Content defined by implementations
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        modifier_extension:
+          description: Extensions that cannot be ignored
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: ModifierExtension
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/resources_go_proto
+    MimeTypeCode:
+      description: See http://www.rfc-editor.org/bcp/bcp13.txt
+      type: object
+      title: Any valid MimeType.
       properties:
         extension:
           description: Additional Content defined by implementations
@@ -705,15 +1355,11 @@ components:
           x-go-name: Extension
         id:
           $ref: '#/components/schemas/String'
-        name:
-          $ref: '#/components/schemas/String'
-        telecom:
-          description: Contact details for individual or organization
-          type: array
-          items:
-            $ref: '#/components/schemas/ContactPoint'
-          x-go-name: Telecom
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/metadatatypes_go_proto
+        value:
+          description: Primitive value for code
+          type: string
+          x-go-name: Value
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
     CapabilityStatement_Rest_Resource:
       description: Resource served on the REST interface
       type: object
@@ -781,102 +1427,6 @@ components:
         versioning:
           $ref: '#/components/schemas/ResourceVersionPolicyCode'
       x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/resources_go_proto
-    Instant:
-      description: 'Auto-generated from StructureDefinition for instant, last updated
-
-        2017-04-19T07:44:43.294+10:00. Primitive Type instant. See
-
-        http://hl7.org/fhir/StructureDefinition/instant'
-      type: object
-      properties:
-        extension:
-          description: Additional Content defined by implementations
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        precision:
-          $ref: '#/components/schemas/Instant_Precision'
-        timezone:
-          type: string
-          x-go-name: Timezone
-        value_us:
-          description: Primitive value for instant
-          type: integer
-          format: int64
-          x-go-name: ValueUs
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
-    ConditionalDeleteStatusCode:
-      description: See http://hl7.org/fhir/ValueSet/conditional-delete-status
-      type: object
-      title: A code that indicates how the server supports conditional delete.
-      properties:
-        extension:
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        value:
-          $ref: '#/components/schemas/ConditionalDeleteStatusCode_Value'
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
-    UnknownContentCodeCode:
-      description: 'A code that indicates whether an application accepts unknown elements or
-
-        extensions when reading resources. See
-
-        http://hl7.org/fhir/ValueSet/unknown-content-code'
-      type: object
-      properties:
-        extension:
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        value:
-          $ref: '#/components/schemas/UnknownContentCodeCode_Value'
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
-    UnknownContentCodeCode_Value:
-      type: integer
-      format: int32
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
-    ContactPoint:
-      description: 'Auto-generated from StructureDefinition for ContactPoint, last updated
-
-        2017-04-19T07:44:43.294+10:00. Details of a Technology mediated contact point
-
-        (phone, fax, email, etc.). See
-
-        http://hl7.org/fhir/StructureDefinition/ContactPoint'
-      type: object
-      properties:
-        extension:
-          description: Additional Content defined by implementations
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        period:
-          $ref: '#/components/schemas/Period'
-        rank:
-          $ref: '#/components/schemas/PositiveInt'
-        system:
-          $ref: '#/components/schemas/ContactPointSystemCode'
-        use:
-          $ref: '#/components/schemas/ContactPointUseCode'
-        value:
-          $ref: '#/components/schemas/String'
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
-    isReference_Reference:
-      type: object
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
     Meta:
       description: 'Auto-generated from StructureDefinition for Meta, last updated
 
@@ -916,6 +1466,36 @@ components:
         version_id:
           $ref: '#/components/schemas/Id'
       x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
+    isExtension_ValueX_Choice:
+      type: object
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
+    Instant:
+      description: 'Auto-generated from StructureDefinition for instant, last updated
+
+        2017-04-19T07:44:43.294+10:00. Primitive Type instant. See
+
+        http://hl7.org/fhir/StructureDefinition/instant'
+      type: object
+      properties:
+        extension:
+          description: Additional Content defined by implementations
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          x-go-name: Extension
+        id:
+          $ref: '#/components/schemas/String'
+        precision:
+          $ref: '#/components/schemas/Instant_Precision'
+        timezone:
+          type: string
+          x-go-name: Timezone
+        value_us:
+          description: Primitive value for instant
+          type: integer
+          format: int64
+          x-go-name: ValueUs
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
     CapabilityStatement_Software:
       description: Software that is covered by this capability statement
       type: object
@@ -941,54 +1521,10 @@ components:
         version:
           $ref: '#/components/schemas/String'
       x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/resources_go_proto
-    ContainedResource:
-      type: object
-      properties:
-        OneofResource:
-          $ref: '#/components/schemas/isContainedResource_OneofResource'
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/resources_go_proto
-    EventCapabilityModeCode:
-      description: See http://hl7.org/fhir/ValueSet/event-capability-mode
-      type: object
-      title: The mode of a message capability statement.
-      properties:
-        extension:
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        value:
-          $ref: '#/components/schemas/EventCapabilityModeCode_Value'
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
-    ConditionalReadStatusCode_Value:
+    ResourceTypeCode_Value:
       type: integer
       format: int32
       x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
-    CapabilityStatement_Rest_Operation:
-      description: Definition of an operation or a custom query
-      type: object
-      properties:
-        definition:
-          $ref: '#/components/schemas/Reference'
-        extension:
-          description: Additional Content defined by implementations
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        modifier_extension:
-          description: Extensions that cannot be ignored
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: ModifierExtension
-        name:
-          $ref: '#/components/schemas/String'
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/resources_go_proto
     Extension:
       description: 'Optional Extensions Element
 
@@ -1008,16 +1544,16 @@ components:
         value:
           $ref: '#/components/schemas/Extension_ValueX'
       x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
-    Base64Binary:
-      description: 'Auto-generated from StructureDefinition for base64Binary, last updated
-
-        2017-04-19T07:44:43.294+10:00. Primitive Type base64Binary. See
-
-        http://hl7.org/fhir/StructureDefinition/base64Binary'
+    DateTime_Precision:
+      type: integer
+      format: int32
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
+    TypeRestfulInteractionCode:
+      description: See http://hl7.org/fhir/ValueSet/type-restful-interaction
       type: object
+      title: Operations supported by REST at the type or instance level.
       properties:
         extension:
-          description: Additional Content defined by implementations
           type: array
           items:
             $ref: '#/components/schemas/Extension'
@@ -1025,13 +1561,8 @@ components:
         id:
           $ref: '#/components/schemas/String'
         value:
-          description: Primitive value for base64Binary
-          type: array
-          items:
-            type: integer
-            format: uint8
-          x-go-name: Value
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
+          $ref: '#/components/schemas/TypeRestfulInteractionCode_Value'
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
     CapabilityStatement_Rest_Resource_SearchParam:
       description: Search parameters supported by implementation
       type: object
@@ -1059,175 +1590,13 @@ components:
         type:
           $ref: '#/components/schemas/SearchParamTypeCode'
       x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/resources_go_proto
-    MessageSignificanceCategoryCode_Value:
-      type: integer
-      format: int32
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
-    ConditionalReadStatusCode:
-      description: See http://hl7.org/fhir/ValueSet/conditional-read-status
+    isUsageContext_Value_Value:
       type: object
-      title: A code that indicates how the server supports conditional read.
-      properties:
-        extension:
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        value:
-          $ref: '#/components/schemas/ConditionalReadStatusCode_Value'
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
-    UnsignedInt:
-      description: 'Auto-generated from StructureDefinition for unsignedInt, last updated
-
-        2017-04-19T07:44:43.294+10:00. Primitive Type unsignedInt. See
-
-        http://hl7.org/fhir/StructureDefinition/unsignedInt'
-      type: object
-      properties:
-        extension:
-          description: Additional Content defined by implementations
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        value:
-          description: Primitive value for unsignedInt
-          type: integer
-          format: uint32
-          x-go-name: Value
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
-    UsageContext:
-      description: 'Auto-generated from StructureDefinition for UsageContext, last updated
-
-        2017-04-19T07:44:43.294+10:00. Describes the context of use for a conformance
-
-        or knowledge resource. See
-
-        http://hl7.org/fhir/StructureDefinition/UsageContext'
-      type: object
-      properties:
-        code:
-          $ref: '#/components/schemas/Coding'
-        extension:
-          description: Additional Content defined by implementations
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        value:
-          $ref: '#/components/schemas/UsageContext_Value'
       x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/metadatatypes_go_proto
-    ResourceTypeCode_Value:
-      type: integer
-      format: int32
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
-    Narrative:
-      description: 'Auto-generated from StructureDefinition for Narrative, last updated
-
-        2017-04-19T07:44:43.294+10:00. A human-readable formatted text, including
-
-        images. See http://hl7.org/fhir/StructureDefinition/Narrative'
+    isContainedResource_OneofResource:
       type: object
-      properties:
-        div:
-          $ref: '#/components/schemas/Xhtml'
-        extension:
-          description: Additional Content defined by implementations
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        status:
-          $ref: '#/components/schemas/NarrativeStatusCode'
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/metadatatypes_go_proto
-    isExtension_ValueX_Choice:
-      type: object
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
-    Instant_Precision:
-      type: integer
-      format: int32
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
-    ReferenceHandlingPolicyCode:
-      description: See http://hl7.org/fhir/ValueSet/reference-handling-policy
-      type: object
-      title: A set of flags that defines how references are supported.
-      properties:
-        extension:
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        value:
-          $ref: '#/components/schemas/ReferenceHandlingPolicyCode_Value'
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
-    NarrativeStatusCode:
-      description: 'The status of a resource narrative
-
-        See http://hl7.org/fhir/ValueSet/narrative-status'
-      type: object
-      properties:
-        extension:
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        value:
-          $ref: '#/components/schemas/NarrativeStatusCode_Value'
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
-    Code:
-      description: 'Auto-generated from StructureDefinition for code, last updated
-
-        2017-04-19T07:44:43.294+10:00. Primitive Type code. See
-
-        http://hl7.org/fhir/StructureDefinition/code'
-      type: object
-      properties:
-        extension:
-          description: Additional Content defined by implementations
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        value:
-          description: Primitive value for code
-          type: string
-          x-go-name: Value
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
-    DocumentModeCode:
-      description: See http://hl7.org/fhir/ValueSet/document-mode
-      type: object
-      title: Whether the application produces or consumes documents.
-      properties:
-        extension:
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        value:
-          $ref: '#/components/schemas/DocumentModeCode_Value'
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
-    ContactPointUseCode_Value:
-      description: Primitive value for code
-      type: integer
-      format: int32
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
-    DocumentModeCode_Value:
+      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/resources_go_proto
+    ReferenceHandlingPolicyCode_Value:
       type: integer
       format: int32
       x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
@@ -1264,368 +1633,21 @@ components:
         response:
           $ref: '#/components/schemas/Reference'
       x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/resources_go_proto
-    RestfulCapabilityModeCode:
-      description: See http://hl7.org/fhir/ValueSet/restful-capability-mode
-      type: object
-      title: The mode of a RESTful capability statement.
-      properties:
-        extension:
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        value:
-          $ref: '#/components/schemas/RestfulCapabilityModeCode_Value'
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
-    ConditionalDeleteStatusCode_Value:
+    UnknownContentCodeCode_Value:
       type: integer
       format: int32
       x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
-    ResourceTypeCode:
-      description: See http://hl7.org/fhir/ValueSet/resource-types
-      type: object
-      title: One of the resource types defined as part of FHIR.
-      properties:
-        extension:
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        value:
-          $ref: '#/components/schemas/ResourceTypeCode_Value'
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
-    UsageContext_Value:
-      description: Value that defines the context
-      type: object
-      properties:
-        Value:
-          $ref: '#/components/schemas/isUsageContext_Value_Value'
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/metadatatypes_go_proto
-    EventCapabilityModeCode_Value:
-      type: integer
-      format: int32
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
-    SearchParamTypeCode_Value:
-      type: integer
-      format: int32
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
-    CapabilityStatement_Implementation:
-      description: If this describes a specific instance
-      type: object
-      properties:
-        description:
-          $ref: '#/components/schemas/String'
-        extension:
-          description: Additional Content defined by implementations
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        modifier_extension:
-          description: Extensions that cannot be ignored
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: ModifierExtension
-        url:
-          $ref: '#/components/schemas/Uri'
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/resources_go_proto
-    IdentifierUseCode_Value:
-      description: Primitive value for code
-      type: integer
-      format: int32
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
-    Identifier:
-      description: 'Auto-generated from StructureDefinition for Identifier, last updated
-
-        2017-04-19T07:44:43.294+10:00. An identifier intended for computation. See
-
-        http://hl7.org/fhir/StructureDefinition/Identifier'
-      type: object
-      properties:
-        assigner:
-          $ref: '#/components/schemas/Reference'
-        extension:
-          description: Additional Content defined by implementations
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        period:
-          $ref: '#/components/schemas/Period'
-        system:
-          $ref: '#/components/schemas/Uri'
-        type:
-          $ref: '#/components/schemas/CodeableConcept'
-        use:
-          $ref: '#/components/schemas/IdentifierUseCode'
-        value:
-          $ref: '#/components/schemas/String'
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
-    CapabilityStatement_Document:
-      description: Document definition
-      type: object
-      properties:
-        documentation:
-          $ref: '#/components/schemas/String'
-        extension:
-          description: Additional Content defined by implementations
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        mode:
-          $ref: '#/components/schemas/DocumentModeCode'
-        modifier_extension:
-          description: Extensions that cannot be ignored
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: ModifierExtension
-        profile:
-          $ref: '#/components/schemas/Reference'
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/resources_go_proto
-    CapabilityStatement_Messaging:
-      description: If messaging is supported
-      type: object
-      properties:
-        documentation:
-          $ref: '#/components/schemas/String'
-        endpoint:
-          type: array
-          items:
-            $ref: '#/components/schemas/CapabilityStatement_Messaging_Endpoint'
-          x-go-name: Endpoint
-        event:
-          type: array
-          items:
-            $ref: '#/components/schemas/CapabilityStatement_Messaging_Event'
-          x-go-name: Event
-        extension:
-          description: Additional Content defined by implementations
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        modifier_extension:
-          description: Extensions that cannot be ignored
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: ModifierExtension
-        reliable_cache:
-          $ref: '#/components/schemas/UnsignedInt'
-        supported_message:
-          type: array
-          items:
-            $ref: '#/components/schemas/CapabilityStatement_Messaging_SupportedMessage'
-          x-go-name: SupportedMessage
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/resources_go_proto
-    ContactPointSystemCode_Value:
-      description: Primitive value for code
-      type: integer
-      format: int32
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
-    Xhtml:
-      description: 'Auto-generated from StructureDefinition for xhtml, last updated
-
-        2017-04-19T07:44:43.294+10:00. Primitive Type xhtml. See
-
-        http://hl7.org/fhir/StructureDefinition/xhtml'
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/String'
-        value:
-          description: Actual xhtml
-          type: string
-          x-go-name: Value
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
-    Reference:
-      description: 'A reference from one resource to another
-
-        See https://www.hl7.org/fhir/datatypes.html#Reference'
-      type: object
-      properties:
-        Reference:
-          $ref: '#/components/schemas/isReference_Reference'
-        display:
-          $ref: '#/components/schemas/String'
-        extension:
-          description: Additional Content defined by implementations
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        identifier:
-          $ref: '#/components/schemas/Identifier'
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
-    MimeTypeCode:
-      description: See http://www.rfc-editor.org/bcp/bcp13.txt
-      type: object
-      title: Any valid MimeType.
-      properties:
-        extension:
-          description: Additional Content defined by implementations
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        value:
-          description: Primitive value for code
-          type: string
-          x-go-name: Value
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
-    ContactPointUseCode:
-      description: 'Use of contact point
-
-        See http://hl7.org/fhir/ValueSet/contact-point-use'
-      type: object
-      properties:
-        extension:
-          description: Additional Content defined by implementations
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        value:
-          $ref: '#/components/schemas/ContactPointUseCode_Value'
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
-    LanguageCode:
-      description: 'This value set includes common codes from BCP-47
-
-        (http://tools.ietf.org/html/bcp47)
-
-        See http://hl7.org/fhir/ValueSet/languages
-
-        Note: For historical reasons, this does not use an enum to represent value.'
-      type: object
-      properties:
-        extension:
-          description: Additional Content defined by implementations
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        value:
-          description: Primitive value for code
-          type: string
-          x-go-name: Value
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
-    Coding:
-      description: 'Auto-generated from StructureDefinition for Coding, last updated
-
-        2017-04-19T07:44:43.294+10:00. A reference to a code defined by a terminology
-
-        system. See http://hl7.org/fhir/StructureDefinition/Coding'
-      type: object
-      properties:
-        code:
-          $ref: '#/components/schemas/Code'
-        display:
-          $ref: '#/components/schemas/String'
-        extension:
-          description: Additional Content defined by implementations
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        system:
-          $ref: '#/components/schemas/Uri'
-        user_selected:
-          type: boolean
-        version:
-          $ref: '#/components/schemas/String'
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
-    CapabilityStatement_Rest_Security:
-      description: Information about security of implementation
-      type: object
-      properties:
-        certificate:
-          type: array
-          items:
-            $ref: '#/components/schemas/CapabilityStatement_Rest_Security_Certificate'
-          x-go-name: Certificate
-        cors:
-          type: boolean
-        description:
-          $ref: '#/components/schemas/String'
-        extension:
-          description: Additional Content defined by implementations
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        modifier_extension:
-          description: Extensions that cannot be ignored
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: ModifierExtension
-        service:
-          description: OAuth | SMART-on-FHIR | NTLM | Basic | Kerberos | Certificates
-          type: array
-          items:
-            $ref: '#/components/schemas/CodeableConcept'
-          x-go-name: Service
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/resources_go_proto
     ResourceVersionPolicyCode_Value:
       type: integer
       format: int32
       x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
-    CodeableConcept:
-      description: 'Auto-generated from StructureDefinition for CodeableConcept, last updated
+    Base64Binary:
+      description: 'Auto-generated from StructureDefinition for base64Binary, last updated
 
-        2017-04-19T07:44:43.294+10:00. Concept - reference to a terminology or just
+        2017-04-19T07:44:43.294+10:00. Primitive Type base64Binary. See
 
-        text. See http://hl7.org/fhir/StructureDefinition/CodeableConcept'
+        http://hl7.org/fhir/StructureDefinition/base64Binary'
       type: object
-      properties:
-        coding:
-          description: Code defined by a terminology system
-          type: array
-          items:
-            $ref: '#/components/schemas/Coding'
-          x-go-name: Coding
-        extension:
-          description: Additional Content defined by implementations
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        text:
-          $ref: '#/components/schemas/String'
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
-    IdentifierUseCode:
-      description: See http://hl7.org/fhir/ValueSet/identifier-use
-      type: object
-      title: Identifies the purpose for this identifier, if known .
       properties:
         extension:
           description: Additional Content defined by implementations
@@ -1636,35 +1658,13 @@ components:
         id:
           $ref: '#/components/schemas/String'
         value:
-          $ref: '#/components/schemas/IdentifierUseCode_Value'
+          description: Primitive value for base64Binary
+          type: array
+          items:
+            type: integer
+            format: uint8
+          x-go-name: Value
       x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/datatypes_go_proto
-    RestfulCapabilityModeCode_Value:
-      type: integer
-      format: int32
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/codes_go_proto
-    CapabilityStatement_Rest_Resource_ResourceInteraction:
-      type: object
-      title: What operations are supported?
-      properties:
-        code:
-          $ref: '#/components/schemas/TypeRestfulInteractionCode'
-        documentation:
-          $ref: '#/components/schemas/String'
-        extension:
-          description: Additional Content defined by implementations
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: Extension
-        id:
-          $ref: '#/components/schemas/String'
-        modifier_extension:
-          description: Extensions that cannot be ignored
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-          x-go-name: ModifierExtension
-      x-go-package: github.com/google/fhir/go/proto/google/fhir/proto/stu3/resources_go_proto
   securitySchemes:
     BearerAuth:
       type: http

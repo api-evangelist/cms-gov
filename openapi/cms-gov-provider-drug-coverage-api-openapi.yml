@@ -337,6 +337,127 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    Address:
+      properties:
+        city:
+          type: string
+        state:
+          type: string
+        street_1:
+          type: string
+        street_2:
+          type: string
+        zipcode:
+          type: string
+        countyfips:
+          description: 5-digit county FIPS code
+          type: string
+      type: object
+    DrugCoverage:
+      properties:
+        rxcui:
+          $ref: '#/components/schemas/RxCUI'
+        plan_id:
+          $ref: '#/components/schemas/PlanID'
+        coverage:
+          $ref: '#/components/schemas/Coverage'
+        generic_rxcui:
+          type: string
+          description: The RxCUI for the generic equivalent of the given drug
+    ProviderTypeEnum:
+      enum:
+      - Individual
+      - Facility
+      type: string
+      properties: {}
+    ProviderGenderEnum:
+      enum:
+      - Male
+      - Female
+      - Other
+      - Transgender-female
+      - Transgender-male
+      - Non-binary
+      - Non-disclose
+      type: string
+      properties: {}
+    NPI:
+      type: string
+      pattern: ^[0-9]{10}$
+      properties: {}
+    Coverage:
+      type: string
+      enum:
+      - Covered
+      - NotCovered
+      - DataNotProvided
+      - GenericCovered
+      properties: {}
+    NearbyProvider:
+      properties:
+        provider:
+          $ref: '#/components/schemas/Provider'
+        address:
+          $ref: '#/components/schemas/Address'
+        distance:
+          type: number
+          minimum: 0
+          title: Distance in miles from address, eg., from a proximity search
+      type: object
+      required:
+      - provider
+      - distance
+    Drug:
+      properties:
+        id:
+          description: drug ID
+          type: string
+          pattern: ^[0-9]{1,10}$
+        name:
+          description: normalized SAB=RXNORM name
+          type: string
+        rxcui:
+          $ref: '#/components/schemas/RxCUI'
+        strength:
+          description: strength information for this drug
+          type: string
+        route:
+          description: route information for this drug
+          type: string
+        full_name:
+          description: full name information for this drug
+          type: string
+        rxterms_dose_form:
+          description: rxtermsDoseForm value for this drug
+          type: string
+        rxnorm_dose_form:
+          description: rxnormDoseForm for this drug
+          type: string
+      type: object
+    ProviderCoverage:
+      properties:
+        npi:
+          $ref: '#/components/schemas/NPI'
+        plan_id:
+          $ref: '#/components/schemas/PlanID'
+        coverage:
+          $ref: '#/components/schemas/Coverage'
+        addresses:
+          description: at which addresses this provider is covered by the plan, if any
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+        accepting:
+          type: string
+          enum:
+          - accepting
+          - not accepting
+          - accepting in some locations
+          - unknown
+    RxCUI:
+      type: string
+      pattern: ^[0-9]+$
+      properties: {}
     Provider:
       properties:
         name:
@@ -377,131 +498,10 @@ components:
       - name
       - type
       - npi
-    DrugCoverage:
-      properties:
-        rxcui:
-          $ref: '#/components/schemas/RxCUI'
-        plan_id:
-          $ref: '#/components/schemas/PlanID'
-        coverage:
-          $ref: '#/components/schemas/Coverage'
-        generic_rxcui:
-          type: string
-          description: The RxCUI for the generic equivalent of the given drug
-    NearbyProvider:
-      properties:
-        provider:
-          $ref: '#/components/schemas/Provider'
-        address:
-          $ref: '#/components/schemas/Address'
-        distance:
-          type: number
-          minimum: 0
-          title: Distance in miles from address, eg., from a proximity search
-      type: object
-      required:
-      - provider
-      - distance
-    RxCUI:
-      type: string
-      pattern: ^[0-9]+$
-      properties: {}
-    Coverage:
-      type: string
-      enum:
-      - Covered
-      - NotCovered
-      - DataNotProvided
-      - GenericCovered
-      properties: {}
-    NPI:
-      type: string
-      pattern: ^[0-9]{10}$
-      properties: {}
-    ProviderCoverage:
-      properties:
-        npi:
-          $ref: '#/components/schemas/NPI'
-        plan_id:
-          $ref: '#/components/schemas/PlanID'
-        coverage:
-          $ref: '#/components/schemas/Coverage'
-        addresses:
-          description: at which addresses this provider is covered by the plan, if any
-          type: array
-          items:
-            $ref: '#/components/schemas/Address'
-        accepting:
-          type: string
-          enum:
-          - accepting
-          - not accepting
-          - accepting in some locations
-          - unknown
-    ProviderTypeEnum:
-      enum:
-      - Individual
-      - Facility
-      type: string
-      properties: {}
-    Address:
-      properties:
-        city:
-          type: string
-        state:
-          type: string
-        street_1:
-          type: string
-        street_2:
-          type: string
-        zipcode:
-          type: string
-        countyfips:
-          description: 5-digit county FIPS code
-          type: string
-      type: object
-    ProviderGenderEnum:
-      enum:
-      - Male
-      - Female
-      - Other
-      - Transgender-female
-      - Transgender-male
-      - Non-binary
-      - Non-disclose
-      type: string
-      properties: {}
     PlanID:
       type: string
       pattern: ^[0-9]{5}[A-Z]{2}[0-9]{7}$
       properties: {}
-    Drug:
-      properties:
-        id:
-          description: drug ID
-          type: string
-          pattern: ^[0-9]{1,10}$
-        name:
-          description: normalized SAB=RXNORM name
-          type: string
-        rxcui:
-          $ref: '#/components/schemas/RxCUI'
-        strength:
-          description: strength information for this drug
-          type: string
-        route:
-          description: route information for this drug
-          type: string
-        full_name:
-          description: full name information for this drug
-          type: string
-        rxterms_dose_form:
-          description: rxtermsDoseForm value for this drug
-          type: string
-        rxnorm_dose_form:
-          description: rxnormDoseForm for this drug
-          type: string
-      type: object
   parameters:
     year-with-default:
       x-example: 2019
