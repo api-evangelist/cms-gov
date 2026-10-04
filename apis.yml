@@ -2034,6 +2034,8 @@ apis:
   humanURL: https://bluebutton.cms.gov/developers/
   baseURL: https://api.bluebutton.cms.gov/v2/fhir
   tags:
+  - Admin API
+  tags_raw:
   - admin-api
   properties:
   - type: OpenAPI
@@ -2361,6 +2363,8 @@ apis:
   humanURL: https://bluebutton.cms.gov/developers/
   baseURL: https://api.bluebutton.cms.gov/v2/fhir
   tags:
+  - Downloads
+  tags_raw:
   - Download
   properties:
   - type: OpenAPI
@@ -2407,6 +2411,8 @@ apis:
   humanURL: https://bluebutton.cms.gov/developers/
   baseURL: https://api.bluebutton.cms.gov/v2/fhir
   tags:
+  - Enrollment
+  tags_raw:
   - Enrollments
   properties:
   - type: OpenAPI
@@ -2502,6 +2508,8 @@ apis:
   humanURL: https://bluebutton.cms.gov/developers/
   baseURL: https://api.bluebutton.cms.gov/v2/fhir
   tags:
+  - Health API
+  tags_raw:
   - health-api
   properties:
   - type: OpenAPI
