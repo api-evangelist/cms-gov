@@ -2937,6 +2937,8 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/cms-gov.png
 access: 3rd-Party
 common:
+  - type: RateLimits
+    url: rate-limits/cms-gov-rate-limits.yml
   - type: Website
     url: https://www.cms.gov/
   - type: CapabilityMap
