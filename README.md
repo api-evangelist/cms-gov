@@ -1,4 +1,4 @@
-# CMS — Centers for Medicare & Medicaid Services (cms-gov)
+# CMS — Centers for Medicare & Medicaid Services
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,310 +66,227 @@
 
 The Centers for Medicare & Medicaid Services (CMS) is the U.S. federal agency within the Department of Health and Human Services that administers Medicare, Medicaid, the Children's Health Insurance Program (CHIP), the Health Insurance Marketplace, and the broader CMS open-data program. CMS operates one of the largest collections of HL7 FHIR APIs in the U.S. federal government — Blue Button 2.0, BCDA, AB2D, DPC, and the upstream BFD server — alongside the Marketplace API, the data.cms.gov open-data catalog, the Provider Data Catalog, the Quality Payment Program API, and the Medicare Coverage Database.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/cms-gov/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/cms-gov/refs/heads/main/apis.yml)
+**Areas:** Healthcare · Medicare · Medicaid · FHIR · Bulk Data · Open Data · Government · Federal · Claims · Insurance · ACA · Marketplace
+
+## CMS — Centers for Medicare & Medicaid Services on APIs.io
+
+Everything profiled for CMS — Centers for Medicare & Medicaid Services is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/cms-gov/](https://apis.io/providers/cms-gov/)** — or go straight to one of the APIs or properties below.
+
+### APIs (56)
+
+- [CMS — Centers for Medicare & Medicaid Services Articles API](https://apis.io/apis/cms-gov/cms-gov-articles-api/) — The Articles API from CMS — Centers for Medicare & Medicaid Services — 1 operation(s) for articles.
+- [CMS — Centers for Medicare & Medicaid Services Auth API](https://apis.io/apis/cms-gov/cms-gov-auth-api/) — The Auth API from CMS — Centers for Medicare & Medicaid Services — 2 operation(s) for auth.
+- [CMS — Centers for Medicare & Medicaid Services Benchmarks API](https://apis.io/apis/cms-gov/cms-gov-benchmarks-api/) — The Benchmarks API from CMS — Centers for Medicare & Medicaid Services — 1 operation(s) for benchmarks.
+- [CMS — Centers for Medicare & Medicaid Services Bulk Export API](https://apis.io/apis/cms-gov/cms-gov-bulk-export-api/) — The Bulk Export API from CMS — Centers for Medicare & Medicaid Services — 10 operation(s) for bulk export.
+- [CMS — Centers for Medicare & Medicaid Services Catalog API](https://apis.io/apis/cms-gov/cms-gov-catalog-api/) — The Catalog API from CMS — Centers for Medicare & Medicaid Services — 4 operation(s) for catalog.
+- [CMS — Centers for Medicare & Medicaid Services Coverage API](https://apis.io/apis/cms-gov/cms-gov-coverage-api/) — The Coverage API from CMS — Centers for Medicare & Medicaid Services — 2 operation(s) for coverage.
+- [CMS — Centers for Medicare & Medicaid Services Data API](https://apis.io/apis/cms-gov/cms-gov-data-api/) — The Data API from CMS — Centers for Medicare & Medicaid Services — 4 operation(s) for data.
+- [CMS — Centers for Medicare & Medicaid Services Drugs API](https://apis.io/apis/cms-gov/cms-gov-drugs-api/) — The Drugs API from CMS — Centers for Medicare & Medicaid Services — 1 operation(s) for drugs.
+- [CMS — Centers for Medicare & Medicaid Services Eligibility API](https://apis.io/apis/cms-gov/cms-gov-eligibility-api/) — The Eligibility API from CMS — Centers for Medicare & Medicaid Services — 1 operation(s) for eligibility.
+- [CMS — Centers for Medicare & Medicaid Services ExplanationOfBenefit API](https://apis.io/apis/cms-gov/cms-gov-explanationofbenefit-api/) — The ExplanationOfBenefit API from CMS — Centers for Medicare & Medicaid Services — 2 operation(s) for explanationofbenefit.
+- [CMS — Centers for Medicare & Medicaid Services Geography API](https://apis.io/apis/cms-gov/cms-gov-geography-api/) — The Geography API from CMS — Centers for Medicare & Medicaid Services — 1 operation(s) for geography.
+- [CMS — Centers for Medicare & Medicaid Services Group API](https://apis.io/apis/cms-gov/cms-gov-group-api/) — The Group API from CMS — Centers for Medicare & Medicaid Services — 2 operation(s) for group.
+- [CMS — Centers for Medicare & Medicaid Services Issuers API](https://apis.io/apis/cms-gov/cms-gov-issuers-api/) — The Issuers API from CMS — Centers for Medicare & Medicaid Services — 1 operation(s) for issuers.
+- [CMS — Centers for Medicare & Medicaid Services LCD API](https://apis.io/apis/cms-gov/cms-gov-lcd-api/) — The LCD API from CMS — Centers for Medicare & Medicaid Services — 2 operation(s) for lcd.
+- [CMS — Centers for Medicare & Medicaid Services Measurements API](https://apis.io/apis/cms-gov/cms-gov-measurements-api/) — The Measurements API from CMS — Centers for Medicare & Medicaid Services — 1 operation(s) for measurements.
+- [CMS — Centers for Medicare & Medicaid Services MEDCAC API](https://apis.io/apis/cms-gov/cms-gov-medcac-api/) — The MEDCAC API from CMS — Centers for Medicare & Medicaid Services — 1 operation(s) for medcac.
+- [CMS — Centers for Medicare & Medicaid Services Metadata API](https://apis.io/apis/cms-gov/cms-gov-metadata-api/) — The Metadata API from CMS — Centers for Medicare & Medicaid Services — 2 operation(s) for metadata.
+- [CMS — Centers for Medicare & Medicaid Services NCD API](https://apis.io/apis/cms-gov/cms-gov-ncd-api/) — The NCD API from CMS — Centers for Medicare & Medicaid Services — 2 operation(s) for ncd.
+- [CMS — Centers for Medicare & Medicaid Services Organization API](https://apis.io/apis/cms-gov/cms-gov-organization-api/) — The Organization API from CMS — Centers for Medicare & Medicaid Services — 2 operation(s) for organization.
+- [CMS — Centers for Medicare & Medicaid Services Patient API](https://apis.io/apis/cms-gov/cms-gov-patient-api/) — The Patient API from CMS — Centers for Medicare & Medicaid Services — 2 operation(s) for patient.
+- [CMS — Centers for Medicare & Medicaid Services Plans API](https://apis.io/apis/cms-gov/cms-gov-plans-api/) — The Plans API from CMS — Centers for Medicare & Medicaid Services — 2 operation(s) for plans.
+- [CMS — Centers for Medicare & Medicaid Services Practitioner API](https://apis.io/apis/cms-gov/cms-gov-practitioner-api/) — The Practitioner API from CMS — Centers for Medicare & Medicaid Services — 2 operation(s) for practitioner.
+- [CMS — Centers for Medicare & Medicaid Services Providers API](https://apis.io/apis/cms-gov/cms-gov-providers-api/) — The Providers API from CMS — Centers for Medicare & Medicaid Services — 1 operation(s) for providers.
+- [CMS — Centers for Medicare & Medicaid Services Scoring API](https://apis.io/apis/cms-gov/cms-gov-scoring-api/) — The Scoring API from CMS — Centers for Medicare & Medicaid Services — 1 operation(s) for scoring.
+- [CMS — Centers for Medicare & Medicaid Services Submissions API](https://apis.io/apis/cms-gov/cms-gov-submissions-api/) — The Submissions API from CMS — Centers for Medicare & Medicaid Services — 2 operation(s) for submissions.
+- [CMS Data at the Point of Care (DPC) API](https://apis.io/apis/cms-gov/cms-data-at-the-point-of-care-dpc-api/) — Provides Original Medicare claims data to fee-for-service Medicare providers in a structured, standardized FHIR format at the point of care. Helps providers…
+- [CMS Finder API](https://apis.io/apis/cms-gov/cms-finder-api/) — The API behind Finder.Healthcare.gov that helps users find private health plans available outside the Health Insurance Marketplace. Supports individual plan…
+- [CMS Quality Payment Program (QPP) Submissions API](https://apis.io/apis/cms-gov/cms-quality-payment-program-qpp-submissions-api/) — Enables QPP participants to submit quality performance data and receive real-time performance scoring feedback. Supports Merit-based Incentive Payment…
+- [CMS Socrata Open Data API (data.cms.gov)](https://apis.io/apis/cms-gov/cms-socrata-open-data/) — data.cms.gov hosts hundreds of CMS datasets including Medicare Fee-for-Service utilization and payment data, Provider of Services files, Medicare Part B/D…
+- [CMS Provider Data Catalog API (Care Compare)](https://apis.io/apis/cms-gov/cms-provider-data-catalog/) — The Provider Data Catalog API (formerly Hospital Compare) exposes the Medicare.gov Care Compare datasets including Hospital, Nursing Home, Home Health,…
+- [NPPES NPI Registry API](https://apis.io/apis/cms-gov/nppes-npi-registry/) — The NPPES NPI Registry API provides free public access to look up active National Provider Identifier records for individual and organizational healthcare…
+- [Healthcare.gov Marketplace API](https://apis.io/apis/cms-gov/healthcare-gov-marketplace/) — The Healthcare.gov Marketplace API and accompanying Open Data Plan Finder exposes Qualified Health Plan (QHP) details, plan attributes, provider networks,…
+- [CMS Quality Payment Program (QPP) Measures API](https://apis.io/apis/cms-gov/qpp-measures-api/) — The Quality Payment Program Measures Data repository and REST API publish machine-readable specifications of MIPS quality, promoting interoperability,…
+- [Medicare Coverage Database (MCD) API](https://apis.io/apis/cms-gov/medicare-coverage-database/) — The Medicare Coverage Database publishes National Coverage Determinations (NCDs), Local Coverage Determinations (LCDs), articles, and coding guidance used…
+- [CMS — Centers for Medicare & Medicaid Services 1. Export API](https://apis.io/apis/cms-gov/cms-gov-1-export-api/) — API through which an authenticated and authorized PDP sponsor may request a bulk-data export from a server.
+- [CMS — Centers for Medicare & Medicaid Services 2. Status API](https://apis.io/apis/cms-gov/cms-gov-2-status-api/) — API to determine the status of the job, the files to download once the job is complete and an endpoint to cancel a job
+- [CMS — Centers for Medicare & Medicaid Services 3. Download API](https://apis.io/apis/cms-gov/cms-gov-3-download-api/) — After creating a job, the API to download the generated bulk download files
+- [CMS — Centers for Medicare & Medicaid Services 4. Capabilities API](https://apis.io/apis/cms-gov/cms-gov-4-capabilities-api/) — Provide the standard required FHIR capability statement
+- [CMS — Centers for Medicare & Medicaid Services Admin API](https://apis.io/apis/cms-gov/cms-gov-admin-api-api/) — The admin-api API from CMS — Centers for Medicare & Medicaid Services — 5 operation(s) for admin-api.
+- [CMS — Centers for Medicare & Medicaid Services API Reference API](https://apis.io/apis/cms-gov/cms-gov-api-reference-api/) — Information about the state of Marketplace API.
+- [CMS — Centers for Medicare & Medicaid Services Attribution API](https://apis.io/apis/cms-gov/cms-gov-attribution-api/) — The Attribution API from CMS — Centers for Medicare & Medicaid Services — 2 operation(s) for attribution.
+- [CMS — Centers for Medicare & Medicaid Services Bulk Data API](https://apis.io/apis/cms-gov/cms-gov-bulk-data-api/) — Information about the bulk data json files maintained by Marketplace API.
+- [CMS — Centers for Medicare & Medicaid Services Capabilities API](https://apis.io/apis/cms-gov/cms-gov-capabilities-api/) — Provide the standard required FHIR capability statement
+- [CMS — Centers for Medicare & Medicaid Services Code Search API](https://apis.io/apis/cms-gov/cms-gov-code-search-api/) — Search CPT/HCPCS codes by procedure codes or terms describing medical procedures. Get code details for a given procedure code.
+- [CMS — Centers for Medicare & Medicaid Services Cost Search API](https://apis.io/apis/cms-gov/cms-gov-cost-search-api/) — For a given procedure code or entire set of codes, get national averages for the amount Medicare pays hospitals or surgical centers, and the national…
+- [CMS — Centers for Medicare & Medicaid Services Download API](https://apis.io/apis/cms-gov/cms-gov-download-api/) — After creating a job, the API to download the generated bulk download files
+- [CMS — Centers for Medicare & Medicaid Services Enrollments API](https://apis.io/apis/cms-gov/cms-gov-enrollments-api/) — Enrollment grouping validation and information.
+- [CMS — Centers for Medicare & Medicaid Services Export API](https://apis.io/apis/cms-gov/cms-gov-export-api/) — API through which an authenticated and authorized PDP sponsor may request a bulk-data export from a server.
+- [CMS — Centers for Medicare & Medicaid Services Health API](https://apis.io/apis/cms-gov/cms-gov-health-api-api/) — The health-api API from CMS — Centers for Medicare & Medicaid Services — 1 operation(s) for health-api.
+- [CMS — Centers for Medicare & Medicaid Services Households & Eligibility API](https://apis.io/apis/cms-gov/cms-gov-households-eligibility-api/) — Household specific calculations, including eligibility information, out of pocket costs, poverty levels, and cost benchmarks.
+- [CMS — Centers for Medicare & Medicaid Services Insurance Issuers API](https://apis.io/apis/cms-gov/cms-gov-insurance-issuers-api/) — Data related to health insurance issuers on the marketplace.
+- [CMS — Centers for Medicare & Medicaid Services Insurance Plans API](https://apis.io/apis/cms-gov/cms-gov-insurance-plans-api/) — Data on both health and dental insurance plans.
+- [CMS — Centers for Medicare & Medicaid Services Job API](https://apis.io/apis/cms-gov/cms-gov-job-api/) — The Job API from CMS — Centers for Medicare & Medicaid Services — 4 operation(s) for job.
+- [CMS — Centers for Medicare & Medicaid Services Maintenance Mode API](https://apis.io/apis/cms-gov/cms-gov-maintenance-mode-api-api/) — The maintenance-mode-api API from CMS — Centers for Medicare & Medicaid Services — 1 operation(s) for maintenance-mode-api.
+- [CMS — Centers for Medicare & Medicaid Services Provider & Drug Coverage API](https://apis.io/apis/cms-gov/cms-gov-provider-drug-coverage-api/) — Lookup information on providers, drugs, and what is covered under what plans.
+- [CMS — Centers for Medicare & Medicaid Services Status API](https://apis.io/apis/cms-gov/cms-gov-status-api/) — API to determine the status of the job, the files to download once the job is complete and an endpoint to cancel a job
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Cms Gov Agentic Access](https://apis.io/agentic-access/cms-gov/cms-gov-agentic-access/)
+
+#### JSON Schema (3)
+
+The data models the API reads and writes.
+
+- [Coverage](https://apis.io/schemas/cms-gov/cms-gov-coverage/)
+- [ExplanationOfBenefit](https://apis.io/schemas/cms-gov/cms-gov-explanation-of-benefit/)
+- [Patient](https://apis.io/schemas/cms-gov/cms-gov-patient/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Cms Gov Context](https://apis.io/jsonld/cms-gov/cms-gov-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Cms Gov Vocabulary](https://apis.io/vocabularies/cms-gov/cms-gov-vocabulary/)
+
+#### Examples (4)
+
+Example requests and responses.
+
+- [Cms Gov Bcda Job Example](https://apis.io/examples/cms-gov/cms-gov-bcda-job-example/)
+- [Cms Gov Explanation Of Benefit Example](https://apis.io/examples/cms-gov/cms-gov-explanation-of-benefit-example/)
+- [Cms Gov Marketplace Plan Example](https://apis.io/examples/cms-gov/cms-gov-marketplace-plan-example/)
+- [Cms Gov Patient Example](https://apis.io/examples/cms-gov/cms-gov-patient-example/)
 
-## Scope
+#### Collections (35)
 
-- **Access:** 3rd-Party
+Postman and Open Collection request collections.
 
-## Tags
+- [CMS AB2D API](https://apis.io/collections/cms-gov/open-cms-gov-ab2d/)
+- [CMS AB2D Articles API](https://apis.io/collections/cms-gov/open-cms-gov-articles-api/)
+- [CMS AB2D Articles Auth API](https://apis.io/collections/cms-gov/open-cms-gov-auth-api/)
+- [CMS Beneficiary Claims Data API (BCDA)](https://apis.io/collections/cms-gov/open-cms-gov-bcda/)
+- [CMS AB2D Articles Benchmarks API](https://apis.io/collections/cms-gov/open-cms-gov-benchmarks-api/)
+- [CMS Beneficiary FHIR Data Server (BFD)](https://apis.io/collections/cms-gov/open-cms-gov-bfd/)
+- [CMS Blue Button 2.0 API](https://apis.io/collections/cms-gov/open-cms-gov-blue-button-2/)
+- [CMS AB2D Articles Bulk Export API](https://apis.io/collections/cms-gov/open-cms-gov-bulk-export-api/)
+- [CMS AB2D Articles Catalog API](https://apis.io/collections/cms-gov/open-cms-gov-catalog-api/)
+- [CMS AB2D Articles Coverage API](https://apis.io/collections/cms-gov/open-cms-gov-coverage-api/)
+- [CMS AB2D Articles Data API](https://apis.io/collections/cms-gov/open-cms-gov-data-api/)
+- [CMS Data at the Point of Care API (DPC)](https://apis.io/collections/cms-gov/open-cms-gov-dpc/)
+- [CMS AB2D Articles Drugs API](https://apis.io/collections/cms-gov/open-cms-gov-drugs-api/)
+- [CMS AB2D Articles Eligibility API](https://apis.io/collections/cms-gov/open-cms-gov-eligibility-api/)
+- [CMS AB2D Articles ExplanationOfBenefit API](https://apis.io/collections/cms-gov/open-cms-gov-explanationofbenefit-api/)
+- [CMS AB2D Articles Geography API](https://apis.io/collections/cms-gov/open-cms-gov-geography-api/)
+- [CMS AB2D Articles Group API](https://apis.io/collections/cms-gov/open-cms-gov-group-api/)
+- [CMS AB2D Articles Issuers API](https://apis.io/collections/cms-gov/open-cms-gov-issuers-api/)
+- [CMS AB2D Articles LCD API](https://apis.io/collections/cms-gov/open-cms-gov-lcd-api/)
+- [CMS Marketplace API](https://apis.io/collections/cms-gov/open-cms-gov-marketplace/)
+- [CMS Medicare Coverage Database API](https://apis.io/collections/cms-gov/open-cms-gov-mcd/)
+- [CMS AB2D Articles Measurements API](https://apis.io/collections/cms-gov/open-cms-gov-measurements-api/)
+- [CMS AB2D Articles MEDCAC API](https://apis.io/collections/cms-gov/open-cms-gov-medcac-api/)
+- [CMS AB2D Articles Metadata API](https://apis.io/collections/cms-gov/open-cms-gov-metadata-api/)
+- [CMS AB2D Articles NCD API](https://apis.io/collections/cms-gov/open-cms-gov-ncd-api/)
+- …and 10 more published on APIs.io
 
-- Healthcare
-- Medicare
-- Medicaid
-- FHIR
-- Bulk Data
-- Open Data
-- Government
-- Federal
-- Claims
-- Insurance
-- ACA
-- Marketplace
-- Quality
+#### Governance rules (2)
 
-## Timestamps
+Spectral rulesets for the provider's contracts.
 
-- **Created:** 2026-05-25
-- **Modified:** 2026-05-25
+- [CMS — Centers for Medicare & Medicaid Services — jsonschema rules](https://apis.io/rules/cms-gov/cms-gov-jsonschema-spectral-rules/)
+- [CMS — Centers for Medicare & Medicaid Services API Rules](https://apis.io/rules/cms-gov/cms-gov-rules/)
 
-## APIs
+#### Security (2)
 
-### CMS Blue Button 2.0 API
+Authentication, trust centre, and vulnerability disclosure.
 
-Blue Button 2.0 is a developer-friendly, OAuth 2.0-enabled, HL7 FHIR R4 standard data API that delivers Medicare Part A, B, and D claims data for 60+ million Medicare beneficiaries to applications, services, and research programs. Includes Patient, Coverage, and ExplanationOfBenefit resources for the beneficiary's consented data.
+- [Cms Gov Authentication](https://apis.io/security/cms-gov/cms-gov-authentication/)
+- [Cms Gov Domain Security](https://apis.io/security/cms-gov/cms-gov-domain-security/)
 
-- **Human URL:** [https://bluebutton.cms.gov/developers/](https://bluebutton.cms.gov/developers/)
-- **Base URL:** `https://api.bluebutton.cms.gov/v2/fhir`
+#### OAuth scopes (1)
 
-#### Tags
+The permissions the API asks for.
 
-- Healthcare
-- Medicare
-- FHIR
-- Claims
-- Beneficiary
-- Government
+- [Cms Gov Scopes](https://apis.io/scopes/cms-gov/cms-gov-scopes/)
 
-#### Properties
+#### Rate limits (1)
 
-- [Documentation](https://bluebutton.cms.gov/developers/)
-- [Console](https://bluebutton.cms.gov/api/v2/explorer/)
-- [OpenAPI](openapi/cms-gov-blue-button-2-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/cms-gov-blue-button-2.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/cms-gov-blue-button-2.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/cms-gov-explanation-of-benefit-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/cms-gov-patient-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/cms-gov-coverage-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/cms-gov-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+Published request limits.
 
-### CMS Beneficiary Claims Data API (BCDA)
+- [Cms Gov Rate Limits](https://apis.io/rate-limits/cms-gov/cms-gov-rate-limits/)
 
-BCDA enables Medicare Shared Savings Program Accountable Care Organizations (ACOs) to retrieve bulk Medicare Parts A, B, and D claims data for their assigned and assignable beneficiaries via the HL7 FHIR Bulk Data Access (Flat FHIR) specification. Uses asynchronous $export endpoints returning NDJSON resources for Patient, Coverage, and ExplanationOfBenefit.
+## Where to find this API
 
-- **Human URL:** [https://bcda.cms.gov/](https://bcda.cms.gov/)
-- **Base URL:** `https://api.bcda.cms.gov/api/v2`
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-#### Tags
-
-- Healthcare
-- Medicare
-- FHIR
-- Bulk Data
-- ACO
-- Claims
-- Government
-
-#### Properties
-
-- [Documentation](https://bcda.cms.gov/)
-- [Documentation](https://bcda.cms.gov/guide.html)
-- [Sandbox](https://sandbox.bcda.cms.gov/)
-- [OpenAPI](openapi/cms-gov-bcda-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/cms-gov-bcda.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/cms-gov-bcda.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### CMS AB2D API
-
-AB2D (Claim and Claim Line Feed) delivers Medicare Parts A, B, and D claims data to Part D prescription drug plan sponsors via the HL7 FHIR Bulk Data Access specification. Supports asynchronous $export of ExplanationOfBenefit resources as NDJSON for all enrolled Medicare beneficiaries since 2020.
-
-- **Human URL:** [https://ab2d.cms.gov/](https://ab2d.cms.gov/)
-- **Base URL:** `https://api.ab2d.cms.gov/api/v2`
-
-#### Tags
-
-- Healthcare
-- Medicare
-- FHIR
-- Bulk Data
-- Part D
-- Claims
-- Government
-
-#### Properties
-
-- [Documentation](https://ab2d.cms.gov/)
-- [Documentation](https://ab2d.cms.gov/getting-started/)
-- [Console](https://sandbox.ab2d.cms.gov/swagger-ui/)
-- [OpenAPI](openapi/cms-gov-ab2d-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/cms-gov-ab2d.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/cms-gov-ab2d.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### CMS Data at the Point of Care API (DPC)
-
-Data at the Point of Care fills gaps in patient history by delivering Medicare claims data via HL7 FHIR Bulk Data Access to fee-for-service providers at the point of care. Providers register Practitioner, Organization, Group, and Patient roster resources, then asynchronously $export ExplanationOfBenefit, Coverage, and Patient resources.
-
-- **Human URL:** [https://dpc.cms.gov/](https://dpc.cms.gov/)
-- **Base URL:** `https://sandbox.dpc.cms.gov/api/v1`
-
-#### Tags
-
-- Healthcare
-- Medicare
-- FHIR
-- Bulk Data
-- Provider
-- Government
-
-#### Properties
-
-- [Documentation](https://dpc.cms.gov/)
-- [Documentation](https://dpc.cms.gov/docs)
-- [OpenAPI](openapi/cms-gov-dpc-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/cms-gov-dpc.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/cms-gov-dpc.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### CMS Beneficiary FHIR Data Server (BFD)
-
-The Beneficiary FHIR Data (BFD) Server is the upstream HL7 FHIR R4 service that powers Blue Button 2.0, BCDA, AB2D, and DPC. BFD ingests claims from the CMS Chronic Conditions Warehouse (CCW) and exposes Patient, Coverage, and ExplanationOfBenefit resources with both synchronous and bulk asynchronous access. Internal/peering access only; clients use the downstream Blue Button, BCDA, AB2D, or DPC APIs.
-
-- **Human URL:** [https://bfd.cms.gov/](https://bfd.cms.gov/)
-
-#### Tags
-
-- Healthcare
-- Medicare
-- FHIR
-- Claims
-- Beneficiary
-- Government
-
-#### Properties
-
-- [Documentation](https://bfd.cms.gov/)
-- [Source Code](https://github.com/CMSgov/beneficiary-fhir-data)
-- [OpenAPI](openapi/cms-gov-bfd-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/cms-gov-bfd.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/cms-gov-bfd.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### CMS Marketplace API
-
-The Marketplace API exposes Qualified Health Plan (QHP) and Stand-alone Dental Plan (SADP) data from healthcare.gov including plan finder, plan compare, plan rates, plan benefits, plan crosswalks, and issuer details. Powers consumer plan-shopping experiences across HealthCare.gov and partner brokers.
-
-- **Human URL:** [https://developer.cms.gov/marketplace-api/](https://developer.cms.gov/marketplace-api/)
-- **Base URL:** `https://marketplace.api.healthcare.gov/api/v1`
-
-#### Tags
-
-- Healthcare
-- Marketplace
-- Insurance
-- ACA
-- Plans
-- Government
-
-#### Properties
-
-- [Documentation](https://developer.cms.gov/marketplace-api/)
-- [Documentation](https://www.cms.gov/marketplace/resources/data/public-use-files)
-- [OpenAPI](openapi/cms-gov-marketplace-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/cms-gov-marketplace.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/cms-gov-marketplace.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### CMS Open Data API (data.cms.gov)
-
-The CMS Open Data API exposes the full catalog of public CMS datasets — Medicare provider utilization and payment files, Medicare Advantage and Part D enrollment, Hospital Compare, Nursing Home Compare, Physician Compare, Open Payments (Sunshine Act), Marketplace public-use files, and the Provider Data Catalog. Datasets are queryable via filtered JSON/CSV downloads and dataset-level data-api endpoints.
-
-- **Human URL:** [https://data.cms.gov/](https://data.cms.gov/)
-- **Base URL:** `https://data.cms.gov/data-api/v1`
-
-#### Tags
-
-- Healthcare
-- Open Data
-- Datasets
-- Socrata
-- Government
-
-#### Properties
-
-- [Portal](https://data.cms.gov/)
-- [Documentation](https://data.cms.gov/provider-data/)
-- [Schema](https://data.cms.gov/data.json)
-- [OpenAPI](openapi/cms-gov-open-data-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/cms-gov-open-data.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/cms-gov-open-data.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### CMS Provider Data Catalog API
-
-The Provider Data Catalog API surfaces the quality and compare datasets that powered the legacy Hospital Compare, Nursing Home Compare, Home Health Compare, Hospice Compare, Long-Term Care Hospital Compare, Inpatient Rehabilitation Facility Compare, Dialysis Facility Compare, and Physician Compare sites via CKAN DKAN-compatible dataset and resource endpoints.
-
-- **Human URL:** [https://data.cms.gov/provider-data/](https://data.cms.gov/provider-data/)
-- **Base URL:** `https://data.cms.gov/provider-data/api/1`
-
-#### Tags
-
-- Healthcare
-- Quality
-- Provider
-- Hospitals
-- Compare
-- Government
-
-#### Properties
-
-- [Portal](https://data.cms.gov/provider-data/)
-- [Documentation](https://data.cms.gov/provider-data/docs)
-- [OpenAPI](openapi/cms-gov-provider-data-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/cms-gov-provider-data.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/cms-gov-provider-data.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### CMS Quality Payment Program API
-
-The Quality Payment Program (QPP) API supports the Merit-based Incentive Payment System (MIPS) and Advanced Alternative Payment Models (APMs) under MACRA. Exposes measures, benchmarks, scoring, and submission endpoints used by Qualified Registries, EHR vendors, and QCDRs to submit clinician performance data and retrieve scoring metadata.
-
-- **Human URL:** [https://qpp.cms.gov/about/resource-library](https://qpp.cms.gov/about/resource-library)
-- **Base URL:** `https://qpp.cms.gov/api`
-
-#### Tags
-
-- Healthcare
-- Quality
-- MIPS
-- MACRA
-- Provider
-- Government
-
-#### Properties
-
-- [Documentation](https://qpp.cms.gov/about/resource-library)
-- [Source Code](https://github.com/CMSgov/qpp-measures-data)
-- [OpenAPI](openapi/cms-gov-qpp-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/cms-gov-qpp.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/cms-gov-qpp.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### CMS Medicare Coverage Database API
-
-The Medicare Coverage Database (MCD) exposes National Coverage Determinations (NCDs), Local Coverage Determinations (LCDs), Local Coverage Articles, Proposed Decisions, National Coverage Analyses, and Medicare Evidence Development & Coverage Advisory Committee (MEDCAC) records. Powers coverage policy lookups by HCPCS code, ICD-10, contractor jurisdiction, and state.
-
-- **Human URL:** [https://www.cms.gov/medicare-coverage-database/](https://www.cms.gov/medicare-coverage-database/)
-
-#### Tags
-
-- Healthcare
-- Medicare
-- Coverage
-- Policy
-- LCD
-- NCD
-- Government
-
-#### Properties
-
-- [Portal](https://www.cms.gov/medicare-coverage-database/)
-- [Documentation](https://www.cms.gov/medicare-coverage-database/reports/reports.aspx)
-- [OpenAPI](openapi/cms-gov-mcd-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/cms-gov-mcd.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/cms-gov-mcd.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [Portal](https://www.cms.gov/)
-- [Portal](https://developer.cms.gov/)
-- [Source Code](https://github.com/CMSgov)
-- [Support](https://github.com/CMSgov/bluebutton-developer-help)
-- [Forum](https://groups.google.com/g/developer-group-for-cms-blue-button-api)
-- [Forum](https://groups.google.com/g/cms-bcda-api)
-- [Forum](https://groups.google.com/g/cms-ab2d-api)
-- [Support](https://dpc.cms.gov/contact)
-- [Sandbox](https://bluebutton.cms.gov/developers/#try-the-api)
-- [Sandbox](https://sandbox.bcda.cms.gov/)
-- [Sandbox](https://sandbox.ab2d.cms.gov/)
-- [Sandbox](https://sandbox.dpc.cms.gov/)
-- [Authentication](https://bluebutton.cms.gov/developers/#authorization)
-- [Authentication](https://bcda.cms.gov/guide.html#authentication)
-- [Support](https://www.cms.gov/about-cms/contact-current/contact-us)
-- [Blog](https://www.cms.gov/newsroom)
-- [Privacy](https://www.cms.gov/about-cms/web-policies-important-links/privacy-policy)
+- [Website](https://www.cms.gov/)
 - [Documentation](https://www.cms.gov/cclio/regulations-and-guidance)
-- [Documentation](https://confluence.hl7.org/display/FHIR/Argonaut+Implementation+Guide+Home+Page)
-- [Documentation](https://hl7.org/fhir/us/carin-bb/)
-- [Documentation](https://hl7.org/fhir/uv/bulkdata/)
-- [About](https://www.cms.gov/about-cms)
-- [Feeds](https://www.cms.gov/about-cms/contact-current/cms-rss-feeds)
+- [Support](https://github.com/CMSgov/bluebutton-developer-help)
+- [Blog](https://www.cms.gov/newsroom)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Centers for Medicare & Medicaid Services
-**Email:** CMS_Feedback@cms.hhs.gov
-**URL:** https://www.cms.gov/
+**Kin Score 46.5** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.4 |
+| Contract quality | 59.6 |
+| Contract governance | 13.6 |
+| Operational transparency | 55.3 |
+| Developer ergonomics | 58.8 |
+| Access clarity | 10.5 |
+
+**Agent readiness 40.1** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bound |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | verified |
+| Event Surface Described | — |
+| Agent Skills | unknown |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | documented (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | — |
+
+**Regulatory alignment 33.3** — Insurance
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/cms-gov/](https://apis.io/providers/cms-gov/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for CMS — Centers for Medicare & Medicaid Services: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/cms-gov/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
